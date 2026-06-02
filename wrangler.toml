@@ -1,0 +1,11 @@
+name = "vite-react-template1"
+compatibility_date = "2026-06-01"
+pages_build_output_dir = "dist"
+
+[vars]
+LEADS_ALLOWED_ORIGIN = "https://dalaillama.in"
+
+[[kv_namespaces]]
+binding = "LEADS_KV"
+id = "6746c37be7b54aeaa37c1e7ebeac9381"
+preview_id = "4faf29f726ae49ffa6a10a7a4bd33903"
