@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#000104"/>
+  <path d="M0 0h1200v630H0z" fill="url(#bg)"/>
+  <rect x="78" y="72" width="1044" height="486" rx="28" fill="#080a12" stroke="rgba(226,232,240,.16)"/>
+  <g transform="translate(128 126)">
+    <rect width="96" height="96" rx="22" fill="#0c0a16" stroke="#a78bfa" stroke-width="3"/>
+    <circle cx="48" cy="48" r="34" fill="#080a12" stroke="#a78bfa" stroke-width="3"/>
+    <path d="M30.3 16.2 40.5 33 24.8 37.5c-.8-8.2 1-15.3 5.5-21.3Z" fill="#a78bfa"/>
+    <path d="M65.7 16.2 55.5 33l15.7 4.5c.8-8.2-1-15.3-5.5-21.3Z" fill="#a78bfa"/>
+    <path d="M33.8 29.3h17.7c12.2 0 21.3 8.1 21.3 18.6 0 10.7-9.1 18.2-21.3 18.2H33.8V29.3Zm10.7 9v18.6h6.3c6.5 0 10.8-3.6 10.8-9 0-5.7-4.3-9.6-10.8-9.6h-6.3Z" fill="#f8fafc"/>
+  </g>
+  <text x="248" y="176" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="800">Dalaillama</text>
+  <text x="251" y="218" fill="#aeb8c8" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing="3">CREATOR STUDIO</text>
+  <text x="128" y="338" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="68" font-weight="850">Plan the short.</text>
+  <text x="128" y="420" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="68" font-weight="850">Shoot the take.</text>
+  <text x="128" y="502" fill="#d8b4fe" font-family="Inter, Arial, sans-serif" font-size="68" font-weight="850">Polish it like a studio.</text>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630">
+      <stop stop-color="#160b2d"/>
+      <stop offset=".34" stop-color="#000104"/>
+      <stop offset="1" stop-color="#090b11"/>
+    </linearGradient>
+  </defs>
+</svg>

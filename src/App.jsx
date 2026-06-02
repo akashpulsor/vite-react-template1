@@ -3,6 +3,7 @@ import { trackPageView } from "./analytics.js";
 import Home from "./pages/Home.jsx";
 import Blog from "./pages/Blog.jsx";
 import BlogPost from "./pages/BlogPost.jsx";
+import BrandLogo from "./components/BrandLogo.jsx";
 import { getPostBySlug } from "./posts/index.js";
 
 const SITE_URL = "https://dalaillama.in";
@@ -31,7 +32,9 @@ export default function App() {
     <div className="creator-app">
       <div className="site-shell">
         <header className="topbar creator-panel-muted">
-          <a className="wordmark" href="/">dalaillama.in</a>
+          <a className="wordmark" href="/" aria-label="Dalaillama Creator Studio home">
+            <BrandLogo />
+          </a>
           <nav className="nav-links" aria-label="Primary navigation">
             <a href="/" data-ga-event="nav_click" data-ga-label="Dashboard">Dashboard</a>
             <a href="/#problem" data-ga-event="nav_click" data-ga-label="Problem">Problem</a>

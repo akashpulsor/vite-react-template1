@@ -162,10 +162,77 @@ a:hover {
 }
 
 .wordmark {
+  display: inline-flex;
+  align-items: center;
+  min-width: 190px;
   color: #ffffff;
-  font-size: 14px;
-  font-weight: 800;
-  text-shadow: 0 0 18px rgba(216, 180, 254, 0.24);
+}
+
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(216, 180, 254, 0.32);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), transparent 42%),
+    rgba(12, 10, 22, 0.92);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 10px 28px rgba(0, 0, 0, 0.35),
+    0 0 22px rgba(124, 58, 237, 0.2);
+}
+
+.brand-mark svg {
+  width: 30px;
+  height: 30px;
+}
+
+.brand-mark-bg {
+  fill: #080a12;
+  stroke: rgba(216, 180, 254, 0.54);
+  stroke-width: 1.2;
+}
+
+.brand-mark-ear-left,
+.brand-mark-ear-right {
+  fill: #a78bfa;
+  opacity: 0.78;
+}
+
+.brand-mark-d {
+  fill: #f8fafc;
+}
+
+.brand-mark-gloss {
+  fill: rgba(255, 255, 255, 0.2);
+}
+
+.brand-copy {
+  display: grid;
+  gap: 1px;
+  line-height: 1.05;
+}
+
+.brand-copy strong {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 880;
+  text-shadow: 0 0 18px rgba(216, 180, 254, 0.2);
+}
+
+.brand-copy small {
+  color: #aeb8c8;
+  font-size: 10px;
+  font-weight: 850;
+  text-transform: uppercase;
 }
 
 .nav-links {
@@ -992,6 +1059,10 @@ a:hover {
   .post-link {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .wordmark {
+    min-width: 0;
   }
 
   .landing-hero,
