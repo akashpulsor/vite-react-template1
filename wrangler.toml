@@ -1,6 +1,10 @@
 name = "vite-react-template1"
 main = "src/worker.js"
 compatibility_date = "2026-06-01"
+compatibility_flags = ["nodejs_compat"]
+routes = [
+  { pattern = "dalaillama.in", zone_name = "dalaillama.in", custom_domain = true }
+]
 
 [assets]
 directory = "./dist"
@@ -15,3 +19,9 @@ LEADS_ALLOWED_ORIGIN = "https://dalaillama.in"
 binding = "LEADS_KV"
 id = "6746c37be7b54aeaa37c1e7ebeac9381"
 preview_id = "4faf29f726ae49ffa6a10a7a4bd33903"
+
+[observability]
+enabled = true
+
+[observability.logs]
+enabled = true
