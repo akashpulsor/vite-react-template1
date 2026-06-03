@@ -67,7 +67,8 @@ function seoForRoute(route, post) {
   if (route.page === "post" && post) {
     return {
       title: `${post.title} | Dalaillama`,
-      description: post.body.replace(/[#*_`>-]/g, "").replace(/\s+/g, " ").slice(0, 155),
+      description: post.description || post.body.replace(/[#*_`>-]/g, "").replace(/\s+/g, " ").slice(0, 155),
+      keywords: post.keywords || [],
       path: `/blog/${post.slug}`,
     };
   }
@@ -79,9 +80,10 @@ function seoForRoute(route, post) {
   };
 }
 
-function applySeo({ title, description, path }) {
+function applySeo({ title, description, keywords = [], path }) {
   document.title = title;
   setMeta("description", description);
+  if (keywords.length) setMeta("keywords", keywords.join(", "));
   setMeta("robots", "index,follow");
   setMeta("og:type", "website", "property");
   setMeta("og:site_name", "dalaillama.in", "property");
