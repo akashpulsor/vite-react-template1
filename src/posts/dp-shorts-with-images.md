@@ -7,7 +7,7 @@ readingTime: "8 min"
 date: "June 19, 2026"
 imagePrompts:
   framework: "Director of photography planning sheets for a 30-second vertical Short about a tired woman becoming energized through exercise."
-relatedArticles: ["How to Storyboard Shorts With Images", "How to Light Shorts With Images", "How to Shoot Professional Videos With a Phone"]
+relatedArticles: ["Why Making Something Meaningful Is Hard", "How to Storyboard Shorts With Images", "How to Light Shorts With Images"]
 ---
 
 # How to DP Shorts With Images
@@ -18,7 +18,7 @@ It is about making every shot shootable.
 
 In this example, Maya starts bored, tired, and low on energy. She decides to do a 30-second exercise burst, moves through jumping jacks, high knees, and squats, then ends energized. The storyboard tells us the emotional change. The DP plan tells us how the camera captures that change without losing the action.
 
-Use this guide with [How to Storyboard Shorts With Images](/blog/storyboard-shorts-with-images) and [How to Light Shorts With Images](/blog/lighting-shorts-with-images). The three posts describe the same Short from three production angles.
+Use this guide with [How to Storyboard Shorts With Images](/blog/storyboard-shorts-with-images), [How to Light Shorts With Images](/blog/lighting-shorts-with-images), and the creator case study [Why Making Something Meaningful Is Hard](/blog/meaningful-short-video-ai).
 
 ## What a DP sheet should decide
 
@@ -188,4 +188,5 @@ The best DP plan for a creator Short is usually simple. It lets the viewer under
 
 - [How to Storyboard Shorts With Images](/blog/storyboard-shorts-with-images)
 - [How to Light Shorts With Images](/blog/lighting-shorts-with-images)
+- [Why Making Something Meaningful Is Hard](/blog/meaningful-short-video-ai)
 - [How to Shoot Professional Videos With a Phone](/blog/professional-videos-with-phone)

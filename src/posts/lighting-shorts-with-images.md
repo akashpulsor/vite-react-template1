@@ -7,7 +7,7 @@ readingTime: "8 min"
 date: "June 19, 2026"
 imagePrompts:
   framework: "Lighting planning sheets for a 30-second vertical Short about a tired woman becoming energized through exercise."
-relatedArticles: ["How to Storyboard Shorts With Images", "How to DP Shorts With Images", "How to Light a Talking Head Video"]
+relatedArticles: ["Why Making Something Meaningful Is Hard", "How to Storyboard Shorts With Images", "How to DP Shorts With Images"]
 ---
 
 # How to Light Shorts With Images
@@ -18,7 +18,7 @@ It is mood control.
 
 In this example, Maya begins bored, tired, and low on energy. She decides to exercise, pushes through a 30-second workout, and ends feeling charged. The lighting has to support that shift while staying believable inside one home location.
 
-Use this with [How to Storyboard Shorts With Images](/blog/storyboard-shorts-with-images) and [How to DP Shorts With Images](/blog/dp-shorts-with-images). The storyboard decides what the viewer understands. The DP plan decides how the camera sees it. The lighting plan decides how the frame feels.
+Use this with [How to Storyboard Shorts With Images](/blog/storyboard-shorts-with-images), [How to DP Shorts With Images](/blog/dp-shorts-with-images), and the creator case study [Why Making Something Meaningful Is Hard](/blog/meaningful-short-video-ai). The storyboard decides what the viewer understands. The DP plan decides how the camera sees it. The lighting plan decides how the frame feels.
 
 ## What a lighting sheet should decide
 
@@ -186,4 +186,5 @@ Lighting is not there to make the Short look expensive. It is there to make the 
 
 - [How to Storyboard Shorts With Images](/blog/storyboard-shorts-with-images)
 - [How to DP Shorts With Images](/blog/dp-shorts-with-images)
+- [Why Making Something Meaningful Is Hard](/blog/meaningful-short-video-ai)
 - [How to Light a Talking Head Video](/blog/talking-head-video-lighting)

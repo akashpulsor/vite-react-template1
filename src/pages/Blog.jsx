@@ -1,6 +1,7 @@
 import { posts } from "../posts/index.js";
 
 const featuredGuideSlugs = [
+  "meaningful-short-video-ai",
   "storyboard-shorts-with-images",
   "dp-shorts-with-images",
   "lighting-shorts-with-images",
@@ -18,8 +19,8 @@ export default function Blog() {
       <h1>Blogs & Case Studies</h1>
       <p>We will publish product blogs and real creator workflow case studies here.</p>
       {featuredPosts.length > 0 && (
-        <section className="blog-featured-block" aria-label="Featured production guides">
-          <h2>Featured Production Guides</h2>
+        <section className="blog-featured-block" aria-label="Featured production guides and case studies">
+          <h2>Featured Production Guides and Case Studies</h2>
           <div className="guide-link-grid">
             {featuredPosts.map((post) => (
               <a

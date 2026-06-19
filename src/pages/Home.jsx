@@ -50,6 +50,7 @@ const operatingModes = [
 ];
 
 const featuredGuideSlugs = [
+  "meaningful-short-video-ai",
   "storyboard-shorts-with-images",
   "dp-shorts-with-images",
   "lighting-shorts-with-images",
@@ -218,7 +219,7 @@ export default function Home() {
       {featuredGuides.length > 0 && (
         <section className="landing-section writing-section" id="production-guides">
           <p className="kicker">Production guides</p>
-          <h2>See one Short planned three ways.</h2>
+          <h2>See Shorts planned from concept to production.</h2>
           <div className="guide-link-grid">
             {featuredGuides.map((post) => (
               <a

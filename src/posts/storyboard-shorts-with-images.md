@@ -7,7 +7,7 @@ readingTime: "9 min"
 date: "June 19, 2026"
 imagePrompts:
   framework: "Image-based storyboard sequence for a 30-second vertical Short about a tired woman becoming energized through exercise."
-relatedArticles: ["How to DP Shorts With Images", "How to Light Shorts With Images", "How to Storyboard a YouTube Short"]
+relatedArticles: ["Why Making Something Meaningful Is Hard", "How to DP Shorts With Images", "How to Light Shorts With Images"]
 ---
 
 # How to Storyboard Shorts With Images
@@ -26,7 +26,7 @@ If you are planning your own Short, keep three layers connected:
 - **DP plan:** Where are the camera, actor, lens, movement, and safe zones?
 - **Lighting plan:** How does the scene stay readable, energetic, and consistent?
 
-For the broader method, pair this example with [How to DP Shorts With Images](/blog/dp-shorts-with-images), [How to Light Shorts With Images](/blog/lighting-shorts-with-images), and [How to Storyboard a YouTube Short](/blog/storyboard-youtube-short).
+For the broader method, pair this example with [Why Making Something Meaningful Is Hard](/blog/meaningful-short-video-ai), [How to DP Shorts With Images](/blog/dp-shorts-with-images), and [How to Light Shorts With Images](/blog/lighting-shorts-with-images).
 
 ## Build the Short around one emotional spine
 
@@ -216,4 +216,5 @@ When those three layers agree, shooting becomes calmer. You are not inventing th
 
 - [How to DP Shorts With Images](/blog/dp-shorts-with-images)
 - [How to Light Shorts With Images](/blog/lighting-shorts-with-images)
+- [Why Making Something Meaningful Is Hard](/blog/meaningful-short-video-ai)
 - [How to Storyboard a YouTube Short](/blog/storyboard-youtube-short)
