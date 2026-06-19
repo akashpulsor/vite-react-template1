@@ -17,21 +17,6 @@ export default {
       });
     }
 
-    if (shouldServePrerenderedBlogHtml(request, url)) {
-      const assetUrl = new URL(request.url);
-      assetUrl.pathname = url.pathname === "/blog" ? "/blog/index.html" : `${url.pathname.replace(/\/$/, "")}/index.html`;
-      return env.ASSETS.fetch(new Request(assetUrl, request));
-    }
-
     return env.ASSETS.fetch(request);
   },
 };
-
-function shouldServePrerenderedBlogHtml(request, url) {
-  if (request.method !== "GET" && request.method !== "HEAD") return false;
-  if (url.pathname !== "/blog" && !url.pathname.startsWith("/blog/")) return false;
-  if (/\.[a-z0-9]+$/i.test(url.pathname)) return false;
-
-  const accept = request.headers.get("accept") || "";
-  return !accept || accept.includes("text/html") || accept.includes("*/*");
-}
