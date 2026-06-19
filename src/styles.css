@@ -830,6 +830,12 @@ a:hover {
   margin-top: 26px;
 }
 
+.writing-list {
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 12px 18px;
+  max-width: 1040px;
+}
+
 .use-case-row {
   display: grid;
   grid-template-columns: 16px minmax(0, 1fr);
@@ -889,15 +895,16 @@ a:hover {
 }
 
 .writing-section {
-  max-width: 900px;
+  max-width: 1080px;
 }
 
 .writing-link {
-  display: flex;
-  justify-content: space-between;
-  gap: 18px;
+  display: grid;
+  align-content: start;
+  gap: 6px;
   border-bottom: 1px solid rgba(226, 232, 240, 0.14);
   color: #e5e7eb;
+  min-height: 74px;
   padding: 14px 0;
 }
 
@@ -980,14 +987,17 @@ a:hover {
 
 .post-list {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  column-gap: 28px;
   border-top: 1px solid rgba(148, 163, 184, 0.18);
   margin-top: 18px;
 }
 
 .post-link {
-  display: flex;
-  justify-content: space-between;
-  gap: 18px;
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  min-height: 74px;
   padding: 14px 0;
   border-bottom: 1px solid rgba(148, 163, 184, 0.18);
   color: #e5e7eb;
@@ -1227,6 +1237,11 @@ a:hover {
     grid-template-columns: 1fr;
   }
 
+  .writing-list,
+  .post-list {
+    grid-template-columns: 1fr;
+  }
+
   .guide-link-grid {
     grid-template-columns: 1fr;
   }
@@ -1256,7 +1271,6 @@ a:hover {
   }
 
   .writing-link {
-    flex-direction: column;
     gap: 4px;
   }
 
