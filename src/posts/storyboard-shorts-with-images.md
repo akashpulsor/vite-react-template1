@@ -7,7 +7,7 @@ readingTime: "9 min"
 date: "June 19, 2026"
 imagePrompts:
   framework: "Image-based storyboard sequence for a 30-second vertical Short about a tired woman becoming energized through exercise."
-relatedArticles: ["How to Storyboard a YouTube Short", "How to Shoot Professional Videos With a Phone", "How to Light a Talking Head Video"]
+relatedArticles: ["How to DP Shorts With Images", "How to Light Shorts With Images", "How to Storyboard a YouTube Short"]
 ---
 
 # How to Storyboard Shorts With Images
@@ -26,7 +26,7 @@ If you are planning your own Short, keep three layers connected:
 - **DP plan:** Where are the camera, actor, lens, movement, and safe zones?
 - **Lighting plan:** How does the scene stay readable, energetic, and consistent?
 
-For the broader method, pair this example with [How to Storyboard a YouTube Short](/blog/storyboard-youtube-short), the camera and blocking ideas in [How to Shoot Professional Videos With a Phone](/blog/professional-videos-with-phone), and the setup logic in [How to Light a Talking Head Video](/blog/talking-head-video-lighting).
+For the broader method, pair this example with [How to DP Shorts With Images](/blog/dp-shorts-with-images), [How to Light Shorts With Images](/blog/lighting-shorts-with-images), and [How to Storyboard a YouTube Short](/blog/storyboard-youtube-short).
 
 ## Build the Short around one emotional spine
 
@@ -36,13 +36,13 @@ The viewer should never wonder what changed. Each image should push Maya from lo
 
 | Shot | Story beat | Visual job | Production companion |
 |---|---|---|---|
-| 1 | Tired slump | Make the low-energy state instantly visible | [DP sheet](/blog/storyboard-shorts-with-images/dp-shot-1.jpg) and [lighting sheet](/blog/storyboard-shorts-with-images/lighting-shot-1.jpg) |
-| 2 | Seeks validation | Turn the problem into a shared feeling | [DP sheet](/blog/storyboard-shorts-with-images/dp-shot-2.jpg) and [lighting sheet](/blog/storyboard-shorts-with-images/lighting-shot-2.jpg) |
-| 3 | Decides to act | Show posture, confidence, and the challenge | [DP sheet](/blog/storyboard-shorts-with-images/dp-shot-3.jpg) and [lighting sheet](/blog/storyboard-shorts-with-images/lighting-shot-3.jpg) |
-| 4 | Initial burst | Prove the decision with movement | [DP sheet](/blog/storyboard-shorts-with-images/dp-shot-4.jpg) and [lighting sheet](/blog/storyboard-shorts-with-images/lighting-shot-4.jpg) |
-| 5 | Mid-workout push | Keep the energy rising | [DP sheet](/blog/storyboard-shorts-with-images/dp-shot-5.jpg) and [lighting sheet](/blog/storyboard-shorts-with-images/lighting-shot-5.jpg) |
-| 6 | Final push | Show effort becoming invigoration | [DP sheet](/blog/storyboard-shorts-with-images/dp-shot-6.jpg) and [lighting sheet](/blog/storyboard-shorts-with-images/lighting-shot-6.jpg) |
-| 7 | Payoff and CTA | Close with a clear changed state | [DP sheet](/blog/storyboard-shorts-with-images/dp-shot-7.jpg) and [lighting sheet](/blog/storyboard-shorts-with-images/lighting-shot-7.jpg) |
+| 1 | Tired slump | Make the low-energy state instantly visible | [DP guide](/blog/dp-shorts-with-images) and [lighting guide](/blog/lighting-shorts-with-images) |
+| 2 | Seeks validation | Turn the problem into a shared feeling | [DP guide](/blog/dp-shorts-with-images) and [lighting guide](/blog/lighting-shorts-with-images) |
+| 3 | Decides to act | Show posture, confidence, and the challenge | [DP guide](/blog/dp-shorts-with-images) and [lighting guide](/blog/lighting-shorts-with-images) |
+| 4 | Initial burst | Prove the decision with movement | [DP guide](/blog/dp-shorts-with-images) and [lighting guide](/blog/lighting-shorts-with-images) |
+| 5 | Mid-workout push | Keep the energy rising | [DP guide](/blog/dp-shorts-with-images) and [lighting guide](/blog/lighting-shorts-with-images) |
+| 6 | Final push | Show effort becoming invigoration | [DP guide](/blog/dp-shorts-with-images) and [lighting guide](/blog/lighting-shorts-with-images) |
+| 7 | Payoff and CTA | Close with a clear changed state | [DP guide](/blog/dp-shorts-with-images) and [lighting guide](/blog/lighting-shorts-with-images) |
 
 The table matters because a Short can fall apart when the images, camera plan, and lighting plan are treated as separate tasks.
 
@@ -214,6 +214,6 @@ When those three layers agree, shooting becomes calmer. You are not inventing th
 
 ## Related Articles
 
+- [How to DP Shorts With Images](/blog/dp-shorts-with-images)
+- [How to Light Shorts With Images](/blog/lighting-shorts-with-images)
 - [How to Storyboard a YouTube Short](/blog/storyboard-youtube-short)
-- [How to Shoot Professional Videos With a Phone](/blog/professional-videos-with-phone)
-- [How to Light a Talking Head Video](/blog/talking-head-video-lighting)

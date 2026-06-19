@@ -9,8 +9,12 @@ import audioQuality from "./improve-audio-quality-in-videos.md?raw";
 import phoneFootageProfessional from "./make-phone-footage-look-professional.md?raw";
 import creatorWorkflow from "./creator-production-workflow.md?raw";
 import storyboardShortsWithImages from "./storyboard-shorts-with-images.md?raw";
+import dpShortsWithImages from "./dp-shorts-with-images.md?raw";
+import lightingShortsWithImages from "./lighting-shorts-with-images.md?raw";
 
 const rawPosts = [
+  lightingShortsWithImages,
+  dpShortsWithImages,
   storyboardShortsWithImages,
   planShort,
   hooks,

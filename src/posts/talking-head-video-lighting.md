@@ -10,7 +10,7 @@ imagePrompts:
   comparison: "Good vs bad talking head lighting comparison using simple abstract rectangles and light arrows. No people, no stock photos, black and white."
   process: "Step-by-step lighting setup workflow for talking head video. White background, simple arrows, high readability."
   advanced: "Professional talking head lighting diagram showing key, fill bounce, negative fill, rim light, background light, contrast ratio. Minimal black and white."
-relatedArticles: ["How to Storyboard Shorts With Images", "How to Shoot Professional Videos With a Phone", "How to Make Phone Footage Look Professional", "How to Improve Audio Quality in Videos"]
+relatedArticles: ["How to Light Shorts With Images", "How to Storyboard Shorts With Images", "How to Shoot Professional Videos With a Phone", "How to Make Phone Footage Look Professional", "How to Improve Audio Quality in Videos"]
 ---
 
 # How to Light a Talking Head Video
@@ -165,6 +165,7 @@ We built Dalaillama Creator Studio around this production thinking: a creator do
 
 ## Related Articles
 
+- [How to Light Shorts With Images](/blog/lighting-shorts-with-images)
 - [How to Storyboard Shorts With Images](/blog/storyboard-shorts-with-images)
 - [How to Shoot Professional Videos With a Phone](/blog/professional-videos-with-phone)
 - [How to Make Phone Footage Look Professional](/blog/make-phone-footage-look-professional)

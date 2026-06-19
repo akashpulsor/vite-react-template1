@@ -10,7 +10,7 @@ imagePrompts:
   comparison: "Good vs bad phone video setup comparison with abstract phone frames and simple labels. Minimal editorial black and white."
   process: "Workflow diagram for phone video shooting: clean lens, lock exposure, set light, frame, record audio, review. No people, white background."
   advanced: "Professional phone video workflow diagram showing blocking, gimbal movement, exposure lock, audio check, coverage. Minimal black and white."
-relatedArticles: ["How to Storyboard Shorts With Images", "How to Light a Talking Head Video", "How to Make Phone Footage Look Professional", "How to Review Footage Before Editing"]
+relatedArticles: ["How to DP Shorts With Images", "How to Storyboard Shorts With Images", "How to Light a Talking Head Video", "How to Make Phone Footage Look Professional", "How to Review Footage Before Editing"]
 ---
 
 # How to Shoot Professional Videos With a Phone
@@ -160,6 +160,7 @@ We built Dalaillama Creator Studio around that reality: creators need help plann
 
 ## Related Articles
 
+- [How to DP Shorts With Images](/blog/dp-shorts-with-images)
 - [How to Storyboard Shorts With Images](/blog/storyboard-shorts-with-images)
 - [How to Light a Talking Head Video](/blog/talking-head-video-lighting)
 - [How to Make Phone Footage Look Professional](/blog/make-phone-footage-look-professional)
