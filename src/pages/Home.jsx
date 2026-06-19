@@ -291,7 +291,7 @@ export default function Home() {
         <h2>Work stories from the product.</h2>
         {posts.length > 0 ? (
           <div className="writing-list">
-            {posts.slice(0, 5).map((post) => (
+            {posts.map((post) => (
             <a
               className="writing-link"
               href={`/blog/${post.slug}`}

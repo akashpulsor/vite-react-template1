@@ -7,6 +7,7 @@ const DEFAULT_DESCRIPTION =
   "Dalaillama Creator Studio helps creators plan shorts, shoot against a real shot plan, and polish phone footage like a small production team.";
 const DEFAULT_SOCIAL_IMAGE = "/social-card.svg";
 const FEATURED_GUIDE_SLUGS = [
+  "meaningful-short-video-ai",
   "storyboard-shorts-with-images",
   "dp-shorts-with-images",
   "lighting-shorts-with-images",
@@ -269,17 +270,14 @@ function renderHomeFallback(allPosts) {
       </section>
       <section class="landing-section writing-section" id="production-guides">
         <p class="kicker">Production guides</p>
-        <h2>See one Short planned three ways.</h2>
+        <h2>See Shorts planned from concept to production.</h2>
         ${renderGuideCards(featuredPosts)}
       </section>
       <section class="landing-section writing-section">
         <p class="kicker">Blogs & case studies</p>
-        <h2>Recent creator production writing.</h2>
+        <h2>Work stories from the product.</h2>
         <div class="writing-list">
-          ${allPosts
-            .slice(0, 8)
-            .map((post) => renderWritingLink(post))
-            .join("")}
+          ${allPosts.map((post) => renderWritingLink(post)).join("")}
         </div>
       </section>
     </article>`;
@@ -287,19 +285,19 @@ function renderHomeFallback(allPosts) {
 
 function renderBlogIndex(allPosts) {
   const featuredPosts = featuredPostsFrom(allPosts);
-  const remainingPosts = allPosts.filter((post) => !FEATURED_GUIDE_SLUGS.includes(post.slug));
 
   return `
     <article class="page essay-page">
       <p class="back-link"><a href="/">Back to dashboard</a></p>
       <h1>Blogs & Case Studies</h1>
       <p>Product blogs and creator workflow case studies about planning, shooting, lighting, reviewing, and polishing short videos.</p>
-      <section class="blog-featured-block" aria-label="Featured production guides">
-        <h2>Featured Production Guides</h2>
+      <section class="blog-featured-block" aria-label="Featured production guides and case studies">
+        <h2>Featured Production Guides and Case Studies</h2>
         ${renderGuideCards(featuredPosts)}
       </section>
+      <h2>All Blog Posts</h2>
       <div class="post-list">
-        ${remainingPosts.map((post) => renderPostLink(post)).join("")}
+        ${allPosts.map((post) => renderPostLink(post)).join("")}
       </div>
     </article>`;
 }

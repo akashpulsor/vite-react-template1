@@ -11,7 +11,6 @@ export default function Blog() {
   const featuredPosts = featuredGuideSlugs
     .map((slug) => posts.find((post) => post.slug === slug))
     .filter(Boolean);
-  const remainingPosts = posts.filter((post) => !featuredGuideSlugs.includes(post.slug));
 
   return (
     <article className="page essay-page">
@@ -38,20 +37,23 @@ export default function Blog() {
         </section>
       )}
       {posts.length > 0 ? (
-        <div className="post-list">
-          {remainingPosts.map((post) => (
-          <a
-            className="post-link"
-            href={`/blog/${post.slug}`}
-            key={post.slug}
-            data-ga-event="blog_post_click"
-            data-ga-label={post.title}
-          >
-            <span>{post.title}</span>
-            <small>{post.date}</small>
-          </a>
-          ))}
-        </div>
+        <>
+          <h2>All Blog Posts</h2>
+          <div className="post-list">
+            {posts.map((post) => (
+              <a
+                className="post-link"
+                href={`/blog/${post.slug}`}
+                key={post.slug}
+                data-ga-event="blog_post_click"
+                data-ga-label={post.title}
+              >
+                <span>{post.title}</span>
+                <small>{post.date}</small>
+              </a>
+            ))}
+          </div>
+        </>
       ) : (
         <p className="empty-note">No posts yet.</p>
       )}
