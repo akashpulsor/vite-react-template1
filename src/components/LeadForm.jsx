@@ -39,6 +39,7 @@ export default function LeadForm() {
       if (!response.ok || result.ok === false) {
         throw new Error(result.message || "Could not save interest.");
       }
+      trackEvent("lead_form_submission", { form_id: "hero_lead_form" });
       trackEvent("lead_submit_success", { event_category: "lead_form" });
       setState({ status: "sent", message: "Thanks. We saved your email." });
       setForm({ name: "", email: "", phoneNumber: "", country: "India", youtubeHandle: "", message: "", website: "" });
@@ -56,7 +57,7 @@ export default function LeadForm() {
   )}`;
 
   return (
-    <form className="lead-form" onSubmit={submit}>
+    <form id="hero_lead_form" className="lead-form" onSubmit={submit}>
       <label className="hp-field" aria-hidden="true">
         <span>Website</span>
         <input value={form.website} onChange={(event) => update("website", event.target.value)} tabIndex={-1} autoComplete="off" />
@@ -92,7 +93,13 @@ export default function LeadForm() {
         <textarea value={form.message} onChange={(event) => update("message", event.target.value)} rows={4} placeholder="Example: fitness shorts, podcast clips, founder videos. Tell us where the workflow breaks today." disabled={state.status === "saving"} />
       </label>
       <div className="form-actions">
-        <button type="submit" disabled={state.status === "saving"} data-ga-event="lead_form_button_click" data-ga-label="Request access form">
+        <button
+          type="submit"
+          disabled={state.status === "saving"}
+          data-ga-event="cta_click"
+          data-ga-cta-location="access_section"
+          data-ga-cta-text="Request access"
+        >
           {state.status === "saving" ? "Saving..." : "Request access"}
         </button>
         <a href={mailto} data-ga-event="email_instead_click" data-ga-label="Lead form email instead">Email instead</a>

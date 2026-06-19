@@ -52,7 +52,7 @@ const operatingModes = [
 export default function Home() {
   return (
     <article className="landing-page">
-      <section className="landing-hero studio-hero" aria-label="Landing hero">
+      <section className="landing-hero studio-hero" id="hero" aria-label="Landing hero">
         <div className="hero-copy">
           <p className="kicker">Dalaillama Creator Studio</p>
           <h1>Plan the short. Shoot the take. Polish it like a studio.</h1>
@@ -66,8 +66,33 @@ export default function Home() {
             </p>
           </div>
           <div className="hero-actions">
-            <a className="creator-primary hero-button" href="#access" data-ga-event="cta_click" data-ga-label="Hero request access">Request access</a>
-            <a className="hero-link" href="#workflow" data-ga-event="cta_click" data-ga-label="Hero see workflow">See the workflow</a>
+            <a
+              className="creator-primary hero-button"
+              href="#access"
+              data-ga-event="cta_click"
+              data-ga-cta-location="hero_section"
+              data-ga-cta-text="Get Started"
+            >
+              Get Started
+            </a>
+            <a
+              className="creator-secondary hero-button"
+              href="#access"
+              data-ga-event="cta_click"
+              data-ga-cta-location="hero_section"
+              data-ga-cta-text="Book a Demo"
+            >
+              Book a Demo
+            </a>
+            <a
+              className="hero-link"
+              href="#workflow"
+              data-ga-event="cta_click"
+              data-ga-cta-location="hero_section"
+              data-ga-cta-text="See the workflow"
+            >
+              See the workflow
+            </a>
           </div>
           <p className="hero-note">
             Built first for creators making shorts, reels, podcast clips, coaching videos, product videos, and founder-led content.

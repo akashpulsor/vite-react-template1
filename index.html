@@ -1,6 +1,16 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google Analytics 4: load the official gtag.js tag before any other head content. -->
+    <script async id="dalaillama-landing-ga4" src="https://www.googletagmanager.com/gtag/js?id=G-YVWC0J9JC3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+      gtag("config", "G-YVWC0J9JC3");
+      window.__DALAILLAMA_GA4_INITIALIZED__ = true;
+      window.__DALAILLAMA_GA4_AUTO_PAGE_VIEW__ = true;
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index,follow" />
@@ -45,6 +55,7 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- React app bundle. GA4 event listeners are initialized from src/main.jsx via src/analytics.js. -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
