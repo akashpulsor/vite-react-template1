@@ -49,7 +49,17 @@ const operatingModes = [
   },
 ];
 
+const featuredGuideSlugs = [
+  "storyboard-shorts-with-images",
+  "dp-shorts-with-images",
+  "lighting-shorts-with-images",
+];
+
 export default function Home() {
+  const featuredGuides = featuredGuideSlugs
+    .map((slug) => posts.find((post) => post.slug === slug))
+    .filter(Boolean);
+
   return (
     <article className="landing-page">
       <section className="landing-hero studio-hero" id="hero" aria-label="Landing hero">
@@ -204,6 +214,27 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      {featuredGuides.length > 0 && (
+        <section className="landing-section writing-section" id="production-guides">
+          <p className="kicker">Production guides</p>
+          <h2>See one Short planned three ways.</h2>
+          <div className="guide-link-grid">
+            {featuredGuides.map((post) => (
+              <a
+                className="guide-link-card creator-panel-muted"
+                href={`/blog/${post.slug}`}
+                key={post.slug}
+                data-ga-event="blog_link_click"
+                data-ga-label={post.title}
+              >
+                <span>{post.title}</span>
+                <small>{post.description}</small>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="landing-section split-section" id="polish">
         <div>

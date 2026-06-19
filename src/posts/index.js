@@ -46,6 +46,8 @@ function parsePost(raw) {
     readingTime: frontmatter.readingTime || "",
     date: frontmatter.date || "",
     body: stripLeadingH1(body),
+    heroImage: frontmatter.ogImage || firstImage(body)?.src || "",
+    heroImageAlt: frontmatter.ogImageAlt || firstImage(body)?.alt || "",
     imagePrompts: frontmatter.imagePrompts || {},
     relatedArticles: frontmatter.relatedArticles || [],
   };
@@ -98,6 +100,11 @@ function firstHeading(body) {
 
 function stripLeadingH1(body) {
   return body.replace(/^# .+\n+/, "").trim();
+}
+
+function firstImage(body) {
+  const match = body.match(/!\[([^\]]*)\]\(([^)]+)\)/);
+  return match ? { alt: match[1], src: match[2] } : null;
 }
 
 function slugify(value) {

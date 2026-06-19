@@ -916,6 +916,46 @@ a:hover {
   color: #94a3b8;
 }
 
+.guide-link-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.guide-link-card {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-height: 152px;
+  padding: 18px;
+}
+
+.guide-link-card span {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 850;
+  line-height: 1.18;
+}
+
+.guide-link-card small {
+  color: #cbd5e1;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+.blog-featured-block {
+  margin-top: 28px;
+}
+
+.blog-featured-block h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.12;
+}
+
 .access-section {
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(320px, 0.72fr);
@@ -1184,6 +1224,10 @@ a:hover {
   }
 
   .crew-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-link-grid {
     grid-template-columns: 1fr;
   }
 
