@@ -10,7 +10,7 @@ imagePrompts:
   comparison: "Minimal comparison of vague storyboard versus useful storyboard. Two-column black and white diagram with simple panels, no people."
   process: "Workflow diagram showing idea to beats to frames to shot list for a YouTube Short. White background, no gradients."
   advanced: "Professional storyboard workflow diagram showing continuity, pacing, camera, lighting, sound, and edit intent. Minimal black and white."
-relatedArticles: ["What Is a Shot List?", "How to Plan a YouTube Short in 15 Minutes", "The Solo Creator Production Workflow"]
+relatedArticles: ["How to Storyboard Shorts With Images", "What Is a Shot List?", "How to Plan a YouTube Short in 15 Minutes", "The Solo Creator Production Workflow"]
 ---
 
 # How to Storyboard a YouTube Short
@@ -181,6 +181,7 @@ We built Dalaillama Creator Studio around that idea: the creator should be able 
 
 ## Related Articles
 
+- [How to Storyboard Shorts With Images](/blog/storyboard-shorts-with-images)
 - [What Is a Shot List?](/blog/what-is-a-shot-list)
 - [How to Plan a YouTube Short in 15 Minutes](/blog/how-to-plan-a-youtube-short)
 - [The Solo Creator Production Workflow](/blog/creator-production-workflow)

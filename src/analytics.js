@@ -1,5 +1,5 @@
 const GOOGLE_TAG_SCRIPT_ID = "dalaillama-landing-ga4";
-const DEFAULT_GA_MEASUREMENT_ID = "G-YVWC0J9JC3";
+const DEFAULT_GA_MEASUREMENT_ID = "G-KCK0RY0YPP";
 const SCROLL_DEPTH_MARKS = [25, 50, 75, 90];
 const SOCIAL_LINK_HOSTS = [
   "twitter.com",

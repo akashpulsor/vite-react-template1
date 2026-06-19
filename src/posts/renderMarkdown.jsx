@@ -70,11 +70,37 @@ function splitTableRow(line) {
 }
 
 function formatInline(text) {
-  const parts = text.split(/(\*\*.*?\*\*)/g);
+  const parts = [];
+  const inlinePattern = /(\*\*[^*]+?\*\*|\[[^\]]+?\]\([^)]+?\))/g;
+  let cursor = 0;
+  let match;
+
+  while ((match = inlinePattern.exec(text)) !== null) {
+    if (match.index > cursor) {
+      parts.push(text.slice(cursor, match.index));
+    }
+    parts.push(match[0]);
+    cursor = match.index + match[0].length;
+  }
+
+  if (cursor < text.length) {
+    parts.push(text.slice(cursor));
+  }
+
   return parts.map((part, index) => {
+    const linkMatch = part.match(/^\[([^\]]+?)\]\(([^)]+?)\)$/);
+    if (linkMatch) {
+      return (
+        <a key={index} href={linkMatch[2]}>
+          {linkMatch[1]}
+        </a>
+      );
+    }
+
     if (part.startsWith("**") && part.endsWith("**")) {
       return <strong key={index}>{part.slice(2, -2)}</strong>;
     }
+
     return <React.Fragment key={index}>{part}</React.Fragment>;
   });
 }

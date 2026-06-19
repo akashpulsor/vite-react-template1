@@ -977,6 +977,18 @@ a:hover {
   margin-top: 26px;
 }
 
+.post-body a {
+  color: #d8b4fe;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.post-body a:hover {
+  color: #ffffff;
+}
+
 .post-body h3 {
   margin-top: 34px;
   margin-bottom: 10px;

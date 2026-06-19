@@ -8,8 +8,10 @@ import reviewFootage from "./review-footage-before-editing.md?raw";
 import audioQuality from "./improve-audio-quality-in-videos.md?raw";
 import phoneFootageProfessional from "./make-phone-footage-look-professional.md?raw";
 import creatorWorkflow from "./creator-production-workflow.md?raw";
+import storyboardShortsWithImages from "./storyboard-shorts-with-images.md?raw";
 
 const rawPosts = [
+  storyboardShortsWithImages,
   planShort,
   hooks,
   shotList,
