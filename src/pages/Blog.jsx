@@ -1,4 +1,5 @@
 import { posts } from "../posts/index.js";
+import { reelStudies } from "../reelStudies.js";
 
 const featuredGuideSlugs = [
   "meaningful-short-video-ai",
@@ -16,7 +17,19 @@ export default function Blog() {
     <article className="page essay-page">
       <p className="back-link"><a href="/" data-ga-event="nav_click" data-ga-label="Blog back to dashboard">Back to dashboard</a></p>
       <h1>Blogs & Case Studies</h1>
-      <p>We will publish product blogs and real creator workflow case studies here.</p>
+      <p>Blogs, edit studies, and short-form content ideas for turning existing video into stronger Shorts.</p>
+      <section className="blog-featured-block" aria-label="Reel patterns with short-form potential">
+        <h2>Reel Patterns Worth Editing</h2>
+        <p className="empty-note">Some clips are not popular yet, but they have the raw material for a good reel: a clear idea, tension, usefulness, or a visible before-and-after.</p>
+        <div className="guide-link-grid">
+          {reelStudies.map((study) => (
+            <div className="guide-link-card creator-panel-muted" key={study.title}>
+              <span>{study.title}</span>
+              <small>{study.body}</small>
+            </div>
+          ))}
+        </div>
+      </section>
       {featuredPosts.length > 0 && (
         <section className="blog-featured-block" aria-label="Featured production guides and case studies">
           <h2>Featured Production Guides and Case Studies</h2>

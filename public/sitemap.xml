@@ -8,9 +8,21 @@
   </url>
   <url>
     <loc>https://dalaillama.in/blog</loc>
-    <lastmod>2026-06-19</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://dalaillama.in/blog/reel-patterns-worth-editing</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dalaillama.in/blog/short-form-video-editor-attention-span</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://dalaillama.in/blog/partition-history-short-video</loc>

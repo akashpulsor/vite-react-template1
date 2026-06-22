@@ -8,7 +8,7 @@ import { getPostBySlug } from "./posts/index.js";
 
 const SITE_URL = "https://dalaillama.in";
 const DEFAULT_DESCRIPTION =
-  "Dalaillama Creator Studio helps creators plan shorts, shoot against a real shot plan, and polish phone footage like a small production team.";
+  "Dalaillama turns your video into short-form content fast. Send the source video and get a ready-to-post Short back in 2 hours.";
 const DEFAULT_SOCIAL_IMAGE = "/social-card.svg";
 
 function routeFromPath(pathname) {
@@ -40,8 +40,8 @@ export default function App() {
           <nav className="nav-links" aria-label="Primary navigation">
             <a href="/" data-ga-event="nav_click" data-ga-label="Dashboard">Dashboard</a>
             <a href="/#problem" data-ga-event="nav_click" data-ga-label="Problem">Problem</a>
-            <a href="/#crew" data-ga-event="nav_click" data-ga-label="Crew">Crew</a>
-            <a href="/#workflow" data-ga-event="nav_click" data-ga-label="Workflow">Workflow</a>
+            <a href="/#crew" data-ga-event="nav_click" data-ga-label="How it helps">How it helps</a>
+            <a href="/#order" data-ga-event="nav_click" data-ga-label="Order details">Order</a>
             <a href="/#polish" data-ga-event="nav_click" data-ga-label="Polish">Polish</a>
             <a href="/#access" data-ga-event="nav_click" data-ga-label="Access">Access</a>
             <a href="/blog" data-ga-event="nav_click" data-ga-label="Blogs and case studies">Blogs & Case Studies</a>

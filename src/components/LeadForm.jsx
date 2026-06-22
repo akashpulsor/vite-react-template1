@@ -41,7 +41,7 @@ export default function LeadForm() {
       }
       trackEvent("lead_form_submission", { form_id: "hero_lead_form" });
       trackEvent("lead_submit_success", { event_category: "lead_form" });
-      setState({ status: "sent", message: "Thanks. We saved your email." });
+      setState({ status: "sent", message: "Thanks. We saved your clip request." });
       setForm({ name: "", email: "", phoneNumber: "", country: "India", youtubeHandle: "", message: "", website: "" });
     } catch (error) {
       trackEvent("lead_submit_error", { event_category: "lead_form" });
@@ -52,8 +52,8 @@ export default function LeadForm() {
     }
   };
 
-  const mailto = `mailto:hello@dalaillama.in?subject=${encodeURIComponent("Dalaillama Creator Studio access")}&body=${encodeURIComponent(
-    `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phoneNumber}\nCountry: ${form.country}\nYouTube: ${form.youtubeHandle}\n\n${form.message}`
+  const mailto = `mailto:hello@dalaillama.in?subject=${encodeURIComponent("Dalaillama clip request")}&body=${encodeURIComponent(
+    `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phoneNumber}\nCountry: ${form.country}\nLink: ${form.youtubeHandle}\n\n${form.message}`
   )}`;
 
   return (
@@ -85,12 +85,12 @@ export default function LeadForm() {
         </label>
       </div>
       <label>
-        <span>YouTube handle</span>
-        <input value={form.youtubeHandle} onChange={(event) => update("youtubeHandle", event.target.value)} type="text" placeholder="@yourchannel or channel URL" autoComplete="off" required disabled={state.status === "saving"} />
+        <span>Channel or video link</span>
+        <input value={form.youtubeHandle} onChange={(event) => update("youtubeHandle", event.target.value)} type="text" placeholder="YouTube, LinkedIn, Drive, or channel URL" autoComplete="off" required disabled={state.status === "saving"} />
       </label>
       <label>
-        <span>What do you record?</span>
-        <textarea value={form.message} onChange={(event) => update("message", event.target.value)} rows={4} placeholder="Example: fitness shorts, podcast clips, founder videos. Tell us where the workflow breaks today." disabled={state.status === "saving"} />
+        <span>Clip details</span>
+        <textarea value={form.message} onChange={(event) => update("message", event.target.value)} rows={4} placeholder="Paste a video link or describe the clip. Example: 40-minute podcast, need one 60-second LinkedIn Short back today." disabled={state.status === "saving"} />
       </label>
       <div className="form-actions">
         <button
@@ -98,9 +98,9 @@ export default function LeadForm() {
           disabled={state.status === "saving"}
           data-ga-event="cta_click"
           data-ga-cta-location="access_section"
-          data-ga-cta-text="Request access"
+          data-ga-cta-text="Send clip details"
         >
-          {state.status === "saving" ? "Saving..." : "Request access"}
+          {state.status === "saving" ? "Saving..." : "Send clip details"}
         </button>
         <a href={mailto} data-ga-event="email_instead_click" data-ga-label="Lead form email instead">Email instead</a>
       </div>

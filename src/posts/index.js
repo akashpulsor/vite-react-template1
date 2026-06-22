@@ -8,6 +8,8 @@ import reviewFootage from "./review-footage-before-editing.md?raw";
 import audioQuality from "./improve-audio-quality-in-videos.md?raw";
 import phoneFootageProfessional from "./make-phone-footage-look-professional.md?raw";
 import creatorWorkflow from "./creator-production-workflow.md?raw";
+import reelPatternsWorthEditing from "./reel-patterns-worth-editing.md?raw";
+import shortFormVideoEditorAttentionSpan from "./short-form-video-editor-attention-span.md?raw";
 import partitionHistoryShortVideo from "./partition-history-short-video.md?raw";
 import historyOfZeroShunya from "./history-of-zero-shunya.md?raw";
 import cockroachSpyShortVideo from "./cockroach-spy-short-video.md?raw";
@@ -17,6 +19,8 @@ import dpShortsWithImages from "./dp-shorts-with-images.md?raw";
 import lightingShortsWithImages from "./lighting-shorts-with-images.md?raw";
 
 const rawPosts = [
+  reelPatternsWorthEditing,
+  shortFormVideoEditorAttentionSpan,
   partitionHistoryShortVideo,
   historyOfZeroShunya,
   cockroachSpyShortVideo,

@@ -1,51 +1,46 @@
 import LeadForm from "../components/LeadForm.jsx";
 import { posts } from "../posts/index.js";
+import { reelStudies } from "../reelStudies.js";
 
-const productionPath = [
-  "Idea",
-  "Storyline",
-  "Actor",
-  "Script",
-  "Shot design",
-  "Shoot",
-  "Polish",
-  "Export",
+const orderDetails = [
+  "Video link",
+  "Target platform",
+  "Content goal",
+  "Delivery place",
 ];
 
 const thinkingModes = [
-  ["Director thinking", "Turns a loose idea into something you can actually shoot."],
-  ["Writer thinking", "Shapes the hook, beats, dialogue, and payoff."],
-  ["DP thinking", "Chooses framing, lens, movement, and gimbal notes."],
-  ["Lighting thinking", "Plans key light, bounce, shadows, contrast, and rim light."],
-  ["Sound thinking", "Keeps voice clear, then plans ambience, foley, music, and sync hits."],
-  ["Editor thinking", "Checks the take, pacing, continuity, and final polish."],
+  ["Manual edit", "A real editor turns your source video into a short-form cut instead of sending you an auto-generated fragment."],
+  ["Better hook", "We shape the opening so the Short starts with a clear reason to keep watching."],
+  ["Clean captions", "We add readable captions that support the idea without covering the important parts of the frame."],
+  ["Mobile crop", "We prepare the edit for vertical viewing so the speaker, product, or key moment stays visible on a phone."],
+  ["Sound polish", "We clean the voice, balance music, and add small emphasis moments where they improve the edit."],
+  ["2-hour return", "We send or upload the finished short-form video back within two hours."],
 ];
 
-const beforeShoot = [
-  "Find or write the idea.",
-  "Generate story options and save one.",
-  "Build the storyline, characters, and emotional beats.",
-  "Map actors to roles.",
-  "Turn the story into shot-wise screenplay.",
-  "Generate storyboard, lighting, sound, and camera plans.",
+const orderItems = [
+  "Send a video file, Drive link, YouTube link, podcast clip, webinar, interview, demo, or founder video.",
+  "Tell us the platform: YouTube Shorts, Instagram Reels, TikTok, LinkedIn, or another short-form destination.",
+  "Tell us the goal: educate, sell, explain, announce, build authority, or create a punchy highlight.",
+  "We manually create one ready-to-post short-form video and return it within two hours.",
 ];
 
 const afterShoot = [
-  "Upload the real take for each planned shot.",
-  "Choose the frame that represents the clip.",
-  "Enhance the selected shot with production design context.",
-  "Apply the same look to following shots for continuity.",
-  "Clean recorded audio and mix dialogue, foley, ambience, music, and SFX.",
+  "Send the source file or link and tell us where the final Short should go.",
+  "We create the edit manually, not as an automatic clip dump.",
+  "We prepare a vertical 9:16 version with captions, sound, crop, and pacing tuned for short-form.",
+  "We upload it back to your shared folder or return a ready-to-post file.",
+  "You get speed without hiring a full editor for every small piece of content.",
 ];
 
 const operatingModes = [
   {
-    title: "Budget polish is being tested",
-    body: "The low-cost path is not available yet. We are still testing selected frames, background plates, compositing, grading, OpenCV recipes, and audio cleanup before offering it to users.",
+    title: "Manual 2-hour service",
+    body: "For now, we do the work by hand. You send the source clip, and our team handles selection, hook, edit, captions, sound, polish, export, and upload-back.",
   },
   {
-    title: "Premium polish",
-    body: "Use Veo for shots where motion, relighting, transitions, or client-facing quality justify the extra cost.",
+    title: "Simple order, finished output",
+    body: "You do not need to learn a tool or manage a production process. Place the order, share the video, and get the finished short-form video back.",
   },
 ];
 
@@ -65,15 +60,15 @@ export default function Home() {
     <article className="landing-page">
       <section className="landing-hero studio-hero" id="hero" aria-label="Landing hero">
         <div className="hero-copy">
-          <p className="kicker">Dalaillama Creator Studio</p>
-          <h1>Plan the short. Shoot the take. Polish it like a studio.</h1>
+          <p className="kicker">Done-for-you short video editing</p>
+          <h1>Turn your video into short-form content fast.</h1>
           <div className="hero-body">
-            <p>Creators do not just need a better filter.</p>
+            <p>Send us the video. We create the Short for you.</p>
             <p>
-              They need help thinking through the production decisions that usually come from a small crew: what to say, how to block it, where to put the camera, how to light the face, when to re-shoot, and how to make the final clip feel intentional.
+              Share a long video, raw clip, podcast, webinar, interview, demo, or founder video. We take the order, manually edit it, add captions and polish, then return a ready-to-post short-form video.
             </p>
             <p>
-              Dalaillama gives that workflow to people recording alone on a phone.
+              The promise is simple: your video becomes a finished Short in 2 hours.
             </p>
           </div>
           <div className="hero-actions">
@@ -82,52 +77,49 @@ export default function Home() {
               href="#access"
               data-ga-event="cta_click"
               data-ga-cta-location="hero_section"
-              data-ga-cta-text="Get Started"
+              data-ga-cta-text="Send a Clip"
             >
-              Get Started
+              Send Your Video
             </a>
             <a
               className="creator-secondary hero-button"
               href="#access"
               data-ga-event="cta_click"
               data-ga-cta-location="hero_section"
-              data-ga-cta-text="Book a Demo"
+              data-ga-cta-text="Talk to Us"
             >
-              Book a Demo
+              Talk to Us
             </a>
             <a
               className="hero-link"
-              href="#workflow"
+              href="#access"
               data-ga-event="cta_click"
               data-ga-cta-location="hero_section"
-              data-ga-cta-text="See the workflow"
+              data-ga-cta-text="Send order details"
             >
-              See the workflow
+              Send order details
             </a>
           </div>
           <p className="hero-note">
-            Built first for creators making shorts, reels, podcast clips, coaching videos, product videos, and founder-led content.
+            Built for creators and teams who already record long-form content but need short-form output fast.
           </p>
         </div>
 
-        <div className="production-board creator-panel" aria-label="Production workflow preview">
+        <div className="production-board creator-panel" aria-label="Short video order preview">
           <div className="board-header">
-            <span>Creator production board</span>
-            <strong>8 steps</strong>
+            <span>Short video order</span>
+            <strong>2 hour return</strong>
           </div>
           <div className="pipeline-strip">
-            {productionPath.map((step, index) => (
-              <div className="pipeline-pill" key={step}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                {step}
-              </div>
+            {orderDetails.map((item) => (
+              <div className="pipeline-pill" key={item}>{item}</div>
             ))}
           </div>
           <div className="shot-preview-card">
             <div>
-              <p>Shot 04</p>
-              <h2>Medium close-up, slight push-in</h2>
-              <span>Key light left, soft bounce right, dialogue stays primary.</span>
+              <p>Simple offer</p>
+              <h2>Place the order. We create the Short.</h2>
+              <span>No editing process to manage. Send the source video and we return a finished short-form edit in 2 hours.</span>
             </div>
             <div className="mini-frame" aria-hidden="true">
               <div className="mini-light" />
@@ -136,18 +128,18 @@ export default function Home() {
           </div>
           <div className="board-timeline">
             <div className="timeline-row">
-              <span>Raw take</span>
+              <span>Video</span>
               <b />
               <b />
               <b />
             </div>
             <div className="timeline-row edited">
-              <span>Polished</span>
+              <span>Short</span>
               <b />
               <b />
             </div>
             <div className="timeline-row sound">
-              <span>Sound</span>
+              <span>Return</span>
               <b />
               <b />
               <b />
@@ -159,23 +151,23 @@ export default function Home() {
 
       <section className="landing-section essay-section" id="problem">
         <p className="kicker">The problem</p>
-        <h2>A creator shooting alone has to think like a small production team.</h2>
+        <h2>You have video. You need short-form output quickly.</h2>
         <div className="essay-copy">
           <p>
-            Recording is easy now. Production is still hard.
+            Most creators and teams already have usable content sitting inside long recordings.
           </p>
           <p>
-            A creator has to choose the idea, ask the follow-up questions, write the hook, plan the shots, find a usable room, set the light, record the take, notice what went wrong, fix the sound, edit the clip, and keep publishing.
+            Someone has to watch the recording, choose the strongest moment, understand the context, write the hook, trim the lead-in, keep the payoff, add captions, clean sound, crop for mobile, and export the final version.
           </p>
           <p>
-            Most tools enter too late. They start after the video exists. But many bad videos were already lost when the production thinking did not happen before the first take.
+            We remove that work from your day. Send the order, and we turn the video into a short-form edit fast.
           </p>
         </div>
       </section>
 
       <section className="landing-section" id="crew">
         <p className="kicker">How the product helps</p>
-        <h2>The missing production thinking.</h2>
+        <h2>We turn your shared video into a finished short-form edit.</h2>
         <div className="crew-grid">
           {thinkingModes.map(([role, body]) => (
             <div className="crew-card creator-panel-muted" key={role}>
@@ -186,13 +178,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="landing-section split-section" id="workflow">
+      <section className="landing-section split-section" id="order">
         <div>
-          <p className="kicker">Workflow</p>
-          <h2>It starts before the camera turns on.</h2>
+          <p className="kicker">Order details</p>
+          <h2>Tell us what to make. We handle the edit.</h2>
         </div>
         <div className="stage-list">
-          {beforeShoot.map((item, index) => (
+          {orderItems.map((item, index) => (
             <div className="stage-row" key={item}>
               <span>{String(index + 1).padStart(2, "0")}</span>
               <p>{item}</p>
@@ -203,15 +195,15 @@ export default function Home() {
 
       <section className="landing-section split-section">
         <div>
-          <p className="kicker">Shot design</p>
-          <h2>Every shot gets a plan, not just an image.</h2>
+          <p className="kicker">Manual edit</p>
+          <h2>We make the short-form version feel intentional.</h2>
         </div>
         <div className="essay-copy">
           <p>
-            The app creates storyboard direction, lighting build sheets, sound cues, DP camera notes, gimbal movement, framing, wardrobe, props, and creator setup guidance.
+            A strong Short is not only a trimmed timeline. We decide where to stay on the speaker, where to crop tighter, where captions should carry the idea, and where a pause makes the line land.
           </p>
           <p>
-            The point is not to make a pretty card. The point is to tell the creator what to record so the footage has a chance to work.
+            That is why the final output feels made, not merely clipped. The viewer sees a clear short-form story instead of a leftover piece of a longer video.
           </p>
         </div>
       </section>
@@ -239,8 +231,8 @@ export default function Home() {
 
       <section className="landing-section split-section" id="polish">
         <div>
-          <p className="kicker">Shoot and polish</p>
-          <h2>After recording, the app becomes the review room.</h2>
+          <p className="kicker">Manual edit and upload</p>
+          <h2>You get a ready-to-post Short back within two hours.</h2>
         </div>
         <div className="stage-list">
           {afterShoot.map((item, index) => (
@@ -254,10 +246,10 @@ export default function Home() {
 
       <section className="landing-section mode-section">
         <div className="mode-copy">
-          <p className="kicker">Cost control</p>
-          <h2>Not every shot deserves the expensive path.</h2>
+          <p className="kicker">Service model</p>
+          <h2>Order in. Short-form video out.</h2>
           <p>
-            The product has to be useful for people testing content every day. It also has to produce a stronger result when a shot is important.
+            We are not asking users to learn another editor. The offer is simple: send us the source video and get a polished Short back in 2 hours.
           </p>
         </div>
         <div className="mode-list">
@@ -272,16 +264,16 @@ export default function Home() {
 
       <section className="landing-section essay-section">
         <p className="kicker">What it is not</p>
-        <h2>It is not a magic button for making fake videos.</h2>
+        <h2>It is not a random AI clipping button.</h2>
         <div className="essay-copy">
           <p>
-            The useful version keeps the creator's performance, words, timing, and identity intact.
+            The useful version keeps the creator's real words, face, timing, and identity intact.
           </p>
           <p>
-            The software should improve what surrounds the performance: the plan, room, light, color, sound, continuity, and final polish.
+            We do not just slice a long video into fragments. We make judgment calls: what moment is worth posting, what context is needed, where the hook starts, and how the edit should move.
           </p>
           <p>
-            If the take is wrong, it should say re-shoot. That is a feature, not a failure.
+            If the source clip does not have a strong Short inside it, we should tell you. That honesty is part of the service.
           </p>
         </div>
       </section>
@@ -289,6 +281,18 @@ export default function Home() {
       <section className="landing-section writing-section" id="writing">
         <p className="kicker">Blogs & case studies</p>
         <h2>Work stories from the product.</h2>
+        <div className="blog-featured-block" aria-label="Reel patterns with short-form potential">
+          <h2>Reel patterns worth editing</h2>
+          <p className="empty-note">Not every strong reel starts as a popular clip. These are the kinds of moments we look for when turning long video into short-form content.</p>
+          <div className="guide-link-grid">
+            {reelStudies.map((study) => (
+              <div className="guide-link-card creator-panel-muted" key={study.title}>
+                <span>{study.title}</span>
+                <small>{study.body}</small>
+              </div>
+            ))}
+          </div>
+        </div>
         {posts.length > 0 ? (
           <div className="writing-list">
             {posts.map((post) => (
@@ -311,13 +315,13 @@ export default function Home() {
 
       <section className="landing-section access-section creator-panel" id="access">
         <div>
-          <p className="kicker">Request access</p>
-          <h2>Bring one rough clip.</h2>
+          <p className="kicker">Send a clip</p>
+          <h2>Send one clip. Get one Short back.</h2>
           <p>
-            We want early users who already record and can tell us where production thinking breaks: idea, script, shot plan, lighting, take review, polish, audio, or export.
+            Share a long video, raw clip, podcast, webinar, interview, product demo, or founder video. Tell us the platform and what you want the Short to achieve.
           </p>
           <p>
-            Leave your email and what you record. We will start with a small group and learn from real projects.
+            We are taking orders manually first so every delivery teaches us what creators actually need.
           </p>
         </div>
         <LeadForm />
