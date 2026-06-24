@@ -16,7 +16,7 @@ export default function BlogPost({ slug }) {
 
   return (
     <article className="page essay-page">
-      <p className="back-link"><a href="/" data-ga-event="nav_click" data-ga-label="Post back to dashboard">Back to dashboard</a></p>
+      <p className="back-link"><a href="/" data-ga-event="nav_click" data-ga-label="Post back to home">Back to home</a></p>
       <p className="kicker">{post.date}</p>
       <h1>{post.title}</h1>
       <div className="post-body">{renderMarkdown(post.body)}</div>

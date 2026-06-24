@@ -52,7 +52,7 @@ export default function LeadForm() {
     }
   };
 
-  const mailto = `mailto:hello@dalaillama.in?subject=${encodeURIComponent("Dalaillama clip request")}&body=${encodeURIComponent(
+  const mailto = `mailto:akash.tripathi@dalaillama.in?subject=${encodeURIComponent("Dalaillama clip request")}&body=${encodeURIComponent(
     `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phoneNumber}\nCountry: ${form.country}\nLink: ${form.youtubeHandle}\n\n${form.message}`
   )}`;
 

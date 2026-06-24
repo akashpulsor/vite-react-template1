@@ -51,6 +51,29 @@ const featuredGuideSlugs = [
   "lighting-shorts-with-images",
 ];
 
+const shortVideoEditorLinks = [
+  {
+    title: "Short Video Editor Service",
+    href: "/short-video-editor",
+    body: "Send existing video and get a ready-to-post vertical Short back within 2 hours.",
+  },
+  {
+    title: "Short-Form Video Editing: How to Hold Attention",
+    href: "/blog/short-form-video-editor-attention-span",
+    body: "A guide to hooks, pacing, captions, cut rhythm, and the first three seconds of a Short.",
+  },
+  {
+    title: "Reel Patterns Worth Editing",
+    href: "/blog/reel-patterns-worth-editing",
+    body: "How to spot the long-form moments that can become useful Reels and Shorts.",
+  },
+  {
+    title: "How to Write Better Hooks for YouTube Shorts",
+    href: "/blog/youtube-shorts-hooks",
+    body: "Hook patterns for creators who want viewers to understand the point quickly.",
+  },
+];
+
 export default function Home() {
   const featuredGuides = featuredGuideSlugs
     .map((slug) => posts.find((post) => post.slug === slug))
@@ -61,7 +84,7 @@ export default function Home() {
       <section className="landing-hero studio-hero" id="hero" aria-label="Landing hero">
         <div className="hero-copy">
           <p className="kicker">Done-for-you short video editing</p>
-          <h1>Turn your video into short-form content fast.</h1>
+          <h1>Short video editing done for you in 2 hours.</h1>
           <div className="hero-body">
             <p>Send us the video. We create the Short for you.</p>
             <p>
@@ -228,6 +251,25 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      <section className="landing-section writing-section" id="short-video-editor-links">
+        <p className="kicker">Short video editor links</p>
+        <h2>For creators searching for a short video editor.</h2>
+        <div className="guide-link-grid">
+          {shortVideoEditorLinks.map((link) => (
+            <a
+              className="guide-link-card creator-panel-muted"
+              href={link.href}
+              key={link.href}
+              data-ga-event="resource_link_click"
+              data-ga-label={link.title}
+            >
+              <span>{link.title}</span>
+              <small>{link.body}</small>
+            </a>
+          ))}
+        </div>
+      </section>
 
       <section className="landing-section split-section" id="polish">
         <div>

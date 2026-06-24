@@ -3,14 +3,70 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const SITE_URL = "https://dalaillama.in";
+const HOME_TITLE = "Dalaillama | Done-for-You Short Video Editing in 2 Hours";
+const SHORT_VIDEO_EDITOR_TITLE = "Short Video Editor for Reels & YouTube Shorts | Dalaillama";
+const BLOG_TITLE = "Short Video Editing Guides & Case Studies | Dalaillama";
 const DEFAULT_DESCRIPTION =
-  "Dalaillama Creator Studio helps creators plan shorts, shoot against a real shot plan, and polish phone footage like a small production team.";
+  "Done-for-you short video editing for creators and teams. Send a long video, podcast, webinar, interview, demo, or raw clip and get a captioned vertical Short back in 2 hours.";
+const SHORT_VIDEO_EDITOR_DESCRIPTION =
+  "A short video editor service for creators and teams. Send existing footage and get one ready-to-post vertical Short for Reels, Shorts, TikTok, or LinkedIn in 2 hours.";
+const BLOG_DESCRIPTION =
+  "Practical short video editing guides and case studies about hooks, Reels, YouTube Shorts, captions, pacing, phone footage, audio, and production workflow.";
 const DEFAULT_SOCIAL_IMAGE = "/social-card.svg";
 const FEATURED_GUIDE_SLUGS = [
   "meaningful-short-video-ai",
   "storyboard-shorts-with-images",
   "dp-shorts-with-images",
   "lighting-shorts-with-images",
+];
+const SHORT_VIDEO_EDITOR_RESOURCES = [
+  {
+    title: "Short-Form Video Editing: How to Hold Attention",
+    href: "/blog/short-form-video-editor-attention-span",
+    body: "A practical guide to hooks, pacing, captions, cut rhythm, and the first three seconds of a Short.",
+  },
+  {
+    title: "Reel Patterns Worth Editing",
+    href: "/blog/reel-patterns-worth-editing",
+    body: "How to identify the quiet, useful, tense, or transformational moments inside longer recordings.",
+  },
+  {
+    title: "How to Write Better Hooks for YouTube Shorts",
+    href: "/blog/youtube-shorts-hooks",
+    body: "Hook patterns for creators who want viewers to understand the point before they scroll away.",
+  },
+  {
+    title: "Make Phone Footage Look Professional",
+    href: "/blog/make-phone-footage-look-professional",
+    body: "Simple polish decisions that make ordinary phone footage feel clearer and more finished.",
+  },
+  {
+    title: "How to Plan a YouTube Short",
+    href: "/blog/how-to-plan-a-youtube-short",
+    body: "A creator-friendly way to move from topic to shot plan before recording the next Short.",
+  },
+  {
+    title: "Improve Audio Quality in Videos",
+    href: "/blog/improve-audio-quality-in-videos",
+    body: "Why clear voice, room tone, music balance, and small sound decisions matter in short-form edits.",
+  },
+];
+const SHORT_VIDEO_EDITOR_FAQ = [
+  {
+    question: "What can I send to Dalaillama?",
+    answer:
+      "You can send a long video, podcast clip, webinar, interview, demo, founder video, raw phone footage, Drive link, YouTube link, or downloadable file.",
+  },
+  {
+    question: "Is this an automatic AI clipping tool?",
+    answer:
+      "No. Dalaillama is a done-for-you editing service. A real editor chooses the moment, shapes the hook, trims the timeline, adds captions, polishes sound, and prepares the vertical export.",
+  },
+  {
+    question: "What do I get back?",
+    answer:
+      "You get one ready-to-post vertical short-form video with a tighter hook, mobile crop, readable captions, sound polish, and export suitable for YouTube Shorts, Instagram Reels, TikTok, LinkedIn, or a similar short-form platform.",
+  },
 ];
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -22,6 +78,12 @@ const posts = await loadPosts();
 await writeFile(
   templatePath,
   buildPage(template, homeSeo(), renderShell(renderHomeFallback(posts)))
+);
+
+await mkdir(path.join(distDir, "short-video-editor"), { recursive: true });
+await writeFile(
+  path.join(distDir, "short-video-editor", "index.html"),
+  buildPage(template, shortVideoEditorSeo(), renderShell(renderShortVideoEditorPage()))
 );
 
 await mkdir(path.join(distDir, "blog"), { recursive: true });
@@ -140,24 +202,35 @@ function parseValue(value) {
 
 function homeSeo() {
   return {
-    title: "Dalaillama Creator Studio",
+    title: HOME_TITLE,
     description: DEFAULT_DESCRIPTION,
     path: "/",
     type: "website",
     image: DEFAULT_SOCIAL_IMAGE,
-    imageAlt: "Dalaillama Creator Studio logo",
+    imageAlt: "Dalaillama short video editor service",
+  };
+}
+
+function shortVideoEditorSeo() {
+  return {
+    title: SHORT_VIDEO_EDITOR_TITLE,
+    description: SHORT_VIDEO_EDITOR_DESCRIPTION,
+    path: "/short-video-editor",
+    type: "website",
+    image: DEFAULT_SOCIAL_IMAGE,
+    imageAlt: "Dalaillama short video editor service",
+    structuredData: shortVideoEditorStructuredData(),
   };
 }
 
 function blogIndexSeo() {
   return {
-    title: "Blogs & Case Studies | Dalaillama Creator Studio",
-    description:
-      "Blogs and case studies about creator production, shot planning, polishing phone footage, and building shorts people want to watch.",
+    title: BLOG_TITLE,
+    description: BLOG_DESCRIPTION,
     path: "/blog",
     type: "website",
     image: DEFAULT_SOCIAL_IMAGE,
-    imageAlt: "Dalaillama Creator Studio logo",
+    imageAlt: "Dalaillama short video editing guides",
   };
 }
 
@@ -167,38 +240,88 @@ function postSeo(post) {
   return {
     title: `${post.title} | Dalaillama`,
     description: post.description,
-    keywords: post.keywords,
     path: pathName,
     type: "article",
     image: post.heroImage,
     imageAlt: post.heroImageAlt,
     articlePublishedTime: published,
-    structuredData: {
+    structuredData: [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: post.title,
+        description: post.description,
+        image: [absoluteUrl(post.heroImage)],
+        datePublished: published,
+        dateModified: published,
+        author: {
+          "@type": "Organization",
+          name: "Dalaillama",
+          url: SITE_URL,
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "Dalaillama",
+        },
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": `${SITE_URL}${pathName}`,
+        },
+      },
+      breadcrumbStructuredData([
+        ["Home", "/"],
+        ["Editing Guides", "/blog"],
+        [post.title, pathName],
+      ]),
+    ],
+  };
+}
+
+function shortVideoEditorStructuredData() {
+  return [
+    {
       "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      headline: post.title,
-      description: post.description,
-      image: [absoluteUrl(post.heroImage)],
-      datePublished: published,
-      dateModified: published,
-      author: {
+      "@type": "Service",
+      name: "Dalaillama Short Video Editor",
+      serviceType: "Short-form video editing",
+      url: `${SITE_URL}/short-video-editor`,
+      description: SHORT_VIDEO_EDITOR_DESCRIPTION,
+      areaServed: "Worldwide",
+      provider: {
         "@type": "Organization",
         name: "Dalaillama",
         url: SITE_URL,
       },
-      publisher: {
-        "@type": "Organization",
-        name: "Dalaillama",
-        logo: {
-          "@type": "ImageObject",
-          url: absoluteUrl("/favicon.svg"),
-        },
-      },
-      mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": `${SITE_URL}${pathName}`,
-      },
     },
+    breadcrumbStructuredData([
+      ["Home", "/"],
+      ["Short Video Editor", "/short-video-editor"],
+    ]),
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: SHORT_VIDEO_EDITOR_FAQ.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    },
+  ];
+}
+
+function breadcrumbStructuredData(items) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map(([name, item], index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name,
+      item: `${SITE_URL}${item}`,
+    })),
   };
 }
 
@@ -208,7 +331,6 @@ function buildPage(baseHtml, seo, rootHtml) {
 
   html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(seo.title)}</title>`);
   html = setMeta(html, "name", "description", seo.description);
-  html = seo.keywords?.length ? setMeta(html, "name", "keywords", seo.keywords.join(", ")) : html;
   html = setMeta(html, "name", "robots", "index,follow");
   html = setMeta(html, "property", "og:type", seo.type || "website");
   html = setMeta(html, "property", "og:site_name", "dalaillama.in");
@@ -241,30 +363,48 @@ function renderShell(content) {
     <div class="creator-app">
       <div class="site-shell">
         <header class="topbar creator-panel-muted">
-          <a class="wordmark" href="/" aria-label="Dalaillama Creator Studio home">Dalaillama Creator Studio</a>
+          <a class="wordmark" href="/" aria-label="Dalaillama home">Dalaillama</a>
           <nav class="nav-links" aria-label="Primary navigation">
-            <a href="/">Dashboard</a>
-            <a href="/#workflow">Workflow</a>
+            <a href="/">Home</a>
+            <a href="/short-video-editor">Short Video Editor</a>
+            <a href="/#order">Order</a>
             <a href="/#production-guides">Production Guides</a>
-            <a href="/blog">Blogs & Case Studies</a>
+            <a href="/blog">Editing Guides</a>
           </nav>
         </header>
         <main>${content}</main>
+        <footer class="site-footer" aria-label="Short video editing resources">
+          <a href="/short-video-editor">Short Video Editor Service</a>
+          <a href="/blog/short-form-video-editor-attention-span">Short-Form Video Editing Guide</a>
+          <a href="/blog/reel-patterns-worth-editing">Reel Editing Patterns</a>
+          <a href="/blog/youtube-shorts-hooks">YouTube Shorts Hooks</a>
+          <a href="/#access">Send a Video</a>
+        </footer>
       </div>
     </div>`;
 }
 
 function renderHomeFallback(allPosts) {
   const featuredPosts = featuredPostsFrom(allPosts);
+  const shortVideoEditorLinks = [
+    {
+      title: "Short Video Editor Service",
+      href: "/short-video-editor",
+      body: "Send existing video and get a ready-to-post vertical Short back within 2 hours.",
+    },
+    ...SHORT_VIDEO_EDITOR_RESOURCES.slice(0, 3),
+  ];
+
   return `
     <article class="landing-page">
       <section class="landing-hero studio-hero">
         <div class="hero-copy">
-          <p class="kicker">Dalaillama Creator Studio</p>
-          <h1>Plan the short. Shoot the take. Polish it like a studio.</h1>
+          <p class="kicker">Done-for-you short video editing</p>
+          <h1>Short video editing done for you in 2 hours.</h1>
           <div class="hero-body">
-            <p>Creators do not just need a better filter.</p>
-            <p>Dalaillama helps creators plan storyboards, DP camera notes, lighting sheets, sound cues, and polish decisions before recording.</p>
+            <p>Send us the video. We create the Short for you.</p>
+            <p>Share a long video, raw clip, podcast, webinar, interview, demo, or founder video. We manually edit it, add captions and polish, then return a ready-to-post short-form video.</p>
+            <p>The promise is simple: your video becomes a finished Short in 2 hours.</p>
           </div>
         </div>
       </section>
@@ -272,6 +412,11 @@ function renderHomeFallback(allPosts) {
         <p class="kicker">Production guides</p>
         <h2>See Shorts planned from concept to production.</h2>
         ${renderGuideCards(featuredPosts)}
+      </section>
+      <section class="landing-section writing-section" id="short-video-editor-links">
+        <p class="kicker">Short video editor links</p>
+        <h2>For creators searching for a short video editor.</h2>
+        ${renderLinkCards(shortVideoEditorLinks)}
       </section>
       <section class="landing-section writing-section">
         <p class="kicker">Blogs & case studies</p>
@@ -288,9 +433,9 @@ function renderBlogIndex(allPosts) {
 
   return `
     <article class="page essay-page">
-      <p class="back-link"><a href="/">Back to dashboard</a></p>
-      <h1>Blogs & Case Studies</h1>
-      <p>Product blogs and creator workflow case studies about planning, shooting, lighting, reviewing, and polishing short videos.</p>
+      <p class="back-link"><a href="/">Back to home</a></p>
+      <h1>Short Video Editing Guides & Case Studies</h1>
+      <p>Practical editing guides, production notes, and case studies for turning existing video into stronger Shorts, Reels, TikToks, and LinkedIn clips.</p>
       <section class="blog-featured-block" aria-label="Featured production guides and case studies">
         <h2>Featured Production Guides and Case Studies</h2>
         ${renderGuideCards(featuredPosts)}
@@ -302,10 +447,80 @@ function renderBlogIndex(allPosts) {
     </article>`;
 }
 
+function renderShortVideoEditorPage() {
+  const editingSteps = [
+    "Review the source video and find the strongest short-form moment.",
+    "Shape the opening so the first seconds give viewers a reason to keep watching.",
+    "Trim pauses, repeated setup, and context that does not help the final Short.",
+    "Crop for vertical 9:16 viewing so the speaker, product, or key action stays visible.",
+    "Add readable captions, clean sound, balance music, and export a ready-to-post file.",
+  ];
+
+  return `
+    <article class="page essay-page service-page">
+      <p class="back-link"><a href="/">Back to home</a></p>
+      <section class="service-hero">
+        <p class="kicker">Short video editor service</p>
+        <h1>Short video editor for Reels, YouTube Shorts, TikTok, and LinkedIn.</h1>
+        <div class="hero-body">
+          <p>Dalaillama turns existing video into short-form content for YouTube Shorts, Instagram Reels, TikTok, LinkedIn, and similar vertical platforms.</p>
+          <p>Send a long recording, podcast clip, webinar, interview, product demo, founder video, or raw phone footage. We manually edit the moment, add captions and sound polish, then return one finished Short within 2 hours.</p>
+        </div>
+        <div class="hero-actions">
+          <a class="creator-primary hero-button" href="/#access">Send Your Video</a>
+          <a class="creator-secondary hero-button" href="/#order">See Order Details</a>
+        </div>
+      </section>
+      <section class="landing-section split-section">
+        <div>
+          <p class="kicker">What the editor does</p>
+          <h2>We make judgment calls a simple clipper misses.</h2>
+        </div>
+        <div class="stage-list">
+          ${editingSteps
+            .map(
+              (item, index) => `
+                <div class="stage-row">
+                  <span>${String(index + 1).padStart(2, "0")}</span>
+                  <p>${escapeHtml(item)}</p>
+                </div>`
+            )
+            .join("")}
+        </div>
+      </section>
+      <section class="landing-section essay-section">
+        <p class="kicker">Who it is for</p>
+        <h2>Useful for teams with footage, but no time to edit every small clip.</h2>
+        <div class="essay-copy">
+          <p>This works best when you already record useful material: podcasts, sales calls, expert interviews, lessons, product demos, webinars, events, or founder updates.</p>
+          <p>The goal is not to make every possible clip. The goal is to find one good short-form idea inside the source, make it clear, and deliver it in a format that is ready to post.</p>
+        </div>
+      </section>
+      <section class="landing-section writing-section" id="short-video-editor-resources">
+        <p class="kicker">Short video editor resources</p>
+        <h2>Helpful links for planning, editing, and polishing better Shorts.</h2>
+        ${renderLinkCards(SHORT_VIDEO_EDITOR_RESOURCES)}
+      </section>
+      <section class="landing-section essay-section">
+        <p class="kicker">FAQ</p>
+        <h2>Common questions before sending a clip.</h2>
+        <div class="faq-list">
+          ${SHORT_VIDEO_EDITOR_FAQ.map(
+            (item) => `
+              <details class="faq-item creator-panel-muted">
+                <summary>${escapeHtml(item.question)}</summary>
+                <p>${escapeHtml(item.answer)}</p>
+              </details>`
+          ).join("")}
+        </div>
+      </section>
+    </article>`;
+}
+
 function renderPost(post) {
   return `
     <article class="page essay-page">
-      <p class="back-link"><a href="/">Back to dashboard</a></p>
+      <p class="back-link"><a href="/">Back to home</a></p>
       <p class="kicker">${escapeHtml(post.date)}</p>
       <h1>${escapeHtml(post.title)}</h1>
       <div class="post-body">${renderMarkdown(post.body)}</div>
@@ -322,6 +537,21 @@ function renderGuideCards(featuredPosts) {
             <a class="guide-link-card creator-panel-muted" href="/blog/${escapeAttribute(post.slug)}">
               <span>${escapeHtml(post.title)}</span>
               <small>${escapeHtml(post.description)}</small>
+            </a>`
+        )
+        .join("")}
+    </div>`;
+}
+
+function renderLinkCards(links) {
+  return `
+    <div class="guide-link-grid">
+      ${links
+        .map(
+          (link) => `
+            <a class="guide-link-card creator-panel-muted" href="${escapeAttribute(link.href)}">
+              <span>${escapeHtml(link.title)}</span>
+              <small>${escapeHtml(link.body)}</small>
             </a>`
         )
         .join("")}

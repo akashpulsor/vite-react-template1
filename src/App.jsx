@@ -3,16 +3,25 @@ import { trackPageView } from "./analytics.js";
 import Home from "./pages/Home.jsx";
 import Blog from "./pages/Blog.jsx";
 import BlogPost from "./pages/BlogPost.jsx";
+import ShortVideoEditor from "./pages/ShortVideoEditor.jsx";
 import BrandLogo from "./components/BrandLogo.jsx";
 import { getPostBySlug } from "./posts/index.js";
 
 const SITE_URL = "https://dalaillama.in";
+const HOME_TITLE = "Dalaillama | Done-for-You Short Video Editing in 2 Hours";
+const SHORT_VIDEO_EDITOR_TITLE = "Short Video Editor for Reels & YouTube Shorts | Dalaillama";
+const BLOG_TITLE = "Short Video Editing Guides & Case Studies | Dalaillama";
 const DEFAULT_DESCRIPTION =
-  "Dalaillama turns your video into short-form content fast. Send the source video and get a ready-to-post Short back in 2 hours.";
+  "Done-for-you short video editing for creators and teams. Send a long video, podcast, webinar, interview, demo, or raw clip and get a captioned vertical Short back in 2 hours.";
+const SHORT_VIDEO_EDITOR_DESCRIPTION =
+  "A short video editor service for creators and teams. Send existing footage and get one ready-to-post vertical Short for Reels, Shorts, TikTok, or LinkedIn in 2 hours.";
+const BLOG_DESCRIPTION =
+  "Practical short video editing guides and case studies about hooks, Reels, YouTube Shorts, captions, pacing, phone footage, audio, and production workflow.";
 const DEFAULT_SOCIAL_IMAGE = "/social-card.svg";
 
 function routeFromPath(pathname) {
-  if (pathname === "/blog") return { page: "blog" };
+  if (pathname === "/short-video-editor" || pathname === "/short-video-editor/") return { page: "shortVideoEditor" };
+  if (pathname === "/blog" || pathname === "/blog/") return { page: "blog" };
   if (pathname.startsWith("/blog/")) {
     return { page: "post", slug: pathname.replace("/blog/", "").replace(/\/$/, "") };
   }
@@ -34,37 +43,57 @@ export default function App() {
     <div className="creator-app">
       <div className="site-shell">
         <header className="topbar creator-panel-muted">
-          <a className="wordmark" href="/" aria-label="Dalaillama Creator Studio home">
+          <a className="wordmark" href="/" aria-label="Dalaillama home">
             <BrandLogo />
           </a>
           <nav className="nav-links" aria-label="Primary navigation">
-            <a href="/" data-ga-event="nav_click" data-ga-label="Dashboard">Dashboard</a>
+            <a href="/" data-ga-event="nav_click" data-ga-label="Home">Home</a>
+            <a href="/short-video-editor" data-ga-event="nav_click" data-ga-label="Short video editor">Short Video Editor</a>
             <a href="/#problem" data-ga-event="nav_click" data-ga-label="Problem">Problem</a>
             <a href="/#crew" data-ga-event="nav_click" data-ga-label="How it helps">How it helps</a>
             <a href="/#order" data-ga-event="nav_click" data-ga-label="Order details">Order</a>
             <a href="/#polish" data-ga-event="nav_click" data-ga-label="Polish">Polish</a>
             <a href="/#access" data-ga-event="nav_click" data-ga-label="Access">Access</a>
-            <a href="/blog" data-ga-event="nav_click" data-ga-label="Blogs and case studies">Blogs & Case Studies</a>
+            <a href="/blog" data-ga-event="nav_click" data-ga-label="Editing guides">Editing Guides</a>
           </nav>
         </header>
         <main>
           {route.page === "blog" && <Blog />}
           {route.page === "post" && <BlogPost slug={route.slug} />}
+          {route.page === "shortVideoEditor" && <ShortVideoEditor />}
           {route.page === "home" && <Home />}
         </main>
+        <footer className="site-footer" aria-label="Short video editing resources">
+          <a href="/short-video-editor" data-ga-event="footer_link_click" data-ga-label="Short Video Editor Service">Short Video Editor Service</a>
+          <a href="/blog/short-form-video-editor-attention-span" data-ga-event="footer_link_click" data-ga-label="Short-form video editing guide">Short-Form Video Editing Guide</a>
+          <a href="/blog/reel-patterns-worth-editing" data-ga-event="footer_link_click" data-ga-label="Reel editing patterns">Reel Editing Patterns</a>
+          <a href="/blog/youtube-shorts-hooks" data-ga-event="footer_link_click" data-ga-label="YouTube Shorts hooks">YouTube Shorts Hooks</a>
+          <a href="/#access" data-ga-event="footer_link_click" data-ga-label="Send a video">Send a Video</a>
+        </footer>
       </div>
     </div>
   );
 }
 
 function seoForRoute(route, post) {
+  if (route.page === "shortVideoEditor") {
+    return {
+      title: SHORT_VIDEO_EDITOR_TITLE,
+      description: SHORT_VIDEO_EDITOR_DESCRIPTION,
+      path: "/short-video-editor",
+      image: DEFAULT_SOCIAL_IMAGE,
+      imageAlt: "Dalaillama short video editor service",
+      structuredData: shortVideoEditorStructuredData(),
+    };
+  }
+
   if (route.page === "blog") {
     return {
-      title: "Blogs & Case Studies | Dalaillama Creator Studio",
-      description: "Blogs and case studies about creator production, shot planning, polishing phone footage, and building shorts people want to watch.",
+      title: BLOG_TITLE,
+      description: BLOG_DESCRIPTION,
       path: "/blog",
       image: DEFAULT_SOCIAL_IMAGE,
-      imageAlt: "Dalaillama Creator Studio logo",
+      imageAlt: "Dalaillama short video editing guides",
     };
   }
 
@@ -85,19 +114,85 @@ function seoForRoute(route, post) {
   }
 
   return {
-    title: "Dalaillama Creator Studio",
+    title: HOME_TITLE,
     description: DEFAULT_DESCRIPTION,
     path: "/",
     image: DEFAULT_SOCIAL_IMAGE,
-    imageAlt: "Dalaillama Creator Studio logo",
+    imageAlt: "Dalaillama short video editor service",
   };
 }
 
-function applySeo({ title, description, keywords = [], path, image = DEFAULT_SOCIAL_IMAGE, imageAlt = "", type = "website", articlePublishedTime = "" }) {
+function shortVideoEditorStructuredData() {
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: "Dalaillama Short Video Editor",
+      serviceType: "Short-form video editing",
+      url: `${SITE_URL}/short-video-editor`,
+      description: SHORT_VIDEO_EDITOR_DESCRIPTION,
+      areaServed: "Worldwide",
+      provider: {
+        "@type": "Organization",
+        name: "Dalaillama",
+        url: SITE_URL,
+      },
+    },
+    breadcrumbStructuredData([
+      ["Home", "/"],
+      ["Short Video Editor", "/short-video-editor"],
+    ]),
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What can I send to Dalaillama?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "You can send a long video, podcast clip, webinar, interview, demo, founder video, raw phone footage, Drive link, YouTube link, or downloadable file.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Is this an automatic AI clipping tool?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "No. Dalaillama is a done-for-you editing service. A real editor chooses the moment, shapes the hook, trims the timeline, adds captions, polishes sound, and prepares the vertical export.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What do I get back?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "You get one ready-to-post vertical short-form video with a tighter hook, mobile crop, readable captions, sound polish, and export suitable for YouTube Shorts, Instagram Reels, TikTok, LinkedIn, or a similar short-form platform.",
+          },
+        },
+      ],
+    },
+  ];
+}
+
+function breadcrumbStructuredData(items) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map(([name, item], index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name,
+      item: `${SITE_URL}${item}`,
+    })),
+  };
+}
+
+function applySeo({ title, description, path, image = DEFAULT_SOCIAL_IMAGE, imageAlt = "", type = "website", articlePublishedTime = "" }) {
   const absoluteImage = absoluteUrl(image);
   document.title = title;
   setMeta("description", description);
-  if (keywords.length) setMeta("keywords", keywords.join(", "));
+  removeMeta("keywords");
   setMeta("robots", "index,follow");
   setMeta("og:type", type, "property");
   setMeta("og:site_name", "dalaillama.in", "property");
@@ -163,32 +258,35 @@ function applyStructuredData(data) {
 
 function articleStructuredData(post, path, image) {
   const published = isoDate(post.date);
-  return {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.description || "",
-    image: [absoluteUrl(image)],
-    datePublished: published,
-    dateModified: published,
-    author: {
-      "@type": "Organization",
-      name: "Dalaillama",
-      url: SITE_URL,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Dalaillama",
-      logo: {
-        "@type": "ImageObject",
-        url: absoluteUrl("/favicon.svg"),
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.description || "",
+      image: [absoluteUrl(image)],
+      datePublished: published,
+      dateModified: published,
+      author: {
+        "@type": "Organization",
+        name: "Dalaillama",
+        url: SITE_URL,
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Dalaillama",
+      },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": `${SITE_URL}${path}`,
       },
     },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `${SITE_URL}${path}`,
-    },
-  };
+    breadcrumbStructuredData([
+      ["Home", "/"],
+      ["Editing Guides", "/blog"],
+      [post.title, path],
+    ]),
+  ];
 }
 
 function absoluteUrl(path) {

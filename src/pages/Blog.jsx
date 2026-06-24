@@ -15,9 +15,9 @@ export default function Blog() {
 
   return (
     <article className="page essay-page">
-      <p className="back-link"><a href="/" data-ga-event="nav_click" data-ga-label="Blog back to dashboard">Back to dashboard</a></p>
-      <h1>Blogs & Case Studies</h1>
-      <p>Blogs, edit studies, and short-form content ideas for turning existing video into stronger Shorts.</p>
+      <p className="back-link"><a href="/" data-ga-event="nav_click" data-ga-label="Blog back to home">Back to home</a></p>
+      <h1>Short Video Editing Guides & Case Studies</h1>
+      <p>Practical editing guides, production notes, and case studies for turning existing video into stronger Shorts, Reels, TikToks, and LinkedIn clips.</p>
       <section className="blog-featured-block" aria-label="Reel patterns with short-form potential">
         <h2>Reel Patterns Worth Editing</h2>
         <p className="empty-note">Some clips are not popular yet, but they have the raw material for a good reel: a clear idea, tension, usefulness, or a visible before-and-after.</p>
