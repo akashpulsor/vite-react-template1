@@ -11,6 +11,9 @@ import creatorWorkflow from "./creator-production-workflow.md?raw";
 import reelPatternsWorthEditing from "./reel-patterns-worth-editing.md?raw";
 import learnVideoEditing from "./how-to-learn-video-editing.md?raw";
 import shortFormVideoEditorAttentionSpan from "./short-form-video-editor-attention-span.md?raw";
+import redditShortsEditingWorkflow from "./reddit-shorts-editing-workflow.md?raw";
+import aiVideoEditingNewsrooms from "./ai-video-editing-newsrooms.md?raw";
+import aiVideoWorkflowDigitalPublishers from "./ai-video-workflow-digital-publishers.md?raw";
 import partitionHistoryShortVideo from "./partition-history-short-video.md?raw";
 import historyOfZeroShunya from "./history-of-zero-shunya.md?raw";
 import cockroachSpyShortVideo from "./cockroach-spy-short-video.md?raw";
@@ -18,8 +21,16 @@ import meaningfulShortVideoAi from "./meaningful-short-video-ai.md?raw";
 import storyboardShortsWithImages from "./storyboard-shorts-with-images.md?raw";
 import dpShortsWithImages from "./dp-shorts-with-images.md?raw";
 import lightingShortsWithImages from "./lighting-shorts-with-images.md?raw";
+import { agencyWorkflowPosts } from "./agencyWorkflowPosts.js";
+import { newsroomWorkflowPosts } from "./newsroomWorkflowPosts.js";
+import { programmaticShortsPosts } from "./programmaticShortsPosts.js";
+import { serviceComparisonPosts } from "./serviceComparisonPosts.js";
+import { videoOperationsPosts } from "./videoOperationsPosts.js";
 
 const rawPosts = [
+  aiVideoWorkflowDigitalPublishers,
+  aiVideoEditingNewsrooms,
+  redditShortsEditingWorkflow,
   learnVideoEditing,
   reelPatternsWorthEditing,
   shortFormVideoEditorAttentionSpan,
@@ -42,7 +53,18 @@ const rawPosts = [
   creatorWorkflow,
 ];
 
-export const posts = rawPosts.map(parsePost);
+const markdownPosts = rawPosts.map(parsePost);
+
+export const posts = [
+  ...markdownPosts.slice(0, 2),
+  ...newsroomWorkflowPosts,
+  ...agencyWorkflowPosts,
+  ...videoOperationsPosts,
+  ...serviceComparisonPosts,
+  markdownPosts[2],
+  ...programmaticShortsPosts,
+  ...markdownPosts.slice(3),
+];
 
 export function getPostBySlug(slug) {
   return posts.find((post) => post.slug === slug);

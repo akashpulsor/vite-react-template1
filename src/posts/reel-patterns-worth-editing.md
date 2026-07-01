@@ -193,6 +193,12 @@ A good editor finds that clarity, removes everything around it, and shapes it so
 
 That is the work: turn existing video into something short enough to watch, clear enough to remember, and polished enough to post.
 
+## Authority References
+
+- [YouTube Help: Get started creating YouTube Shorts](https://support.google.com/youtube/answer/10059070) gives the platform context for how Shorts are created, uploaded, and discovered.
+- [Adobe Learn: Premiere Pro](https://www.adobe.com/learn/premiere-pro) is a useful editing reference for turning raw footage into structured timelines.
+- [Google Search Central: creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) supports choosing clips for user value instead of shallow trend chasing.
+
 ## Related Articles
 
 - [Short-Form Video Editing: How to Hold Attention](/blog/short-form-video-editor-attention-span)

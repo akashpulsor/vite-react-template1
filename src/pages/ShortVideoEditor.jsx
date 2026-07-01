@@ -8,6 +8,96 @@ const editingSteps = [
 
 const resourceLinks = [
   {
+    title: "AI Video Workflow for Digital Publishers",
+    href: "/blog/ai-video-workflow-digital-publishers",
+    body: "The site graph and pillar guide for a focused AI-powered newsroom video production knowledge base.",
+  },
+  {
+    title: "AI Video Editing for Newsrooms",
+    href: "/blog/ai-video-editing-newsrooms",
+    body: "An enterprise guide to AI clipping, captions, detection, review workflows, APIs, and newsroom-grade short-form production.",
+  },
+  {
+    title: "Newsroom Video Workflow",
+    href: "/blog/newsroom-video-workflow",
+    body: "A workflow map for source intake, clipping, approvals, captions, publishing, and archive reuse.",
+  },
+  {
+    title: "High Volume News Editing",
+    href: "/blog/high-volume-news-editing",
+    body: "How publishers can increase video output with templates, AI-assisted prep, review queues, and quality control.",
+  },
+  {
+    title: "Reduce News Editing Time",
+    href: "/blog/reduce-news-editing-time",
+    body: "Workflow fixes for faster newsroom video turnaround without removing editorial checks.",
+  },
+  {
+    title: "Agency Video Editing Workflow",
+    href: "/blog/agency-video-editing-workflow",
+    body: "A delivery workflow for agencies managing client briefs, batches, reviews, revisions, and final exports.",
+  },
+  {
+    title: "Done For You Shorts",
+    href: "/blog/done-for-you-shorts",
+    body: "What a reliable done-for-you Shorts workflow should include before you hand off footage.",
+  },
+  {
+    title: "Video Repurposing Service",
+    href: "/video-repurposing",
+    body: "Turn podcasts, webinars, interviews, lectures, press conferences, and YouTube videos into focused Shorts.",
+  },
+  {
+    title: "Video Operations Guide",
+    href: "/blog/video-operations-guide",
+    body: "A practical guide to intake, production queues, QA, review, delivery, publishing, and metrics.",
+  },
+  {
+    title: "Video QA Workflow",
+    href: "/blog/video-qa-workflow",
+    body: "A quality-control workflow for captions, audio, crop, export settings, brand fit, and delivery readiness.",
+  },
+  {
+    title: "Video Delivery Workflow",
+    href: "/blog/video-delivery-workflow",
+    body: "How to move approved edits into clean final exports, folders, posting notes, and archive records.",
+  },
+  {
+    title: "Best Shorts Editing Service",
+    href: "/blog/best-shorts-editing-service",
+    body: "What to check before buying a Shorts editing service: hooks, captions, crop, QA, turnaround, and revisions.",
+  },
+  {
+    title: "YouTube Shorts Editing Service",
+    href: "/blog/youtube-shorts-editing-service",
+    body: "A YouTube Shorts editing service guide for creators and teams turning existing footage into ready-to-post Shorts.",
+  },
+  {
+    title: "Opus Clip Alternative",
+    href: "/blog/opus-clip-alternative",
+    body: "When managed short-form editing makes more sense than a self-serve AI clipping workflow.",
+  },
+  {
+    title: "Turn Podcast into Shorts",
+    href: "/video-repurposing/turn-podcast-into-shorts",
+    body: "Send a podcast episode and get a focused Short from one guest answer, story, claim, or teaching moment.",
+  },
+  {
+    title: "Turn Webinar into Shorts",
+    href: "/video-repurposing/turn-webinar-into-shorts",
+    body: "Repurpose a webinar replay into one useful teaching moment, Q&A answer, framework, or demo clip.",
+  },
+  {
+    title: "Turn Product Demo into Shorts",
+    href: "/blog/turn-product-demo-into-shorts",
+    body: "A product clip workflow built around one buyer pain, one visible feature, and one result.",
+  },
+  {
+    title: "Turn Internal Meeting into Shorts",
+    href: "/blog/turn-internal-meeting-into-shorts",
+    body: "Private clip guidance for training, alignment, permissions, and internal review.",
+  },
+  {
     title: "Short-Form Video Editing: How to Hold Attention",
     href: "/blog/short-form-video-editor-attention-span",
     body: "A practical guide to hooks, pacing, captions, cut rhythm, and the first three seconds of a Short.",
@@ -74,7 +164,7 @@ export default function ShortVideoEditor() {
             Dalaillama turns existing video into short-form content for YouTube Shorts, Instagram Reels, TikTok, LinkedIn, and similar vertical platforms.
           </p>
           <p>
-            Send a long recording, podcast clip, webinar, interview, product demo, founder video, or raw phone footage. We manually edit the moment, add captions and sound polish, then return one finished Short within 2 hours.
+            Send a long recording, podcast clip, webinar, interview, product demo, founder video, or raw phone footage. We manually edit the moment, add captions and sound polish, then return one finished Short within 30 minutes.
           </p>
         </div>
         <div className="hero-actions">

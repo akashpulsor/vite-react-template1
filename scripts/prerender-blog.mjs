@@ -1,17 +1,27 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import {
+  VIDEO_REPURPOSING_BASE_PATH,
+  getVideoRepurposingPage,
+  videoRepurposingAuthorityLinks,
+  videoRepurposingChildPages,
+  videoRepurposingHub,
+} from "../src/videoRepurposingPages.js";
 
 const SITE_URL = "https://dalaillama.in";
-const HOME_TITLE = "Dalaillama | Done-for-You Short Video Editing in 2 Hours";
+const CURRENT_LASTMOD = "2026-07-01";
+const HOME_TITLE = "Dalaillama | Done-for-You Short Video Editing in 30 Minutes";
 const SHORT_VIDEO_EDITOR_TITLE = "Short Video Editor for Reels & YouTube Shorts | Dalaillama";
-const BLOG_TITLE = "Short Video Editing Guides & Case Studies | Dalaillama";
+const VIDEO_REPURPOSING_TITLE = "Video Repurposing Service for Shorts | Dalaillama";
+const BLOG_TITLE = "AI Newsroom Video Workflow Knowledge Base | Dalaillama";
 const DEFAULT_DESCRIPTION =
-  "Done-for-you short video editing for creators and teams. Send a long video, podcast, webinar, interview, demo, or raw clip and get a captioned vertical Short back in 2 hours.";
+  "Done-for-you short video editing for creators and teams. Send a long video, podcast, webinar, interview, demo, or raw clip and get a captioned vertical Short back in 30 minutes.";
 const SHORT_VIDEO_EDITOR_DESCRIPTION =
-  "A short video editor service for creators and teams. Send existing footage and get one ready-to-post vertical Short for Reels, Shorts, TikTok, or LinkedIn in 2 hours.";
+  "A short video editor service for creators and teams. Send existing footage and get one ready-to-post vertical Short for Reels, Shorts, TikTok, or LinkedIn in 30 minutes.";
+const VIDEO_REPURPOSING_DESCRIPTION = videoRepurposingHub.description;
 const BLOG_DESCRIPTION =
-  "Practical short video editing guides and case studies about hooks, Reels, YouTube Shorts, captions, pacing, phone footage, audio, and production workflow.";
+  "AI newsroom video workflow guides for publishers, broadcasters, media teams, agencies, and teams turning long video into approved short-form output.";
 const DEFAULT_SOCIAL_IMAGE = "/social-card.svg";
 const FEATURED_GUIDE_SLUGS = [
   "meaningful-short-video-ai",
@@ -19,7 +29,180 @@ const FEATURED_GUIDE_SLUGS = [
   "dp-shorts-with-images",
   "lighting-shorts-with-images",
 ];
+const NEWSROOM_WORKFLOW_SLUGS = [
+  "ai-video-editing-newsrooms",
+  "ai-video-workflow-digital-publishers",
+  "newsroom-video-workflow",
+  "how-newsrooms-produce-shorts",
+  "breaking-news-video-workflow",
+  "press-conference-workflow",
+  "newsroom-video-automation",
+  "editorial-approval-workflow",
+  "broadcast-to-vertical-video",
+  "video-desk-workflow",
+  "social-media-workflow-for-publishers",
+  "local-news-video-workflow",
+  "election-coverage-workflow",
+  "sports-news-video-workflow",
+  "news-archive-repurposing",
+  "video-asset-management-for-newsrooms",
+  "high-volume-news-editing",
+  "daily-news-production-workflow",
+  "multi-platform-publishing",
+  "newsroom-editing-sop",
+  "reduce-news-editing-time",
+  "scaling-newsroom-video-teams",
+  "newsroom-video-review-workflow",
+  "publish-breaking-news-faster",
+  "editorial-video-operations",
+];
+const AGENCY_WORKFLOW_SLUGS = [
+  "agency-video-editing-workflow",
+  "scaling-video-editing-agency",
+  "white-label-shorts-editing",
+  "batch-editing-client-videos",
+  "agency-review-workflow",
+  "agency-video-sop",
+  "client-approval-workflow",
+  "agency-production-pipeline",
+  "managing-multiple-clients",
+  "reduce-agency-turnaround",
+  "how-agencies-deliver-shorts-fast",
+  "agency-video-qa-checklist",
+  "agency-video-templates",
+  "agency-production-metrics",
+  "agency-workflow-automation",
+  "video-outsourcing-guide",
+  "done-for-you-shorts",
+  "video-repurposing-service",
+  "podcast-editing-service",
+  "interview-editing-service",
+];
+const VIDEO_OPERATIONS_SLUGS = [
+  "reduce-video-editing-turnaround-time",
+  "how-to-produce-100-shorts-every-week",
+  "batch-video-editing",
+  "video-review-workflow",
+  "editorial-review-workflow",
+  "content-repurposing-workflow",
+  "production-pipeline",
+  "video-processing-pipeline",
+  "editor-checklist",
+  "video-qa-workflow",
+  "managing-hundreds-of-videos",
+  "review-less-edit-more",
+  "ai-assisted-editing-workflow",
+  "scaling-video-teams",
+  "video-production-kpis",
+  "editing-throughput",
+  "review-bottlenecks",
+  "video-delivery-workflow",
+  "publishing-workflow",
+  "video-operations-guide",
+];
+const SERVICE_COMPARISON_SLUGS = [
+  "best-podcast-editing-service",
+  "best-shorts-editing-service",
+  "podcast-to-shorts-service",
+  "interview-clipping-service",
+  "webinar-editing-service",
+  "video-repurposing-service",
+  "youtube-shorts-editing-service",
+  "done-for-you-shorts",
+  "ai-video-editing-service",
+  "fast-video-editing-service",
+  "opus-clip-alternative",
+  "capcut-alternative",
+  "descript-alternative",
+  "best-ai-video-editing-tool",
+  "best-video-repurposing-tool",
+  "best-enterprise-video-editor",
+  "best-agency-video-editing-tool",
+  "ai-video-editing-for-enterprises",
+  "professional-shorts-editing",
+  "managed-video-editing",
+];
 const SHORT_VIDEO_EDITOR_RESOURCES = [
+  {
+    title: "Best Shorts Editing Service",
+    href: "/blog/best-shorts-editing-service",
+    body: "What to check before buying a Shorts editing service: hooks, captions, crop, QA, turnaround, and revisions.",
+  },
+  {
+    title: "YouTube Shorts Editing Service",
+    href: "/blog/youtube-shorts-editing-service",
+    body: "A YouTube Shorts editing service guide for creators and teams turning existing footage into ready-to-post Shorts.",
+  },
+  {
+    title: "Opus Clip Alternative",
+    href: "/blog/opus-clip-alternative",
+    body: "When managed short-form editing makes more sense than a self-serve AI clipping workflow.",
+  },
+  {
+    title: "Video Operations Guide",
+    href: "/blog/video-operations-guide",
+    body: "A practical guide to intake, production queues, QA, review, delivery, publishing, and metrics.",
+  },
+  {
+    title: "Video QA Workflow",
+    href: "/blog/video-qa-workflow",
+    body: "A quality-control workflow for captions, audio, crop, export settings, brand fit, and delivery readiness.",
+  },
+  {
+    title: "Video Delivery Workflow",
+    href: "/blog/video-delivery-workflow",
+    body: "How to move approved edits into clean final exports, folders, posting notes, and archive records.",
+  },
+  {
+    title: "Agency Video Editing Workflow",
+    href: "/blog/agency-video-editing-workflow",
+    body: "A delivery workflow for agencies managing client briefs, batches, reviews, revisions, and final exports.",
+  },
+  {
+    title: "Done For You Shorts",
+    href: "/blog/done-for-you-shorts",
+    body: "What a reliable done-for-you Shorts workflow should include before you hand off footage.",
+  },
+  {
+    title: "Video Repurposing Service",
+    href: "/video-repurposing",
+    body: "Turn podcasts, webinars, interviews, lectures, press conferences, and YouTube videos into focused Shorts.",
+  },
+  {
+    title: "Newsroom Video Workflow",
+    href: "/blog/newsroom-video-workflow",
+    body: "A workflow map for source intake, clipping, approvals, captions, publishing, and archive reuse.",
+  },
+  {
+    title: "High Volume News Editing",
+    href: "/blog/high-volume-news-editing",
+    body: "How publishers can increase video output with templates, AI-assisted prep, review queues, and quality control.",
+  },
+  {
+    title: "Reduce News Editing Time",
+    href: "/blog/reduce-news-editing-time",
+    body: "Workflow fixes for faster newsroom video turnaround without removing editorial checks.",
+  },
+  {
+    title: "Turn Podcast into Shorts",
+    href: "/video-repurposing/turn-podcast-into-shorts",
+    body: "Send a podcast episode and get a focused Short from one guest answer, story, claim, or teaching moment.",
+  },
+  {
+    title: "Turn Webinar into Shorts",
+    href: "/video-repurposing/turn-webinar-into-shorts",
+    body: "Repurpose a webinar replay into one useful teaching moment, Q&A answer, framework, or demo clip.",
+  },
+  {
+    title: "Turn Product Demo into Shorts",
+    href: "/blog/turn-product-demo-into-shorts",
+    body: "A product clip workflow built around one buyer pain, one visible feature, and one result.",
+  },
+  {
+    title: "Turn Internal Meeting into Shorts",
+    href: "/blog/turn-internal-meeting-into-shorts",
+    body: "Private clip guidance for training, alignment, permissions, and internal review.",
+  },
   {
     title: "Short-Form Video Editing: How to Hold Attention",
     href: "/blog/short-form-video-editor-attention-span",
@@ -86,6 +269,21 @@ await writeFile(
   buildPage(template, shortVideoEditorSeo(), renderShell(renderShortVideoEditorPage()))
 );
 
+await mkdir(path.join(distDir, "video-repurposing"), { recursive: true });
+await writeFile(
+  path.join(distDir, "video-repurposing", "index.html"),
+  buildPage(template, videoRepurposingSeo(), renderShell(renderVideoRepurposingPage()))
+);
+
+for (const page of videoRepurposingChildPages) {
+  const outputDir = path.join(distDir, "video-repurposing", page.slug);
+  await mkdir(outputDir, { recursive: true });
+  await writeFile(
+    path.join(outputDir, "index.html"),
+    buildPage(template, videoRepurposingSeo(page), renderShell(renderVideoRepurposingPage(page)))
+  );
+}
+
 await mkdir(path.join(distDir, "blog"), { recursive: true });
 await writeFile(
   path.join(distDir, "blog", "index.html"),
@@ -101,7 +299,11 @@ for (const post of posts) {
   );
 }
 
-console.log(`Prerendered ${posts.length} blog posts for SEO.`);
+const sitemap = buildSitemap(posts);
+await writeFile(path.join(distDir, "sitemap.xml"), sitemap);
+await writeFile(path.join(rootDir, "public", "sitemap.xml"), sitemap);
+
+console.log(`Prerendered ${posts.length} blog posts and ${videoRepurposingChildPages.length + 1} video repurposing pages for SEO and wrote sitemap.`);
 
 async function loadPosts() {
   const postsIndex = await readFile(path.join(rootDir, "src", "posts", "index.js"), "utf8");
@@ -127,7 +329,32 @@ async function loadPosts() {
     parsed.push(parsePost(raw));
   }
 
-  return parsed;
+  const shortsPostsPath = path.join(rootDir, "src", "posts", "programmaticShortsPosts.js");
+  const shortsModule = await import(pathToFileURL(shortsPostsPath).href);
+  const programmaticPosts = shortsModule.programmaticShortsPosts || [];
+  const newsroomPostsPath = path.join(rootDir, "src", "posts", "newsroomWorkflowPosts.js");
+  const newsroomModule = await import(pathToFileURL(newsroomPostsPath).href);
+  const newsroomWorkflowPosts = newsroomModule.newsroomWorkflowPosts || [];
+  const agencyPostsPath = path.join(rootDir, "src", "posts", "agencyWorkflowPosts.js");
+  const agencyModule = await import(pathToFileURL(agencyPostsPath).href);
+  const agencyWorkflowPosts = agencyModule.agencyWorkflowPosts || [];
+  const videoOperationsPostsPath = path.join(rootDir, "src", "posts", "videoOperationsPosts.js");
+  const videoOperationsModule = await import(pathToFileURL(videoOperationsPostsPath).href);
+  const videoOperationsPosts = videoOperationsModule.videoOperationsPosts || [];
+  const servicePostsPath = path.join(rootDir, "src", "posts", "serviceComparisonPosts.js");
+  const serviceModule = await import(pathToFileURL(servicePostsPath).href);
+  const serviceComparisonPosts = serviceModule.serviceComparisonPosts || [];
+
+  return [
+    ...parsed.slice(0, 2),
+    ...newsroomWorkflowPosts,
+    ...agencyWorkflowPosts,
+    ...videoOperationsPosts,
+    ...serviceComparisonPosts,
+    parsed[2],
+    ...programmaticPosts,
+    ...parsed.slice(3),
+  ].filter(Boolean);
 }
 
 function parsePost(raw) {
@@ -223,6 +450,18 @@ function shortVideoEditorSeo() {
   };
 }
 
+function videoRepurposingSeo(page = null) {
+  return {
+    title: page?.seoTitle || VIDEO_REPURPOSING_TITLE,
+    description: page?.description || VIDEO_REPURPOSING_DESCRIPTION,
+    path: page?.path || VIDEO_REPURPOSING_BASE_PATH,
+    type: "website",
+    image: DEFAULT_SOCIAL_IMAGE,
+    imageAlt: page ? `${page.title} service by Dalaillama` : "Dalaillama video repurposing service",
+    structuredData: videoRepurposingStructuredData(page),
+  };
+}
+
 function blogIndexSeo() {
   return {
     title: BLOG_TITLE,
@@ -312,6 +551,64 @@ function shortVideoEditorStructuredData() {
   ];
 }
 
+function videoRepurposingStructuredData(page = null) {
+  const pathName = page?.path || VIDEO_REPURPOSING_BASE_PATH;
+  const title = page?.title || "Video Repurposing";
+  const description = page?.description || VIDEO_REPURPOSING_DESCRIPTION;
+  const breadcrumbItems = page
+    ? [
+        ["Home", "/"],
+        ["Video Repurposing", VIDEO_REPURPOSING_BASE_PATH],
+        [page.title, page.path],
+      ]
+    : [
+        ["Home", "/"],
+        ["Video Repurposing", VIDEO_REPURPOSING_BASE_PATH],
+      ];
+  const faqItems = page
+    ? [
+        {
+          question: `What do I get when I ${page.title.toLowerCase()}?`,
+          answer: page.outcome,
+        },
+        {
+          question: `What should I send for ${page.source.toLowerCase()} repurposing?`,
+          answer: page.intake.join(", "),
+        },
+      ]
+    : videoRepurposingHub.faq;
+
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: `Dalaillama ${title}`,
+      serviceType: page ? page.title : "Video repurposing service",
+      url: `${SITE_URL}${pathName}`,
+      description,
+      areaServed: "Worldwide",
+      provider: {
+        "@type": "Organization",
+        name: "Dalaillama",
+        url: SITE_URL,
+      },
+    },
+    breadcrumbStructuredData(breadcrumbItems),
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    },
+  ];
+}
+
 function breadcrumbStructuredData(items) {
   return {
     "@context": "https://schema.org",
@@ -367,6 +664,7 @@ function renderShell(content) {
           <nav class="nav-links" aria-label="Primary navigation">
             <a href="/">Home</a>
             <a href="/short-video-editor">Short Video Editor</a>
+            <a href="/video-repurposing">Video Repurposing</a>
             <a href="/#order">Order</a>
             <a href="/#production-guides">Production Guides</a>
             <a href="/blog">Editing Guides</a>
@@ -375,6 +673,12 @@ function renderShell(content) {
         <main>${content}</main>
         <footer class="site-footer" aria-label="Short video editing resources">
           <a href="/short-video-editor">Short Video Editor Service</a>
+          <a href="/video-repurposing">Video Repurposing Service</a>
+          <a href="/blog/newsroom-video-workflow">Newsroom Video Workflow</a>
+          <a href="/blog/agency-video-editing-workflow">Agency Video Editing Workflow</a>
+          <a href="/blog/video-operations-guide">Video Operations Guide</a>
+          <a href="/video-repurposing/turn-podcast-into-shorts">Turn Podcast into Shorts</a>
+          <a href="/blog/best-shorts-editing-service">Best Shorts Editing Service</a>
           <a href="/blog/short-form-video-editor-attention-span">Short-Form Video Editing Guide</a>
           <a href="/blog/reel-patterns-worth-editing">Reel Editing Patterns</a>
           <a href="/blog/youtube-shorts-hooks">YouTube Shorts Hooks</a>
@@ -390,7 +694,7 @@ function renderHomeFallback(allPosts) {
     {
       title: "Short Video Editor Service",
       href: "/short-video-editor",
-      body: "Send existing video and get a ready-to-post vertical Short back within 2 hours.",
+    body: "Send existing video and get a ready-to-post vertical Short back within 30 minutes.",
     },
     ...SHORT_VIDEO_EDITOR_RESOURCES.slice(0, 3),
   ];
@@ -400,11 +704,11 @@ function renderHomeFallback(allPosts) {
       <section class="landing-hero studio-hero">
         <div class="hero-copy">
           <p class="kicker">Done-for-you short video editing</p>
-          <h1>Short video editing done for you in 2 hours.</h1>
+          <h1>Short video editing done for you in 30 minutes.</h1>
           <div class="hero-body">
             <p>Send us the video. We create the Short for you.</p>
             <p>Share a long video, raw clip, podcast, webinar, interview, demo, or founder video. We manually edit it, add captions and polish, then return a ready-to-post short-form video.</p>
-            <p>The promise is simple: your video becomes a finished Short in 2 hours.</p>
+            <p>The promise is simple: your video becomes a finished Short in 30 minutes.</p>
           </div>
         </div>
       </section>
@@ -430,12 +734,42 @@ function renderHomeFallback(allPosts) {
 
 function renderBlogIndex(allPosts) {
   const featuredPosts = featuredPostsFrom(allPosts);
+  const newsroomWorkflowPosts = NEWSROOM_WORKFLOW_SLUGS.map((slug) => allPosts.find((post) => post.slug === slug)).filter(Boolean);
+  const agencyWorkflowPosts = AGENCY_WORKFLOW_SLUGS.map((slug) => allPosts.find((post) => post.slug === slug)).filter(Boolean);
+  const videoOperationsPosts = VIDEO_OPERATIONS_SLUGS.map((slug) => allPosts.find((post) => post.slug === slug)).filter(Boolean);
+  const serviceComparisonPosts = SERVICE_COMPARISON_SLUGS.map((slug) => allPosts.find((post) => post.slug === slug)).filter(Boolean);
+  const sourceToShortsPosts = allPosts.filter((post) => post.slug.startsWith("turn-"));
 
   return `
     <article class="page essay-page">
       <p class="back-link"><a href="/">Back to home</a></p>
-      <h1>Short Video Editing Guides & Case Studies</h1>
-      <p>Practical editing guides, production notes, and case studies for turning existing video into stronger Shorts, Reels, TikToks, and LinkedIn clips.</p>
+      <h1>AI Newsroom Video Workflow Knowledge Base</h1>
+      <p>Practical guides, site-graph planning, and production notes for publishers, broadcasters, agencies, and media teams turning long video into approved short-form output.</p>
+      <section class="blog-featured-block" aria-label="Newsroom video operations guides">
+        <h2>Newsroom Video Operations Guides</h2>
+        <p class="empty-note">Focused guides for publishers, broadcasters, video desks, and editorial operations teams improving AI-assisted newsroom video workflows without weakening editorial review.</p>
+        ${renderGuideCards(newsroomWorkflowPosts)}
+      </section>
+      <section class="blog-featured-block" aria-label="Agency video operations guides">
+        <h2>Agency Video Operations Guides</h2>
+        <p class="empty-note">Focused guides for agencies managing client Shorts, white-label editing, batching, approval, QA, templates, metrics, outsourcing, and fast delivery.</p>
+        ${renderGuideCards(agencyWorkflowPosts)}
+      </section>
+      <section class="blog-featured-block" aria-label="Video production operations guides">
+        <h2>Video Production Operations Guides</h2>
+        <p class="empty-note">Broader operations guides for teams reducing turnaround, increasing throughput, fixing review bottlenecks, scaling production, and managing high-volume video delivery.</p>
+        ${renderGuideCards(videoOperationsPosts)}
+      </section>
+      <section class="blog-featured-block" aria-label="Service and tool evaluation guides">
+        <h2>Service and Tool Evaluation Guides</h2>
+        <p class="empty-note">Buyer-intent guides for choosing Shorts editing services, podcast clipping, AI video tools, managed editing, and alternatives to self-serve editing software.</p>
+        ${renderGuideCards(serviceComparisonPosts)}
+      </section>
+      <section class="blog-featured-block" aria-label="Source-to-Shorts conversion guides">
+        <h2>Source-to-Shorts Conversion Guides</h2>
+        <p class="empty-note">Focused source-specific guides for turning podcasts, interviews, webinars, meetings, broadcasts, events, investor updates, sports footage, and civic recordings into Shorts.</p>
+        ${renderGuideCards(sourceToShortsPosts)}
+      </section>
       <section class="blog-featured-block" aria-label="Featured production guides and case studies">
         <h2>Featured Production Guides and Case Studies</h2>
         ${renderGuideCards(featuredPosts)}
@@ -445,6 +779,191 @@ function renderBlogIndex(allPosts) {
         ${allPosts.map((post) => renderPostLink(post)).join("")}
       </div>
     </article>`;
+}
+
+function renderVideoRepurposingPage(page = null) {
+  if (page) return renderVideoRepurposingChild(page);
+  const hubMetrics = [
+    ["Source", "Podcast, webinar, interview, lecture, YouTube video, or press conference"],
+    ["Decision", "One useful moment with context, hook, captions, crop, and review"],
+    ["Output", "A ready-to-post vertical Short for Shorts, Reels, TikTok, or LinkedIn"],
+  ];
+
+  return `
+    <article class="page essay-page service-page video-repurposing-page">
+      <p class="back-link"><a href="/">Back to home</a></p>
+      <section class="service-hero video-repurposing-hero">
+        <p class="kicker">${escapeHtml(videoRepurposingHub.kicker)}</p>
+        <h1>${escapeHtml(videoRepurposingHub.headline)}</h1>
+        <div class="hero-body">
+          ${videoRepurposingHub.intro.map((item) => `<p>${escapeHtml(item)}</p>`).join("")}
+        </div>
+        <div class="hero-actions">
+          <a class="creator-primary hero-button" href="/#access">Send a Long Video</a>
+          <a class="creator-secondary hero-button" href="#repurposing-formats">Choose Source Format</a>
+        </div>
+      </section>
+      <section class="landing-section split-section video-repurposing-overview">
+        <div>
+          <p class="kicker">Repurposing map</p>
+          <h2>One long recording becomes one intentional Short.</h2>
+        </div>
+        <div class="repurposing-board creator-panel-muted" aria-label="Video repurposing workflow">
+          ${hubMetrics
+            .map(
+              ([label, body], index) => `
+                <div class="repurposing-board-row">
+                  <span>${String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <strong>${escapeHtml(label)}</strong>
+                    <p>${escapeHtml(body)}</p>
+                  </div>
+                </div>`
+            )
+            .join("")}
+        </div>
+      </section>
+      <section class="landing-section writing-section" id="repurposing-formats">
+        <p class="kicker">Source formats</p>
+        <h2>Programmatic landing pages for high-intent repurposing searches.</h2>
+        ${renderLinkCards(
+          videoRepurposingChildPages.map((item) => ({
+            title: item.title,
+            href: item.path,
+            body: item.description,
+          }))
+        )}
+      </section>
+      <section class="landing-section split-section">
+        <div>
+          <p class="kicker">Workflow</p>
+          <h2>How we keep the edit useful instead of generic.</h2>
+        </div>
+        <div class="stage-list">
+          ${renderStageRows(videoRepurposingHub.workflow)}
+        </div>
+      </section>
+      ${renderAuthoritySection()}
+      <section class="landing-section access-section creator-panel" id="repurposing-order">
+        <div>
+          <p class="kicker">Send a source video</p>
+          <h2>Get one focused Short back.</h2>
+          <p>Share the recording, target platform, and what the Short should achieve. We handle the edit, captions, crop, polish, and upload-back.</p>
+        </div>
+      </section>
+    </article>`;
+}
+
+function renderVideoRepurposingChild(page) {
+  const relatedPages = page.relatedSlugs.map(getVideoRepurposingPage).filter(Boolean);
+
+  return `
+    <article class="page essay-page service-page video-repurposing-page">
+      <p class="back-link"><a href="${escapeAttribute(VIDEO_REPURPOSING_BASE_PATH)}">Back to video repurposing</a></p>
+      <section class="service-hero video-repurposing-hero">
+        <p class="kicker">${escapeHtml(page.kicker)}</p>
+        <h1>${escapeHtml(page.title)}</h1>
+        <div class="hero-body">
+          <p>${escapeHtml(page.problem)}</p>
+          <p>${escapeHtml(page.outcome)}</p>
+        </div>
+        <div class="hero-actions">
+          <a class="creator-primary hero-button" href="#repurposing-order">Send This Source</a>
+          <a class="creator-secondary hero-button" href="${escapeAttribute(page.blogHref)}">Read Workflow Guide</a>
+        </div>
+      </section>
+      <section class="landing-section writing-section">
+        <p class="kicker">Fit</p>
+        <h2>What makes this source worth repurposing.</h2>
+        <div class="guide-link-grid source-fit-grid">
+          <div class="guide-link-card creator-panel-muted">
+            <span>Best moment</span>
+            <small>${escapeHtml(page.bestMoment)}</small>
+          </div>
+          <div class="guide-link-card creator-panel-muted">
+            <span>Avoid</span>
+            <small>${escapeHtml(page.avoid)}</small>
+          </div>
+          <div class="guide-link-card creator-panel-muted">
+            <span>Audience</span>
+            <small>${escapeHtml(page.audience)}</small>
+          </div>
+        </div>
+      </section>
+      <section class="landing-section split-section">
+        <div>
+          <p class="kicker">Edit workflow</p>
+          <h2>How we turn a ${escapeHtml(page.source.toLowerCase())} into a Short.</h2>
+        </div>
+        <div class="stage-list">
+          ${renderStageRows(page.workflow)}
+        </div>
+      </section>
+      <section class="landing-section split-section">
+        <div>
+          <p class="kicker">Handoff</p>
+          <h2>What to send and what we check before delivery.</h2>
+        </div>
+        <div class="handoff-grid">
+          ${renderChecklistCard("Send us", page.intake)}
+          ${renderChecklistCard("Quality checks", page.qualityChecks)}
+        </div>
+      </section>
+      <section class="landing-section writing-section">
+        <p class="kicker">Related formats</p>
+        <h2>Other source videos we can repurpose.</h2>
+        ${renderLinkCards(
+          relatedPages.map((item) => ({
+            title: item.title,
+            href: item.path,
+            body: item.description,
+          }))
+        )}
+      </section>
+      ${renderAuthoritySection()}
+      <section class="landing-section access-section creator-panel" id="repurposing-order">
+        <div>
+          <p class="kicker">Order this edit</p>
+          <h2>Send the ${escapeHtml(page.source.toLowerCase())}. We will create the Short.</h2>
+          <p>Include the source link or file, platform, and any names or approval rules we should respect. We return a captioned vertical Short ready for review or posting.</p>
+        </div>
+      </section>
+    </article>`;
+}
+
+function renderStageRows(items) {
+  return items
+    .map(
+      (item, index) => `
+        <div class="stage-row">
+          <span>${String(index + 1).padStart(2, "0")}</span>
+          <p>${escapeHtml(item)}</p>
+        </div>`
+    )
+    .join("");
+}
+
+function renderChecklistCard(title, items) {
+  return `
+    <div class="creator-panel-muted checklist-card">
+      <h3>${escapeHtml(title)}</h3>
+      <ul class="plain-list">
+        ${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+      </ul>
+    </div>`;
+}
+
+function renderAuthoritySection() {
+  return `
+    <section class="landing-section writing-section">
+      <p class="kicker">References</p>
+      <h2>Authority links used as publishing guardrails.</h2>
+      ${renderLinkCards(videoRepurposingAuthorityLinks.map((link) => ({
+        title: link.label,
+        href: link.href,
+        body: link.body,
+      })))}
+    </section>`;
 }
 
 function renderShortVideoEditorPage() {
@@ -464,7 +983,7 @@ function renderShortVideoEditorPage() {
         <h1>Short video editor for Reels, YouTube Shorts, TikTok, and LinkedIn.</h1>
         <div class="hero-body">
           <p>Dalaillama turns existing video into short-form content for YouTube Shorts, Instagram Reels, TikTok, LinkedIn, and similar vertical platforms.</p>
-          <p>Send a long recording, podcast clip, webinar, interview, product demo, founder video, or raw phone footage. We manually edit the moment, add captions and sound polish, then return one finished Short within 2 hours.</p>
+          <p>Send a long recording, podcast clip, webinar, interview, product demo, founder video, or raw phone footage. We manually edit the moment, add captions and sound polish, then return one finished Short within 30 minutes.</p>
         </div>
         <div class="hero-actions">
           <a class="creator-primary hero-button" href="/#access">Send Your Video</a>
@@ -572,6 +1091,62 @@ function renderPostLink(post) {
       <span>${escapeHtml(post.title)}</span>
       <small>${escapeHtml(post.date)}</small>
     </a>`;
+}
+
+function buildSitemap(allPosts) {
+  const urls = [
+    {
+      loc: "/",
+      lastmod: CURRENT_LASTMOD,
+      changefreq: "weekly",
+      priority: "1.0",
+    },
+    {
+      loc: "/short-video-editor",
+      lastmod: CURRENT_LASTMOD,
+      changefreq: "weekly",
+      priority: "0.9",
+    },
+    {
+      loc: VIDEO_REPURPOSING_BASE_PATH,
+      lastmod: CURRENT_LASTMOD,
+      changefreq: "weekly",
+      priority: "0.9",
+    },
+    ...videoRepurposingChildPages.map((page) => ({
+      loc: page.path,
+      lastmod: CURRENT_LASTMOD,
+      changefreq: "weekly",
+      priority: "0.85",
+    })),
+    {
+      loc: "/blog",
+      lastmod: CURRENT_LASTMOD,
+      changefreq: "monthly",
+      priority: "0.6",
+    },
+    ...allPosts.map((post) => ({
+      loc: `/blog/${post.slug}`,
+      lastmod: isoDate(post.date) || CURRENT_LASTMOD,
+      changefreq: "monthly",
+      priority: post.slug.startsWith("turn-") ? "0.8" : "0.7",
+    })),
+  ];
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map(renderSitemapUrl).join("\n")}
+</urlset>
+`;
+}
+
+function renderSitemapUrl(item) {
+  return `  <url>
+    <loc>${escapeXml(`${SITE_URL}${item.loc}`)}</loc>
+    <lastmod>${escapeXml(item.lastmod)}</lastmod>
+    <changefreq>${escapeXml(item.changefreq)}</changefreq>
+    <priority>${escapeXml(item.priority)}</priority>
+  </url>`;
 }
 
 function renderMarkdown(markdown) {
@@ -769,6 +1344,15 @@ function escapeHtml(value) {
 
 function escapeAttribute(value) {
   return escapeHtml(value).replace(/"/g, "&quot;");
+}
+
+function escapeXml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
 }
 
 function escapeRegExp(value) {

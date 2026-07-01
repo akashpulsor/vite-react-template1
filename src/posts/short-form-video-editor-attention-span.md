@@ -265,6 +265,12 @@ You earn attention by making the next second feel necessary.
 
 That is the editor's real job: not to make every moment loud, but to make every moment purposeful.
 
+## Authority References
+
+- [YouTube Help: Get started creating YouTube Shorts](https://support.google.com/youtube/answer/10059070) documents the current Shorts environment creators are editing for.
+- [Blackmagic Design DaVinci Resolve Training](https://www.blackmagicdesign.com/products/davinciresolve/training) is a strong editing reference for pacing, trim decisions, color, sound, and post-production fundamentals.
+- [W3C WAI: Captions/Subtitles](https://www.w3.org/WAI/media/av/captions/) supports the article's focus on readable captions and silent-viewer comprehension.
+
 ## Related Articles
 
 - [How to Plan a YouTube Short](/blog/how-to-plan-a-youtube-short)

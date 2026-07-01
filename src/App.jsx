@@ -4,23 +4,31 @@ import Home from "./pages/Home.jsx";
 import Blog from "./pages/Blog.jsx";
 import BlogPost from "./pages/BlogPost.jsx";
 import ShortVideoEditor from "./pages/ShortVideoEditor.jsx";
+import VideoRepurposing from "./pages/VideoRepurposing.jsx";
 import BrandLogo from "./components/BrandLogo.jsx";
 import { getPostBySlug } from "./posts/index.js";
+import { getVideoRepurposingPage, videoRepurposingHub } from "./videoRepurposingPages.js";
 
 const SITE_URL = "https://dalaillama.in";
-const HOME_TITLE = "Dalaillama | Done-for-You Short Video Editing in 2 Hours";
+const HOME_TITLE = "Dalaillama | Done-for-You Short Video Editing in 30 Minutes";
 const SHORT_VIDEO_EDITOR_TITLE = "Short Video Editor for Reels & YouTube Shorts | Dalaillama";
-const BLOG_TITLE = "Short Video Editing Guides & Case Studies | Dalaillama";
+const VIDEO_REPURPOSING_TITLE = "Video Repurposing Service for Shorts | Dalaillama";
+const BLOG_TITLE = "AI Newsroom Video Workflow Knowledge Base | Dalaillama";
 const DEFAULT_DESCRIPTION =
-  "Done-for-you short video editing for creators and teams. Send a long video, podcast, webinar, interview, demo, or raw clip and get a captioned vertical Short back in 2 hours.";
+  "Done-for-you short video editing for creators and teams. Send a long video, podcast, webinar, interview, demo, or raw clip and get a captioned vertical Short back in 30 minutes.";
 const SHORT_VIDEO_EDITOR_DESCRIPTION =
-  "A short video editor service for creators and teams. Send existing footage and get one ready-to-post vertical Short for Reels, Shorts, TikTok, or LinkedIn in 2 hours.";
+  "A short video editor service for creators and teams. Send existing footage and get one ready-to-post vertical Short for Reels, Shorts, TikTok, or LinkedIn in 30 minutes.";
+const VIDEO_REPURPOSING_DESCRIPTION = videoRepurposingHub.description;
 const BLOG_DESCRIPTION =
-  "Practical short video editing guides and case studies about hooks, Reels, YouTube Shorts, captions, pacing, phone footage, audio, and production workflow.";
+  "AI newsroom video workflow guides for publishers, broadcasters, media teams, agencies, and teams turning long video into approved short-form output.";
 const DEFAULT_SOCIAL_IMAGE = "/social-card.svg";
 
 function routeFromPath(pathname) {
   if (pathname === "/short-video-editor" || pathname === "/short-video-editor/") return { page: "shortVideoEditor" };
+  if (pathname === "/video-repurposing" || pathname === "/video-repurposing/") return { page: "videoRepurposing" };
+  if (pathname.startsWith("/video-repurposing/")) {
+    return { page: "videoRepurposingChild", slug: pathname.replace("/video-repurposing/", "").replace(/\/$/, "") };
+  }
   if (pathname === "/blog" || pathname === "/blog/") return { page: "blog" };
   if (pathname.startsWith("/blog/")) {
     return { page: "post", slug: pathname.replace("/blog/", "").replace(/\/$/, "") };
@@ -31,13 +39,14 @@ function routeFromPath(pathname) {
 export default function App() {
   const route = routeFromPath(window.location.pathname);
   const post = route.page === "post" ? getPostBySlug(route.slug) : null;
+  const videoRepurposingPage = route.page === "videoRepurposingChild" ? getVideoRepurposingPage(route.slug) : null;
 
   useEffect(() => {
-    const seo = seoForRoute(route, post);
+    const seo = seoForRoute(route, post, videoRepurposingPage);
     applySeo(seo);
     applyStructuredData(seo.structuredData);
     trackPageView(window.location.pathname + window.location.search + window.location.hash);
-  }, [route.page, route.slug, post]);
+  }, [route.page, route.slug, post, videoRepurposingPage]);
 
   return (
     <div className="creator-app">
@@ -49,6 +58,7 @@ export default function App() {
           <nav className="nav-links" aria-label="Primary navigation">
             <a href="/" data-ga-event="nav_click" data-ga-label="Home">Home</a>
             <a href="/short-video-editor" data-ga-event="nav_click" data-ga-label="Short video editor">Short Video Editor</a>
+            <a href="/video-repurposing" data-ga-event="nav_click" data-ga-label="Video repurposing">Video Repurposing</a>
             <a href="/#problem" data-ga-event="nav_click" data-ga-label="Problem">Problem</a>
             <a href="/#crew" data-ga-event="nav_click" data-ga-label="How it helps">How it helps</a>
             <a href="/#order" data-ga-event="nav_click" data-ga-label="Order details">Order</a>
@@ -61,10 +71,20 @@ export default function App() {
           {route.page === "blog" && <Blog />}
           {route.page === "post" && <BlogPost slug={route.slug} />}
           {route.page === "shortVideoEditor" && <ShortVideoEditor />}
+          {route.page === "videoRepurposing" && <VideoRepurposing />}
+          {route.page === "videoRepurposingChild" && <VideoRepurposing slug={route.slug} />}
           {route.page === "home" && <Home />}
         </main>
         <footer className="site-footer" aria-label="Short video editing resources">
           <a href="/short-video-editor" data-ga-event="footer_link_click" data-ga-label="Short Video Editor Service">Short Video Editor Service</a>
+          <a href="/video-repurposing" data-ga-event="footer_link_click" data-ga-label="Video Repurposing Service">Video Repurposing Service</a>
+          <a href="/blog/ai-video-workflow-digital-publishers" data-ga-event="footer_link_click" data-ga-label="AI video workflow for digital publishers">AI Video Workflow for Publishers</a>
+          <a href="/blog/ai-video-editing-newsrooms" data-ga-event="footer_link_click" data-ga-label="AI video editing for newsrooms">AI Video Editing for Newsrooms</a>
+          <a href="/blog/newsroom-video-workflow" data-ga-event="footer_link_click" data-ga-label="Newsroom video workflow">Newsroom Video Workflow</a>
+          <a href="/blog/agency-video-editing-workflow" data-ga-event="footer_link_click" data-ga-label="Agency video editing workflow">Agency Video Editing Workflow</a>
+          <a href="/blog/video-operations-guide" data-ga-event="footer_link_click" data-ga-label="Video operations guide">Video Operations Guide</a>
+          <a href="/video-repurposing/turn-podcast-into-shorts" data-ga-event="footer_link_click" data-ga-label="Turn Podcast into Shorts">Turn Podcast into Shorts</a>
+          <a href="/blog/best-shorts-editing-service" data-ga-event="footer_link_click" data-ga-label="Best Shorts editing service">Best Shorts Editing Service</a>
           <a href="/blog/short-form-video-editor-attention-span" data-ga-event="footer_link_click" data-ga-label="Short-form video editing guide">Short-Form Video Editing Guide</a>
           <a href="/blog/reel-patterns-worth-editing" data-ga-event="footer_link_click" data-ga-label="Reel editing patterns">Reel Editing Patterns</a>
           <a href="/blog/youtube-shorts-hooks" data-ga-event="footer_link_click" data-ga-label="YouTube Shorts hooks">YouTube Shorts Hooks</a>
@@ -75,7 +95,7 @@ export default function App() {
   );
 }
 
-function seoForRoute(route, post) {
+function seoForRoute(route, post, videoRepurposingPage) {
   if (route.page === "shortVideoEditor") {
     return {
       title: SHORT_VIDEO_EDITOR_TITLE,
@@ -84,6 +104,28 @@ function seoForRoute(route, post) {
       image: DEFAULT_SOCIAL_IMAGE,
       imageAlt: "Dalaillama short video editor service",
       structuredData: shortVideoEditorStructuredData(),
+    };
+  }
+
+  if (route.page === "videoRepurposing") {
+    return {
+      title: VIDEO_REPURPOSING_TITLE,
+      description: VIDEO_REPURPOSING_DESCRIPTION,
+      path: "/video-repurposing",
+      image: DEFAULT_SOCIAL_IMAGE,
+      imageAlt: "Dalaillama video repurposing service",
+      structuredData: videoRepurposingStructuredData(),
+    };
+  }
+
+  if (route.page === "videoRepurposingChild" && videoRepurposingPage) {
+    return {
+      title: videoRepurposingPage.seoTitle,
+      description: videoRepurposingPage.description,
+      path: videoRepurposingPage.path,
+      image: DEFAULT_SOCIAL_IMAGE,
+      imageAlt: `${videoRepurposingPage.title} service by Dalaillama`,
+      structuredData: videoRepurposingStructuredData(videoRepurposingPage),
     };
   }
 
@@ -120,6 +162,65 @@ function seoForRoute(route, post) {
     image: DEFAULT_SOCIAL_IMAGE,
     imageAlt: "Dalaillama short video editor service",
   };
+}
+
+function videoRepurposingStructuredData(page = null) {
+  const path = page?.path || "/video-repurposing";
+  const title = page?.title || "Video Repurposing";
+  const description = page?.description || VIDEO_REPURPOSING_DESCRIPTION;
+  const serviceType = page ? page.title : "Video repurposing service";
+  const breadcrumbItems = page
+    ? [
+        ["Home", "/"],
+        ["Video Repurposing", "/video-repurposing"],
+        [page.title, page.path],
+      ]
+    : [
+        ["Home", "/"],
+        ["Video Repurposing", "/video-repurposing"],
+      ];
+
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: `Dalaillama ${title}`,
+      serviceType,
+      url: `${SITE_URL}${path}`,
+      description,
+      areaServed: "Worldwide",
+      provider: {
+        "@type": "Organization",
+        name: "Dalaillama",
+        url: SITE_URL,
+      },
+    },
+    breadcrumbStructuredData(breadcrumbItems),
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: (page
+        ? [
+            {
+              question: `What do I get when I ${page.title.toLowerCase()}?`,
+              answer: page.outcome,
+            },
+            {
+              question: `What should I send for ${page.source.toLowerCase()} repurposing?`,
+              answer: page.intake.join(", "),
+            },
+          ]
+        : videoRepurposingHub.faq
+      ).map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    },
+  ];
 }
 
 function shortVideoEditorStructuredData() {

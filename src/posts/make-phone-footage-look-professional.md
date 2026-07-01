@@ -160,6 +160,12 @@ The viewer should feel that someone made decisions about light, sound, backgroun
 
 We built Dalaillama Creator Studio around this idea: creators often have usable footage, but they need production thinking to make it feel finished without making it fake.
 
+## Authority References
+
+- [Apple Support: Record a video with your iPhone camera](https://support.apple.com/guide/iphone/record-a-video-iph61f49e4bb/ios) is a practical official reference for phone video capture.
+- [Adobe Premiere: basic color correction options](https://helpx.adobe.com/premiere/desktop/correct-color/color-correction-fundamentals/basic-color-correction-options.html) supports the article's guidance on restrained color and exposure polish.
+- [W3C WAI: Captions/Subtitles](https://www.w3.org/WAI/media/av/captions/) is relevant because professional-looking mobile videos still need readable captions for silent and accessible viewing.
+
 ## Related Articles
 
 - [How to Shoot Professional Videos With a Phone](/blog/professional-videos-with-phone)

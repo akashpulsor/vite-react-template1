@@ -15,14 +15,14 @@ const thinkingModes = [
   ["Clean captions", "We add readable captions that support the idea without covering the important parts of the frame."],
   ["Mobile crop", "We prepare the edit for vertical viewing so the speaker, product, or key moment stays visible on a phone."],
   ["Sound polish", "We clean the voice, balance music, and add small emphasis moments where they improve the edit."],
-  ["2-hour return", "We send or upload the finished short-form video back within two hours."],
+  ["30-minute return", "We send or upload the finished short-form video back within 30 minutes."],
 ];
 
 const orderItems = [
   "Send a video file, Drive link, YouTube link, podcast clip, webinar, interview, demo, or founder video.",
   "Tell us the platform: YouTube Shorts, Instagram Reels, TikTok, LinkedIn, or another short-form destination.",
   "Tell us the goal: educate, sell, explain, announce, build authority, or create a punchy highlight.",
-  "We manually create one ready-to-post short-form video and return it within two hours.",
+  "We manually create one ready-to-post short-form video and return it within 30 minutes.",
 ];
 
 const afterShoot = [
@@ -35,7 +35,7 @@ const afterShoot = [
 
 const operatingModes = [
   {
-    title: "Manual 2-hour service",
+    title: "Manual 30-minute service",
     body: "For now, we do the work by hand. You send the source clip, and our team handles selection, hook, edit, captions, sound, polish, export, and upload-back.",
   },
   {
@@ -45,6 +45,9 @@ const operatingModes = [
 ];
 
 const featuredGuideSlugs = [
+  "ai-video-workflow-digital-publishers",
+  "ai-video-editing-newsrooms",
+  "reddit-shorts-editing-workflow",
   "meaningful-short-video-ai",
   "storyboard-shorts-with-images",
   "dp-shorts-with-images",
@@ -53,14 +56,129 @@ const featuredGuideSlugs = [
 
 const shortVideoEditorLinks = [
   {
+    title: "AI Video Workflow for Digital Publishers",
+    href: "/blog/ai-video-workflow-digital-publishers",
+    body: "The pillar page and site graph for building a focused AI newsroom video production knowledge base.",
+  },
+  {
+    title: "AI Video Editing for Newsrooms",
+    href: "/blog/ai-video-editing-newsrooms",
+    body: "An enterprise workflow guide for publishers, broadcasters, media teams, agencies, and high-volume video teams.",
+  },
+  {
+    title: "Newsroom Video Workflow",
+    href: "/blog/newsroom-video-workflow",
+    body: "An end-to-end operating map for intake, clipping, captions, approval, publishing, and archive reuse.",
+  },
+  {
+    title: "Breaking News Video Workflow",
+    href: "/blog/breaking-news-video-workflow",
+    body: "How to publish urgent news clips faster while keeping source checks, context, and review intact.",
+  },
+  {
+    title: "Editorial Approval Workflow",
+    href: "/blog/editorial-approval-workflow",
+    body: "A review path for facts, rights, captions, sensitivity, legal review, and publishing sign-off.",
+  },
+  {
+    title: "Broadcast to Vertical Video",
+    href: "/blog/broadcast-to-vertical-video",
+    body: "A workflow for reframing broadcast packages into mobile-first clips without losing context.",
+  },
+  {
+    title: "Agency Video Editing Workflow",
+    href: "/blog/agency-video-editing-workflow",
+    body: "A client delivery workflow for intake, batching, internal QA, approvals, revisions, and reporting.",
+  },
+  {
+    title: "White Label Shorts Editing",
+    href: "/blog/white-label-shorts-editing",
+    body: "How agencies can deliver client-ready Shorts under their own brand with quality control intact.",
+  },
+  {
+    title: "Done For You Shorts",
+    href: "/blog/done-for-you-shorts",
+    body: "A guide to reliable done-for-you Shorts delivery, from source review to final export.",
+  },
+  {
+    title: "Video Operations Guide",
+    href: "/blog/video-operations-guide",
+    body: "A cross-team guide to intake, production pipelines, QA, review, delivery, publishing, and KPIs.",
+  },
+  {
+    title: "Reduce Video Editing Turnaround Time",
+    href: "/blog/reduce-video-editing-turnaround-time",
+    body: "How teams reduce editing turnaround without cutting QA, captions, review, or delivery standards.",
+  },
+  {
+    title: "How to Produce 100 Shorts Every Week",
+    href: "/blog/how-to-produce-100-shorts-every-week",
+    body: "A realistic operating system for high-volume Shorts production with batching, templates, and review lanes.",
+  },
+  {
+    title: "Best Shorts Editing Service",
+    href: "/blog/best-shorts-editing-service",
+    body: "A buyer guide for choosing a Shorts editing service based on hooks, captions, crop, QA, turnaround, and delivery.",
+  },
+  {
+    title: "AI Video Editing Service",
+    href: "/blog/ai-video-editing-service",
+    body: "How to evaluate AI-assisted editing when you still need human review, QA, and managed delivery.",
+  },
+  {
+    title: "Managed Video Editing",
+    href: "/blog/managed-video-editing",
+    body: "When a handled editing service is better than adding another self-serve video tool.",
+  },
+  {
+    title: "Video Repurposing Service",
+    href: "/video-repurposing",
+    body: "Turn long-form recordings into focused, captioned Shorts with human review and mobile-first editing.",
+  },
+  {
     title: "Short Video Editor Service",
     href: "/short-video-editor",
-    body: "Send existing video and get a ready-to-post vertical Short back within 2 hours.",
+    body: "Send existing video and get a ready-to-post vertical Short back within 30 minutes.",
+  },
+  {
+    title: "Turn Podcast into Shorts",
+    href: "/video-repurposing/turn-podcast-into-shorts",
+    body: "Send a podcast episode and get one focused Short from a guest answer, story, or claim.",
+  },
+  {
+    title: "Turn Webinar into Shorts",
+    href: "/video-repurposing/turn-webinar-into-shorts",
+    body: "Repurpose a webinar replay into one useful teaching moment, Q&A answer, or demo clip.",
+  },
+  {
+    title: "Turn Press Conference into Shorts",
+    href: "/video-repurposing/turn-press-conference-into-shorts",
+    body: "Create fast public-interest clips while preserving attribution, context, and review.",
+  },
+  {
+    title: "Turn Interview into Shorts",
+    href: "/video-repurposing/turn-interview-into-shorts",
+    body: "Convert expert, founder, customer, or journalistic interviews into answer-led Shorts.",
+  },
+  {
+    title: "Turn YouTube Video into Shorts",
+    href: "/video-repurposing/turn-youtube-video-into-shorts",
+    body: "Repurpose owned YouTube videos into standalone Shorts with a fresh hook and vertical crop.",
+  },
+  {
+    title: "Turn Lecture into Shorts",
+    href: "/video-repurposing/turn-lecture-into-shorts",
+    body: "Turn one concept, example, or misconception from a lecture into an educational Short.",
   },
   {
     title: "Short-Form Video Editing: How to Hold Attention",
     href: "/blog/short-form-video-editor-attention-span",
     body: "A guide to hooks, pacing, captions, cut rhythm, and the first three seconds of a Short.",
+  },
+  {
+    title: "What Reddit Creators Ask About Shorts Editing",
+    href: "/blog/reddit-shorts-editing-workflow",
+    body: "A focused read on the real editing pain creators discuss: captions, retention, CapCut friction, and multi-platform exports.",
   },
   {
     title: "Reel Patterns Worth Editing",
@@ -84,14 +202,14 @@ export default function Home() {
       <section className="landing-hero studio-hero" id="hero" aria-label="Landing hero">
         <div className="hero-copy">
           <p className="kicker">Done-for-you short video editing</p>
-          <h1>Short video editing done for you in 2 hours.</h1>
+          <h1>Short video editing done for you in 30 minutes.</h1>
           <div className="hero-body">
             <p>Send us the video. We create the Short for you.</p>
             <p>
               Share a long video, raw clip, podcast, webinar, interview, demo, or founder video. We take the order, manually edit it, add captions and polish, then return a ready-to-post short-form video.
             </p>
             <p>
-              The promise is simple: your video becomes a finished Short in 2 hours.
+              The promise is simple: your video becomes a finished Short in 30 minutes.
             </p>
           </div>
           <div className="hero-actions">
@@ -131,7 +249,7 @@ export default function Home() {
         <div className="production-board creator-panel" aria-label="Short video order preview">
           <div className="board-header">
             <span>Short video order</span>
-            <strong>2 hour return</strong>
+            <strong>30 minute return</strong>
           </div>
           <div className="pipeline-strip">
             {orderDetails.map((item) => (
@@ -142,7 +260,7 @@ export default function Home() {
             <div>
               <p>Simple offer</p>
               <h2>Place the order. We create the Short.</h2>
-              <span>No editing process to manage. Send the source video and we return a finished short-form edit in 2 hours.</span>
+              <span>No editing process to manage. Send the source video and we return a finished short-form edit in 30 minutes.</span>
             </div>
             <div className="mini-frame" aria-hidden="true">
               <div className="mini-light" />
@@ -233,8 +351,8 @@ export default function Home() {
 
       {featuredGuides.length > 0 && (
         <section className="landing-section writing-section" id="production-guides">
-          <p className="kicker">Production guides</p>
-          <h2>See Shorts planned from concept to production.</h2>
+          <p className="kicker">Knowledge base</p>
+          <h2>AI video workflow guides for publishers and teams.</h2>
           <div className="guide-link-grid">
             {featuredGuides.map((post) => (
               <a
@@ -254,7 +372,7 @@ export default function Home() {
 
       <section className="landing-section writing-section" id="short-video-editor-links">
         <p className="kicker">Short video editor links</p>
-        <h2>For creators searching for a short video editor.</h2>
+        <h2>For teams building a repeatable short-form video workflow.</h2>
         <div className="guide-link-grid">
           {shortVideoEditorLinks.map((link) => (
             <a
@@ -274,7 +392,7 @@ export default function Home() {
       <section className="landing-section split-section" id="polish">
         <div>
           <p className="kicker">Manual edit and upload</p>
-          <h2>You get a ready-to-post Short back within two hours.</h2>
+          <h2>You get a ready-to-post Short back within 30 minutes.</h2>
         </div>
         <div className="stage-list">
           {afterShoot.map((item, index) => (
@@ -291,7 +409,7 @@ export default function Home() {
           <p className="kicker">Service model</p>
           <h2>Order in. Short-form video out.</h2>
           <p>
-            We are not asking users to learn another editor. The offer is simple: send us the source video and get a polished Short back in 2 hours.
+            We are not asking users to learn another editor. The offer is simple: send us the source video and get a polished Short back in 30 minutes.
           </p>
         </div>
         <div className="mode-list">

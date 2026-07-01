@@ -184,6 +184,12 @@ Use this before shooting any vertical Short:
 
 The best DP plan for a creator Short is usually simple. It lets the viewer understand the action without feeling the camera struggle.
 
+## Authority References
+
+- [Blackmagic Design DaVinci Resolve Training](https://www.blackmagicdesign.com/products/davinciresolve/training) is a strong reference for how camera, edit, color, and sound decisions connect in post.
+- [Apple Support: Record a video with your iPhone camera](https://support.apple.com/guide/iphone/record-a-video-iph61f49e4bb/ios) is useful for creators shooting vertical footage on phones.
+- [YouTube Help: Get started creating YouTube Shorts](https://support.google.com/youtube/answer/10059070) gives the Shorts-specific platform context for framing and delivery.
+
 ## Related Articles
 
 - [How to Storyboard Shorts With Images](/blog/storyboard-shorts-with-images)

@@ -163,6 +163,12 @@ Place the viewer's attention where it belongs. Remove distractions. Give the fac
 
 We built Dalaillama Creator Studio around this production thinking: a creator does not need a big crew, but they do need key light, bounce, shadow, rim, background, and sound decisions before recording.
 
+## Authority References
+
+- [Apple Support: Record a video with your iPhone camera](https://support.apple.com/guide/iphone/record-a-video-iph61f49e4bb/ios) is relevant for creators shooting talking-head footage on a phone.
+- [Adobe Premiere: basic color correction options](https://helpx.adobe.com/premiere/desktop/correct-color/color-correction-fundamentals/basic-color-correction-options.html) supports the article's guidance on exposure, color, and post-production restraint.
+- [Blackmagic Design DaVinci Resolve Training](https://www.blackmagicdesign.com/products/davinciresolve/training) provides professional color and editing learning resources that connect lighting choices to final image quality.
+
 ## Related Articles
 
 - [How to Light Shorts With Images](/blog/lighting-shorts-with-images)

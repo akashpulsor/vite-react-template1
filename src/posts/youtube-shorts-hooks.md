@@ -195,6 +195,12 @@ It tells the viewer, quickly, why this video exists and what question it will an
 
 We built Dalaillama Creator Studio around that idea. A Short should begin with the viewer's problem, then move through hook, shots, sound, and polish as one connected plan.
 
+## Authority References
+
+- [YouTube Help: Get started creating YouTube Shorts](https://support.google.com/youtube/answer/10059070) explains the Shorts format, upload path, discovery surfaces, and current platform constraints.
+- [Google Search Central: creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) is a useful quality check for avoiding fake urgency and writing hooks that actually help viewers.
+- [W3C WAI: Captions/Subtitles](https://www.w3.org/WAI/media/av/captions/) is relevant because many Shorts hooks are read silently before the viewer decides whether to turn sound on.
+
 ## Related Articles
 
 - [How to Plan a YouTube Short in 15 Minutes](/blog/how-to-plan-a-youtube-short)

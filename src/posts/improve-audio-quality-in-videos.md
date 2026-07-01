@@ -157,6 +157,12 @@ It is editorial. You decide what the viewer should hear first.
 
 We built Dalaillama Creator Studio with that separation in mind: keep dialogue clear, then plan ambience, foley, music, and sync hits around the story instead of letting sound fight it.
 
+## Authority References
+
+- [Adobe Premiere: Audio Track Mixer](https://helpx.adobe.com/premiere/desktop/add-audio-effects/advanced-audio-techniques/about-audio-track-mixer.html) is a useful reference for understanding track-based audio control in a professional editor.
+- [W3C WAI: Captions/Subtitles](https://www.w3.org/WAI/media/av/captions/) reinforces why clean dialogue and accurate captions matter for accessibility and comprehension.
+- [Apple Support: Record a video with your iPhone camera](https://support.apple.com/guide/iphone/record-a-video-iph61f49e4bb/ios) is relevant for creators recording phone footage before the edit.
+
 ## Related Articles
 
 - [How to Review Footage Before Editing](/blog/review-footage-before-editing)

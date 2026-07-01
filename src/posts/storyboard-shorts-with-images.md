@@ -212,6 +212,12 @@ The storyboard says what the viewer must see. The DP plan turns that into blocki
 
 When those three layers agree, shooting becomes calmer. You are not inventing the video while recording. You are executing the clearest version you already planned.
 
+## Authority References
+
+- [YouTube Help: Get started creating YouTube Shorts](https://support.google.com/youtube/answer/10059070) gives the platform context for storyboard decisions in vertical short-form video.
+- [Adobe Learn: Premiere Pro](https://www.adobe.com/learn/premiere-pro) helps connect storyboard beats to timeline editing and post-production.
+- [Blackmagic Design DaVinci Resolve Training](https://www.blackmagicdesign.com/products/davinciresolve/training) supports the article's connection between storyboard, DP choices, lighting, edit, color, and sound.
+
 ## Related Articles
 
 - [How to DP Shorts With Images](/blog/dp-shorts-with-images)

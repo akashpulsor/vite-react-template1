@@ -163,6 +163,12 @@ You are not polishing yet. You are deciding what the footage can honestly become
 
 We built Dalaillama Creator Studio around this kind of review thinking: plan the shot, record it, inspect it, then polish from a clear understanding of what the footage actually contains.
 
+## Authority References
+
+- [Adobe Learn: Premiere Pro](https://www.adobe.com/learn/premiere-pro) is a practical editing reference for organizing, reviewing, and shaping footage in a professional workflow.
+- [Blackmagic Design DaVinci Resolve Training](https://www.blackmagicdesign.com/products/davinciresolve/training) supports the article's edit-review focus across trim, color, sound, and final polish.
+- [W3C WAI: Making Audio and Video Media Accessible](https://www.w3.org/WAI/media/av/) is relevant when reviewing whether voice, captions, and media accessibility are strong enough before editing.
+
 ## Related Articles
 
 - [What Is a Shot List?](/blog/what-is-a-shot-list)

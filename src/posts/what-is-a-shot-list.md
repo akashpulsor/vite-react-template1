@@ -171,6 +171,12 @@ It is a way to protect the idea from the chaos of shooting.
 
 We built Dalaillama Creator Studio around this kind of thinking: creators need the practical structure of a crew, even when they are shooting alone.
 
+## Authority References
+
+- [Adobe Learn: Premiere Pro](https://www.adobe.com/learn/premiere-pro) is a practical reference for how shot planning becomes timeline editing.
+- [Blackmagic Design DaVinci Resolve Training](https://www.blackmagicdesign.com/products/davinciresolve/training) connects shot planning to editing, color, sound, and delivery workflows.
+- [YouTube Help: Get started creating YouTube Shorts](https://support.google.com/youtube/answer/10059070) gives the platform context for vertical short-form planning.
+
 ## Related Articles
 
 - [How to Storyboard a YouTube Short](/blog/storyboard-youtube-short)

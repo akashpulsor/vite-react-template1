@@ -182,6 +182,12 @@ Use this before shooting:
 
 Lighting is not there to make the Short look expensive. It is there to make the story state visible.
 
+## Authority References
+
+- [Adobe Premiere: basic color correction options](https://helpx.adobe.com/premiere/desktop/correct-color/color-correction-fundamentals/basic-color-correction-options.html) supports the article's connection between lighting, exposure, and post-production color.
+- [Blackmagic Design DaVinci Resolve Training](https://www.blackmagicdesign.com/products/davinciresolve/training) includes professional color and editing training that reinforces why lighting consistency matters.
+- [Apple Support: Record a video with your iPhone camera](https://support.apple.com/guide/iphone/record-a-video-iph61f49e4bb/ios) is relevant for creators locking exposure and recording phone footage.
+
 ## Related Articles
 
 - [How to Storyboard Shorts With Images](/blog/storyboard-shorts-with-images)

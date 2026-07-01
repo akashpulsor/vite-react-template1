@@ -158,6 +158,12 @@ It is about making clear decisions the camera can capture.
 
 We built Dalaillama Creator Studio around that reality: creators need help planning shots, light, sound, and polish so ordinary phone footage has a real production shape.
 
+## Authority References
+
+- [Apple Support: Record a video with your iPhone camera](https://support.apple.com/guide/iphone/record-a-video-iph61f49e4bb/ios) is an official phone-video reference for creators shooting on iPhone.
+- [YouTube Help: Get started creating YouTube Shorts](https://support.google.com/youtube/answer/10059070) gives the Shorts-specific platform context for mobile-first videos.
+- [W3C WAI: Making Audio and Video Media Accessible](https://www.w3.org/WAI/media/av/) supports the article's emphasis on clear sound, captions, and viewer comprehension.
+
 ## Related Articles
 
 - [How to DP Shorts With Images](/blog/dp-shorts-with-images)

@@ -179,6 +179,12 @@ It is there to give you a useful first version of the video before you touch the
 
 We built Dalaillama Creator Studio around that idea: the creator should be able to move from idea to storyboard to shot list to polish without losing the reason the video exists.
 
+## Authority References
+
+- [YouTube Help: Get started creating YouTube Shorts](https://support.google.com/youtube/answer/10059070) gives the format context for planning short vertical videos.
+- [Adobe Learn: Premiere Pro](https://www.adobe.com/learn/premiere-pro) is a useful reference for turning planned beats into an edited timeline.
+- [Google Search Central: creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) supports storyboards that answer a real viewer need instead of only serving a trend.
+
 ## Related Articles
 
 - [How to Storyboard Shorts With Images](/blog/storyboard-shorts-with-images)
