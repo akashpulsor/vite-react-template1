@@ -372,7 +372,7 @@ The seventh mistake is not thinking about the edit. A shot list should include c
 
 ## Tools and Templates
 
-A shot list can be made in a notebook, spreadsheet, Notion table, Google Sheet, production board, or dedicated video planning tool. The tool matters less than the fields.
+A shot list can be made in a notebook, spreadsheet, Notion table, Google Sheet, production board, or dedicated video planning tool. Dalaillama can also create an AI-driven shot list and storyboard from your topic and story, so you can see the shots before you record. The tool matters less than whether the plan gives you the right fields.
 
 Use this basic template:
 
