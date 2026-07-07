@@ -17,26 +17,6 @@ const referenceLibrary = {
     url: "https://newsinitiative.withgoogle.com/",
     note: "for digital journalism, audience, and newsroom training resources",
   },
-  googleHelpful: {
-    label: "Google Search Central: helpful, reliable, people-first content",
-    url: "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
-    note: "for publishing useful pages instead of search-only content",
-  },
-  googleAi: {
-    label: "Google Search Central: guidance about AI-generated content",
-    url: "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
-    note: "for using AI-assisted workflows without lowering content quality",
-  },
-  googleArticleSchema: {
-    label: "Google Search Central: Article structured data",
-    url: "https://developers.google.com/search/docs/appearance/structured-data/article",
-    note: "for article metadata and search appearance basics",
-  },
-  googleSitemaps: {
-    label: "Google Search Central: Learn about sitemaps",
-    url: "https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview",
-    note: "for sitemap discovery and crawl efficiency context",
-  },
   youtubeShorts: {
     label: "YouTube Help: Get started creating YouTube Shorts",
     url: "https://support.google.com/youtube/answer/10059070",
@@ -90,7 +70,7 @@ export const newsroomWorkflowConfigs = [
     primaryKeyword: "newsroom video workflow",
     intent: "map an end-to-end newsroom video production system",
     audience: "digital editors, video desks, newsroom operators, and publishers",
-    angle: "This page is the operating map for the cluster. It explains the handoff from assignment to source video, edit, review, publishing, and archive so the other pages can go deeper without repeating the same overview.",
+    angle: "A strong newsroom video workflow explains the handoff from assignment to source video, edit, review, publishing, and archive without leaving each desk to invent its own process.",
     outcome: "a repeatable video production line where breaking news, explainers, interviews, and broadcasts move through consistent checkpoints",
     avoid: "building separate manual workflows for every desk, channel, and editor",
     owner: "head of video or managing editor",
@@ -111,7 +91,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid treating speed and verification as separate teams with no handoff.",
       "Keep one source of truth for status so desks do not duplicate edits.",
     ],
-    references: ["reutersDigitalNews2026", "apPrinciples", "iptcVideoMetadata", "googleHelpful"],
+    references: ["reutersDigitalNews2026", "apPrinciples", "iptcVideoMetadata"],
     related: ["ai-video-editing-newsrooms", "editorial-approval-workflow", "video-desk-workflow"],
     funnel: "MOFU",
     businessIntent: "workflow audit",
@@ -123,7 +103,7 @@ export const newsroomWorkflowConfigs = [
     primaryKeyword: "how newsrooms produce shorts",
     intent: "understand short-form production inside editorial teams",
     audience: "newsroom social editors, video producers, and digital publishers",
-    angle: "This article focuses on newsroom Shorts production, not creator-style repurposing. The editorial problem is making one short clip fast while preserving sourcing, context, corrections, captions, and platform fit.",
+    angle: "Newsroom Shorts production is different from creator-style repurposing. The editorial problem is making one short clip fast while preserving sourcing, context, corrections, captions, and platform fit.",
     outcome: "a short-form production flow that gets useful news clips onto YouTube Shorts, Reels, TikTok, and social feeds with review intact",
     avoid: "cutting every strong quote into a Short before checking whether the clip changes the story meaning",
     owner: "social video editor",
@@ -144,7 +124,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid trending audio or meme framing on sensitive news.",
       "Keep correction and update procedures clear after the Short is published.",
     ],
-    references: ["youtubeShorts", "apPrinciples", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "apPrinciples", "w3cMedia"],
     related: ["broadcast-to-vertical-video", "social-media-workflow-for-publishers", "newsroom-video-review-workflow"],
     funnel: "MOFU",
     businessIntent: "short-form newsroom workflow",
@@ -156,7 +136,7 @@ export const newsroomWorkflowConfigs = [
     primaryKeyword: "breaking news video workflow",
     intent: "speed up breaking news video publishing safely",
     audience: "breaking news desks, digital editors, broadcasters, and publishers",
-    angle: "Breaking news video needs a different workflow from evergreen publishing. The page focuses on speed, verification, update discipline, and visible context during a moving story.",
+    angle: "Breaking news video needs a different workflow from evergreen publishing. The workflow emphasizes speed, verification, update discipline, and visible context during a moving story.",
     outcome: "a fast publish path that keeps source checks, rights, lower thirds, captions, and story updates in the same lane",
     avoid: "publishing the first dramatic clip before the desk knows where it came from and what it shows",
     owner: "breaking news editor",
@@ -177,7 +157,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid auto-captioning names or locations without human review.",
       "Do not let urgency override rights, safety, or harm checks.",
     ],
-    references: ["apPrinciples", "googleNewsInitiative", "w3cMedia", "googleHelpful"],
+    references: ["apPrinciples", "googleNewsInitiative", "w3cMedia"],
     related: ["publish-breaking-news-faster", "newsroom-video-review-workflow", "daily-news-production-workflow"],
     funnel: "BOFU",
     businessIntent: "breaking news workflow improvement",
@@ -189,7 +169,7 @@ export const newsroomWorkflowConfigs = [
     primaryKeyword: "press conference workflow",
     intent: "turn official remarks into accurate newsroom clips",
     audience: "newsrooms, public affairs editors, broadcasters, and agency video teams",
-    angle: "This page is about the newsroom workflow around press conferences, while the source-to-Shorts page covers the direct repurposing use case. Here the emphasis is queueing, verification, official context, and multi-clip production.",
+    angle: "Press conference clipping needs queueing, verification, official context, and multi-clip production before the newsroom turns official remarks into publishable video.",
     outcome: "a repeatable method for turning one official event into accurate clips, quote cards, social video, and archive assets",
     avoid: "lifting a quote without the reporter question, policy context, or speaker role",
     owner: "assignment editor or video desk lead",
@@ -210,7 +190,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid editorial captions that add certainty the speaker did not provide.",
       "Keep sensitive announcements under editor review before platform distribution.",
     ],
-    references: ["apPrinciples", "iptcVideoMetadata", "w3cMedia", "googleHelpful"],
+    references: ["apPrinciples", "iptcVideoMetadata", "w3cMedia"],
     related: ["turn-press-conference-into-shorts", "breaking-news-video-workflow", "editorial-approval-workflow"],
     funnel: "BOFU",
     businessIntent: "press conference clipping workflow",
@@ -222,7 +202,7 @@ export const newsroomWorkflowConfigs = [
     primaryKeyword: "newsroom video automation",
     intent: "evaluate automation in editorial video operations",
     audience: "newsroom leaders, product teams, video desks, and media operations teams",
-    angle: "Automation should remove repetitive handling, not editorial judgment. This page separates safe automation from decisions that need editors, legal review, or desk ownership.",
+    angle: "Automation should remove repetitive handling, not editorial judgment. A useful automation plan separates safe machine work from decisions that need editors, legal review, or desk ownership.",
     outcome: "an automation plan that speeds transcript, detection, routing, formatting, and metadata while keeping final editorial accountability human",
     avoid: "using AI as a direct publishing system for unreviewed news clips",
     owner: "newsroom product or video operations lead",
@@ -243,7 +223,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid measuring success only by number of clips published.",
       "Keep a fallback manual workflow for breaking stories and sensitive topics.",
     ],
-    references: ["googleAi", "apPrinciples", "ffmpegDocs", "googleHelpful"],
+    references: ["apPrinciples", "ffmpegDocs"],
     related: ["ai-video-editing-newsrooms", "high-volume-news-editing", "reduce-news-editing-time"],
     funnel: "BOFU",
     businessIntent: "AI automation evaluation",
@@ -276,7 +256,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid hidden Slack-only approvals that cannot be audited later.",
       "Keep legal review proportional so routine news video does not stall.",
     ],
-    references: ["apPrinciples", "googleHelpful", "w3cMedia", "googleArticleSchema"],
+    references: ["apPrinciples", "w3cMedia"],
     related: ["newsroom-video-review-workflow", "newsroom-editing-sop", "editorial-video-operations"],
     funnel: "BOFU",
     businessIntent: "editorial workflow governance",
@@ -288,7 +268,7 @@ export const newsroomWorkflowConfigs = [
     primaryKeyword: "broadcast to vertical video",
     intent: "adapt broadcast footage for vertical social platforms",
     audience: "broadcasters, TV newsrooms, digital producers, and social video editors",
-    angle: "This page focuses on the reframing problem: a broadcast package is built for a horizontal screen, while vertical platforms require a different visual hierarchy.",
+    angle: "The core reframing problem is visual hierarchy: a broadcast package is built for a horizontal screen, while vertical platforms need a different frame, caption layout, and subject priority.",
     outcome: "vertical news clips where the speaker, footage, lower thirds, captions, and context remain legible on mobile",
     avoid: "cropping the center of the frame blindly and hiding the action, quote source, or lower third",
     owner: "broadcast digital producer",
@@ -342,7 +322,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid assigning every clip as urgent.",
       "Keep a daily debrief so workflow problems are fixed before they become habits.",
     ],
-    references: ["reutersDigitalNews2026", "iptcVideoMetadata", "apPrinciples", "googleHelpful"],
+    references: ["reutersDigitalNews2026", "iptcVideoMetadata", "apPrinciples"],
     related: ["newsroom-video-workflow", "daily-news-production-workflow", "scaling-newsroom-video-teams"],
     funnel: "BOFU",
     businessIntent: "video desk operations audit",
@@ -408,7 +388,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid overproducing clips when a clear captioned excerpt would serve the audience better.",
       "Keep public meeting footage labelled with source and date.",
     ],
-    references: ["googleNewsInitiative", "apPrinciples", "w3cMedia", "googleHelpful"],
+    references: ["googleNewsInitiative", "apPrinciples", "w3cMedia"],
     related: ["newsroom-video-workflow", "daily-news-production-workflow", "news-archive-repurposing"],
     funnel: "MOFU",
     businessIntent: "local newsroom workflow support",
@@ -441,7 +421,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid algorithmic clipping of candidate remarks without political editor review.",
       "Keep misinformation, hate, and safety review standards visible in the queue.",
     ],
-    references: ["apPrinciples", "googleNewsInitiative", "w3cMedia", "googleHelpful"],
+    references: ["apPrinciples", "googleNewsInitiative", "w3cMedia"],
     related: ["breaking-news-video-workflow", "editorial-approval-workflow", "publish-breaking-news-faster"],
     funnel: "BOFU",
     businessIntent: "election video operations",
@@ -453,7 +433,7 @@ export const newsroomWorkflowConfigs = [
     primaryKeyword: "sports news video workflow",
     intent: "organize sports video production for publishers",
     audience: "sports desks, broadcasters, clubs, leagues, and digital publishers",
-    angle: "Sports video is fast, emotional, and rights-sensitive. This page focuses on newsroom operations, not just highlight editing.",
+    angle: "Sports video is fast, emotional, and rights-sensitive. The workflow has to manage newsroom operations, rights, updates, and context, not just highlight editing.",
     outcome: "a sports video workflow that separates rights-cleared highlights, interviews, analysis, fan reaction, and live updates",
     avoid: "mixing licensed match footage, reporter video, social embeds, and archive clips without rights labels",
     owner: "sports editor or sports video lead",
@@ -507,7 +487,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid implying old conditions are present-day conditions.",
       "Keep rights and usage windows attached to every repurposed export.",
     ],
-    references: ["iptcVideoMetadata", "apPrinciples", "googleArticleSchema", "googleHelpful"],
+    references: ["iptcVideoMetadata", "apPrinciples"],
     related: ["video-asset-management-for-newsrooms", "newsroom-video-workflow", "turn-documentary-into-shorts"],
     funnel: "MOFU",
     businessIntent: "archive workflow audit",
@@ -540,7 +520,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid free-text tags when the newsroom needs consistent search.",
       "Keep sensitive footage restricted even after derivative clips are made.",
     ],
-    references: ["iptcVideoMetadata", "googleArticleSchema", "googleSitemaps", "apPrinciples"],
+    references: ["iptcVideoMetadata", "apPrinciples"],
     related: ["news-archive-repurposing", "video-desk-workflow", "high-volume-news-editing"],
     funnel: "BOFU",
     businessIntent: "video asset management planning",
@@ -573,7 +553,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid batching captions without human review for names and locations.",
       "Keep priority lanes open for breaking news and sensitive stories.",
     ],
-    references: ["googleAi", "ffmpegDocs", "apPrinciples", "googleHelpful"],
+    references: ["ffmpegDocs", "apPrinciples"],
     related: ["newsroom-video-automation", "reduce-news-editing-time", "scaling-newsroom-video-teams"],
     funnel: "BOFU",
     businessIntent: "high-volume newsroom editing",
@@ -606,7 +586,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid publishing platform clips without a desk owner who can handle corrections.",
       "Keep a visible cut-off for low-value edits that consume the day.",
     ],
-    references: ["reutersDigitalNews2026", "googleNewsInitiative", "apPrinciples", "googleHelpful"],
+    references: ["reutersDigitalNews2026", "googleNewsInitiative", "apPrinciples"],
     related: ["video-desk-workflow", "breaking-news-video-workflow", "editorial-video-operations"],
     funnel: "MOFU",
     businessIntent: "daily newsroom operations",
@@ -639,7 +619,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid losing canonical source links when clips move to social.",
       "Keep platform metadata consistent with the approved headline and story status.",
     ],
-    references: ["youtubeShorts", "googleArticleSchema", "googleSitemaps", "apPrinciples"],
+    references: ["youtubeShorts", "apPrinciples"],
     related: ["social-media-workflow-for-publishers", "broadcast-to-vertical-video", "newsroom-video-workflow"],
     funnel: "BOFU",
     businessIntent: "multi-platform publishing workflow",
@@ -672,7 +652,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid letting old platform specs stay in the SOP after formats change.",
       "Keep sensitive-topic escalation rules clear and hard to skip.",
     ],
-    references: ["apPrinciples", "w3cMedia", "iptcVideoMetadata", "googleHelpful"],
+    references: ["apPrinciples", "w3cMedia", "iptcVideoMetadata"],
     related: ["editorial-approval-workflow", "newsroom-video-review-workflow", "video-desk-workflow"],
     funnel: "BOFU",
     businessIntent: "SOP implementation",
@@ -705,7 +685,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid automating a workflow before fixing bad intake fields.",
       "Track correction rate beside turnaround time.",
     ],
-    references: ["googleAi", "ffmpegDocs", "apPrinciples", "googleHelpful"],
+    references: ["ffmpegDocs", "apPrinciples"],
     related: ["newsroom-video-automation", "high-volume-news-editing", "publish-breaking-news-faster"],
     funnel: "BOFU",
     businessIntent: "turnaround time reduction",
@@ -738,7 +718,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid hiding quality decline behind output charts.",
       "Keep senior editorial judgment available for high-risk clips.",
     ],
-    references: ["reutersDigitalNews2026", "googleNewsInitiative", "apPrinciples", "googleAi"],
+    references: ["reutersDigitalNews2026", "googleNewsInitiative", "apPrinciples"],
     related: ["video-desk-workflow", "high-volume-news-editing", "editorial-video-operations"],
     funnel: "BOFU",
     businessIntent: "team scaling consultation",
@@ -771,7 +751,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid approving captions separately from the timeline they describe.",
       "Keep a re-review rule when stories update materially.",
     ],
-    references: ["apPrinciples", "w3cMedia", "googleHelpful", "googleArticleSchema"],
+    references: ["apPrinciples", "w3cMedia"],
     related: ["editorial-approval-workflow", "newsroom-editing-sop", "publish-breaking-news-faster"],
     funnel: "BOFU",
     businessIntent: "review workflow design",
@@ -804,7 +784,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid archive footage unless it is visibly labelled as archive.",
       "Keep a senior escalation path for public safety, conflict, crime, and civic stories.",
     ],
-    references: ["apPrinciples", "googleNewsInitiative", "w3cMedia", "googleHelpful"],
+    references: ["apPrinciples", "googleNewsInitiative", "w3cMedia"],
     related: ["breaking-news-video-workflow", "reduce-news-editing-time", "newsroom-video-review-workflow"],
     funnel: "BOFU",
     businessIntent: "breaking news speed workflow",
@@ -837,7 +817,7 @@ export const newsroomWorkflowConfigs = [
       "Avoid one-off tools that do not connect to archive, approval, or publishing.",
       "Keep people-first editorial judgment visible in any AI-assisted process.",
     ],
-    references: ["reutersDigitalNews2026", "apPrinciples", "googleAi", "iptcVideoMetadata"],
+    references: ["reutersDigitalNews2026", "apPrinciples", "iptcVideoMetadata"],
     related: ["newsroom-video-workflow", "scaling-newsroom-video-teams", "ai-video-editing-newsrooms"],
     funnel: "BOFU",
     businessIntent: "editorial operations strategy",
@@ -904,7 +884,7 @@ function buildBody(config) {
 
 ${config.angle}
 
-This guide targets ${config.audience}. The goal is ${config.outcome}. It is intentionally different from the source-to-Shorts pages: those explain how to repurpose one recording type, while this page explains the newsroom operating problem behind the keyword "${config.primaryKeyword}."
+This guide is for ${config.audience}. The practical goal is ${config.outcome}.
 
 ## Workflow Fit
 
@@ -927,7 +907,7 @@ ${config.signals.map((item) => `- ${item}`).join("\n")}
 
 ${config.guardrails.map((item) => `- ${item}`).join("\n")}
 
-Guardrails protect topical authority as much as editorial trust. A thin page that repeats the same generic "make Shorts faster" advice would compete with the rest of the cluster. A useful page gives one newsroom role a clear decision path, source-specific checks, and links to the right supporting workflow.
+Guardrails protect editorial trust. A useful newsroom workflow gives one role a clear decision path, source-specific checks, and a visible review record before publishing.
 
 ## How Dalaillama Would Support This
 
@@ -943,15 +923,7 @@ ${relatedGuides.map((guide) => `- [${guide.title}](${guide.href})`).join("\n")}
 
 ### Is ${config.primaryKeyword} an AI workflow?
 
-It can include AI, but it should not be only an AI workflow. The useful setup combines automation for repetitive work with human editorial review for facts, context, rights, captions, and sensitive stories.
-
-### How does this avoid cannibalization?
-
-This page owns the "${config.primaryKeyword}" angle. Related pages cover adjacent jobs such as approval, automation, archive reuse, breaking news speed, source-to-Shorts conversion, or platform publishing. Internal links point readers to the more specific workflow instead of repeating the same article under different titles.
-
-### What should a newsroom prepare before using this workflow?
-
-Prepare a source intake form, rights labels, review owner, platform targets, caption standard, export presets, and an archive metadata rule. Those basics reduce rework before any AI or editing automation is added.`;
+It can include AI, but it should not be only an AI workflow. The useful setup combines automation for repetitive work with human editorial review for facts, context, rights, captions, and sensitive stories.`;
 }
 
 function referencesFor(config) {

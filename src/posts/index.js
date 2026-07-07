@@ -14,6 +14,10 @@ import shortFormVideoEditorAttentionSpan from "./short-form-video-editor-attenti
 import redditShortsEditingWorkflow from "./reddit-shorts-editing-workflow.md?raw";
 import aiVideoEditingNewsrooms from "./ai-video-editing-newsrooms.md?raw";
 import aiVideoWorkflowDigitalPublishers from "./ai-video-workflow-digital-publishers.md?raw";
+import videoProductionWorkflow from "./video-production-workflow.md?raw";
+import videoEditingWorkflow from "./video-editing-workflow.md?raw";
+import videoProductionChecklist from "./video-production-checklist.md?raw";
+import ultimateGuideToVideoRepurposing from "./ultimate-guide-to-video-repurposing.md?raw";
 import partitionHistoryShortVideo from "./partition-history-short-video.md?raw";
 import historyOfZeroShunya from "./history-of-zero-shunya.md?raw";
 import cockroachSpyShortVideo from "./cockroach-spy-short-video.md?raw";
@@ -30,6 +34,10 @@ import { videoOperationsPosts } from "./videoOperationsPosts.js";
 const rawPosts = [
   aiVideoWorkflowDigitalPublishers,
   aiVideoEditingNewsrooms,
+  videoProductionWorkflow,
+  videoEditingWorkflow,
+  videoProductionChecklist,
+  ultimateGuideToVideoRepurposing,
   redditShortsEditingWorkflow,
   learnVideoEditing,
   reelPatternsWorthEditing,
@@ -56,14 +64,14 @@ const rawPosts = [
 const markdownPosts = rawPosts.map(parsePost);
 
 export const posts = [
-  ...markdownPosts.slice(0, 2),
+  ...markdownPosts.slice(0, 6),
   ...newsroomWorkflowPosts,
   ...agencyWorkflowPosts,
   ...videoOperationsPosts,
   ...serviceComparisonPosts,
-  markdownPosts[2],
+  markdownPosts[6],
   ...programmaticShortsPosts,
-  ...markdownPosts.slice(3),
+  ...markdownPosts.slice(7),
 ];
 
 export function getPostBySlug(slug) {

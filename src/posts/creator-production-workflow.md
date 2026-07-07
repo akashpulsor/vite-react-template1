@@ -193,7 +193,6 @@ We built Dalaillama Creator Studio around this observation: the creator does not
 
 - [YouTube Help: Get started creating YouTube Shorts](https://support.google.com/youtube/answer/10059070) gives the official platform context for short-form video creation and upload.
 - [Blackmagic Design DaVinci Resolve Training](https://www.blackmagicdesign.com/products/davinciresolve/training) is a practical production reference for editing, color, audio, and post-production roles.
-- [Google Search Central: creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) supports building workflows around real user value instead of output volume alone.
 
 ## Related Articles
 

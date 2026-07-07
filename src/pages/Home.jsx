@@ -45,6 +45,10 @@ const operatingModes = [
 ];
 
 const featuredGuideSlugs = [
+  "video-production-workflow",
+  "video-editing-workflow",
+  "video-production-checklist",
+  "ultimate-guide-to-video-repurposing",
   "ai-video-workflow-digital-publishers",
   "ai-video-editing-newsrooms",
   "reddit-shorts-editing-workflow",
@@ -58,7 +62,7 @@ const shortVideoEditorLinks = [
   {
     title: "AI Video Workflow for Digital Publishers",
     href: "/blog/ai-video-workflow-digital-publishers",
-    body: "The pillar page and site graph for building a focused AI newsroom video production knowledge base.",
+    body: "A practical workflow for turning publisher source footage into reviewed, captioned, platform-ready short-form clips.",
   },
   {
     title: "AI Video Editing for Newsrooms",

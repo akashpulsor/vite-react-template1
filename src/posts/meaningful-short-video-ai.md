@@ -242,8 +242,6 @@ That is the lesson inside this Short: AI can help make the video, but the creato
 
 ## Authority References
 
-- [Google Search Central: guidance about AI-generated content](https://developers.google.com/search/blog/2023/02/google-search-and-ai-content) is relevant to the article's argument that AI-assisted work still needs originality, quality, and human intent.
-- [Google Search Central: creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) supports the focus on making content for people rather than producing generic output.
 - [YouTube Help: Get started creating YouTube Shorts](https://support.google.com/youtube/answer/10059070) gives the Shorts format and platform context for the final creative plan.
 
 ## Related Articles

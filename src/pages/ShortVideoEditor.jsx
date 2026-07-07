@@ -10,7 +10,7 @@ const resourceLinks = [
   {
     title: "AI Video Workflow for Digital Publishers",
     href: "/blog/ai-video-workflow-digital-publishers",
-    body: "The site graph and pillar guide for a focused AI-powered newsroom video production knowledge base.",
+    body: "A practical workflow for turning publisher source footage into reviewed, captioned, platform-ready short-form clips.",
   },
   {
     title: "AI Video Editing for Newsrooms",

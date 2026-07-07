@@ -78,7 +78,7 @@ function VideoRepurposingHub() {
 
       <section className="landing-section writing-section" id="repurposing-formats">
         <p className="kicker">Source formats</p>
-        <h2>Programmatic landing pages for high-intent repurposing searches.</h2>
+        <h2>Choose the source format you already have.</h2>
         <div className="guide-link-grid">
           {videoRepurposingChildPages.map((item) => (
             <a

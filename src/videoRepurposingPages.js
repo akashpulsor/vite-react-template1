@@ -11,11 +11,6 @@ export const videoRepurposingAuthorityLinks = [
     href: "https://www.w3.org/WAI/media/av/captions/",
     body: "Accessibility guidance for captions and subtitles, useful when repurposed clips depend on spoken words.",
   },
-  {
-    label: "Google Search Central: Helpful Content",
-    href: "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
-    body: "Quality guidance for keeping scaled content useful, specific, and people-first.",
-  },
 ];
 
 export const videoRepurposingHub = {

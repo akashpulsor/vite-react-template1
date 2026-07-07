@@ -2,16 +2,6 @@ const PUBLISHED_DATE = "July 1, 2026";
 const HERO_IMAGE = "/blog/reddit-shorts-editing-workflow/shorts-editing-workflow.png";
 
 const referenceLibrary = {
-  googleHelpful: {
-    label: "Google Search Central: helpful, reliable, people-first content",
-    url: "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
-    note: "for writing buyer pages that help people evaluate real options",
-  },
-  googleAi: {
-    label: "Google Search Central: guidance about AI-generated content",
-    url: "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
-    note: "for using AI-assisted content without publishing low-quality scaled pages",
-  },
   youtubeShorts: {
     label: "YouTube Help: Get started creating YouTube Shorts",
     url: "https://support.google.com/youtube/answer/10059070",
@@ -93,7 +83,7 @@ export const serviceComparisonConfigs = [
       "Avoid services that cannot show source timestamps for every final clip.",
       "Keep guest approvals and sponsor restrictions visible in the brief.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["podcast-editing-service", "podcast-to-shorts-service", "turn-podcast-into-shorts"],
     funnel: "BOFU",
     businessIntent: "podcast editing service evaluation",
@@ -123,7 +113,7 @@ export const serviceComparisonConfigs = [
       "Avoid cheap clip dumps that ignore context and platform fit.",
       "Keep final approval separate from early drafts.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["done-for-you-shorts", "professional-shorts-editing", "fast-video-editing-service"],
     funnel: "BOFU",
     businessIntent: "Shorts editing order",
@@ -153,7 +143,7 @@ export const serviceComparisonConfigs = [
       "Avoid publishing private guest context or sponsor-sensitive segments.",
       "Keep episode links attached for attribution and review.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["best-podcast-editing-service", "turn-podcast-into-shorts", "video-repurposing-service"],
     funnel: "BOFU",
     businessIntent: "podcast-to-Shorts order",
@@ -183,7 +173,7 @@ export const serviceComparisonConfigs = [
       "Avoid testimonial-style claims without approval.",
       "Keep consent and usage boundaries attached to the project.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["interview-editing-service", "turn-interview-into-shorts", "client-approval-workflow"],
     funnel: "BOFU",
     businessIntent: "interview clipping order",
@@ -213,7 +203,7 @@ export const serviceComparisonConfigs = [
       "Avoid using tiny slide text as the main visual.",
       "Keep regulated or claims-heavy webinars under review.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-webinar-into-shorts", "video-repurposing-service", "content-repurposing-workflow"],
     funnel: "BOFU",
     businessIntent: "webinar editing order",
@@ -243,7 +233,7 @@ export const serviceComparisonConfigs = [
       "Avoid using footage without rights or channel owner approval.",
       "Keep source context attached for revisions.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-youtube-video-into-shorts", "best-shorts-editing-service", "youtube-shorts-hooks"],
     funnel: "BOFU",
     businessIntent: "YouTube Shorts editing order",
@@ -273,7 +263,7 @@ export const serviceComparisonConfigs = [
       "Avoid vendors that cannot explain what is automated and what is human-reviewed.",
       "Keep sensitive footage out of generic automation paths.",
     ],
-    references: ["googleAi", "googleHelpful", "w3cMedia"],
+    references: ["w3cMedia"],
     related: ["best-ai-video-editing-tool", "ai-assisted-editing-workflow", "managed-video-editing"],
     funnel: "BOFU",
     businessIntent: "AI editing service evaluation",
@@ -303,7 +293,7 @@ export const serviceComparisonConfigs = [
       "Avoid services that skip QA to advertise faster delivery.",
       "Keep urgent and sensitive work under a clear review path.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["reduce-video-editing-turnaround-time", "how-agencies-deliver-shorts-fast", "best-shorts-editing-service"],
     funnel: "BOFU",
     businessIntent: "fast editing order",
@@ -333,7 +323,7 @@ export const serviceComparisonConfigs = [
       "Avoid comparing only price without measuring review time and rejected clips.",
       "Keep competitor claims sourced to official pages.",
     ],
-    references: ["opusClip", "googleHelpful", "googleAi", "youtubeShorts"],
+    references: ["opusClip", "youtubeShorts"],
     related: ["best-ai-video-editing-tool", "managed-video-editing", "ai-video-editing-service"],
     funnel: "BOFU",
     businessIntent: "Opus Clip alternative evaluation",
@@ -363,7 +353,7 @@ export const serviceComparisonConfigs = [
       "Avoid comparing app features to service outcomes as if they are the same thing.",
       "Keep platform, rights, and brand review outside the app-only decision.",
     ],
-    references: ["capcut", "googleHelpful", "youtubeShorts", "w3cMedia"],
+    references: ["capcut", "youtubeShorts", "w3cMedia"],
     related: ["best-shorts-editing-service", "professional-shorts-editing", "managed-video-editing"],
     funnel: "BOFU",
     businessIntent: "CapCut alternative evaluation",
@@ -393,7 +383,7 @@ export const serviceComparisonConfigs = [
       "Avoid switching tools before measuring where turnaround is actually stuck.",
       "Keep sensitive interviews under consent and approval review.",
     ],
-    references: ["descript", "w3cMedia", "googleHelpful", "googleAi"],
+    references: ["descript", "w3cMedia"],
     related: ["best-podcast-editing-service", "podcast-to-shorts-service", "managed-video-editing"],
     funnel: "BOFU",
     businessIntent: "Descript alternative evaluation",
@@ -423,7 +413,7 @@ export const serviceComparisonConfigs = [
       "Avoid output volume metrics without review and acceptance metrics.",
       "Keep AI-generated captions and summaries under human review.",
     ],
-    references: ["opusClip", "capcut", "descript", "googleAi"],
+    references: ["opusClip", "capcut", "descript"],
     related: ["ai-video-editing-service", "best-video-repurposing-tool", "ai-assisted-editing-workflow"],
     funnel: "BOFU",
     businessIntent: "AI tool evaluation",
@@ -483,7 +473,7 @@ export const serviceComparisonConfigs = [
       "Avoid tools that create finished exports with no audit or review trail.",
       "Keep data access, retention, and permissions part of the evaluation.",
     ],
-    references: ["googleAi", "w3cMedia", "ffmpegDocs", "googleHelpful"],
+    references: ["w3cMedia", "ffmpegDocs"],
     related: ["ai-video-editing-for-enterprises", "best-agency-video-editing-tool", "video-operations-guide"],
     funnel: "BOFU",
     businessIntent: "enterprise video solution evaluation",
@@ -513,7 +503,7 @@ export const serviceComparisonConfigs = [
       "Avoid adding another editor if the bottleneck is client approval.",
       "Keep QA and delivery standards independent of tool choice.",
     ],
-    references: ["capcut", "descript", "opusClip", "googleHelpful"],
+    references: ["capcut", "descript", "opusClip"],
     related: ["agency-video-editing-workflow", "white-label-shorts-editing", "agency-production-pipeline"],
     funnel: "BOFU",
     businessIntent: "agency tool evaluation",
@@ -543,7 +533,7 @@ export const serviceComparisonConfigs = [
       "Avoid vendor decisions based only on demo clips.",
       "Keep source, transcript, caption, and final export history connected.",
     ],
-    references: ["googleAi", "w3cMedia", "ffmpegDocs", "googleHelpful"],
+    references: ["w3cMedia", "ffmpegDocs"],
     related: ["best-enterprise-video-editor", "ai-video-editing-service", "editorial-video-operations"],
     funnel: "BOFU",
     businessIntent: "enterprise AI video evaluation",
@@ -603,7 +593,7 @@ export const serviceComparisonConfigs = [
       "Avoid providers with no QA, source tracking, or revision structure.",
       "Keep strategic decisions and sensitive approvals with the right owner.",
     ],
-    references: ["googleHelpful", "w3cMedia", "googleAi"],
+    references: ["w3cMedia"],
     related: ["done-for-you-shorts", "ai-video-editing-service", "best-shorts-editing-service"],
     funnel: "BOFU",
     businessIntent: "managed editing order",
@@ -668,18 +658,18 @@ function buildBody(config) {
 
   return `![${config.title} evaluation workflow](${HERO_IMAGE})
 
-The search for "${config.primaryKeyword}" usually means the buyer is close to choosing a service or tool. The useful answer is not a fake universal ranking. It is a fit-based evaluation: what job needs to be done, what remains after software or a service helps, and who owns quality before publishing.
+When a buyer compares options for ${config.primaryKeyword}, they are usually close to choosing a service or tool. The useful answer is not a fake universal ranking. It is a fit-based evaluation: what job needs to be done, what remains after software or a service helps, and who owns quality before publishing.
 
-This page is for ${config.audience}. It is intentionally separate from workflow pages: those explain operations; this page helps a buyer decide whether a service, tool, alternative, or managed editing workflow is the right fit.
+This guide is for ${config.audience}. Use it to compare fit, quality checks, turnaround, ownership, and the handoff between tool output and final video.
 
 ## Best Fit
 
 | Decision | Recommendation |
 | --- | --- |
-| Page type | ${config.pageType} |
+| Guide focus | ${config.pageType} |
 | Best for | ${config.bestFor} |
 | Not for | ${config.notFor} |
-| Buyer intent | ${config.intent} |
+| Decision job | ${config.intent} |
 
 ## What to Evaluate
 
@@ -693,7 +683,7 @@ ${config.workflow.map((item) => `- ${item}`).join("\n")}
 
 ${config.guardrails.map((item) => `- ${item}`).join("\n")}
 
-These guardrails matter for SEO too. A buyer-intent page should not repeat every other service page. This article owns the "${config.primaryKeyword}" decision and links to more specific workflow pages when the reader needs implementation detail.
+These guardrails keep the buying decision grounded in real production work. The right service or tool should be clear about fit, trade-offs, quality checks, and who owns the final video before it is published.
 
 ## Where Dalaillama Fits
 

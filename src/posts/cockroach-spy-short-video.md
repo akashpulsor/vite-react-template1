@@ -296,7 +296,6 @@ That is the story.
 ## Authority References
 
 - [YouTube Help: Get started creating YouTube Shorts](https://support.google.com/youtube/answer/10059070) gives the platform context for turning this idea into a vertical Short.
-- [Google Search Central: creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) is a useful quality check for making a strange science-adjacent idea clear, useful, and not misleading.
 - [W3C WAI: Making Audio and Video Media Accessible](https://www.w3.org/WAI/media/av/) supports the article's emphasis on captions, visuals, and comprehension in a short explainer.
 
 ## Related Articles

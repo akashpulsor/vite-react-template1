@@ -183,7 +183,6 @@ We built Dalaillama Creator Studio around that idea: the creator should be able 
 
 - [YouTube Help: Get started creating YouTube Shorts](https://support.google.com/youtube/answer/10059070) gives the format context for planning short vertical videos.
 - [Adobe Learn: Premiere Pro](https://www.adobe.com/learn/premiere-pro) is a useful reference for turning planned beats into an edited timeline.
-- [Google Search Central: creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) supports storyboards that answer a real viewer need instead of only serving a trend.
 
 ## Related Articles
 

@@ -12,16 +12,6 @@ const referenceLibrary = {
     url: "https://www.w3.org/WAI/media/av/",
     note: "for captions, transcripts, and accessible media decisions",
   },
-  googleHelpful: {
-    label: "Google Search Central: helpful, reliable, people-first content",
-    url: "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
-    note: "for publishing quality checks before scaling a content cluster",
-  },
-  googleAi: {
-    label: "Google Search Central: guidance about AI-generated content",
-    url: "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
-    note: "for keeping assisted content original, useful, and reviewed",
-  },
   googleMeet: {
     label: "Google Meet Help: Record a video meeting",
     url: "https://support.google.com/meet/answer/9308681",
@@ -93,7 +83,7 @@ export const sourceToShortsConfigs = [
       "Avoid cutting mid-thought just because the sentence sounds quotable.",
       "Check guest approvals when the episode agreement requires it.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-interview-into-shorts", "turn-youtube-video-into-shorts", "reddit-shorts-editing-workflow"],
     funnel: "MOFU",
     businessIntent: "podcast repurposing order",
@@ -127,7 +117,7 @@ export const sourceToShortsConfigs = [
       "Avoid stitching two separate answers into one artificial position.",
       "Confirm usage rights when the interview was recorded for a limited purpose.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-podcast-into-shorts", "turn-customer-testimonial-into-shorts", "youtube-shorts-hooks"],
     funnel: "MOFU",
     businessIntent: "interview clip editing",
@@ -161,7 +151,7 @@ export const sourceToShortsConfigs = [
       "Avoid using a clip that depends on a downloadable asset the viewer cannot see.",
       "Check brand and legal review when the webinar covers regulated claims.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-online-course-into-shorts", "turn-training-video-into-shorts", "short-form-video-editor-attention-span"],
     funnel: "BOFU",
     businessIntent: "webinar repurposing order",
@@ -195,7 +185,7 @@ export const sourceToShortsConfigs = [
       "Avoid captions that editorialize the speaker's words.",
       "Keep a link or timestamp to the full source recording for internal verification.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-news-broadcast-into-shorts", "turn-parliamentary-session-into-shorts", "ai-video-editing-newsrooms"],
     funnel: "BOFU",
     businessIntent: "newsroom clipping workflow",
@@ -229,7 +219,7 @@ export const sourceToShortsConfigs = [
       "Do not hide the source context when the clip includes third-party material.",
       "Avoid turning every chapter into a Short if several chapters target the same query.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-podcast-into-shorts", "turn-live-stream-into-shorts", "youtube-shorts-hooks"],
     funnel: "MOFU",
     businessIntent: "youtube repurposing order",
@@ -263,7 +253,7 @@ export const sourceToShortsConfigs = [
       "Avoid showing attendee lists, chat, email, dashboard data, or private documents.",
       "Check Zoom account recording settings and retention rules before sharing source files.",
     ],
-    references: ["zoomSupport", "youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["zoomSupport", "youtubeShorts", "w3cMedia"],
     related: ["turn-google-meet-recording-into-shorts", "turn-microsoft-teams-recording-into-shorts", "turn-internal-meeting-into-shorts"],
     funnel: "BOFU",
     businessIntent: "meeting recording edit",
@@ -297,7 +287,7 @@ export const sourceToShortsConfigs = [
       "Remove participant tiles, emails, and private chat where they are not needed.",
       "Follow the organization's Meet recording and consent policy before editing.",
     ],
-    references: ["googleMeet", "youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["googleMeet", "youtubeShorts", "w3cMedia"],
     related: ["turn-zoom-recording-into-shorts", "turn-microsoft-teams-recording-into-shorts", "turn-internal-meeting-into-shorts"],
     funnel: "BOFU",
     businessIntent: "Google Meet clip editing",
@@ -331,7 +321,7 @@ export const sourceToShortsConfigs = [
       "Do not show whiteboards, notes, or shared apps if they were not captured or approved.",
       "Avoid exporting public clips from internal meetings without legal or comms review.",
     ],
-    references: ["microsoftTeams", "youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["microsoftTeams", "youtubeShorts", "w3cMedia"],
     related: ["turn-google-meet-recording-into-shorts", "turn-zoom-recording-into-shorts", "turn-internal-meeting-into-shorts"],
     funnel: "BOFU",
     businessIntent: "Teams recording repurposing",
@@ -365,7 +355,7 @@ export const sourceToShortsConfigs = [
       "Do not show grades, participant names, or private LMS screens.",
       "Avoid simplifying a concept so much that it becomes inaccurate.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-online-course-into-shorts", "turn-training-video-into-shorts", "turn-webinar-into-shorts"],
     funnel: "MOFU",
     businessIntent: "education clip editing",
@@ -399,7 +389,7 @@ export const sourceToShortsConfigs = [
       "Avoid using student names, assignments, or private cohort conversations.",
       "Make sure claims about outcomes match the full course promise.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-lecture-into-shorts", "turn-webinar-into-shorts", "turn-training-video-into-shorts"],
     funnel: "BOFU",
     businessIntent: "course repurposing order",
@@ -433,7 +423,7 @@ export const sourceToShortsConfigs = [
       "Avoid humor or pacing choices that make a compliance topic feel unserious.",
       "Review captions carefully because one wrong word can change a procedure.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-online-course-into-shorts", "turn-lecture-into-shorts", "turn-internal-meeting-into-shorts"],
     funnel: "BOFU",
     businessIntent: "training content repurposing",
@@ -467,7 +457,7 @@ export const sourceToShortsConfigs = [
       "Avoid overstating a feature beyond what the demo shows.",
       "Check UI labels and product names if the interface has changed.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "ffmpegDocs", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia", "ffmpegDocs"],
     related: ["turn-customer-testimonial-into-shorts", "turn-webinar-into-shorts", "short-form-video-editor-attention-span"],
     funnel: "BOFU",
     businessIntent: "product demo clip order",
@@ -501,7 +491,7 @@ export const sourceToShortsConfigs = [
       "Avoid showing private customer information in screen shares or lower thirds.",
       "Route metrics and regulated claims through legal or customer approval.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-product-demo-into-shorts", "turn-interview-into-shorts", "turn-founder-story-into-shorts"],
     funnel: "BOFU",
     businessIntent: "testimonial video editing",
@@ -535,7 +525,7 @@ export const sourceToShortsConfigs = [
       "Avoid claims about competitors or markets that need substantiation.",
       "Cut vanity details if they do not help the viewer understand the company.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-customer-testimonial-into-shorts", "turn-interview-into-shorts", "turn-investor-update-into-shorts"],
     funnel: "MOFU",
     businessIntent: "founder content editing",
@@ -569,7 +559,7 @@ export const sourceToShortsConfigs = [
       "Avoid clipping a provocative sentence without the clarifying follow-up.",
       "Confirm event release terms for all panelists.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-conference-talk-into-shorts", "turn-keynote-into-shorts", "turn-event-recording-into-shorts"],
     funnel: "MOFU",
     businessIntent: "event panel repurposing",
@@ -603,7 +593,7 @@ export const sourceToShortsConfigs = [
       "Do not use audience footage if release terms are unclear.",
       "Avoid turning a nuanced talk into a single misleading hot take.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-keynote-into-shorts", "turn-panel-discussion-into-shorts", "turn-event-recording-into-shorts"],
     funnel: "MOFU",
     businessIntent: "conference clip editing",
@@ -637,7 +627,7 @@ export const sourceToShortsConfigs = [
       "Avoid clipping strategic claims without qualifiers.",
       "Keep the Short aligned with the official launch messaging.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-conference-talk-into-shorts", "turn-founder-story-into-shorts", "turn-product-demo-into-shorts"],
     funnel: "BOFU",
     businessIntent: "keynote repurposing order",
@@ -671,7 +661,7 @@ export const sourceToShortsConfigs = [
       "Avoid adding music, graphics, or captions that sensationalize market-sensitive statements.",
       "Keep links to filings, releases, or transcripts in the review notes.",
     ],
-    references: ["secEdgar", "youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["secEdgar", "youtubeShorts", "w3cMedia"],
     related: ["turn-investor-update-into-shorts", "turn-founder-story-into-shorts", "ai-video-workflow-digital-publishers"],
     funnel: "BOFU",
     businessIntent: "financial media clip workflow",
@@ -705,7 +695,7 @@ export const sourceToShortsConfigs = [
       "Avoid implying guaranteed outcomes from forecasts or goals.",
       "Review customer references, revenue figures, and fundraising language before posting.",
     ],
-    references: ["secEdgar", "youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["secEdgar", "youtubeShorts", "w3cMedia"],
     related: ["turn-earnings-call-into-shorts", "turn-founder-story-into-shorts", "turn-town-hall-into-shorts"],
     funnel: "BOFU",
     businessIntent: "investor content editing",
@@ -739,7 +729,7 @@ export const sourceToShortsConfigs = [
       "Avoid cutting out difficult context to make a decision sound easier than it is.",
       "Blur or remove names, chat, and private documents where needed.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-internal-meeting-into-shorts", "turn-investor-update-into-shorts", "turn-microsoft-teams-recording-into-shorts"],
     funnel: "BOFU",
     businessIntent: "internal communications repurposing",
@@ -773,7 +763,7 @@ export const sourceToShortsConfigs = [
       "Avoid showing private chat, donations, or user data if not intended.",
       "Do not leave in technical artifacts that make the clip feel unfinished.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "ffmpegDocs", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia", "ffmpegDocs"],
     related: ["turn-youtube-video-into-shorts", "turn-event-recording-into-shorts", "reel-patterns-worth-editing"],
     funnel: "MOFU",
     businessIntent: "live stream clip editing",
@@ -807,7 +797,7 @@ export const sourceToShortsConfigs = [
       "Avoid pairing interview audio with unrelated match footage.",
       "Respect league, club, and broadcaster rights around highlights and logos.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-match-highlights-into-shorts", "turn-news-broadcast-into-shorts", "ai-video-workflow-digital-publishers"],
     funnel: "BOFU",
     businessIntent: "sports media repurposing",
@@ -841,7 +831,7 @@ export const sourceToShortsConfigs = [
       "Avoid misleading edits that remove fouls, VAR, umpire calls, or sequence context.",
       "Keep scoreboard and player identification accurate.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "ffmpegDocs", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia", "ffmpegDocs"],
     related: ["turn-sports-interview-into-shorts", "turn-live-stream-into-shorts", "turn-news-broadcast-into-shorts"],
     funnel: "BOFU",
     businessIntent: "sports highlight editing",
@@ -875,7 +865,7 @@ export const sourceToShortsConfigs = [
       "Avoid dramatic music and captions that bias interpretation of legal proceedings.",
       "Do not clip testimony or argument in a way that changes legal meaning.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-parliamentary-session-into-shorts", "turn-press-conference-into-shorts", "turn-news-broadcast-into-shorts"],
     funnel: "BOFU",
     businessIntent: "civic media clip workflow",
@@ -909,7 +899,7 @@ export const sourceToShortsConfigs = [
       "Avoid captions that turn parliamentary debate into campaign messaging unless that is the approved purpose.",
       "Check official footage terms before publishing on commercial channels.",
     ],
-    references: ["parliamentLive", "youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["parliamentLive", "youtubeShorts", "w3cMedia"],
     related: ["turn-press-conference-into-shorts", "turn-court-hearing-into-shorts", "turn-news-broadcast-into-shorts"],
     funnel: "BOFU",
     businessIntent: "civic video repurposing",
@@ -943,7 +933,7 @@ export const sourceToShortsConfigs = [
       "Avoid remixing archival, music, or third-party material beyond licensed use.",
       "Do not edit a contributor into a position they did not express.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-tv-show-into-shorts", "turn-event-recording-into-shorts", "reel-patterns-worth-editing"],
     funnel: "MOFU",
     businessIntent: "documentary promotion editing",
@@ -977,7 +967,7 @@ export const sourceToShortsConfigs = [
       "Avoid removing context that changes character meaning or plot stakes.",
       "Check music, talent, and territory restrictions before exporting.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "ffmpegDocs", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia", "ffmpegDocs"],
     related: ["turn-news-broadcast-into-shorts", "turn-documentary-into-shorts", "ai-video-editing-newsrooms"],
     funnel: "BOFU",
     businessIntent: "broadcast clip workflow",
@@ -1011,7 +1001,7 @@ export const sourceToShortsConfigs = [
       "Avoid clipping uncertainty as certainty.",
       "Keep editorial sign-off for sensitive civic, health, crime, and conflict stories.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-press-conference-into-shorts", "turn-tv-show-into-shorts", "ai-video-editing-newsrooms"],
     funnel: "BOFU",
     businessIntent: "newsroom video workflow",
@@ -1045,7 +1035,7 @@ export const sourceToShortsConfigs = [
       "Avoid overusing logo walls and generic crowd shots.",
       "Keep sponsor and partner approvals clear when clips include brand obligations.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-conference-talk-into-shorts", "turn-panel-discussion-into-shorts", "turn-live-stream-into-shorts"],
     funnel: "MOFU",
     businessIntent: "event repurposing order",
@@ -1079,7 +1069,7 @@ export const sourceToShortsConfigs = [
       "Avoid sharing private employee, customer, or financial information.",
       "Version and retire clips when policies, tools, or decisions change.",
     ],
-    references: ["googleMeet", "microsoftTeams", "zoomSupport", "w3cMedia", "googleHelpful"],
+    references: ["googleMeet", "microsoftTeams", "zoomSupport", "w3cMedia"],
     related: ["turn-town-hall-into-shorts", "turn-training-video-into-shorts", "turn-zoom-recording-into-shorts"],
     funnel: "BOFU",
     businessIntent: "internal meeting editing",
@@ -1136,15 +1126,15 @@ function buildBody(config) {
 
   return `![${config.source} to Shorts editing workflow](${HERO_IMAGE})
 
-If you want to ${config.primaryKeyword}, the risky move is treating the source like raw footage and letting a clipper grab whatever sounds punchy. ${config.distinction}
+If you want to turn a ${sourceLower} into a Short, the risky move is treating the source like raw footage and letting a clipper grab whatever sounds punchy. ${config.distinction}
 
-This page is written for ${config.audience}. The goal is a focused, source-specific workflow: one strong vertical Short, clean captions, clear context, and a review path that reduces cannibalization with the other source-to-Shorts pages on this site.
+This guide is for ${config.audience}. The goal is a focused, source-specific workflow: one strong vertical Short, clean captions, clear context, and a review path that keeps the final edit honest to the original source.
 
-## Search Intent and Editorial Angle
+## Source Brief
 
 | Decision | Best answer for ${config.source} |
 | --- | --- |
-| Primary intent | ${config.searchIntent} |
+| Main job | ${config.searchIntent} |
 | Best moment | ${config.bestMoment} |
 | Avoid | ${config.avoid} |
 | Review owner | ${config.reviewOwner} |
@@ -1159,7 +1149,7 @@ The best ${sourceLower} Short usually starts where the viewer's problem becomes 
 
 ${config.workflow.map((item) => `- ${item}`).join("\n")}
 
-This is intentionally narrower than a general "make more Shorts" checklist. The page exists because ${sourceLower} recordings create different editing problems from podcasts, webinars, meetings, sports footage, civic footage, and product demos. That separation helps each article answer a distinct query instead of competing against the same generic guide.
+This is intentionally narrower than a general "make more Shorts" checklist. A ${sourceLower} creates its own editing problems: context, permissions, visual clarity, captions, pacing, and review all change with the source format.
 
 ## Editorial Guardrails
 

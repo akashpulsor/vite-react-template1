@@ -24,6 +24,10 @@ const BLOG_DESCRIPTION =
   "AI newsroom video workflow guides for publishers, broadcasters, media teams, agencies, and teams turning long video into approved short-form output.";
 const DEFAULT_SOCIAL_IMAGE = "/social-card.svg";
 const FEATURED_GUIDE_SLUGS = [
+  "video-production-workflow",
+  "video-editing-workflow",
+  "video-production-checklist",
+  "ultimate-guide-to-video-repurposing",
   "meaningful-short-video-ai",
   "storyboard-shorts-with-images",
   "dp-shorts-with-images",
@@ -303,7 +307,7 @@ const sitemap = buildSitemap(posts);
 await writeFile(path.join(distDir, "sitemap.xml"), sitemap);
 await writeFile(path.join(rootDir, "public", "sitemap.xml"), sitemap);
 
-console.log(`Prerendered ${posts.length} blog posts and ${videoRepurposingChildPages.length + 1} video repurposing pages for SEO and wrote sitemap.`);
+console.log(`Prerendered ${posts.length} blog posts and ${videoRepurposingChildPages.length + 1} video repurposing pages and wrote sitemap.`);
 
 async function loadPosts() {
   const postsIndex = await readFile(path.join(rootDir, "src", "posts", "index.js"), "utf8");
@@ -743,8 +747,8 @@ function renderBlogIndex(allPosts) {
   return `
     <article class="page essay-page">
       <p class="back-link"><a href="/">Back to home</a></p>
-      <h1>AI Newsroom Video Workflow Knowledge Base</h1>
-      <p>Practical guides, site-graph planning, and production notes for publishers, broadcasters, agencies, and media teams turning long video into approved short-form output.</p>
+      <h1>Video Editing Guides</h1>
+      <p>Practical guides for turning long, raw, or rough footage into focused short-form videos with stronger hooks, cleaner captions, better pacing, and reliable review.</p>
       <section class="blog-featured-block" aria-label="Newsroom video operations guides">
         <h2>Newsroom Video Operations Guides</h2>
         <p class="empty-note">Focused guides for publishers, broadcasters, video desks, and editorial operations teams improving AI-assisted newsroom video workflows without weakening editorial review.</p>
@@ -762,7 +766,7 @@ function renderBlogIndex(allPosts) {
       </section>
       <section class="blog-featured-block" aria-label="Service and tool evaluation guides">
         <h2>Service and Tool Evaluation Guides</h2>
-        <p class="empty-note">Buyer-intent guides for choosing Shorts editing services, podcast clipping, AI video tools, managed editing, and alternatives to self-serve editing software.</p>
+        <p class="empty-note">Evaluation guides for choosing Shorts editing services, podcast clipping, AI video tools, managed editing, and alternatives to self-serve editing software.</p>
         ${renderGuideCards(serviceComparisonPosts)}
       </section>
       <section class="blog-featured-block" aria-label="Source-to-Shorts conversion guides">
@@ -825,7 +829,7 @@ function renderVideoRepurposingPage(page = null) {
       </section>
       <section class="landing-section writing-section" id="repurposing-formats">
         <p class="kicker">Source formats</p>
-        <h2>Programmatic landing pages for high-intent repurposing searches.</h2>
+        <h2>Choose the source format you already have.</h2>
         ${renderLinkCards(
           videoRepurposingChildPages.map((item) => ({
             title: item.title,

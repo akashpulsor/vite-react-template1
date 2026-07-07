@@ -2,16 +2,6 @@ const PUBLISHED_DATE = "July 1, 2026";
 const HERO_IMAGE = "/blog/reddit-shorts-editing-workflow/shorts-editing-workflow.png";
 
 const referenceLibrary = {
-  googleHelpful: {
-    label: "Google Search Central: helpful, reliable, people-first content",
-    url: "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
-    note: "for keeping scaled content useful, original, and people-first",
-  },
-  googleAi: {
-    label: "Google Search Central: guidance about AI-generated content",
-    url: "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
-    note: "for responsible AI-assisted content workflows",
-  },
   youtubeShorts: {
     label: "YouTube Help: Get started creating YouTube Shorts",
     url: "https://support.google.com/youtube/answer/10059070",
@@ -26,11 +16,6 @@ const referenceLibrary = {
     label: "FFmpeg documentation",
     url: "https://ffmpeg.org/documentation.html",
     note: "for video processing, scaling, encoding, and inspection",
-  },
-  googleSitemaps: {
-    label: "Google Search Central: Learn about sitemaps",
-    url: "https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview",
-    note: "for sitemap discovery and crawl hygiene",
   },
 };
 
@@ -63,7 +48,7 @@ export const videoOperationsConfigs = [
       "Avoid accepting incomplete jobs into the active queue.",
       "Keep sensitive, legal, or brand-risk videos out of automatic fast lanes.",
     ],
-    references: ["googleHelpful", "w3cMedia", "ffmpegDocs"],
+    references: ["w3cMedia", "ffmpegDocs"],
     related: ["editing-throughput", "review-bottlenecks", "video-delivery-workflow"],
     funnel: "BOFU",
     businessIntent: "turnaround workflow audit",
@@ -96,7 +81,7 @@ export const videoOperationsConfigs = [
       "Avoid pushing unreviewed AI-selected clips directly to publishing.",
       "Keep a quality threshold that lets the team kill weak clips early.",
     ],
-    references: ["youtubeShorts", "googleAi", "googleHelpful"],
+    references: ["youtubeShorts"],
     related: ["batch-video-editing", "managing-hundreds-of-videos", "video-production-kpis"],
     funnel: "BOFU",
     businessIntent: "high-volume Shorts production",
@@ -162,7 +147,7 @@ export const videoOperationsConfigs = [
       "Avoid separate feedback channels for the same draft.",
       "Keep factual, legal, or brand-risk comments higher priority than preference notes.",
     ],
-    references: ["w3cMedia", "googleHelpful", "youtubeShorts"],
+    references: ["w3cMedia", "youtubeShorts"],
     related: ["editorial-review-workflow", "review-bottlenecks", "review-less-edit-more"],
     funnel: "MOFU",
     businessIntent: "review workflow design",
@@ -174,7 +159,7 @@ export const videoOperationsConfigs = [
     primaryKeyword: "editorial review workflow",
     intent: "build an editorial review process for video",
     audience: "publishers, brands, educators, agencies, and internal communications teams",
-    angle: "This page is the generic editorial review guide. Newsroom-specific approval lives elsewhere; this version is for any team that needs accuracy, context, claims, captions, and stakeholder trust.",
+    angle: "General editorial review helps any video team protect accuracy, context, claims, captions, and stakeholder trust before publishing.",
     outcome: "a clear editorial review path that catches meaning, claim, context, and caption problems before distribution",
     avoid: "reviewing only visual polish while ignoring what the video says",
     owner: "editorial lead",
@@ -195,7 +180,7 @@ export const videoOperationsConfigs = [
       "Avoid editing quotes into stronger claims than the source supports.",
       "Keep a re-review rule when facts, product details, or campaign claims change.",
     ],
-    references: ["googleHelpful", "w3cMedia", "googleAi"],
+    references: ["w3cMedia"],
     related: ["video-review-workflow", "video-qa-workflow", "publishing-workflow"],
     funnel: "BOFU",
     businessIntent: "editorial review setup",
@@ -228,7 +213,7 @@ export const videoOperationsConfigs = [
       "Avoid treating every timestamp as a publishable clip.",
       "Keep source links and timestamps attached to derivative assets.",
     ],
-    references: ["youtubeShorts", "googleHelpful", "googleSitemaps"],
+    references: ["youtubeShorts"],
     related: ["video-repurposing-service", "turn-podcast-into-shorts", "turn-webinar-into-shorts"],
     funnel: "MOFU",
     businessIntent: "repurposing workflow planning",
@@ -261,7 +246,7 @@ export const videoOperationsConfigs = [
       "Avoid hiding urgent jobs outside the pipeline.",
       "Keep final files connected to source files and review history.",
     ],
-    references: ["googleHelpful", "googleAi", "ffmpegDocs"],
+    references: ["ffmpegDocs"],
     related: ["video-processing-pipeline", "video-delivery-workflow", "video-operations-guide"],
     funnel: "BOFU",
     businessIntent: "production pipeline setup",
@@ -294,7 +279,7 @@ export const videoOperationsConfigs = [
       "Avoid silent transcodes that change timing, audio, or color without review.",
       "Keep original files accessible for re-edits and audits.",
     ],
-    references: ["ffmpegDocs", "w3cMedia", "googleHelpful"],
+    references: ["ffmpegDocs", "w3cMedia"],
     related: ["production-pipeline", "video-qa-workflow", "publishing-workflow"],
     funnel: "BOFU",
     businessIntent: "technical video operations",
@@ -360,7 +345,7 @@ export const videoOperationsConfigs = [
       "Avoid having the same person be sole editor and QA on high-risk work.",
       "Keep QA scope separate from subjective creative preference.",
     ],
-    references: ["w3cMedia", "ffmpegDocs", "googleHelpful"],
+    references: ["w3cMedia", "ffmpegDocs"],
     related: ["editor-checklist", "video-review-workflow", "video-processing-pipeline"],
     funnel: "BOFU",
     businessIntent: "QA workflow setup",
@@ -393,7 +378,7 @@ export const videoOperationsConfigs = [
       "Avoid vague statuses such as almost done or waiting.",
       "Keep permissions clean when many clients, desks, or contractors are involved.",
     ],
-    references: ["googleSitemaps", "ffmpegDocs", "googleHelpful"],
+    references: ["ffmpegDocs"],
     related: ["how-to-produce-100-shorts-every-week", "production-pipeline", "video-production-kpis"],
     funnel: "BOFU",
     businessIntent: "high-volume operations setup",
@@ -426,7 +411,7 @@ export const videoOperationsConfigs = [
       "Avoid removing review from sensitive or high-impact videos.",
       "Keep final approval visible before publishing.",
     ],
-    references: ["googleHelpful", "w3cMedia", "youtubeShorts"],
+    references: ["w3cMedia", "youtubeShorts"],
     related: ["video-review-workflow", "review-bottlenecks", "editor-checklist"],
     funnel: "MOFU",
     businessIntent: "review efficiency improvement",
@@ -459,7 +444,7 @@ export const videoOperationsConfigs = [
       "Avoid using automation to mass-produce low-value pages or videos.",
       "Keep sensitive sources under stricter human review.",
     ],
-    references: ["googleAi", "googleHelpful", "w3cMedia"],
+    references: ["w3cMedia"],
     related: ["newsroom-video-automation", "agency-workflow-automation", "video-qa-workflow"],
     funnel: "BOFU",
     businessIntent: "AI editing workflow setup",
@@ -492,7 +477,7 @@ export const videoOperationsConfigs = [
       "Avoid letting metrics reward weak high-volume output.",
       "Keep QA and review standards visible as the team grows.",
     ],
-    references: ["googleHelpful", "googleAi", "ffmpegDocs"],
+    references: ["ffmpegDocs"],
     related: ["video-production-kpis", "editing-throughput", "managing-hundreds-of-videos"],
     funnel: "BOFU",
     businessIntent: "video team scaling",
@@ -525,7 +510,7 @@ export const videoOperationsConfigs = [
       "Avoid comparing complex videos to simple batch clips without context.",
       "Keep metric definitions stable enough to compare over time.",
     ],
-    references: ["googleHelpful", "googleAi", "ffmpegDocs"],
+    references: ["ffmpegDocs"],
     related: ["editing-throughput", "review-bottlenecks", "scaling-video-teams"],
     funnel: "BOFU",
     businessIntent: "production metrics setup",
@@ -558,7 +543,7 @@ export const videoOperationsConfigs = [
       "Avoid measuring editor performance without accounting for brief quality.",
       "Keep quality and burnout indicators visible.",
     ],
-    references: ["ffmpegDocs", "googleHelpful", "w3cMedia"],
+    references: ["ffmpegDocs", "w3cMedia"],
     related: ["video-production-kpis", "reduce-video-editing-turnaround-time", "batch-video-editing"],
     funnel: "BOFU",
     businessIntent: "throughput improvement",
@@ -591,7 +576,7 @@ export const videoOperationsConfigs = [
       "Avoid letting late feedback restart the whole process without scope rules.",
       "Keep sensitive review strict even while routine review gets faster.",
     ],
-    references: ["googleHelpful", "w3cMedia", "youtubeShorts"],
+    references: ["w3cMedia", "youtubeShorts"],
     related: ["video-review-workflow", "review-less-edit-more", "video-production-kpis"],
     funnel: "BOFU",
     businessIntent: "review bottleneck fix",
@@ -624,7 +609,7 @@ export const videoOperationsConfigs = [
       "Avoid file names that do not identify client, project, platform, version, or date.",
       "Keep caption files and thumbnails with the final export where required.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleSitemaps"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["publishing-workflow", "production-pipeline", "video-qa-workflow"],
     funnel: "MOFU",
     businessIntent: "delivery workflow setup",
@@ -657,7 +642,7 @@ export const videoOperationsConfigs = [
       "Avoid using platform copy that overpromises what the video says.",
       "Keep sensitive content under final review before scheduling.",
     ],
-    references: ["youtubeShorts", "googleSitemaps", "googleHelpful"],
+    references: ["youtubeShorts"],
     related: ["video-delivery-workflow", "multi-platform-publishing", "editorial-review-workflow"],
     funnel: "BOFU",
     businessIntent: "publishing operations setup",
@@ -690,7 +675,7 @@ export const videoOperationsConfigs = [
       "Avoid automating unreviewed content into public publishing.",
       "Keep quality, accessibility, and source context visible in every workflow stage.",
     ],
-    references: ["googleHelpful", "googleAi", "youtubeShorts", "w3cMedia"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["production-pipeline", "video-production-kpis", "scaling-video-teams"],
     funnel: "MOFU",
     businessIntent: "video operations strategy",
@@ -756,7 +741,7 @@ function buildBody(config) {
 
 ${config.angle}
 
-This guide is written for ${config.audience}. The practical goal is ${config.outcome}. It sits above the agency, newsroom, and source-specific clusters: those pages describe a particular business context or source type, while this page explains the operating system that any high-volume video team can adapt.
+This guide is written for ${config.audience}. The practical goal is ${config.outcome}.
 
 ## Workflow Fit
 
@@ -779,7 +764,7 @@ ${config.signals.map((item) => `- ${item}`).join("\n")}
 
 ${config.guardrails.map((item) => `- ${item}`).join("\n")}
 
-The anti-cannibalization rule for this page is simple: it owns the "${config.primaryKeyword}" operations problem. Agency pages explain client delivery, newsroom pages explain editorial operations, and source-to-Shorts pages explain how to transform one recording type.
+Good operations work keeps queues, owners, review states, source context, and delivery standards visible so throughput does not depend on private memory or last-minute chasing.
 
 ## How Dalaillama Fits This Workflow
 
@@ -795,15 +780,7 @@ ${relatedGuides.map((guide) => `- [${guide.title}](${guide.href})`).join("\n")}
 
 ### Is ${config.primaryKeyword} mainly about tools?
 
-Tools help, but the highest-leverage fixes are usually process fixes: complete intake, visible queues, review ownership, QA standards, export presets, and useful metrics.
-
-### How does this avoid cannibalization?
-
-This page answers the general operations query. When the reader needs a narrower workflow, the related links send them to the agency, newsroom, publishing, QA, AI, or source-specific page instead of repeating the same advice.
-
-### What should a team prepare before using this workflow?
-
-Prepare a source intake form, production states, owner rules, review lanes, QA checklist, export presets, delivery folders, and KPI definitions. Those basics make any editing tool or AI workflow more useful.`;
+Tools help, but the highest-leverage fixes are usually process fixes: complete intake, visible queues, review ownership, QA standards, export presets, and useful metrics.`;
 }
 
 function referencesFor(config) {

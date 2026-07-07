@@ -2,16 +2,6 @@ const PUBLISHED_DATE = "July 1, 2026";
 const HERO_IMAGE = "/blog/reddit-shorts-editing-workflow/shorts-editing-workflow.png";
 
 const referenceLibrary = {
-  googleHelpful: {
-    label: "Google Search Central: helpful, reliable, people-first content",
-    url: "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
-    note: "for keeping service pages useful, original, and written for people",
-  },
-  googleAi: {
-    label: "Google Search Central: guidance about AI-generated content",
-    url: "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
-    note: "for using AI assistance without creating low-quality scaled content",
-  },
   youtubeShorts: {
     label: "YouTube Help: Get started creating YouTube Shorts",
     url: "https://support.google.com/youtube/answer/10059070",
@@ -26,11 +16,6 @@ const referenceLibrary = {
     label: "FFmpeg documentation",
     url: "https://ffmpeg.org/documentation.html",
     note: "for video processing, scaling, encoding, and QA tooling",
-  },
-  googleSitemaps: {
-    label: "Google Search Central: Learn about sitemaps",
-    url: "https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview",
-    note: "for crawl discovery and sitemap hygiene",
   },
 };
 
@@ -63,7 +48,7 @@ export const agencyWorkflowConfigs = [
       "Avoid one shared folder with mixed clients and no status system.",
       "Keep brand rules and client approvals attached to every batch.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful", "ffmpegDocs"],
+    references: ["youtubeShorts", "w3cMedia", "ffmpegDocs"],
     related: ["agency-production-pipeline", "agency-review-workflow", "agency-video-sop"],
     funnel: "MOFU",
     businessIntent: "agency workflow audit",
@@ -96,7 +81,7 @@ export const agencyWorkflowConfigs = [
       "Avoid unlimited revisions on fast-turnaround Shorts packages.",
       "Keep QA independent enough to catch editor blind spots.",
     ],
-    references: ["googleHelpful", "googleAi", "w3cMedia", "ffmpegDocs"],
+    references: ["w3cMedia", "ffmpegDocs"],
     related: ["agency-production-metrics", "agency-workflow-automation", "batch-editing-client-videos"],
     funnel: "BOFU",
     businessIntent: "agency scaling consultation",
@@ -129,7 +114,7 @@ export const agencyWorkflowConfigs = [
       "Avoid letting a vendor define the agency's creative standard.",
       "Keep revision ownership clear so client feedback does not get lost.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["video-outsourcing-guide", "agency-review-workflow", "client-approval-workflow"],
     funnel: "BOFU",
     businessIntent: "white-label editing partner evaluation",
@@ -162,7 +147,7 @@ export const agencyWorkflowConfigs = [
       "Avoid using one template across clients with different brand voices.",
       "Keep source timestamps visible so revisions do not require rewatching the whole video.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "ffmpegDocs", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia", "ffmpegDocs"],
     related: ["agency-video-templates", "agency-video-qa-checklist", "agency-production-pipeline"],
     funnel: "BOFU",
     businessIntent: "batch editing workflow",
@@ -195,7 +180,7 @@ export const agencyWorkflowConfigs = [
       "Avoid subjective review with no link back to the brief.",
       "Keep internal review fast enough for short turnaround offers.",
     ],
-    references: ["w3cMedia", "youtubeShorts", "googleHelpful"],
+    references: ["w3cMedia", "youtubeShorts"],
     related: ["agency-video-qa-checklist", "client-approval-workflow", "agency-video-sop"],
     funnel: "BOFU",
     businessIntent: "agency QA workflow",
@@ -228,7 +213,7 @@ export const agencyWorkflowConfigs = [
       "Avoid SOPs that ignore account promises and client contracts.",
       "Keep the SOP short enough to use during active production.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "ffmpegDocs", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia", "ffmpegDocs"],
     related: ["agency-video-editing-workflow", "agency-video-qa-checklist", "agency-video-templates"],
     funnel: "BOFU",
     businessIntent: "agency SOP setup",
@@ -261,7 +246,7 @@ export const agencyWorkflowConfigs = [
       "Avoid open-ended revision windows on fast-turnaround packages.",
       "Keep final approved exports separate from drafts.",
     ],
-    references: ["googleHelpful", "w3cMedia", "youtubeShorts"],
+    references: ["w3cMedia", "youtubeShorts"],
     related: ["agency-review-workflow", "managing-multiple-clients", "agency-production-pipeline"],
     funnel: "BOFU",
     businessIntent: "client approval workflow",
@@ -294,7 +279,7 @@ export const agencyWorkflowConfigs = [
       "Avoid hiding urgent work outside the system.",
       "Keep client-facing deadlines separate from internal production deadlines.",
     ],
-    references: ["googleHelpful", "googleAi", "ffmpegDocs"],
+    references: ["ffmpegDocs"],
     related: ["agency-video-editing-workflow", "agency-production-metrics", "agency-workflow-automation"],
     funnel: "BOFU",
     businessIntent: "production pipeline setup",
@@ -327,7 +312,7 @@ export const agencyWorkflowConfigs = [
       "Avoid copying templates across clients without brand review.",
       "Keep access permissions clean when contractors or white-label partners help.",
     ],
-    references: ["googleHelpful", "w3cMedia", "youtubeShorts"],
+    references: ["w3cMedia", "youtubeShorts"],
     related: ["client-approval-workflow", "agency-production-pipeline", "agency-production-metrics"],
     funnel: "BOFU",
     businessIntent: "multi-client agency operations",
@@ -360,7 +345,7 @@ export const agencyWorkflowConfigs = [
       "Avoid accepting incomplete briefs into the active queue.",
       "Keep client response time visible in turnaround reports.",
     ],
-    references: ["googleAi", "ffmpegDocs", "w3cMedia", "googleHelpful"],
+    references: ["ffmpegDocs", "w3cMedia"],
     related: ["how-agencies-deliver-shorts-fast", "agency-workflow-automation", "agency-video-qa-checklist"],
     funnel: "BOFU",
     businessIntent: "turnaround reduction",
@@ -393,7 +378,7 @@ export const agencyWorkflowConfigs = [
       "Avoid promising custom strategy inside a fast production package.",
       "Keep sensitive or regulated clients out of automatic fast lanes unless review is defined.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["done-for-you-shorts", "reduce-agency-turnaround", "agency-video-templates"],
     funnel: "BOFU",
     businessIntent: "fast Shorts delivery",
@@ -426,7 +411,7 @@ export const agencyWorkflowConfigs = [
       "Avoid letting the same editor be the only reviewer on high-value client work.",
       "Keep the checklist short enough to complete every time.",
     ],
-    references: ["w3cMedia", "ffmpegDocs", "youtubeShorts", "googleHelpful"],
+    references: ["w3cMedia", "ffmpegDocs", "youtubeShorts"],
     related: ["agency-review-workflow", "agency-video-sop", "batch-editing-client-videos"],
     funnel: "MOFU",
     businessIntent: "QA process setup",
@@ -459,7 +444,7 @@ export const agencyWorkflowConfigs = [
       "Avoid visual systems that cover faces, captions, or product details.",
       "Keep source-specific templates separate from client brand templates.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "ffmpegDocs", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia", "ffmpegDocs"],
     related: ["batch-editing-client-videos", "agency-video-sop", "agency-video-qa-checklist"],
     funnel: "MOFU",
     businessIntent: "template system setup",
@@ -492,7 +477,7 @@ export const agencyWorkflowConfigs = [
       "Avoid comparing clients with different scopes as if they are identical.",
       "Keep client response time separate from internal turnaround time.",
     ],
-    references: ["googleHelpful", "googleAi", "ffmpegDocs"],
+    references: ["ffmpegDocs"],
     related: ["scaling-video-editing-agency", "agency-production-pipeline", "reduce-agency-turnaround"],
     funnel: "BOFU",
     businessIntent: "agency metrics dashboard",
@@ -525,7 +510,7 @@ export const agencyWorkflowConfigs = [
       "Avoid AI-generated captions or summaries going out unreviewed.",
       "Keep access permissions strict for white-label and multi-client work.",
     ],
-    references: ["googleAi", "ffmpegDocs", "w3cMedia", "googleHelpful"],
+    references: ["ffmpegDocs", "w3cMedia"],
     related: ["agency-production-pipeline", "agency-production-metrics", "reduce-agency-turnaround"],
     funnel: "BOFU",
     businessIntent: "workflow automation setup",
@@ -558,7 +543,7 @@ export const agencyWorkflowConfigs = [
       "Avoid vendor relationships with unclear file ownership or portfolio usage.",
       "Keep final delivery under agency QA.",
     ],
-    references: ["googleHelpful", "w3cMedia", "youtubeShorts"],
+    references: ["w3cMedia", "youtubeShorts"],
     related: ["white-label-shorts-editing", "agency-review-workflow", "agency-video-qa-checklist"],
     funnel: "BOFU",
     businessIntent: "outsourcing partner evaluation",
@@ -570,7 +555,7 @@ export const agencyWorkflowConfigs = [
     primaryKeyword: "done for you shorts",
     intent: "evaluate done-for-you Shorts production",
     audience: "agencies, creators, founders, consultants, and marketing teams",
-    angle: "This page is a buyer and delivery guide for done-for-you Shorts. It is separate from the main service page because it explains the workflow behind the offer.",
+    angle: "Done-for-you Shorts still need a delivery workflow behind the offer: intake, moment selection, QA, approval, export, and client-ready handoff.",
     outcome: "a clear understanding of what a reliable done-for-you Shorts package should include",
     avoid: "buying a cheap clip dump that skips hook judgment, captions, QA, and review",
     owner: "buyer, creator, or agency account lead",
@@ -591,7 +576,7 @@ export const agencyWorkflowConfigs = [
       "Avoid providers who cannot explain how they choose moments.",
       "Keep ownership, confidentiality, and usage rights clear.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["how-agencies-deliver-shorts-fast", "video-repurposing-service", "short-form-video-editor-attention-span"],
     funnel: "BOFU",
     businessIntent: "done-for-you Shorts order",
@@ -624,7 +609,7 @@ export const agencyWorkflowConfigs = [
       "Avoid publishing client-sensitive or rights-limited footage without review.",
       "Keep source links and timestamps attached for revisions.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful", "googleSitemaps"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["done-for-you-shorts", "turn-podcast-into-shorts", "turn-webinar-into-shorts"],
     funnel: "BOFU",
     businessIntent: "repurposing service order",
@@ -636,7 +621,7 @@ export const agencyWorkflowConfigs = [
     primaryKeyword: "podcast editing service",
     intent: "evaluate podcast clip editing services",
     audience: "podcast agencies, creators, founders, and marketing teams",
-    angle: "This page focuses on the service workflow for podcast editing, while the podcast-to-Shorts page focuses on selecting moments from the source episode.",
+    angle: "Podcast editing services need a workflow for source review, moment selection, captions, audio polish, approvals, and delivery.",
     outcome: "a repeatable service package for turning podcast recordings into approved short-form clips",
     avoid: "editing podcast clips without speaker labels, episode context, guest approvals, or brand style",
     owner: "podcast producer or agency account lead",
@@ -657,7 +642,7 @@ export const agencyWorkflowConfigs = [
       "Avoid stitching separate answers into a stronger claim.",
       "Check guest and sponsor restrictions before publishing clips.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-podcast-into-shorts", "video-repurposing-service", "agency-review-workflow"],
     funnel: "BOFU",
     businessIntent: "podcast editing order",
@@ -669,7 +654,7 @@ export const agencyWorkflowConfigs = [
     primaryKeyword: "interview editing service",
     intent: "evaluate interview video editing services",
     audience: "agencies, B2B teams, founders, customer marketers, and creators",
-    angle: "This page covers the service delivery workflow for interview edits. It does not duplicate the interview-to-Shorts guide, which focuses on selecting the right Q&A moments.",
+    angle: "Interview editing services need a delivery workflow for selecting useful Q&A moments, preserving context, shaping hooks, and routing client review.",
     outcome: "client-ready interview clips with clear context, captions, speaker labels, approvals, and platform exports",
     avoid: "creating polished but misleading answer clips that remove important question context",
     owner: "interview producer or account manager",
@@ -690,7 +675,7 @@ export const agencyWorkflowConfigs = [
       "Avoid using testimonial-style claims without client approval.",
       "Keep release, consent, and usage boundaries visible in the project brief.",
     ],
-    references: ["youtubeShorts", "w3cMedia", "googleHelpful"],
+    references: ["youtubeShorts", "w3cMedia"],
     related: ["turn-interview-into-shorts", "client-approval-workflow", "video-repurposing-service"],
     funnel: "BOFU",
     businessIntent: "interview editing order",
@@ -756,7 +741,7 @@ function buildBody(config) {
 
 ${config.angle}
 
-This guide is written for ${config.audience}. The practical goal is ${config.outcome}. It is intentionally separate from the newsroom workflow pages and the source-to-Shorts pages: this article is about agency delivery, client approvals, production control, and service quality.
+This guide is written for ${config.audience}. The practical goal is ${config.outcome}.
 
 ## Workflow Fit
 
@@ -779,7 +764,7 @@ ${config.signals.map((item) => `- ${item}`).join("\n")}
 
 ${config.guardrails.map((item) => `- ${item}`).join("\n")}
 
-These guardrails also protect the SEO cluster. A page about "${config.primaryKeyword}" should answer the agency operations problem behind that query instead of repeating the same generic service pitch found on every other video editing page.
+These guardrails protect delivery quality. The team should know what is in scope, who owns review, what counts as done, and how revision notes turn into the next export.
 
 ## How Dalaillama Fits This Workflow
 
@@ -795,15 +780,7 @@ ${relatedGuides.map((guide) => `- [${guide.title}](${guide.href})`).join("\n")}
 
 ### Is ${config.primaryKeyword} mainly a tooling problem?
 
-Usually no. Tools help, but agency delivery improves fastest when intake, scope, review ownership, QA, templates, and client approvals are clear before editing starts.
-
-### How does this avoid cannibalization?
-
-This page owns the "${config.primaryKeyword}" intent. Related pages handle adjacent agency jobs such as white-label editing, batching, QA, automation, outsourcing, or source-specific repurposing.
-
-### What should an agency prepare before using this workflow?
-
-Prepare a client brief template, source folder rules, brand assets, approval owner, revision policy, QA checklist, export presets, and reporting format. Those basics reduce rework before any automation is added.`;
+Usually no. Tools help, but agency delivery improves fastest when intake, scope, review ownership, QA, templates, and client approvals are clear before editing starts.`;
 }
 
 function referencesFor(config) {

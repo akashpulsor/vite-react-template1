@@ -206,7 +206,6 @@ We built Dalaillama Creator Studio around this observation: creators do not just
 ## Authority References
 
 - [YouTube Help: Get started creating YouTube Shorts](https://support.google.com/youtube/answer/10059070) gives the platform context for planning vertical short-form videos.
-- [Google Search Central: creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) reinforces the article's core idea: plan around the viewer's real problem, not just a keyword.
 - [W3C WAI: Making Audio and Video Media Accessible](https://www.w3.org/WAI/media/av/) is useful when planning captions, transcripts, and sound notes before shooting.
 
 ## Related Articles
