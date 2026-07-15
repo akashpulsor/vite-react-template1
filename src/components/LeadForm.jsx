@@ -11,7 +11,7 @@ const countries = [
   "Other",
 ];
 
-export default function LeadForm() {
+export default function LeadForm({ selectedPackage = null, requirePackage = false }) {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -27,21 +27,32 @@ export default function LeadForm() {
 
   const submit = async (event) => {
     event.preventDefault();
+    if (requirePackage && !selectedPackage) {
+      setState({ status: "error", message: "Choose a pack from the rate card before submitting details." });
+      trackEvent("lead_submit_error", { event_category: "lead_form", error_type: "missing_package" });
+      return;
+    }
     setState({ status: "saving", message: "" });
     trackEvent("lead_submit_attempt", { event_category: "lead_form" });
     try {
       const response = await fetch("/api/leads", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          selectedPackage,
+        }),
       });
       const result = await response.json().catch(() => ({}));
       if (!response.ok || result.ok === false) {
         throw new Error(result.message || "Could not save interest.");
       }
-      trackEvent("lead_form_submission", { form_id: "hero_lead_form" });
+      trackEvent("lead_form_submission", {
+        form_id: "hero_lead_form",
+        selected_package: selectedPackage?.code || "not_selected",
+      });
       trackEvent("lead_submit_success", { event_category: "lead_form" });
-      setState({ status: "sent", message: "Thanks. We saved your clip request." });
+      setState({ status: "sent", message: "Thanks. We saved your campaign request." });
       setForm({ name: "", email: "", phoneNumber: "", country: "India", youtubeHandle: "", message: "", website: "" });
     } catch (error) {
       trackEvent("lead_submit_error", { event_category: "lead_form" });
@@ -52,8 +63,11 @@ export default function LeadForm() {
     }
   };
 
-  const mailto = `mailto:akash.tripathi@dalaillama.in?subject=${encodeURIComponent("Dalaillama clip request")}&body=${encodeURIComponent(
-    `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phoneNumber}\nCountry: ${form.country}\nLink: ${form.youtubeHandle}\n\n${form.message}`
+  const packageLines = selectedPackage
+    ? `Selected pack: ${selectedPackage.title}\nQuoted wallet deduction: ${selectedPackage.price} / ${selectedPackage.unit}\n\n`
+    : "Selected pack: Not selected yet\n\n";
+  const mailto = `mailto:akash.tripathi@dalaillama.in?subject=${encodeURIComponent("Dalaillama campaign request")}&body=${encodeURIComponent(
+    `${packageLines}Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phoneNumber}\nCountry: ${form.country}\nLink: ${form.youtubeHandle}\n\n${form.message}`
   )}`;
 
   return (
@@ -62,6 +76,24 @@ export default function LeadForm() {
         <span>Website</span>
         <input value={form.website} onChange={(event) => update("website", event.target.value)} tabIndex={-1} autoComplete="off" />
       </label>
+      {(requirePackage || selectedPackage) && (
+        <div className="selected-pack-panel">
+          <span>Selected pack</span>
+          {selectedPackage ? (
+            <>
+              <strong>{selectedPackage.title}</strong>
+              <small>{selectedPackage.price} / {selectedPackage.unit}</small>
+              <p>{selectedPackage.summary}</p>
+            </>
+          ) : (
+            <>
+              <strong>Choose a pack above</strong>
+              <small>Wallet-based production request</small>
+              <p>Select Complete AI, Hybrid UGC Creator, or Managed Launch so the request reaches us with the right production path.</p>
+            </>
+          )}
+        </div>
+      )}
       <label>
         <span>Name</span>
         <input value={form.name} onChange={(event) => update("name", event.target.value)} type="text" autoComplete="name" required disabled={state.status === "saving"} />
@@ -85,12 +117,12 @@ export default function LeadForm() {
         </label>
       </div>
       <label>
-        <span>Channel or video link</span>
-        <input value={form.youtubeHandle} onChange={(event) => update("youtubeHandle", event.target.value)} type="text" placeholder="YouTube, LinkedIn, Drive, or channel URL" autoComplete="off" required disabled={state.status === "saving"} />
+        <span>Product idea or reference link</span>
+        <input value={form.youtubeHandle} onChange={(event) => update("youtubeHandle", event.target.value)} type="text" placeholder="Product page, landing page, competitor ad, Drive, or source URL" autoComplete="off" required disabled={state.status === "saving"} />
       </label>
       <label>
-        <span>Clip details</span>
-        <textarea value={form.message} onChange={(event) => update("message", event.target.value)} rows={4} placeholder="Paste a video link or describe the clip. Example: 40-minute podcast, need one 60-second LinkedIn Short back today." disabled={state.status === "saving"} />
+        <span>Campaign details</span>
+        <textarea value={form.message} onChange={(event) => update("message", event.target.value)} rows={4} placeholder="Tell us the product, audience, offer, campaign goal, and any reference style. Example: 60-second ad for a skincare product targeting busy founders." disabled={state.status === "saving"} />
       </label>
       <div className="form-actions">
         <button
@@ -98,9 +130,9 @@ export default function LeadForm() {
           disabled={state.status === "saving"}
           data-ga-event="cta_click"
           data-ga-cta-location="access_section"
-          data-ga-cta-text="Send clip details"
+          data-ga-cta-text="Send campaign details"
         >
-          {state.status === "saving" ? "Saving..." : "Send clip details"}
+          {state.status === "saving" ? "Saving..." : "Send campaign details"}
         </button>
         <a href={mailto} data-ga-event="email_instead_click" data-ga-label="Lead form email instead">Email instead</a>
       </div>

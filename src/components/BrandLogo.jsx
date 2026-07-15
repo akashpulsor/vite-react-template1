@@ -12,7 +12,7 @@ export default function BrandLogo() {
       </span>
       <span className="brand-copy">
         <strong>Dalaillama</strong>
-        <small>Short Video Editor</small>
+        <small>Creator Studio</small>
       </span>
     </span>
   );

@@ -1,46 +1,94 @@
+import { useEffect, useMemo, useState } from "react";
 import LeadForm from "../components/LeadForm.jsx";
 import { posts } from "../posts/index.js";
 import { reelStudies } from "../reelStudies.js";
 
 const orderDetails = [
-  "Video link",
-  "Target platform",
-  "Content goal",
-  "Delivery place",
+  "Product idea",
+  "Creative angle",
+  "Storyboard",
+  "Rendered ad",
 ];
 
 const thinkingModes = [
-  ["Manual edit", "A real editor turns your source video into a short-form cut instead of sending you an auto-generated fragment."],
-  ["Better hook", "We shape the opening so the Short starts with a clear reason to keep watching."],
-  ["Clean captions", "We add readable captions that support the idea without covering the important parts of the frame."],
-  ["Mobile crop", "We prepare the edit for vertical viewing so the speaker, product, or key moment stays visible on a phone."],
-  ["Sound polish", "We clean the voice, balance music, and add small emphasis moments where they improve the edit."],
-  ["30-minute return", "We send or upload the finished short-form video back within 30 minutes."],
+  ["Copywriter", "Finds the claim, hook, objection, proof, and call to action before a single frame is rendered."],
+  ["Creative director", "Chooses the ad angle, scene order, visual contrast, and retention moments that make the story easy to follow."],
+  ["Storyboard system", "Turns the script into camera frames, scene timelines, character notes, captions, and beat-level direction."],
+  ["Scene cinematographer", "Writes scene instructions for lighting, lens feel, motion, background, and visual continuity across shots."],
+  ["Voice and sound", "Plans native voiceover, lip sync where needed, music rhythm, environmental sound, and caption treatment."],
+  ["Render coordinator", "Sends approved scenes through the seedance 2.0/ Google Omini queue and returns one merged, sound-designed asset."],
 ];
 
 const orderItems = [
-  "Send a video file, Drive link, YouTube link, podcast clip, webinar, interview, demo, or founder video.",
-  "Tell us the platform: YouTube Shorts, Instagram Reels, TikTok, LinkedIn, or another short-form destination.",
-  "Tell us the goal: educate, sell, explain, announce, build authority, or create a punchy highlight.",
-  "We manually create one ready-to-post short-form video and return it within 30 minutes.",
+  "Ingesting the Spark: describe a product idea, paste a competitor link, add raw text, share a landing page, or submit an unfinished campaign note.",
+  "Algorithmic Creative Strategy: the system drafts the script, maps the visual screenplay, detects the high-retention hook, and assigns music beats.",
+  "seedance 2.0/ Google Omini Multimodal Synthesis: approved scenes render in cloud clusters with cinematic frames, matching voiceover or lip sync, and contextual sound effects.",
 ];
 
 const afterShoot = [
-  "Send the source file or link and tell us where the final Short should go.",
-  "We create the edit manually, not as an automatic clip dump.",
-  "We prepare a vertical 9:16 version with captions, sound, crop, and pacing tuned for short-form.",
-  "We upload it back to your shared folder or return a ready-to-post file.",
-  "You get speed without hiring a full editor for every small piece of content.",
+  "A concise text script built around one promise, one audience, one offer, and one call to action.",
+  "A camera storyboard blueprint with scene order, background notes, character direction, and shot-level timing.",
+  "A visual screenplay that can be reviewed before rendering, so bad scenes are corrected before compute is spent.",
+  "A native voiceover, caption plan, music rhythm, and environmental sound plan tied to the pacing of the ad.",
+  "A finished 60-second video asset after approval, ready for download and ad testing.",
 ];
 
 const operatingModes = [
   {
-    title: "Manual 30-minute service",
-    body: "For now, we do the work by hand. You send the source clip, and our team handles selection, hook, edit, captions, sound, polish, export, and upload-back.",
+    title: "Software department, not a self-serve editor",
+    body: "The user does not operate a timeline, write prompts for every shot, or assemble raw clips. The system takes responsibility for the creative path.",
   },
   {
-    title: "Simple order, finished output",
-    body: "You do not need to learn a tool or manage a production process. Place the order, share the video, and get the finished short-form video back.",
+    title: "Blueprint first, wallet deduction second",
+    body: "The campaign blueprint proves the creative logic before production starts. The wallet pack is deducted only when the approved job moves into production.",
+  },
+];
+
+const USD_TO_INR = 95;
+
+const rateCardPlans = [
+  {
+    code: "complete_ai_video_pack",
+    title: "Complete AI Video Pack",
+    badge: "Full AI production",
+    usd: 5999 / USD_TO_INR,
+    unit: "60-second wallet deduction",
+    summary: "A complete AI-generated ad workflow with blueprint, AI scenes, captions, sound, and basic human editor finishing.",
+    points: [
+      "Includes idea shaping, ad script, screenplay, storyboard path, scene prompts, and production plan.",
+      "Generates the AI video scenes with consistency prompts, seeds, character details, background notes, and shot timing.",
+      "Basic editor finishing is included for merge, captions, SRT, sound balance, pacing, and export-ready delivery.",
+      "Best for explainers, product stories, educational ads, and quick campaign tests where full AI visuals are acceptable.",
+    ],
+  },
+  {
+    code: "hybrid_ugc_creator_pack",
+    title: "Hybrid UGC Creator Pack",
+    badge: "UGC sourcing + AI",
+    usd: 8999 / USD_TO_INR,
+    unit: "60-second wallet deduction",
+    summary: "AI scenes plus platform-managed UGC creator sourcing, creator brief, and editor assembly into one finished ad.",
+    points: [
+      "Includes the complete AI workflow plus UGC creator brief creation for talking-head, testimonial, demo, or proof scenes.",
+      "Dalaillama handles creator search and production routing so the user does not hunt through UGC marketplaces.",
+      "Basic editor finishing is included to combine UGC footage, AI scenes, captions, voice, music, and final export.",
+      "Best for founder-style ads, product demos, trust-building proof, and hybrid human plus AI B-roll videos.",
+    ],
+    featured: true,
+  },
+  {
+    code: "managed_launch_pack",
+    title: "Managed Launch Pack",
+    badge: "Higher-stakes ad",
+    usd: 12999 / USD_TO_INR,
+    unit: "60-second wallet deduction",
+    summary: "A supervised production pack for campaigns where the script, proof, pacing, and final asset need more senior attention.",
+    points: [
+      "Includes sharper angle selection, hook alternatives, screenplay review, storyboard validation, and production routing.",
+      "Supports full AI or hybrid UGC depending on which scenes need a human face, product proof, or generated visual explanation.",
+      "A senior editor owns final assembly, sound, captions, pacing, CTA clarity, export, and delivery notes.",
+      "Best for launch ads, offer tests, paid campaigns, investor/customer proof videos, and brand-sensitive production.",
+    ],
   },
 ];
 
@@ -57,6 +105,9 @@ const featuredGuideSlugs = [
   "dp-shorts-with-images",
   "lighting-shorts-with-images",
 ];
+
+const FEATURED_GUIDE_CARD_LIMIT = 6;
+const LATEST_POST_LINK_LIMIT = 9;
 
 const shortVideoEditorLinks = [
   {
@@ -197,63 +248,62 @@ const shortVideoEditorLinks = [
 ];
 
 export default function Home() {
+  const pricing = useLocalizedPricing();
+  const [selectedPackageCode, setSelectedPackageCode] = useState("");
+  const selectedPackage = useMemo(
+    () => quotePackage(selectedPackageCode, pricing),
+    [pricing, selectedPackageCode]
+  );
   const featuredGuides = featuredGuideSlugs
     .map((slug) => posts.find((post) => post.slug === slug))
     .filter(Boolean);
+  const featuredGuideCards = featuredGuides.slice(0, FEATURED_GUIDE_CARD_LIMIT);
+  const latestPostLinks = posts.slice(0, LATEST_POST_LINK_LIMIT);
 
   return (
     <article className="landing-page">
       <section className="landing-hero studio-hero" id="hero" aria-label="Landing hero">
         <div className="hero-copy">
-          <p className="kicker">Done-for-you short video editing</p>
-          <h1>Short video editing done for you in 30 minutes.</h1>
+          <p className="kicker">On-demand creative department in software</p>
+          <h1>Turn a product idea into a finished video ad in 5 minutes.</h1>
           <div className="hero-body">
-            <p>Send us the video. We create the Short for you.</p>
+            <p>Dalaillama turns a link, rough idea, or campaign note into a script, storyboard, scene plan, voiceover, captions, sound design, and final 60-second video.</p>
             <p>
-              Share a long video, raw clip, podcast, webinar, interview, demo, or founder video. We take the order, manually edit it, add captions and polish, then return a ready-to-post short-form video.
+              The old workflow makes founders write the script, brief an editor, chase storyboard revisions, and stitch raw files together. Dalaillama handles the copywriting, storyboard layouts, scene cinematography, and multimodal rendering through seedance 2.0/ Google Omini cloud clusters in one pass.
             </p>
             <p>
-              The promise is simple: your video becomes a finished Short in 30 minutes.
+              You review the creative blueprint first. If it is right, the system renders the finished ad with native voiceover and contextual sound.
             </p>
           </div>
           <div className="hero-actions">
             <a
               className="creator-primary hero-button"
-              href="#access"
+              href="#pricing"
               data-ga-event="cta_click"
               data-ga-cta-location="hero_section"
-              data-ga-cta-text="Send a Clip"
+              data-ga-cta-text="Get a Free Campaign Blueprint"
             >
-              Send Your Video
+              Get a Free Campaign Blueprint
             </a>
             <a
               className="creator-secondary hero-button"
-              href="#access"
+              href="#order"
               data-ga-event="cta_click"
               data-ga-cta-location="hero_section"
-              data-ga-cta-text="Talk to Us"
+              data-ga-cta-text="See the Pipeline"
             >
-              Talk to Us
-            </a>
-            <a
-              className="hero-link"
-              href="#access"
-              data-ga-event="cta_click"
-              data-ga-cta-location="hero_section"
-              data-ga-cta-text="Send order details"
-            >
-              Send order details
+              See the Pipeline
             </a>
           </div>
           <p className="hero-note">
-            Built for creators and teams who already record long-form content but need short-form output fast.
+            Built for founders who need finished ads, not another production tool to manage.
           </p>
         </div>
 
-        <div className="production-board creator-panel" aria-label="Short video order preview">
+        <div className="production-board creator-panel" aria-label="Video ad production preview">
           <div className="board-header">
-            <span>Short video order</span>
-            <strong>30 minute return</strong>
+            <span>Campaign pipeline</span>
+            <strong>5 minute draft</strong>
           </div>
           <div className="pipeline-strip">
             {orderDetails.map((item) => (
@@ -262,9 +312,9 @@ export default function Home() {
           </div>
           <div className="shot-preview-card">
             <div>
-              <p>Simple offer</p>
-              <h2>Place the order. We create the Short.</h2>
-              <span>No editing process to manage. Send the source video and we return a finished short-form edit in 30 minutes.</span>
+              <p>Simple workflow</p>
+              <h2>Link in. Blueprint out. Render when ready.</h2>
+              <span>The system writes the campaign, maps the shots, renders scenes, adds voice and sound, then returns one finished video asset.</span>
             </div>
             <div className="mini-frame" aria-hidden="true">
               <div className="mini-light" />
@@ -273,18 +323,18 @@ export default function Home() {
           </div>
           <div className="board-timeline">
             <div className="timeline-row">
-              <span>Video</span>
+              <span>Brief</span>
               <b />
               <b />
               <b />
             </div>
             <div className="timeline-row edited">
-              <span>Short</span>
+              <span>Scenes</span>
               <b />
               <b />
             </div>
             <div className="timeline-row sound">
-              <span>Return</span>
+              <span>Sound</span>
               <b />
               <b />
               <b />
@@ -295,24 +345,24 @@ export default function Home() {
       </section>
 
       <section className="landing-section essay-section" id="problem">
-        <p className="kicker">The problem</p>
-        <h2>You have video. You need short-form output quickly.</h2>
+        <p className="kicker">Why software alone fails</p>
+        <h2>Most video tools still leave the hard part with the founder.</h2>
         <div className="essay-copy">
           <p>
-            Most creators and teams already have usable content sitting inside long recordings.
+            Standard AI video tools usually produce a talking-head clip with captions. That is not a campaign. The founder still has to decide what to say, why it matters, what proof to show, how the scenes should move, and where the viewer should end up.
           </p>
           <p>
-            Someone has to watch the recording, choose the strongest moment, understand the context, write the hook, trim the lead-in, keep the payoff, add captions, clean sound, crop for mobile, and export the final version.
+            Agencies solve more of the problem, but the loop is slow. A week can disappear before the first storyboard comes back, and every change creates another handoff.
           </p>
           <p>
-            We remove that work from your day. Send the order, and we turn the video into a short-form edit fast.
+            Dalaillama collapses the copywriter, creative director, storyboard artist, animator, voice artist, and sound designer into one software pipeline. The useful output is not a prompt. It is a finished ad.
           </p>
         </div>
       </section>
 
       <section className="landing-section" id="crew">
-        <p className="kicker">How the product helps</p>
-        <h2>We turn your shared video into a finished short-form edit.</h2>
+        <p className="kicker">System truth</p>
+        <h2>The software takes over the creative department roles.</h2>
         <div className="crew-grid">
           {thinkingModes.map(([role, body]) => (
             <div className="crew-card creator-panel-muted" key={role}>
@@ -325,8 +375,8 @@ export default function Home() {
 
       <section className="landing-section split-section" id="order">
         <div>
-          <p className="kicker">Order details</p>
-          <h2>Tell us what to make. We handle the edit.</h2>
+          <p className="kicker">Autonomous pipeline architecture</p>
+          <h2>Three operational steps from spark to finished ad.</h2>
         </div>
         <div className="stage-list">
           {orderItems.map((item, index) => (
@@ -340,25 +390,25 @@ export default function Home() {
 
       <section className="landing-section split-section">
         <div>
-          <p className="kicker">Manual edit</p>
-          <h2>We make the short-form version feel intentional.</h2>
+          <p className="kicker">Blueprint before compute</p>
+          <h2>You can inspect the ad before paying for the final render.</h2>
         </div>
         <div className="essay-copy">
           <p>
-            A strong Short is not only a trimmed timeline. We decide where to stay on the speaker, where to crop tighter, where captions should carry the idea, and where a pause makes the line land.
+            The first output is a campaign blueprint: the hook, the exact script, the visual screenplay, the storyboard layout, scene timing, camera movement, caption style, voice direction, and sound plan.
           </p>
           <p>
-            That is why the final output feels made, not merely clipped. The viewer sees a clear short-form story instead of a leftover piece of a longer video.
+            This matters because bad creative should be fixed before expensive rendering starts. You approve the logic first. Then the production queue turns it into video.
           </p>
         </div>
       </section>
 
-      {featuredGuides.length > 0 && (
+      {featuredGuideCards.length > 0 && (
         <section className="landing-section writing-section" id="production-guides">
           <p className="kicker">Knowledge base</p>
-          <h2>AI video workflow guides for publishers and teams.</h2>
+          <h2>Production notes for teams that want the deeper workflow.</h2>
           <div className="guide-link-grid">
-            {featuredGuides.map((post) => (
+            {featuredGuideCards.map((post) => (
               <a
                 className="guide-link-card creator-panel-muted"
                 href={`/blog/${post.slug}`}
@@ -374,29 +424,10 @@ export default function Home() {
         </section>
       )}
 
-      <section className="landing-section writing-section" id="short-video-editor-links">
-        <p className="kicker">Short video editor links</p>
-        <h2>For teams building a repeatable short-form video workflow.</h2>
-        <div className="guide-link-grid">
-          {shortVideoEditorLinks.map((link) => (
-            <a
-              className="guide-link-card creator-panel-muted"
-              href={link.href}
-              key={link.href}
-              data-ga-event="resource_link_click"
-              data-ga-label={link.title}
-            >
-              <span>{link.title}</span>
-              <small>{link.body}</small>
-            </a>
-          ))}
-        </div>
-      </section>
-
       <section className="landing-section split-section" id="polish">
         <div>
-          <p className="kicker">Manual edit and upload</p>
-          <h2>You get a ready-to-post Short back within 30 minutes.</h2>
+          <p className="kicker">What comes back</p>
+          <h2>The output is structured before it becomes a video file.</h2>
         </div>
         <div className="stage-list">
           {afterShoot.map((item, index) => (
@@ -411,9 +442,9 @@ export default function Home() {
       <section className="landing-section mode-section">
         <div className="mode-copy">
           <p className="kicker">Service model</p>
-          <h2>Order in. Short-form video out.</h2>
+          <h2>An ad production system, not another blank canvas.</h2>
           <p>
-            We are not asking users to learn another editor. The offer is simple: send us the source video and get a polished Short back in 30 minutes.
+            The founder gives Dalaillama the product context. The system handles the creative sequence and returns an asset that can be tested.
           </p>
         </div>
         <div className="mode-list">
@@ -426,28 +457,34 @@ export default function Home() {
         </div>
       </section>
 
+      <PricingSection
+        pricing={pricing}
+        selectedPackageCode={selectedPackageCode}
+        onSelectPackage={setSelectedPackageCode}
+      />
+
       <section className="landing-section essay-section">
         <p className="kicker">What it is not</p>
-        <h2>It is not a random AI clipping button.</h2>
+        <h2>It is not an editor, clipping tool, or prompt box.</h2>
         <div className="essay-copy">
           <p>
-            The useful version keeps the creator's real words, face, timing, and identity intact.
+            A tool still asks the user to do the thinking. It gives knobs, timelines, and exports. That is not enough when the real bottleneck is deciding what the ad should say.
           </p>
           <p>
-            We do not just slice a long video into fragments. We make judgment calls: what moment is worth posting, what context is needed, where the hook starts, and how the edit should move.
+            Dalaillama starts at the campaign level. It decides the hook, writes the script, maps the scenes, maintains visual continuity, and renders the final output after approval.
           </p>
           <p>
-            If the source clip does not have a strong Short inside it, we should tell you. That honesty is part of the service.
+            If the blueprint is weak, you should see that before spending on production. That is why every pack starts with the blueprint before production spend.
           </p>
         </div>
       </section>
 
       <section className="landing-section writing-section" id="writing">
-        <p className="kicker">Blogs & case studies</p>
-        <h2>Work stories from the product.</h2>
+        <p className="kicker">Research notes</p>
+        <h2>Useful reading without turning the page into a link farm.</h2>
         <div className="blog-featured-block" aria-label="Reel patterns with short-form potential">
-          <h2>Reel patterns worth editing</h2>
-          <p className="empty-note">Not every strong reel starts as a popular clip. These are the kinds of moments we look for when turning long video into short-form content.</p>
+          <h2>Creative patterns worth studying</h2>
+          <p className="empty-note">These are the kinds of decisions that sit underneath a strong short-form ad: the hook, proof, scene rhythm, and final action.</p>
           <div className="guide-link-grid">
             {reelStudies.map((study) => (
               <div className="guide-link-card creator-panel-muted" key={study.title}>
@@ -457,9 +494,9 @@ export default function Home() {
             ))}
           </div>
         </div>
-        {posts.length > 0 ? (
+        {latestPostLinks.length > 0 ? (
           <div className="writing-list">
-            {posts.map((post) => (
+            {latestPostLinks.map((post) => (
             <a
               className="writing-link"
               href={`/blog/${post.slug}`}
@@ -477,19 +514,223 @@ export default function Home() {
         )}
       </section>
 
+      <ResourceDirectory featuredGuides={featuredGuides} />
+
       <section className="landing-section access-section creator-panel" id="access">
         <div>
-          <p className="kicker">Send a clip</p>
-          <h2>Send one clip. Get one Short back.</h2>
+          <p className="kicker">Submit campaign details</p>
+          <h2>Send the link or idea. The selected pack is attached to the request.</h2>
           <p>
-            Share a long video, raw clip, podcast, webinar, interview, product demo, or founder video. Tell us the platform and what you want the Short to achieve.
+            Share the product, target customer, campaign goal, and any reference links. Choose the pack that matches how much human presence and creative supervision the ad needs.
           </p>
           <p>
-            We are taking orders manually first so every delivery teaches us what creators actually need.
+            This is wallet-based, not a subscription. The selected pack is deducted only when the approved job moves into production.
           </p>
         </div>
-        <LeadForm />
+        <LeadForm selectedPackage={selectedPackage} requirePackage />
       </section>
     </article>
   );
+}
+
+function ResourceDirectory({ featuredGuides }) {
+  const productionLinks = featuredGuides.map((post) => ({
+    title: post.title,
+    href: `/blog/${post.slug}`,
+  }));
+  const serviceLinks = shortVideoEditorLinks.map((link) => ({
+    title: link.title,
+    href: link.href,
+  }));
+  const blogLinks = posts.map((post) => ({
+    title: post.title,
+    href: `/blog/${post.slug}`,
+  }));
+
+  return (
+    <section className="landing-section resource-directory" id="resource-directory">
+      <details className="resource-directory-toggle">
+        <summary>
+          <span>Browse more guides</span>
+          <small>Production, storyboard, repurposing, and workflow links</small>
+        </summary>
+        <div className="resource-directory-body">
+          <div className="resource-quick-links" aria-label="Primary resource links">
+            <a href="/blog" data-ga-event="resource_link_click" data-ga-label="Blog archive">Blog archive</a>
+            <a href="/short-video-editor" data-ga-event="resource_link_click" data-ga-label="Short video editor">Short video editor</a>
+            <a href="/video-repurposing" data-ga-event="resource_link_click" data-ga-label="Video repurposing">Video repurposing</a>
+            <a href="/#pricing" data-ga-event="resource_link_click" data-ga-label="Pricing">Pricing</a>
+          </div>
+          <ResourceGroup title="Production guides" links={productionLinks} />
+          <ResourceGroup title="Service and workflow pages" links={serviceLinks} />
+          <ResourceGroup title="Full blog archive" links={blogLinks} />
+        </div>
+      </details>
+    </section>
+  );
+}
+
+function ResourceGroup({ title, links }) {
+  if (!links.length) return null;
+
+  return (
+    <details className="resource-group">
+      <summary>
+        <span>{title}</span>
+        <small>{links.length} links</small>
+      </summary>
+      <div className="resource-link-list">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            key={`${title}-${link.href}`}
+            data-ga-event="resource_link_click"
+            data-ga-label={link.title}
+          >
+            {link.title}
+          </a>
+        ))}
+      </div>
+    </details>
+  );
+}
+
+function PricingSection({ pricing, selectedPackageCode, onSelectPackage }) {
+  return (
+    <section className="landing-section pricing-section" id="pricing">
+      <div className="pricing-head">
+        <div>
+          <p className="kicker">Wallet production packs</p>
+          <h2>Pick the production path. The blueprint comes before the deduction.</h2>
+          <p>
+            These are one-time wallet deductions for a finished 60-second ad. Each pack includes ideation, screenplay, storyboard planning, render or creator routing, captions, sound, and basic editor finishing.
+          </p>
+        </div>
+      </div>
+
+      <div className="pricing-grid">
+        {rateCardPlans.map((plan) => {
+          const isSelected = selectedPackageCode === plan.code;
+          return (
+            <article
+              className={`pricing-card creator-panel-muted${plan.featured ? " pricing-card-featured" : ""}${isSelected ? " pricing-card-selected" : ""}`}
+              key={plan.title}
+            >
+              <div className="pricing-card-top">
+                <span className="pricing-badge">{plan.badge}</span>
+                <small>{plan.unit}</small>
+              </div>
+              <h3>{plan.title}</h3>
+              <div className="price-row">
+                <strong>{pricing.format(plan.usd)}</strong>
+                <span>{plan.unit}</span>
+              </div>
+              <p>{plan.summary}</p>
+              <ul className="pricing-list">
+                {plan.points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+              <a
+                className="pricing-card-link"
+                href="#access"
+                onClick={() => onSelectPackage(plan.code)}
+                data-ga-event="cta_click"
+                data-ga-cta-location="pricing_section"
+                data-ga-cta-text={plan.title}
+              >
+                {isSelected ? "Selected pack" : "Choose this pack"}
+              </a>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function useLocalizedPricing() {
+  const [country, setCountry] = useState(() => browserCountryGuess());
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/country", { headers: { accept: "application/json" } })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data) => {
+        const detectedCountry = cleanCountry(data?.country);
+        if (!cancelled && detectedCountry) setCountry(detectedCountry);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return useMemo(() => {
+    const isIndia = country === "IN";
+    return {
+      country,
+      currency: isIndia ? "INR" : "USD",
+      currencyLabel: isIndia ? "Indian rupees" : "US dollars",
+      format: (usd) => (isIndia ? formatInr(usd * USD_TO_INR) : formatUsd(usd)),
+    };
+  }, [country]);
+}
+
+function quotePackage(packageCode, pricing) {
+  const plan = rateCardPlans.find((item) => item.code === packageCode);
+  if (!plan) return null;
+  return {
+    code: plan.code,
+    title: plan.title,
+    badge: plan.badge,
+    unit: plan.unit,
+    price: pricing.format(plan.usd),
+    currency: pricing.currency,
+    usd: Number(plan.usd.toFixed(2)),
+    summary: plan.summary,
+  };
+}
+
+function browserCountryGuess() {
+  if (typeof navigator !== "undefined") {
+    const languages = [navigator.language, ...(navigator.languages || [])]
+      .filter(Boolean)
+      .map((value) => value.toUpperCase());
+    if (languages.some((language) => language.endsWith("-IN") || language === "IN")) {
+      return "IN";
+    }
+  }
+
+  if (typeof Intl !== "undefined") {
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    if (timeZone === "Asia/Kolkata" || timeZone === "Asia/Calcutta") {
+      return "IN";
+    }
+  }
+
+  return "US";
+}
+
+function cleanCountry(country) {
+  const value = String(country || "").trim().toUpperCase();
+  return /^[A-Z]{2}$/.test(value) ? value : "";
+}
+
+function formatInr(amount) {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 0,
+  }).format(Math.round(amount));
+}
+
+function formatUsd(amount) {
+  if (amount === 0) return "$0";
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: amount < 10 ? 2 : 0,
+    maximumFractionDigits: amount < 10 ? 2 : 0,
+  }).format(amount);
 }

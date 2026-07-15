@@ -277,10 +277,18 @@ a:hover {
 .site-footer {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 10px 16px;
   border-top: 1px solid rgba(226, 232, 240, 0.12);
   margin-top: 42px;
   padding-top: 22px;
+}
+
+.site-footer span {
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 820;
+  margin-right: auto;
 }
 
 .site-footer a {
@@ -916,6 +924,210 @@ a:hover {
   border-color: rgba(226, 232, 240, 0.14);
 }
 
+.pricing-section {
+  max-width: 1120px;
+}
+
+.pricing-head {
+  max-width: 860px;
+}
+
+.pricing-head p {
+  max-width: 760px;
+  margin-top: 18px;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-items: stretch;
+  margin-top: 28px;
+}
+
+.pricing-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 540px;
+  padding: 18px;
+  border-color: rgba(226, 232, 240, 0.14);
+}
+
+.pricing-card-featured {
+  border-color: rgba(56, 214, 122, 0.34);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 18px 48px rgba(0, 0, 0, 0.44),
+    0 0 28px rgba(56, 214, 122, 0.08);
+}
+
+.pricing-card-selected {
+  border-color: rgba(196, 181, 253, 0.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    0 18px 48px rgba(0, 0, 0, 0.44),
+    0 0 30px rgba(196, 181, 253, 0.12);
+}
+
+.pricing-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.pricing-card-top small {
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 850;
+  text-align: right;
+}
+
+.pricing-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  border: 1px solid rgba(216, 180, 254, 0.28);
+  border-radius: 999px;
+  background: rgba(124, 58, 237, 0.14);
+  color: #e9d5ff;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 0 9px;
+}
+
+.pricing-card h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 24px;
+  line-height: 1.08;
+}
+
+.price-row {
+  display: grid;
+  gap: 4px;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.12);
+  padding-bottom: 14px;
+}
+
+.price-row strong {
+  color: #ffffff;
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 0 22px rgba(216, 180, 254, 0.16);
+}
+
+.price-row span,
+.pricing-card p {
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+.pricing-list {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pricing-list li {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr);
+  gap: 9px;
+  color: #e5e7eb;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+.pricing-list li::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: var(--creator-green);
+  box-shadow: 0 0 16px rgba(56, 214, 122, 0.2);
+}
+
+.pricing-card-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 40px;
+  margin-top: auto;
+  border: 1px solid rgba(196, 181, 253, 0.48);
+  border-radius: 8px;
+  background: rgba(124, 58, 237, 0.16);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 900;
+  padding: 0 12px;
+}
+
+.pricing-card-link:hover {
+  background: rgba(124, 58, 237, 0.28);
+}
+
+.pricing-card-selected .pricing-card-link {
+  border-color: rgba(187, 247, 208, 0.34);
+  background: rgba(56, 214, 122, 0.14);
+  color: #bbf7d0;
+}
+
+.pricing-addons {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(18px, 4vw, 44px);
+  align-items: start;
+  margin-top: 14px;
+  padding: 20px;
+}
+
+.pricing-addons h3 {
+  max-width: 520px;
+  margin: 0;
+  color: #ffffff;
+  font-size: 22px;
+  line-height: 1.15;
+}
+
+.addon-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.addon-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 52px;
+  border: 1px solid rgba(226, 232, 240, 0.11);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 42%),
+    rgba(255, 255, 255, 0.024);
+  padding: 10px 12px;
+}
+
+.addon-row span {
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.addon-row strong {
+  color: #ffffff;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
 .writing-section {
   max-width: 1080px;
 }
@@ -943,6 +1155,140 @@ a:hover {
 
 .writing-link small {
   color: #94a3b8;
+}
+
+.section-link-note {
+  max-width: 680px;
+  margin-top: 18px !important;
+  color: #94a3b8 !important;
+  font-size: 14px !important;
+}
+
+.resource-directory {
+  max-width: 1080px;
+  padding: 26px 0;
+}
+
+.resource-directory-toggle {
+  border: 1px solid rgba(226, 232, 240, 0.11);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 44%),
+    rgba(7, 8, 12, 0.62);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045);
+}
+
+.resource-directory-toggle > summary {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 48px;
+  padding: 0 14px;
+}
+
+.resource-directory-toggle > summary::-webkit-details-marker {
+  display: none;
+}
+
+.resource-directory-toggle > summary span {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 850;
+}
+
+.resource-directory-toggle > summary small {
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: right;
+}
+
+.resource-directory-body {
+  border-top: 1px solid rgba(226, 232, 240, 0.1);
+  padding: 14px;
+}
+
+.resource-quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.resource-quick-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  border: 1px solid rgba(226, 232, 240, 0.13);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 42%),
+    rgba(255, 255, 255, 0.026);
+  color: #e5e7eb;
+  font-size: 13px;
+  font-weight: 850;
+  padding: 0 12px;
+}
+
+.resource-group {
+  border: 1px solid rgba(226, 232, 240, 0.11);
+  border-radius: 8px;
+  margin-top: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 44%),
+    rgba(7, 8, 12, 0.62);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045);
+}
+
+.resource-group:first-of-type {
+  margin-top: 12px;
+}
+
+.resource-group summary {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 48px;
+  padding: 0 14px;
+}
+
+.resource-group summary::-webkit-details-marker {
+  display: none;
+}
+
+.resource-group summary span {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 850;
+}
+
+.resource-group summary small {
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.resource-link-list {
+  column-count: 3;
+  column-gap: 26px;
+  border-top: 1px solid rgba(226, 232, 240, 0.1);
+  padding: 12px 14px 16px;
+}
+
+.resource-link-list a {
+  display: block;
+  break-inside: avoid;
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 720;
+  line-height: 1.35;
+  padding: 6px 0;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 .guide-link-grid {
@@ -1335,6 +1681,40 @@ a:hover {
   color: #fca5a5;
 }
 
+.selected-pack-panel {
+  display: grid;
+  gap: 6px;
+  border: 1px solid rgba(216, 180, 254, 0.2);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 42%),
+    rgba(124, 58, 237, 0.08);
+  padding: 12px;
+}
+
+.selected-pack-panel span {
+  color: #c4b5fd;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.selected-pack-panel strong {
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 1.15;
+}
+
+.selected-pack-panel small,
+.selected-pack-panel p {
+  color: #cbd5e1;
+  font-size: 13px;
+}
+
+.selected-pack-panel p {
+  margin: 0;
+}
+
 @media (max-width: 720px) {
   .site-shell {
     width: min(100% - 28px, 1180px);
@@ -1354,7 +1734,8 @@ a:hover {
   .split-section,
   .mode-section,
   .access-section,
-  .handoff-grid {
+  .handoff-grid,
+  .pricing-addons {
     grid-template-columns: 1fr;
   }
 
@@ -1382,6 +1763,22 @@ a:hover {
 
   .guide-link-grid {
     grid-template-columns: 1fr;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-card {
+    min-height: auto;
+  }
+
+  .addon-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .resource-link-list {
+    column-count: 1;
   }
 
   .shot-preview-card {

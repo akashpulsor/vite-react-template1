@@ -5,6 +5,12 @@ const MAX_FIELD_LENGTHS = {
   country: 100,
   youtubeHandle: 220,
   message: 1400,
+  selectedPackageCode: 80,
+  selectedPackageTitle: 160,
+  selectedPackagePrice: 80,
+  selectedPackageCurrency: 12,
+  selectedPackageUnit: 120,
+  selectedPackageSummary: 420,
 };
 
 export async function onRequestOptions({ request, env }) {
@@ -85,6 +91,12 @@ function normalizeLead(payload = {}) {
     country: truncate(clean(payload.country), MAX_FIELD_LENGTHS.country),
     youtubeHandle: truncate(clean(payload.youtubeHandle), MAX_FIELD_LENGTHS.youtubeHandle),
     message: truncate(clean(payload.message), MAX_FIELD_LENGTHS.message),
+    selectedPackageCode: truncate(clean(payload.selectedPackage?.code), MAX_FIELD_LENGTHS.selectedPackageCode),
+    selectedPackageTitle: truncate(clean(payload.selectedPackage?.title), MAX_FIELD_LENGTHS.selectedPackageTitle),
+    selectedPackagePrice: truncate(clean(payload.selectedPackage?.price), MAX_FIELD_LENGTHS.selectedPackagePrice),
+    selectedPackageCurrency: truncate(clean(payload.selectedPackage?.currency), MAX_FIELD_LENGTHS.selectedPackageCurrency),
+    selectedPackageUnit: truncate(clean(payload.selectedPackage?.unit), MAX_FIELD_LENGTHS.selectedPackageUnit),
+    selectedPackageSummary: truncate(clean(payload.selectedPackage?.summary), MAX_FIELD_LENGTHS.selectedPackageSummary),
   };
 }
 

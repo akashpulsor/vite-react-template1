@@ -10,12 +10,12 @@ import { getPostBySlug } from "./posts/index.js";
 import { getVideoRepurposingPage, videoRepurposingHub } from "./videoRepurposingPages.js";
 
 const SITE_URL = "https://dalaillama.in";
-const HOME_TITLE = "Dalaillama | Done-for-You Short Video Editing in 30 Minutes";
+const HOME_TITLE = "Dalaillama | On-Demand Creative Department for Video Ads";
 const SHORT_VIDEO_EDITOR_TITLE = "Short Video Editor for Reels & YouTube Shorts | Dalaillama";
 const VIDEO_REPURPOSING_TITLE = "Video Repurposing Service for Shorts | Dalaillama";
 const BLOG_TITLE = "AI Newsroom Video Workflow Knowledge Base | Dalaillama";
 const DEFAULT_DESCRIPTION =
-  "Done-for-you short video editing for creators and teams. Send a long video, podcast, webinar, interview, demo, or raw clip and get a captioned vertical Short back in 30 minutes.";
+  "Turn a product idea into a script, storyboard blueprint, and finished sound-designed short-form video ad through Dalaillama.";
 const SHORT_VIDEO_EDITOR_DESCRIPTION =
   "A short video editor service for creators and teams. Send existing footage and get one ready-to-post vertical Short for Reels, Shorts, TikTok, or LinkedIn in 30 minutes.";
 const VIDEO_REPURPOSING_DESCRIPTION = videoRepurposingHub.description;
@@ -57,14 +57,10 @@ export default function App() {
           </a>
           <nav className="nav-links" aria-label="Primary navigation">
             <a href="/" data-ga-event="nav_click" data-ga-label="Home">Home</a>
-            <a href="/short-video-editor" data-ga-event="nav_click" data-ga-label="Short video editor">Short Video Editor</a>
-            <a href="/video-repurposing" data-ga-event="nav_click" data-ga-label="Video repurposing">Video Repurposing</a>
-            <a href="/#problem" data-ga-event="nav_click" data-ga-label="Problem">Problem</a>
-            <a href="/#crew" data-ga-event="nav_click" data-ga-label="How it helps">How it helps</a>
-            <a href="/#order" data-ga-event="nav_click" data-ga-label="Order details">Order</a>
-            <a href="/#polish" data-ga-event="nav_click" data-ga-label="Polish">Polish</a>
+            <a href="/#order" data-ga-event="nav_click" data-ga-label="Pipeline">Pipeline</a>
+            <a href="/#pricing" data-ga-event="nav_click" data-ga-label="Pricing">Pricing</a>
             <a href="/#access" data-ga-event="nav_click" data-ga-label="Access">Access</a>
-            <a href="/blog" data-ga-event="nav_click" data-ga-label="Editing guides">Editing Guides</a>
+            <a href="/blog" data-ga-event="nav_click" data-ga-label="Guides">Guides</a>
           </nav>
         </header>
         <main>
@@ -75,20 +71,11 @@ export default function App() {
           {route.page === "videoRepurposingChild" && <VideoRepurposing slug={route.slug} />}
           {route.page === "home" && <Home />}
         </main>
-        <footer className="site-footer" aria-label="Short video editing resources">
-          <a href="/short-video-editor" data-ga-event="footer_link_click" data-ga-label="Short Video Editor Service">Short Video Editor Service</a>
-          <a href="/video-repurposing" data-ga-event="footer_link_click" data-ga-label="Video Repurposing Service">Video Repurposing Service</a>
-          <a href="/blog/ai-video-workflow-digital-publishers" data-ga-event="footer_link_click" data-ga-label="AI video workflow for digital publishers">AI Video Workflow for Publishers</a>
-          <a href="/blog/ai-video-editing-newsrooms" data-ga-event="footer_link_click" data-ga-label="AI video editing for newsrooms">AI Video Editing for Newsrooms</a>
-          <a href="/blog/newsroom-video-workflow" data-ga-event="footer_link_click" data-ga-label="Newsroom video workflow">Newsroom Video Workflow</a>
-          <a href="/blog/agency-video-editing-workflow" data-ga-event="footer_link_click" data-ga-label="Agency video editing workflow">Agency Video Editing Workflow</a>
-          <a href="/blog/video-operations-guide" data-ga-event="footer_link_click" data-ga-label="Video operations guide">Video Operations Guide</a>
-          <a href="/video-repurposing/turn-podcast-into-shorts" data-ga-event="footer_link_click" data-ga-label="Turn Podcast into Shorts">Turn Podcast into Shorts</a>
-          <a href="/blog/best-shorts-editing-service" data-ga-event="footer_link_click" data-ga-label="Best Shorts editing service">Best Shorts Editing Service</a>
-          <a href="/blog/short-form-video-editor-attention-span" data-ga-event="footer_link_click" data-ga-label="Short-form video editing guide">Short-Form Video Editing Guide</a>
-          <a href="/blog/reel-patterns-worth-editing" data-ga-event="footer_link_click" data-ga-label="Reel editing patterns">Reel Editing Patterns</a>
-          <a href="/blog/youtube-shorts-hooks" data-ga-event="footer_link_click" data-ga-label="YouTube Shorts hooks">YouTube Shorts Hooks</a>
-          <a href="/#access" data-ga-event="footer_link_click" data-ga-label="Send a video">Send a Video</a>
+        <footer className="site-footer" aria-label="Dalaillama footer">
+          <span>Dalaillama</span>
+          <a href="/#pricing" data-ga-event="footer_link_click" data-ga-label="Pricing">Pricing</a>
+          <a href="/#access" data-ga-event="footer_link_click" data-ga-label="Get blueprint">Get Blueprint</a>
+          <a href="/blog" data-ga-event="footer_link_click" data-ga-label="Blog">Blog</a>
         </footer>
       </div>
     </div>
@@ -160,7 +147,7 @@ function seoForRoute(route, post, videoRepurposingPage) {
     description: DEFAULT_DESCRIPTION,
     path: "/",
     image: DEFAULT_SOCIAL_IMAGE,
-    imageAlt: "Dalaillama short video editor service",
+    imageAlt: "Dalaillama video ad production workflow",
   };
 }
 
