@@ -61,6 +61,8 @@ export default function App() {
             <a href="/#pricing" data-ga-event="nav_click" data-ga-label="Pricing">Pricing</a>
             <a href="/#access" data-ga-event="nav_click" data-ga-label="Access">Access</a>
             <a href="/blog" data-ga-event="nav_click" data-ga-label="Guides">Guides</a>
+            <a href="https://brands.dalaillama.in/creators" data-ga-event="nav_click" data-ga-label="Creators">Creators</a>
+            <a href="https://brands.dalaillama.in/brands/sign-in" data-ga-event="nav_click" data-ga-label="For brands">For brands</a>
           </nav>
         </header>
         <main>
@@ -76,6 +78,9 @@ export default function App() {
           <a href="/#pricing" data-ga-event="footer_link_click" data-ga-label="Pricing">Pricing</a>
           <a href="/#access" data-ga-event="footer_link_click" data-ga-label="Get blueprint">Get Blueprint</a>
           <a href="/blog" data-ga-event="footer_link_click" data-ga-label="Blog">Blog</a>
+          <a href="https://brands.dalaillama.in/creators" data-ga-event="footer_link_click" data-ga-label="Creators">Creators</a>
+          <a href="https://brands.dalaillama.in/privacy" data-ga-event="footer_link_click" data-ga-label="Privacy">Privacy</a>
+          <a href="https://brands.dalaillama.in/terms" data-ga-event="footer_link_click" data-ga-label="Terms">Terms</a>
         </footer>
       </div>
     </div>
