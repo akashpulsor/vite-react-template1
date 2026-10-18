@@ -18,6 +18,7 @@ import videoProductionWorkflow from "./video-production-workflow.md?raw";
 import videoEditingWorkflow from "./video-editing-workflow.md?raw";
 import videoProductionChecklist from "./video-production-checklist.md?raw";
 import ultimateGuideToVideoRepurposing from "./ultimate-guide-to-video-repurposing.md?raw";
+import aiVideoProcessD2cBrands from "./ai-video-process-d2c-brands.md?raw";
 import partitionHistoryShortVideo from "./partition-history-short-video.md?raw";
 import historyOfZeroShunya from "./history-of-zero-shunya.md?raw";
 import cockroachSpyShortVideo from "./cockroach-spy-short-video.md?raw";
@@ -32,6 +33,7 @@ import { serviceComparisonPosts } from "./serviceComparisonPosts.js";
 import { videoOperationsPosts } from "./videoOperationsPosts.js";
 
 const rawPosts = [
+  aiVideoProcessD2cBrands,
   aiVideoWorkflowDigitalPublishers,
   aiVideoEditingNewsrooms,
   videoProductionWorkflow,

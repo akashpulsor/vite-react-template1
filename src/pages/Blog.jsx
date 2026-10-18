@@ -7,6 +7,7 @@ import { videoOperationsGuides } from "../posts/videoOperationsPosts.js";
 import { reelStudies } from "../reelStudies.js";
 
 const featuredGuideSlugs = [
+  "ai-video-process-d2c-brands",
   "video-production-workflow",
   "video-editing-workflow",
   "video-production-checklist",

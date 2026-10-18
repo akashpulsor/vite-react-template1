@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import LeadForm from "../components/LeadForm.jsx";
+import InspirationStrip from "../components/InspirationStrip.jsx";
 import { posts } from "../posts/index.js";
 import { reelStudies } from "../reelStudies.js";
 
@@ -92,7 +93,12 @@ const rateCardPlans = [
   },
 ];
 
+// "Request a video": the brief form on the brands site. No sign-in: the brand describes the video, and
+// the request is routed to an active creator for their industry, who turns it into a priced brief.
+const REQUEST_VIDEO_URL = "https://brands.dalaillama.in/creators?then=request";
+
 const featuredGuideSlugs = [
+  "ai-video-process-d2c-brands",
   "video-production-workflow",
   "video-editing-workflow",
   "video-production-checklist",
@@ -284,6 +290,15 @@ export default function Home() {
               data-ga-cta-text="Get a Free Campaign Blueprint"
             >
               Get a Free Campaign Blueprint
+            </a>
+            <a
+              className="creator-secondary hero-button"
+              href={REQUEST_VIDEO_URL}
+              data-ga-event="cta_click"
+              data-ga-cta-location="hero_section"
+              data-ga-cta-text="Request a video"
+            >
+              Request a video
             </a>
             <a
               className="creator-secondary hero-button"
@@ -516,6 +531,8 @@ export default function Home() {
 
       <ResourceDirectory featuredGuides={featuredGuides} />
 
+      <InspirationStrip />
+
       <section className="landing-section access-section creator-panel" id="access">
         <div>
           <p className="kicker">Submit campaign details</p>
@@ -528,6 +545,13 @@ export default function Home() {
           </p>
         </div>
         <LeadForm selectedPackage={selectedPackage} requirePackage />
+        <p className="hero-note">
+          Want a creator to make it with you?{" "}
+          <a href={REQUEST_VIDEO_URL} data-ga-event="cta_click" data-ga-cta-location="access_section" data-ga-cta-text="Request a video">
+            Request a video
+          </a>{" "}
+          — we match you with a creator for your industry.
+        </p>
       </section>
     </article>
   );
