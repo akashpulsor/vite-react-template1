@@ -1,101 +1,110 @@
-import { useEffect, useMemo, useState } from "react";
-import LeadForm from "../components/LeadForm.jsx";
-import InspirationStrip from "../components/InspirationStrip.jsx";
+import { useEffect, useState } from "react";
 import { posts } from "../posts/index.js";
 import { reelStudies } from "../reelStudies.js";
 
-const orderDetails = [
-  "Product idea",
-  "Creative angle",
-  "Storyboard",
-  "Rendered ad",
+// Two sides of one marketplace: brands who need a video ad, and the creators who make them on
+// Dalai Llama. Brands request (no sign-in) on the brands site; creators start free in the studio.
+const BRANDS_SITE = "https://brands.dalaillama.in";
+const REQUEST_VIDEO_URL = `${BRANDS_SITE}/creators?then=request`;
+const BROWSE_CREATORS_URL = `${BRANDS_SITE}/creators`;
+const BRAND_SIGN_UP_URL = `${BRANDS_SITE}/brands/sign-in`;
+const CREATOR_STUDIO_URL = "https://creator.dalaillama.in/";
+// Films made on Dalai Llama for paying clients (the brands site's feed). Only our own work shows here.
+const FEED_API = "https://api.dalaillama.in/api/v1/public/showcase?tab=TOP&page=0";
+
+const brandProblems = [
+  ["Too many creators, too few that fit", "Open calls bring a flood of portfolios, and most don't match your product, audience or category."],
+  ["No proof they deliver", "A reel of personal posts says little about whether someone can deliver an ad a paying client signed off on."],
+  ["Price comes last", "Rates surface only after calls and back-and-forth, so you can't plan the campaign around them."],
+  ["The brief gets lost", "Script notes, references and approvals scatter across DMs, email and spreadsheets."],
 ];
 
-const thinkingModes = [
-  ["Copywriter", "Finds the claim, hook, objection, proof, and call to action before a single frame is rendered."],
-  ["Creative director", "Chooses the ad angle, scene order, visual contrast, and retention moments that make the story easy to follow."],
-  ["Storyboard system", "Turns the script into camera frames, scene timelines, character notes, captions, and beat-level direction."],
-  ["Scene cinematographer", "Writes scene instructions for lighting, lens feel, motion, background, and visual continuity across shots."],
-  ["Voice and sound", "Plans native voiceover, lip sync where needed, music rhythm, environmental sound, and caption treatment."],
-  ["Render coordinator", "Sends approved scenes through the seedance 2.0/ Google Omini queue and returns one merged, sound-designed asset."],
+const brandAnswers = [
+  ["Matched to your industry", "Tell us what the video should do. We route it to an active creator who makes videos for brands like yours, or you pick one yourself."],
+  ["Every film is client work", "Each film on a creator's page was made on Dalai Llama and delivered to a client who paid for it."],
+  ["A priced brief, straight away", "Your request comes back as a brief with the price on it. Review it, change anything, pay the upfront share to start."],
+  ["One place from brief to delivery", "The brief, the storyboard review and the final video live in one link, not in a thread."],
 ];
 
-const orderItems = [
-  "Ingesting the Spark: describe a product idea, paste a competitor link, add raw text, share a landing page, or submit an unfinished campaign note.",
-  "Algorithmic Creative Strategy: the system drafts the script, maps the visual screenplay, detects the high-retention hook, and assigns music beats.",
-  "seedance 2.0/ Google Omini Multimodal Synthesis: approved scenes render in cloud clusters with cinematic frames, matching voiceover or lip sync, and contextual sound effects.",
+const brandSteps = [
+  ["Describe the video", "What it should do, the product, who it's for, the length and languages. Add product photos or references if you have them."],
+  ["Get a creator and a price", "A creator for your industry takes it and you get the brief with the price, usually the same day."],
+  ["Review, pay, receive", "Approve the storyboard, then the finished ad: captions, voice and sound included."],
 ];
 
-const afterShoot = [
-  "A concise text script built around one promise, one audience, one offer, and one call to action.",
-  "A camera storyboard blueprint with scene order, background notes, character direction, and shot-level timing.",
-  "A visual screenplay that can be reviewed before rendering, so bad scenes are corrected before compute is spent.",
-  "A native voiceover, caption plan, music rhythm, and environmental sound plan tied to the pacing of the ad.",
-  "A finished 60-second video asset after approval, ready for download and ad testing.",
+const creatorFeatures = [
+  ["From idea to finished ad", "Script, storyboard, scene plan, voice, captions and sound in one guided pipeline, so you deliver ads instead of assembling files."],
+  ["The right model for each shot", "Seedance 2.0, Veo 3.1, Kling and more: pick per scene, from a fast draft model to a cinematic one."],
+  ["A workflow that thinks ahead", "Shots are planned before they're rendered, so a weak scene is fixed in the storyboard, not after you've paid to render it."],
+  ["Cost that stays in check", "See what each render costs before you start it, and re-render only the shot that needs it, not the whole film."],
+  ["Music that fits the mood", "The soundtrack follows the ad's mood and pacing: calm for a skincare ritual, punchy for a launch."],
+  ["Stretch", "Render a shorter clip and Stretch it to length: the missing frames are filled in, so a slow-motion shot costs a fraction of rendering every second."],
 ];
 
-const operatingModes = [
+const creatorReach = [
+  ["Your public profile", "A page brands can find, with the films you made on Dalai Llama for paying clients."],
+  ["Outreach from your own address", "Send your work to brands from your Dalai Llama email. One mail a day per brand, never spam."],
+  ["Automatic outreach", "We show your new films to brands in the industries you work in, who are likely to want one like them."],
+  ["Requests routed to you", "Brands that ask Dalai Llama for a video in your industry are routed to you. A request comes with a brief you can price."],
+];
+
+const CADENCES = [
+  ["QUARTERLY", "Quarterly", 3],
+  ["HALF_YEARLY", "Every 6 months", 6],
+  ["YEARLY", "Yearly", 12],
+];
+
+const creatorPlans = [
   {
-    title: "Software department, not a self-serve editor",
-    body: "The user does not operate a timeline, write prompts for every shot, or assemble raw clips. The system takes responsibility for the creative path.",
-  },
-  {
-    title: "Blueprint first, wallet deduction second",
-    body: "The campaign blueprint proves the creative logic before production starts. The wallet pack is deducted only when the approved job moves into production.",
-  },
-];
-
-const USD_TO_INR = 95;
-
-const rateCardPlans = [
-  {
-    code: "complete_ai_video_pack",
-    title: "Complete AI Video Pack",
-    badge: "Full AI production",
-    usd: 5999 / USD_TO_INR,
-    unit: "60-second wallet deduction",
-    summary: "A complete AI-generated ad workflow with blueprint, AI scenes, captions, sound, and basic human editor finishing.",
-    points: [
-      "Includes idea shaping, ad script, screenplay, storyboard path, scene prompts, and production plan.",
-      "Generates the AI video scenes with consistency prompts, seeds, character details, background notes, and shot timing.",
-      "Basic editor finishing is included for merge, captions, SRT, sound balance, pacing, and export-ready delivery.",
-      "Best for explainers, product stories, educational ads, and quick campaign tests where full AI visuals are acceptable.",
+    code: "FREE",
+    name: "Free",
+    monthly: 0,
+    tagline: "Get found and start creating",
+    features: [
+      "Public creator profile",
+      "Reach out to your own audience",
+      "100 emails a month to brands",
+      "Your profile shown to up to 10 brands",
+      "Automatic outreach to brands who may like your videos",
+      "Create and download videos",
     ],
+    cta: "Start free",
   },
   {
-    code: "hybrid_ugc_creator_pack",
-    title: "Hybrid UGC Creator Pack",
-    badge: "UGC sourcing + AI",
-    usd: 8999 / USD_TO_INR,
-    unit: "60-second wallet deduction",
-    summary: "AI scenes plus platform-managed UGC creator sourcing, creator brief, and editor assembly into one finished ad.",
-    points: [
-      "Includes the complete AI workflow plus UGC creator brief creation for talking-head, testimonial, demo, or proof scenes.",
-      "Dalaillama handles creator search and production routing so the user does not hunt through UGC marketplaces.",
-      "Basic editor finishing is included to combine UGC footage, AI scenes, captions, voice, music, and final export.",
-      "Best for founder-style ads, product demos, trust-building proof, and hybrid human plus AI B-roll videos.",
-    ],
+    code: "STUDIO",
+    name: "Studio",
+    monthly: 2999,
+    tagline: "For creators taking on paid work",
     featured: true,
+    features: [
+      "Everything in Free",
+      "1,000 emails a month to brands",
+      "Your profile shown to up to 100 brands",
+      "Edit any shot",
+      "Upload product and reference images",
+      "Share brief links with clients",
+    ],
+    cta: "Choose Studio",
   },
   {
-    code: "managed_launch_pack",
-    title: "Managed Launch Pack",
-    badge: "Higher-stakes ad",
-    usd: 12999 / USD_TO_INR,
-    unit: "60-second wallet deduction",
-    summary: "A supervised production pack for campaigns where the script, proof, pacing, and final asset need more senior attention.",
-    points: [
-      "Includes sharper angle selection, hook alternatives, screenplay review, storyboard validation, and production routing.",
-      "Supports full AI or hybrid UGC depending on which scenes need a human face, product proof, or generated visual explanation.",
-      "A senior editor owns final assembly, sound, captions, pacing, CTA clarity, export, and delivery notes.",
-      "Best for launch ads, offer tests, paid campaigns, investor/customer proof videos, and brand-sensitive production.",
+    code: "PRO",
+    name: "Pro",
+    monthly: 6999,
+    tagline: "Every feature, no limit on reach",
+    features: [
+      "Everything in Studio",
+      "3,000 emails a month to brands",
+      "Your profile shown to every brand",
+      "Upscaling, with upscale preview",
+      "Upload your character voices",
+      "Every feature in the studio",
     ],
+    cta: "Choose Pro",
   },
 ];
 
-// "Request a video": the brief form on the brands site. No sign-in: the brand describes the video, and
-// the request is routed to an active creator for their industry, who turns it into a priced brief.
-const REQUEST_VIDEO_URL = "https://brands.dalaillama.in/creators?then=request";
+// The Dalai Llama price for a request we match: per second, from the 60-second price.
+const BRAND_VIDEO_PRICE = 4999;
 
 const featuredGuideSlugs = [
   "ai-video-process-d2c-brands",
@@ -254,169 +263,130 @@ const shortVideoEditorLinks = [
 ];
 
 export default function Home() {
-  const pricing = useLocalizedPricing();
-  const [selectedPackageCode, setSelectedPackageCode] = useState("");
-  const selectedPackage = useMemo(
-    () => quotePackage(selectedPackageCode, pricing),
-    [pricing, selectedPackageCode]
-  );
   const featuredGuides = featuredGuideSlugs
     .map((slug) => posts.find((post) => post.slug === slug))
     .filter(Boolean);
   const featuredGuideCards = featuredGuides.slice(0, FEATURED_GUIDE_CARD_LIMIT);
   const latestPostLinks = posts.slice(0, LATEST_POST_LINK_LIMIT);
+  const films = useFilms();
 
   return (
     <article className="landing-page">
-      <section className="landing-hero studio-hero" id="hero" aria-label="Landing hero">
+      <section className="landing-hero" id="hero" aria-label="Landing hero">
         <div className="hero-copy">
-          <p className="kicker">On-demand creative department in software</p>
-          <h1>Turn a product idea into a finished video ad in 5 minutes.</h1>
+          <p className="kicker">Video ads, made by creators on Dalai Llama</p>
+          <h1>The right creator for your next video ad.</h1>
           <div className="hero-body">
-            <p>Dalaillama turns a link, rough idea, or campaign note into a script, storyboard, scene plan, voiceover, captions, sound design, and final 60-second video.</p>
+            <p>Tell us what the video should do. We match you with a creator who makes ads for brands like yours, and you get a priced brief straight away.</p>
             <p>
-              The old workflow makes founders write the script, brief an editor, chase storyboard revisions, and stitch raw files together. Dalaillama handles the copywriting, storyboard layouts, scene cinematography, and multimodal rendering through seedance 2.0/ Google Omini cloud clusters in one pass.
-            </p>
-            <p>
-              You review the creative blueprint first. If it is right, the system renders the finished ad with native voiceover and contextual sound.
+              Every film you see here was made on Dalai Llama and delivered to a paying client. No open calls, no chasing portfolios,
+              no price after three calls.
             </p>
           </div>
           <div className="hero-actions">
-            <a
-              className="creator-primary hero-button"
-              href="#pricing"
-              data-ga-event="cta_click"
-              data-ga-cta-location="hero_section"
-              data-ga-cta-text="Get a Free Campaign Blueprint"
-            >
-              Get a Free Campaign Blueprint
-            </a>
-            <a
-              className="creator-secondary hero-button"
-              href={REQUEST_VIDEO_URL}
-              data-ga-event="cta_click"
-              data-ga-cta-location="hero_section"
-              data-ga-cta-text="Request a video"
-            >
+            <a className="creator-primary hero-button" href={REQUEST_VIDEO_URL}
+               data-ga-event="cta_click" data-ga-cta-location="hero_section" data-ga-cta-text="Request a video">
               Request a video
             </a>
-            <a
-              className="creator-secondary hero-button"
-              href="#order"
-              data-ga-event="cta_click"
-              data-ga-cta-location="hero_section"
-              data-ga-cta-text="See the Pipeline"
-            >
-              See the Pipeline
+            <a className="creator-secondary hero-button" href={BROWSE_CREATORS_URL}
+               data-ga-event="cta_click" data-ga-cta-location="hero_section" data-ga-cta-text="See creators' work">
+              See creators' work
             </a>
           </div>
           <p className="hero-note">
-            Built for founders who need finished ads, not another production tool to manage.
+            You make videos?{" "}
+            <a className="hero-link" href="#creators" data-ga-event="cta_click" data-ga-cta-location="hero_section" data-ga-cta-text="For creators">
+              Get found by brands, free
+            </a>
           </p>
         </div>
-
-        <div className="production-board creator-panel" aria-label="Video ad production preview">
-          <div className="board-header">
-            <span>Campaign pipeline</span>
-            <strong>5 minute draft</strong>
-          </div>
-          <div className="pipeline-strip">
-            {orderDetails.map((item) => (
-              <div className="pipeline-pill" key={item}>{item}</div>
-            ))}
-          </div>
-          <div className="shot-preview-card">
-            <div>
-              <p>Simple workflow</p>
-              <h2>Link in. Blueprint out. Render when ready.</h2>
-              <span>The system writes the campaign, maps the shots, renders scenes, adds voice and sound, then returns one finished video asset.</span>
-            </div>
-            <div className="mini-frame" aria-hidden="true">
-              <div className="mini-light" />
-              <div className="mini-person" />
-            </div>
-          </div>
-          <div className="board-timeline">
-            <div className="timeline-row">
-              <span>Brief</span>
-              <b />
-              <b />
-              <b />
-            </div>
-            <div className="timeline-row edited">
-              <span>Scenes</span>
-              <b />
-              <b />
-            </div>
-            <div className="timeline-row sound">
-              <span>Sound</span>
-              <b />
-              <b />
-              <b />
-              <b />
-            </div>
-          </div>
-        </div>
+        <HeroFilm film={films[0]} />
       </section>
 
       <section className="landing-section essay-section" id="problem">
-        <p className="kicker">Why software alone fails</p>
-        <h2>Most video tools still leave the hard part with the founder.</h2>
+        <p className="kicker">For brands</p>
+        <h2>Finding the right creator is the hard part.</h2>
         <div className="essay-copy">
           <p>
-            Standard AI video tools usually produce a talking-head clip with captions. That is not a campaign. The founder still has to decide what to say, why it matters, what proof to show, how the scenes should move, and where the viewer should end up.
-          </p>
-          <p>
-            Agencies solve more of the problem, but the loop is slow. A week can disappear before the first storyboard comes back, and every change creates another handoff.
-          </p>
-          <p>
-            Dalaillama collapses the copywriter, creative director, storyboard artist, animator, voice artist, and sound designer into one software pipeline. The useful output is not a prompt. It is a finished ad.
+            In one survey of US marketers, finding the right creators was the top challenge, ahead of strategy and measurement
+            (<a className="hero-link" href="https://www.emarketer.com/content/marketers-struggle-find-compatible-creators-despite-rising-budgets--new-research-finds"
+                target="_blank" rel="noopener noreferrer">EMARKETER, 43.9%</a>). Budgets keep rising; the search doesn't get easier.
           </p>
         </div>
-      </section>
-
-      <section className="landing-section" id="crew">
-        <p className="kicker">System truth</p>
-        <h2>The software takes over the creative department roles.</h2>
-        <div className="crew-grid">
-          {thinkingModes.map(([role, body]) => (
-            <div className="crew-card creator-panel-muted" key={role}>
-              <h3>{role}</h3>
+        <div className="crew-grid crew-grid-two">
+          {brandProblems.map(([title, body]) => (
+            <div className="crew-card creator-panel-muted" key={title}>
+              <h3>{title}</h3>
               <p>{body}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="landing-section split-section" id="order">
+      <section className="landing-section split-section" id="how">
         <div>
-          <p className="kicker">Autonomous pipeline architecture</p>
-          <h2>Three operational steps from spark to finished ad.</h2>
+          <p className="kicker">What Dalai Llama does</p>
+          <h2>A creator who fits, a price up front, one place for the work.</h2>
         </div>
         <div className="stage-list">
-          {orderItems.map((item, index) => (
-            <div className="stage-row" key={item}>
+          {brandAnswers.map(([title, body], index) => (
+            <div className="stage-row" key={title}>
               <span>{String(index + 1).padStart(2, "0")}</span>
-              <p>{item}</p>
+              <p><strong className="row-title">{title}.</strong> {body}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="landing-section split-section">
+      <FilmStrip films={films} />
+
+      <section className="landing-section split-section" id="order">
         <div>
-          <p className="kicker">Blueprint before compute</p>
-          <h2>You can inspect the ad before paying for the final render.</h2>
+          <p className="kicker">How a request works</p>
+          <h2>From a few lines to a finished ad.</h2>
+          <div className="hero-actions">
+            <a className="creator-primary hero-button" href={REQUEST_VIDEO_URL}
+               data-ga-event="cta_click" data-ga-cta-location="how_section" data-ga-cta-text="Request a video">
+              Request a video
+            </a>
+          </div>
         </div>
-        <div className="essay-copy">
-          <p>
-            The first output is a campaign blueprint: the hook, the exact script, the visual screenplay, the storyboard layout, scene timing, camera movement, caption style, voice direction, and sound plan.
-          </p>
-          <p>
-            This matters because bad creative should be fixed before expensive rendering starts. You approve the logic first. Then the production queue turns it into video.
-          </p>
+        <div className="stage-list">
+          {brandSteps.map(([title, body], index) => (
+            <div className="stage-row" key={title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <p><strong className="row-title">{title}.</strong> {body}</p>
+            </div>
+          ))}
         </div>
       </section>
+
+      <section className="landing-section" id="creators">
+        <p className="kicker">For creators</p>
+        <h2>A studio that makes the ad, and brings you the brands.</h2>
+        <p className="section-lede">
+          Make client-ready video ads with the best models for each shot, then let brands find you: a public profile, outreach
+          from your own address, and requests routed to you.
+        </p>
+        <div className="crew-grid">
+          {creatorFeatures.map(([title, body]) => (
+            <div className={`crew-card creator-panel-muted${title === "Stretch" ? " crew-card-accent" : ""}`} key={title}>
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </div>
+          ))}
+        </div>
+        <div className="stage-list reach-list">
+          {creatorReach.map(([title, body], index) => (
+            <div className="stage-row" key={title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <p><strong className="row-title">{title}.</strong> {body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <PricingSection />
 
       {featuredGuideCards.length > 0 && (
         <section className="landing-section writing-section" id="production-guides">
@@ -424,13 +394,8 @@ export default function Home() {
           <h2>Production notes for teams that want the deeper workflow.</h2>
           <div className="guide-link-grid">
             {featuredGuideCards.map((post) => (
-              <a
-                className="guide-link-card creator-panel-muted"
-                href={`/blog/${post.slug}`}
-                key={post.slug}
-                data-ga-event="blog_link_click"
-                data-ga-label={post.title}
-              >
+              <a className="guide-link-card creator-panel-muted" href={`/blog/${post.slug}`} key={post.slug}
+                 data-ga-event="blog_link_click" data-ga-label={post.title}>
                 <span>{post.title}</span>
                 <small>{post.description}</small>
               </a>
@@ -439,67 +404,10 @@ export default function Home() {
         </section>
       )}
 
-      <section className="landing-section split-section" id="polish">
-        <div>
-          <p className="kicker">What comes back</p>
-          <h2>The output is structured before it becomes a video file.</h2>
-        </div>
-        <div className="stage-list">
-          {afterShoot.map((item, index) => (
-            <div className="stage-row" key={item}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <p>{item}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="landing-section mode-section">
-        <div className="mode-copy">
-          <p className="kicker">Service model</p>
-          <h2>An ad production system, not another blank canvas.</h2>
-          <p>
-            The founder gives Dalaillama the product context. The system handles the creative sequence and returns an asset that can be tested.
-          </p>
-        </div>
-        <div className="mode-list">
-          {operatingModes.map((mode) => (
-            <div className="mode-card creator-panel-muted" key={mode.title}>
-              <h3>{mode.title}</h3>
-              <p>{mode.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <PricingSection
-        pricing={pricing}
-        selectedPackageCode={selectedPackageCode}
-        onSelectPackage={setSelectedPackageCode}
-      />
-
-      <section className="landing-section essay-section">
-        <p className="kicker">What it is not</p>
-        <h2>It is not an editor, clipping tool, or prompt box.</h2>
-        <div className="essay-copy">
-          <p>
-            A tool still asks the user to do the thinking. It gives knobs, timelines, and exports. That is not enough when the real bottleneck is deciding what the ad should say.
-          </p>
-          <p>
-            Dalaillama starts at the campaign level. It decides the hook, writes the script, maps the scenes, maintains visual continuity, and renders the final output after approval.
-          </p>
-          <p>
-            If the blueprint is weak, you should see that before spending on production. That is why every pack starts with the blueprint before production spend.
-          </p>
-        </div>
-      </section>
-
       <section className="landing-section writing-section" id="writing">
         <p className="kicker">Research notes</p>
-        <h2>Useful reading without turning the page into a link farm.</h2>
+        <h2>What sits underneath a strong short-form ad.</h2>
         <div className="blog-featured-block" aria-label="Reel patterns with short-form potential">
-          <h2>Creative patterns worth studying</h2>
-          <p className="empty-note">These are the kinds of decisions that sit underneath a strong short-form ad: the hook, proof, scene rhythm, and final action.</p>
           <div className="guide-link-grid">
             {reelStudies.map((study) => (
               <div className="guide-link-card creator-panel-muted" key={study.title}>
@@ -509,52 +417,214 @@ export default function Home() {
             ))}
           </div>
         </div>
-        {latestPostLinks.length > 0 ? (
+        {latestPostLinks.length > 0 && (
           <div className="writing-list">
             {latestPostLinks.map((post) => (
-            <a
-              className="writing-link"
-              href={`/blog/${post.slug}`}
-              key={post.slug}
-              data-ga-event="blog_link_click"
-              data-ga-label={post.title}
-            >
-              <span>{post.title}</span>
-              <small>{post.date}</small>
-            </a>
+              <a className="writing-link" href={`/blog/${post.slug}`} key={post.slug} data-ga-event="blog_link_click" data-ga-label={post.title}>
+                <span>{post.title}</span>
+                <small>{post.date}</small>
+              </a>
             ))}
           </div>
-        ) : (
-          <p className="empty-note">Blogs and case studies will live here soon.</p>
         )}
       </section>
 
       <ResourceDirectory featuredGuides={featuredGuides} />
 
-      <InspirationStrip />
-
       <section className="landing-section access-section creator-panel" id="access">
         <div>
-          <p className="kicker">Submit campaign details</p>
-          <h2>Send the link or idea. The selected pack is attached to the request.</h2>
-          <p>
-            Share the product, target customer, campaign goal, and any reference links. Choose the pack that matches how much human presence and creative supervision the ad needs.
-          </p>
-          <p>
-            This is wallet-based, not a subscription. The selected pack is deducted only when the approved job moves into production.
-          </p>
+          <p className="kicker">Start here</p>
+          <h2>Need a video? Make videos? Both start free.</h2>
+          <p>Brands: describe the video and get a priced brief from a creator who fits. Creators: set up your profile and start reaching brands.</p>
         </div>
-        <LeadForm selectedPackage={selectedPackage} requirePackage />
-        <p className="hero-note">
-          Want a creator to make it with you?{" "}
-          <a href={REQUEST_VIDEO_URL} data-ga-event="cta_click" data-ga-cta-location="access_section" data-ga-cta-text="Request a video">
+        <div className="hero-actions">
+          <a className="creator-primary hero-button" href={REQUEST_VIDEO_URL}
+             data-ga-event="cta_click" data-ga-cta-location="access_section" data-ga-cta-text="Request a video">
             Request a video
-          </a>{" "}
-          — we match you with a creator for your industry.
-        </p>
+          </a>
+          <a className="creator-secondary hero-button" href={CREATOR_STUDIO_URL}
+             data-ga-event="cta_click" data-ga-cta-location="access_section" data-ga-cta-text="Start free as a creator">
+            Start free as a creator
+          </a>
+        </div>
       </section>
     </article>
   );
+}
+
+/** Films made on Dalai Llama, newest top first; empty until the feed answers. */
+function useFilms() {
+  const [films, setFilms] = useState([]);
+  useEffect(() => {
+    let cancelled = false;
+    fetch(FEED_API, { headers: { accept: "application/json" } })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((page) => {
+        const items = (page?.items || []).filter((item) => item.origin === "PLATFORM" && item.thumbnailUrl);
+        if (!cancelled) setFilms(items.slice(0, 8));
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
+  return films;
+}
+
+function filmUrl(film) {
+  return `${film.creator?.profileUrl || BROWSE_CREATORS_URL}?film=${encodeURIComponent(film.publicId)}`;
+}
+
+function filmMeta(film) {
+  const length = film.durationSeconds ? `${Math.floor(film.durationSeconds / 60)}:${String(Math.round(film.durationSeconds % 60)).padStart(2, "0")}` : null;
+  return [FORMAT_LABEL[film.format], length, film.vertical ? "Vertical" : "Widescreen"].filter(Boolean).join(" · ");
+}
+
+const FORMAT_LABEL = {
+  PRODUCT_AD: "Product ad", UGC: "UGC", EXPLAINER: "Explainer", BRAND_FILM: "Brand film", SOCIAL_SHORT: "Social short",
+};
+
+/** The hero's right side: the top film, played from its poster to the creator's page. */
+function HeroFilm({ film }) {
+  return (
+    <a className="hero-film creator-panel" href={film ? filmUrl(film) : BROWSE_CREATORS_URL}
+       data-ga-event="film_click" data-ga-label={film?.title || "Browse films"} aria-label={film ? `Watch ${film.title}` : "See films made on Dalai Llama"}>
+      <div className="hero-film-frame">
+        {film ? <img src={film.thumbnailUrl} alt="" loading="eager" /> : <div className="hero-film-empty" />}
+        <span className="play-badge" aria-hidden="true">▶</span>
+      </div>
+      <div className="hero-film-caption">
+        <span>{film ? filmMeta(film) : "Made on Dalai Llama"}</span>
+        <strong>{film ? film.title : "Films made for paying clients"}</strong>
+        {film?.creator && <small>by {film.creator.displayName} · made on Dalai Llama for a paying client</small>}
+      </div>
+    </a>
+  );
+}
+
+function FilmStrip({ films }) {
+  if (films.length === 0) return null;
+  return (
+    <section className="landing-section" id="films" aria-label="Films made on Dalai Llama">
+      <p className="kicker">Made on Dalai Llama</p>
+      <h2>Ads our creators made for paying clients.</h2>
+      <div className="film-grid">
+        {films.map((film) => (
+          <a className="film-card creator-panel-muted" href={filmUrl(film)} key={film.publicId}
+             data-ga-event="film_click" data-ga-label={film.title}>
+            <div className={`film-card-frame${film.vertical ? " film-card-vertical" : ""}`}>
+              <img src={film.thumbnailUrl} alt="" loading="lazy" />
+              <span className="play-badge" aria-hidden="true">▶</span>
+            </div>
+            <span className="film-card-meta">{filmMeta(film)}</span>
+            <strong>{film.title}</strong>
+            {film.creator && <small>by {film.creator.displayName}</small>}
+          </a>
+        ))}
+      </div>
+      <p className="hero-note">
+        <a className="hero-link" href={BROWSE_CREATORS_URL} data-ga-event="cta_click" data-ga-cta-location="films_section" data-ga-cta-text="See all films">
+          See every creator and film
+        </a>
+      </p>
+    </section>
+  );
+}
+
+function PricingSection() {
+  const [audience, setAudience] = useState("CREATORS");
+  const [cadence, setCadence] = useState("QUARTERLY");
+  const months = CADENCES.find(([code]) => code === cadence)[2];
+
+  return (
+    <section className="landing-section pricing-section" id="pricing">
+      <div className="pricing-head">
+        <div>
+          <p className="kicker">Pricing</p>
+          <h2>Free to start, on both sides.</h2>
+        </div>
+        <div className="segmented" role="tablist" aria-label="Pricing for">
+          {[["CREATORS", "For creators"], ["BRANDS", "For brands"]].map(([code, label]) => (
+            <button key={code} type="button" role="tab" aria-selected={audience === code} onClick={() => setAudience(code)}
+                    className={audience === code ? "is-active" : ""} data-ga-event="pricing_tab" data-ga-label={label}>
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {audience === "CREATORS" ? (
+        <>
+          <div className="segmented segmented-small" role="radiogroup" aria-label="Billing">
+            {CADENCES.map(([code, label]) => (
+              <button key={code} type="button" role="radio" aria-checked={cadence === code} onClick={() => setCadence(code)}
+                      className={cadence === code ? "is-active" : ""} data-ga-event="pricing_cadence" data-ga-label={label}>
+                {label}
+              </button>
+            ))}
+          </div>
+          <div className="pricing-grid">
+            {creatorPlans.map((plan) => (
+              <article className={`pricing-card creator-panel-muted${plan.featured ? " pricing-card-featured" : ""}`} key={plan.code}>
+                <div className="pricing-card-top">
+                  <span className="pricing-badge">{plan.tagline}</span>
+                </div>
+                <h3>{plan.name}</h3>
+                <div className="price-row">
+                  <strong>{inr(plan.monthly)}</strong>
+                  <span>{plan.monthly === 0 ? "forever" : "a month"}</span>
+                </div>
+                <p className="price-billed">
+                  {plan.monthly === 0 ? "No card needed" : `Billed ${inr(plan.monthly * months)} ${months === 12 ? "a year" : `every ${months} months`}`}
+                </p>
+                <ul className="pricing-list">
+                  {plan.features.map((feature) => <li key={feature}>{feature}</li>)}
+                </ul>
+                <a className="pricing-card-link" href={CREATOR_STUDIO_URL}
+                   data-ga-event="cta_click" data-ga-cta-location="pricing_section" data-ga-cta-text={`${plan.name} ${cadence}`}>
+                  {plan.cta}
+                </a>
+              </article>
+            ))}
+          </div>
+        </>
+      ) : (
+        <div className="pricing-grid pricing-grid-two">
+          <article className="pricing-card creator-panel-muted">
+            <div className="pricing-card-top"><span className="pricing-badge">Your brand profile</span></div>
+            <h3>Free</h3>
+            <div className="price-row"><strong>{inr(0)}</strong><span>to join</span></div>
+            <ul className="pricing-list">
+              <li>Create your brand profile</li>
+              <li>Browse creators and the films they made for clients</li>
+              <li>Follow creators and get their new films</li>
+              <li>Request a video, with or without signing in</li>
+            </ul>
+            <a className="pricing-card-link" href={BRAND_SIGN_UP_URL} data-ga-event="cta_click" data-ga-cta-location="pricing_section" data-ga-cta-text="Brand profile">
+              Create your profile
+            </a>
+          </article>
+          <article className="pricing-card creator-panel-muted pricing-card-featured">
+            <div className="pricing-card-top"><span className="pricing-badge">A finished video ad</span></div>
+            <h3>Per video</h3>
+            <div className="price-row"><strong>~{inr(BRAND_VIDEO_PRICE)}</strong><span>for a 60-second video</span></div>
+            <p className="price-billed">Shorter videos cost less. A creator you choose yourself may set their own rate.</p>
+            <ul className="pricing-list">
+              <li>The price is on your brief before you pay anything</li>
+              <li>Pay an upfront share to start production</li>
+              <li>Storyboard review before the final render</li>
+              <li>Captions, voice and sound included</li>
+            </ul>
+            <a className="pricing-card-link" href={REQUEST_VIDEO_URL} data-ga-event="cta_click" data-ga-cta-location="pricing_section" data-ga-cta-text="Request a video">
+              Request a video
+            </a>
+          </article>
+        </div>
+      )}
+    </section>
+  );
+}
+
+function inr(amount) {
+  return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(amount);
 }
 
 function ResourceDirectory({ featuredGuides }) {
@@ -617,144 +687,4 @@ function ResourceGroup({ title, links }) {
       </div>
     </details>
   );
-}
-
-function PricingSection({ pricing, selectedPackageCode, onSelectPackage }) {
-  return (
-    <section className="landing-section pricing-section" id="pricing">
-      <div className="pricing-head">
-        <div>
-          <p className="kicker">Wallet production packs</p>
-          <h2>Pick the production path. The blueprint comes before the deduction.</h2>
-          <p>
-            These are one-time wallet deductions for a finished 60-second ad. Each pack includes ideation, screenplay, storyboard planning, render or creator routing, captions, sound, and basic editor finishing.
-          </p>
-        </div>
-      </div>
-
-      <div className="pricing-grid">
-        {rateCardPlans.map((plan) => {
-          const isSelected = selectedPackageCode === plan.code;
-          return (
-            <article
-              className={`pricing-card creator-panel-muted${plan.featured ? " pricing-card-featured" : ""}${isSelected ? " pricing-card-selected" : ""}`}
-              key={plan.title}
-            >
-              <div className="pricing-card-top">
-                <span className="pricing-badge">{plan.badge}</span>
-                <small>{plan.unit}</small>
-              </div>
-              <h3>{plan.title}</h3>
-              <div className="price-row">
-                <strong>{pricing.format(plan.usd)}</strong>
-                <span>{plan.unit}</span>
-              </div>
-              <p>{plan.summary}</p>
-              <ul className="pricing-list">
-                {plan.points.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
-              <a
-                className="pricing-card-link"
-                href="#access"
-                onClick={() => onSelectPackage(plan.code)}
-                data-ga-event="cta_click"
-                data-ga-cta-location="pricing_section"
-                data-ga-cta-text={plan.title}
-              >
-                {isSelected ? "Selected pack" : "Choose this pack"}
-              </a>
-            </article>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-function useLocalizedPricing() {
-  const [country, setCountry] = useState(() => browserCountryGuess());
-
-  useEffect(() => {
-    let cancelled = false;
-    fetch("/api/country", { headers: { accept: "application/json" } })
-      .then((response) => (response.ok ? response.json() : null))
-      .then((data) => {
-        const detectedCountry = cleanCountry(data?.country);
-        if (!cancelled && detectedCountry) setCountry(detectedCountry);
-      })
-      .catch(() => {});
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  return useMemo(() => {
-    const isIndia = country === "IN";
-    return {
-      country,
-      currency: isIndia ? "INR" : "USD",
-      currencyLabel: isIndia ? "Indian rupees" : "US dollars",
-      format: (usd) => (isIndia ? formatInr(usd * USD_TO_INR) : formatUsd(usd)),
-    };
-  }, [country]);
-}
-
-function quotePackage(packageCode, pricing) {
-  const plan = rateCardPlans.find((item) => item.code === packageCode);
-  if (!plan) return null;
-  return {
-    code: plan.code,
-    title: plan.title,
-    badge: plan.badge,
-    unit: plan.unit,
-    price: pricing.format(plan.usd),
-    currency: pricing.currency,
-    usd: Number(plan.usd.toFixed(2)),
-    summary: plan.summary,
-  };
-}
-
-function browserCountryGuess() {
-  if (typeof navigator !== "undefined") {
-    const languages = [navigator.language, ...(navigator.languages || [])]
-      .filter(Boolean)
-      .map((value) => value.toUpperCase());
-    if (languages.some((language) => language.endsWith("-IN") || language === "IN")) {
-      return "IN";
-    }
-  }
-
-  if (typeof Intl !== "undefined") {
-    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
-    if (timeZone === "Asia/Kolkata" || timeZone === "Asia/Calcutta") {
-      return "IN";
-    }
-  }
-
-  return "US";
-}
-
-function cleanCountry(country) {
-  const value = String(country || "").trim().toUpperCase();
-  return /^[A-Z]{2}$/.test(value) ? value : "";
-}
-
-function formatInr(amount) {
-  return new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  }).format(Math.round(amount));
-}
-
-function formatUsd(amount) {
-  if (amount === 0) return "$0";
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: amount < 10 ? 2 : 0,
-    maximumFractionDigits: amount < 10 ? 2 : 0,
-  }).format(amount);
 }

@@ -10,12 +10,12 @@ import { getPostBySlug } from "./posts/index.js";
 import { getVideoRepurposingPage, videoRepurposingHub } from "./videoRepurposingPages.js";
 
 const SITE_URL = "https://dalaillama.in";
-const HOME_TITLE = "Dalaillama | On-Demand Creative Department for Video Ads";
+const HOME_TITLE = "Dalaillama | Video Ads Made by Creators Who Fit Your Brand";
 const SHORT_VIDEO_EDITOR_TITLE = "Short Video Editor for Reels & YouTube Shorts | Dalaillama";
 const VIDEO_REPURPOSING_TITLE = "Video Repurposing Service for Shorts | Dalaillama";
 const BLOG_TITLE = "AI Newsroom Video Workflow Knowledge Base | Dalaillama";
 const DEFAULT_DESCRIPTION =
-  "Turn a product idea into a script, storyboard blueprint, and finished sound-designed short-form video ad through Dalaillama.";
+  "Find the right creator for your next video ad. Brands get a priced brief from a creator who makes ads for their industry; creators get a studio that makes the ad and brings them brands. Both start free.";
 const SHORT_VIDEO_EDITOR_DESCRIPTION =
   "A short video editor service for creators and teams. Send existing footage and get one ready-to-post vertical Short for Reels, Shorts, TikTok, or LinkedIn in 30 minutes.";
 const VIDEO_REPURPOSING_DESCRIPTION = videoRepurposingHub.description;
@@ -57,12 +57,12 @@ export default function App() {
           </a>
           <nav className="nav-links" aria-label="Primary navigation">
             <a href="/" data-ga-event="nav_click" data-ga-label="Home">Home</a>
-            <a href="/#order" data-ga-event="nav_click" data-ga-label="Pipeline">Pipeline</a>
+            <a href="/#how" data-ga-event="nav_click" data-ga-label="For brands">For brands</a>
+            <a href="/#creators" data-ga-event="nav_click" data-ga-label="For creators">For creators</a>
+            <a href="/#films" data-ga-event="nav_click" data-ga-label="Films">Films</a>
             <a href="/#pricing" data-ga-event="nav_click" data-ga-label="Pricing">Pricing</a>
-            <a href="/#access" data-ga-event="nav_click" data-ga-label="Access">Access</a>
             <a href="/blog" data-ga-event="nav_click" data-ga-label="Guides">Guides</a>
-            <a href="https://brands.dalaillama.in/creators" data-ga-event="nav_click" data-ga-label="Creators">Creators</a>
-            <a href="https://brands.dalaillama.in/brands/sign-in" data-ga-event="nav_click" data-ga-label="For brands">For brands</a>
+            <a href="https://brands.dalaillama.in/brands/sign-in" data-ga-event="nav_click" data-ga-label="Brand sign in">Sign in</a>
           </nav>
         </header>
         <main>
@@ -76,7 +76,7 @@ export default function App() {
         <footer className="site-footer" aria-label="Dalaillama footer">
           <span>Dalaillama</span>
           <a href="/#pricing" data-ga-event="footer_link_click" data-ga-label="Pricing">Pricing</a>
-          <a href="/#access" data-ga-event="footer_link_click" data-ga-label="Get blueprint">Get Blueprint</a>
+          <a href="https://brands.dalaillama.in/creators?then=request" data-ga-event="footer_link_click" data-ga-label="Request a video">Request a video</a>
           <a href="/blog" data-ga-event="footer_link_click" data-ga-label="Blog">Blog</a>
           <a href="https://brands.dalaillama.in/creators" data-ga-event="footer_link_click" data-ga-label="Creators">Creators</a>
           <a href="https://brands.dalaillama.in/privacy" data-ga-event="footer_link_click" data-ga-label="Privacy">Privacy</a>
