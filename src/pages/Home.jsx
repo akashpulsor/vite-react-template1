@@ -48,11 +48,17 @@ const creatorReach = [
   ["Requests routed to you", "Brands that ask Dalai Llama for a video in your industry are routed to you. A request comes with a brief you can price."],
 ];
 
+// Prices are monthly; longer billing is the months times the monthly price, less a discount. The
+// same totals are the plan rows in product-service (V30), so what's shown here is what's charged.
 const CADENCES = [
-  ["QUARTERLY", "Quarterly", 3],
-  ["HALF_YEARLY", "Every 6 months", 6],
-  ["YEARLY", "Yearly", 12],
+  ["MONTHLY", "Monthly", 1, 0],
+  ["QUARTERLY", "Quarterly", 3, 0.1],
+  ["HALF_YEARLY", "Every 6 months", 6, 0.15],
+  ["YEARLY", "Yearly", 12, 0.2],
 ];
+
+// Visitors outside India see US dollars at this rate (payments outside India are coming).
+const USD_TO_INR = 95;
 
 const creatorPlans = [
   {
@@ -531,8 +537,9 @@ function FilmStrip({ films }) {
 
 function PricingSection() {
   const [audience, setAudience] = useState("CREATORS");
-  const [cadence, setCadence] = useState("QUARTERLY");
-  const months = CADENCES.find(([code]) => code === cadence)[2];
+  const [cadence, setCadence] = useState("MONTHLY");
+  const [, , months, discount] = CADENCES.find(([code]) => code === cadence);
+  const money = useLocalCurrency();
 
   return (
     <section className="landing-section pricing-section" id="pricing">
@@ -569,11 +576,13 @@ function PricingSection() {
                 </div>
                 <h3>{plan.name}</h3>
                 <div className="price-row">
-                  <strong>{inr(plan.monthly)}</strong>
+                  <strong>{money.format(billed(money.amount(plan.monthly), months, discount) / months)}</strong>
                   <span>{plan.monthly === 0 ? "forever" : "a month"}</span>
                 </div>
                 <p className="price-billed">
-                  {plan.monthly === 0 ? "No card needed" : `Billed ${inr(plan.monthly * months)} ${months === 12 ? "a year" : `every ${months} months`}`}
+                  {plan.monthly === 0 ? "No card needed"
+                    : months === 1 ? "Billed monthly"
+                      : `Billed ${money.format(billed(money.amount(plan.monthly), months, discount))} ${months === 12 ? "a year" : `every ${months} months`} · save ${Math.round(discount * 100)}%`}
                 </p>
                 <ul className="pricing-list">
                   {plan.features.map((feature) => <li key={feature}>{feature}</li>)}
@@ -591,7 +600,7 @@ function PricingSection() {
           <article className="pricing-card creator-panel-muted">
             <div className="pricing-card-top"><span className="pricing-badge">Your brand profile</span></div>
             <h3>Free</h3>
-            <div className="price-row"><strong>{inr(0)}</strong><span>to join</span></div>
+            <div className="price-row"><strong>{money.format(0)}</strong><span>to join</span></div>
             <ul className="pricing-list">
               <li>Create your brand profile</li>
               <li>Browse creators and the films they made for clients</li>
@@ -605,7 +614,7 @@ function PricingSection() {
           <article className="pricing-card creator-panel-muted pricing-card-featured">
             <div className="pricing-card-top"><span className="pricing-badge">A finished video ad</span></div>
             <h3>Per video</h3>
-            <div className="price-row"><strong>~{inr(BRAND_VIDEO_PRICE)}</strong><span>for a 60-second video</span></div>
+            <div className="price-row"><strong>~{money.format(money.amount(BRAND_VIDEO_PRICE))}</strong><span>for a 60-second video</span></div>
             <p className="price-billed">Shorter videos cost less. A creator you choose yourself may set their own rate.</p>
             <ul className="pricing-list">
               <li>The price is on your brief before you pay anything</li>
@@ -619,12 +628,53 @@ function PricingSection() {
           </article>
         </div>
       )}
+      {money.currency !== "INR" && (
+        <p className="hero-note">Prices in US dollars. Card payments from outside India are coming soon.</p>
+      )}
     </section>
   );
 }
 
-function inr(amount) {
-  return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(amount);
+/** One billing period's price: the monthly price times the months, less the cadence's discount. */
+function billed(monthly, months, discount) {
+  return Math.round(monthly * months * (1 - discount));
+}
+
+/** Rupees in India, US dollars elsewhere: the country from our edge (/api/country), guessed from
+ * the browser until it answers. {@code amount} turns a rupee price into the visitor's currency. */
+function useLocalCurrency() {
+  const [country, setCountry] = useState(() => browserCountryGuess());
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/country", { headers: { accept: "application/json" } })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data) => {
+        const code = String(data?.country || "").trim().toUpperCase();
+        if (!cancelled && /^[A-Z]{2}$/.test(code)) setCountry(code);
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
+  const india = country === "IN";
+  return {
+    currency: india ? "INR" : "USD",
+    amount: (inrPrice) => (india ? inrPrice : Math.round(inrPrice / USD_TO_INR)),
+    format: (value) => new Intl.NumberFormat(india ? "en-IN" : "en-US", {
+      style: "currency", currency: india ? "INR" : "USD", maximumFractionDigits: 0,
+    }).format(Math.round(value)),
+  };
+}
+
+function browserCountryGuess() {
+  if (typeof navigator !== "undefined") {
+    const languages = [navigator.language, ...(navigator.languages || [])].filter(Boolean).map((v) => v.toUpperCase());
+    if (languages.some((language) => language.endsWith("-IN"))) return "IN";
+  }
+  if (typeof Intl !== "undefined") {
+    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    if (zone === "Asia/Kolkata" || zone === "Asia/Calcutta") return "IN";
+  }
+  return "US";
 }
 
 function ResourceDirectory({ featuredGuides }) {
