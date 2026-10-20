@@ -11,12 +11,12 @@ import {
 
 const SITE_URL = "https://dalaillama.in";
 const CURRENT_LASTMOD = "2026-07-01";
-const HOME_TITLE = "Dalaillama | Done-for-You Short Video Editing in 30 Minutes";
+const HOME_TITLE = "Dalaillama | Video Ads Made by Creators Who Fit Your Brand";
 const SHORT_VIDEO_EDITOR_TITLE = "Short Video Editor for Reels & YouTube Shorts | Dalaillama";
 const VIDEO_REPURPOSING_TITLE = "Video Repurposing Service for Shorts | Dalaillama";
 const BLOG_TITLE = "AI Newsroom Video Workflow Knowledge Base | Dalaillama";
 const DEFAULT_DESCRIPTION =
-  "Done-for-you short video editing for creators and teams. Send a long video, podcast, webinar, interview, demo, or raw clip and get a captioned vertical Short back in 30 minutes.";
+  "Find the right creator for your next video ad. Brands get a priced brief from a creator who makes ads for their industry; creators get a studio that makes the ad and brings them brands. Both start free.";
 const SHORT_VIDEO_EDITOR_DESCRIPTION =
   "A short video editor service for creators and teams. Send existing footage and get one ready-to-post vertical Short for Reels, Shorts, TikTok, or LinkedIn in 30 minutes.";
 const VIDEO_REPURPOSING_DESCRIPTION = videoRepurposingHub.description;
