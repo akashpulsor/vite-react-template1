@@ -2190,3 +2190,142 @@ a:hover {
   color: #ffffff;
   background: rgba(124, 58, 237, 0.18);
 }
+
+/* ---- Our player and the request form, opened on the page ---- */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(0, 1, 4, 0.82);
+  backdrop-filter: blur(6px);
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.player-modal {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(220px, 300px);
+  gap: 20px;
+  align-items: end;
+  max-width: min(960px, 100%);
+  max-height: calc(100vh - 32px);
+}
+
+.player-frame video {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 32px);
+  border-radius: 16px;
+  background: #000104;
+}
+
+.player-caption {
+  display: grid;
+  gap: 8px;
+  padding-bottom: 8px;
+}
+
+.player-caption strong {
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.player-caption small {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.work-tag-inline {
+  justify-self: start;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #f59e0b;
+  color: #0f0a00;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.inquiry-modal {
+  position: relative;
+  width: min(640px, 100%);
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  padding: 26px;
+  border-radius: 20px;
+}
+
+.inquiry-modal h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 850;
+}
+
+.modal-lede {
+  margin: 8px 0 18px !important;
+  color: #cbd5e1;
+  font-size: 15px;
+}
+
+.modal-done {
+  display: grid;
+  gap: 14px;
+  color: #e2e8f0;
+}
+
+.form-grid-three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+button.hero-film {
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+button.work-card-request {
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+button.pricing-card-link {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  .player-modal {
+    grid-template-columns: 1fr;
+  }
+
+  .player-frame video {
+    max-height: 62vh;
+  }
+
+  .form-grid-three {
+    grid-template-columns: 1fr;
+  }
+}

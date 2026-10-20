@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { posts } from "../posts/index.js";
 import { reelStudies } from "../reelStudies.js";
+import LeadForm from "../components/LeadForm.jsx";
+import { InquiryModal, PlayerModal } from "../components/VideoModals.jsx";
 
 // Two sides of one marketplace: brands who need a video ad, and the creators who make them on
 // Dalai Llama. Brands request (no sign-in) on the brands site; creators start free in the studio.
 const BRANDS_SITE = "https://brands.dalaillama.in";
-const REQUEST_VIDEO_URL = `${BRANDS_SITE}/creators?then=request`;
 const BROWSE_CREATORS_URL = `${BRANDS_SITE}/creators`;
 const BRAND_SIGN_UP_URL = `${BRANDS_SITE}/brands/sign-in`;
 const CREATOR_STUDIO_URL = "https://creator.dalaillama.in/";
@@ -281,6 +282,11 @@ export default function Home() {
   const latestPostLinks = posts.slice(0, LATEST_POST_LINK_LIMIT);
   const ideas = useJson(INSPIRATION_API, []);
   const creators = useJson(CREATORS_API, []);
+  // A video playing in our player, and the request form, both open right here on the page.
+  const [playing, setPlaying] = useState(null);
+  const [inquiry, setInquiry] = useState(null);
+  const requestVideo = (prefill = {}) => { setPlaying(null); setInquiry(prefill); };
+  const playIdea = (idea) => idea.videoUrl ? setPlaying(idea) : requestVideo(ideaPrefill(idea));
 
   return (
     <article className="landing-page">
@@ -295,10 +301,10 @@ export default function Home() {
             </p>
           </div>
           <div className="hero-actions">
-            <a className="creator-primary hero-button" href={REQUEST_VIDEO_URL}
+            <button type="button" className="creator-primary hero-button" onClick={() => requestVideo()}
                data-ga-event="cta_click" data-ga-cta-location="hero_section" data-ga-cta-text="Request a video">
               Request a video
-            </a>
+            </button>
             <a className="creator-secondary hero-button" href={BROWSE_CREATORS_URL}
                data-ga-event="cta_click" data-ga-cta-location="hero_section" data-ga-cta-text="See creators' work">
               See creators' work
@@ -311,7 +317,7 @@ export default function Home() {
             </a>
           </p>
         </div>
-        <HeroIdea idea={ideas.find((idea) => idea.posterUrl)} />
+        <HeroIdea idea={ideas.find((idea) => idea.posterUrl)} onPlay={playIdea} />
       </section>
 
       <section className="landing-section essay-section" id="problem">
@@ -349,17 +355,17 @@ export default function Home() {
         </div>
       </section>
 
-      <WorkGrid ideas={ideas} />
+      <WorkGrid ideas={ideas} onPlay={playIdea} onRequest={(idea) => requestVideo(ideaPrefill(idea))} />
 
       <section className="landing-section split-section" id="order">
         <div>
           <p className="kicker">How a request works</p>
           <h2>From a few lines to a finished ad.</h2>
           <div className="hero-actions">
-            <a className="creator-primary hero-button" href={REQUEST_VIDEO_URL}
+            <button type="button" className="creator-primary hero-button" onClick={() => requestVideo()}
                data-ga-event="cta_click" data-ga-cta-location="how_section" data-ga-cta-text="Request a video">
               Request a video
-            </a>
+            </button>
           </div>
         </div>
         <div className="stage-list">
@@ -400,7 +406,7 @@ export default function Home() {
         </div>
       </section>
 
-      <PricingSection />
+      <PricingSection onRequest={requestVideo} />
 
       {featuredGuideCards.length > 0 && (
         <section className="landing-section writing-section" id="production-guides">
@@ -445,6 +451,18 @@ export default function Home() {
 
       <ResourceDirectory featuredGuides={featuredGuides} />
 
+      <section className="landing-section access-section creator-panel" id="custom">
+        <div>
+          <p className="kicker">Still not sure?</p>
+          <h2>Tell us what you need and we'll work it out with you.</h2>
+          <p>
+            A campaign, a series, something you haven't seen here yet: share the product, who it's for and a link or two. We'll come
+            back with how we'd make it, and who should.
+          </p>
+        </div>
+        <LeadForm />
+      </section>
+
       <section className="landing-section access-section creator-panel" id="access">
         <div>
           <p className="kicker">Start here</p>
@@ -452,27 +470,40 @@ export default function Home() {
           <p>Brands: describe the video and get a priced brief from a creator who fits. Creators: set up your profile and start reaching brands.</p>
         </div>
         <div className="hero-actions">
-          <a className="creator-primary hero-button" href={REQUEST_VIDEO_URL}
+          <button type="button" className="creator-primary hero-button" onClick={() => requestVideo()}
              data-ga-event="cta_click" data-ga-cta-location="access_section" data-ga-cta-text="Request a video">
             Request a video
-          </a>
+          </button>
           <a className="creator-secondary hero-button" href={CREATOR_STUDIO_URL}
              data-ga-event="cta_click" data-ga-cta-location="access_section" data-ga-cta-text="Start free as a creator">
             Start free as a creator
           </a>
         </div>
       </section>
+      {playing && (
+        <PlayerModal video={{ videoUrl: playing.videoUrl, posterUrl: playing.posterUrl, title: playing.title, tag: "Inspiration",
+                              byline: playing.makerName ? `by ${playing.makerName}` : null }}
+                     onClose={() => setPlaying(null)} onRequest={() => requestVideo(ideaPrefill(playing))} />
+      )}
+      {inquiry && <InquiryModal prefill={inquiry} onClose={() => setInquiry(null)} />}
     </article>
   );
 }
 
+/** A request for "one like this": the video as the reference, on our own inspiration page. */
+function ideaPrefill(idea) {
+  return {
+    title: idea.title, industry: idea.industry, source: "inspiration",
+    reference: `Like this inspiration video: ${idea.title} (${INSPIRATION_PAGE}?pin=${encodeURIComponent(idea.pinId)})`,
+  };
+}
+
 /** The hero's right side: an inspiration video playing muted, with a request for one like it. */
-function HeroIdea({ idea }) {
+function HeroIdea({ idea, onPlay }) {
   if (!idea) return <div className="hero-film creator-panel"><div className="hero-film-frame"><div className="hero-film-empty" /></div></div>;
-  const request = `${REQUEST_VIDEO_URL}&inspiration=${encodeURIComponent(idea.pinId)}${idea.industry ? `&industry=${idea.industry}` : ""}`;
   return (
-    <a className="hero-film creator-panel" href={request} data-ga-event="cta_click" data-ga-cta-location="hero_video"
-       data-ga-cta-text="Make one like this" aria-label={`Make an ad like ${idea.title}`}>
+    <button type="button" className="hero-film creator-panel" onClick={() => onPlay(idea)} data-ga-event="video_open"
+            data-ga-label={idea.title} aria-label={`Play ${idea.title}`}>
       <div className="hero-film-frame">
         {idea.videoUrl
           ? <video src={idea.videoUrl} poster={idea.posterUrl} autoPlay muted loop playsInline aria-label={idea.title} />
@@ -484,7 +515,7 @@ function HeroIdea({ idea }) {
         <strong>{idea.title}</strong>
         <small>{idea.makerName ? `by ${idea.makerName} · ` : ""}make one like this for your brand</small>
       </div>
-    </a>
+    </button>
   );
 }
 
@@ -504,7 +535,7 @@ function useJson(url, fallback) {
 
 /** "What we can create": inspiration videos, each tagged, in one masonry grid. (Creators' own films
  * join it once there are enough of them.) */
-function WorkGrid({ ideas }) {
+function WorkGrid({ ideas, onPlay, onRequest }) {
   const shown = ideas.filter((idea) => idea.posterUrl).slice(0, 12);
   if (shown.length === 0) return null;
   return (
@@ -515,7 +546,7 @@ function WorkGrid({ ideas }) {
         The kind of ad our creators can make for you. See one you like? Ask for one like it.
       </p>
       <div className="work-grid">
-        {shown.map((idea) => <IdeaCard idea={idea} key={idea.id} />)}
+        {shown.map((idea) => <IdeaCard idea={idea} key={idea.id} onPlay={onPlay} onRequest={onRequest} />)}
       </div>
       <p className="hero-note">
         <a className="hero-link" href={INSPIRATION_PAGE} data-ga-event="cta_click" data-ga-cta-location="work_section" data-ga-cta-text="More inspiration">
@@ -529,18 +560,19 @@ function WorkGrid({ ideas }) {
   );
 }
 
-/** An inspiration video in our own player: muted, plays on hover or tap. */
-function IdeaCard({ idea }) {
+/** An inspiration video: a muted preview on hover, our player on click, "Make one like this" opens
+ * the request form on the page. */
+function IdeaCard({ idea, onPlay, onRequest }) {
   const [playing, setPlaying] = useState(false);
   const video = useRef(null);
   const play = () => video.current?.play().then(() => setPlaying(true)).catch(() => {});
   const stop = () => { video.current?.pause(); setPlaying(false); };
   const ratio = idea.posterWidth && idea.posterHeight ? `${idea.posterWidth} / ${idea.posterHeight}` : "9 / 16";
-  const request = `${REQUEST_VIDEO_URL}&inspiration=${encodeURIComponent(idea.pinId)}${idea.industry ? `&industry=${idea.industry}` : ""}`;
   return (
     <div className="work-card creator-panel-muted">
       <div className="work-card-frame" style={{ aspectRatio: ratio }} onMouseEnter={play} onMouseLeave={stop}
-           onClick={() => (playing ? stop() : play())}>
+           onClick={() => { stop(); onPlay(idea); }} role="button" tabIndex={0} aria-label={`Play ${idea.title}`}
+           onKeyDown={(event) => event.key === "Enter" && onPlay(idea)}>
         {idea.videoUrl
           ? <video ref={video} src={idea.videoUrl} poster={idea.posterUrl} muted loop playsInline preload="none" aria-label={idea.title} />
           : <img src={idea.posterUrl} alt="" loading="lazy" />}
@@ -550,9 +582,10 @@ function IdeaCard({ idea }) {
       <span className="film-card-meta">{INDUSTRY_LABEL[idea.industry] || "Inspiration"}</span>
       <strong>{idea.title}</strong>
       {idea.makerName && <small>by {idea.makerName}</small>}
-      <a className="work-card-request" href={request} data-ga-event="cta_click" data-ga-cta-location="work_section" data-ga-cta-text="Make one like this">
+      <button type="button" className="work-card-request" onClick={() => onRequest(idea)}
+              data-ga-event="cta_click" data-ga-cta-location="work_section" data-ga-cta-text="Make one like this">
         Make one like this
-      </a>
+      </button>
     </div>
   );
 }
@@ -588,7 +621,7 @@ const INDUSTRY_LABEL = {
   ECOMMERCE: "E-commerce", ENTERTAINMENT: "Entertainment", OTHER: "Other",
 };
 
-function PricingSection() {
+function PricingSection({ onRequest }) {
   const [audience, setAudience] = useState("CREATORS");
   const [cadence, setCadence] = useState("MONTHLY");
   const [, , months, discount] = CADENCES.find(([code]) => code === cadence);
@@ -676,9 +709,9 @@ function PricingSection() {
               <li>Storyboard review before the final render</li>
               <li>Captions, voice and sound included</li>
             </ul>
-            <a className="pricing-card-link" href={REQUEST_VIDEO_URL} data-ga-event="cta_click" data-ga-cta-location="pricing_section" data-ga-cta-text="Request a video">
+            <button type="button" className="pricing-card-link" onClick={() => onRequest()} data-ga-event="cta_click" data-ga-cta-location="pricing_section" data-ga-cta-text="Request a video">
               Request a video
-            </a>
+            </button>
           </article>
         </div>
       )}
