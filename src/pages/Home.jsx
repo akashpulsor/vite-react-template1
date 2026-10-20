@@ -113,8 +113,9 @@ const creatorPlans = [
   },
 ];
 
-// The Dalai Llama price for a request we match: per second, from the 60-second price.
-const BRAND_VIDEO_PRICE = 4999;
+// A 60-second video starts at this base price (in the visitor's currency); the rest is the creator's
+// own rate, set by their skill and the work.
+const BRAND_VIDEO_BASE_USD = 20;
 
 const featuredGuideSlugs = [
   "ai-video-process-d2c-brands",
@@ -666,10 +667,11 @@ function PricingSection() {
           <article className="pricing-card creator-panel-muted pricing-card-featured">
             <div className="pricing-card-top"><span className="pricing-badge">A finished video ad</span></div>
             <h3>Per video</h3>
-            <div className="price-row"><strong>~{money.format(money.amount(BRAND_VIDEO_PRICE))}</strong><span>for a 60-second video</span></div>
-            <p className="price-billed">Shorter videos cost less. A creator you choose yourself may set their own rate.</p>
+            <div className="price-row"><strong>From {money.format(money.fromUsd(BRAND_VIDEO_BASE_USD))}</strong><span>for a 60-second video</span></div>
+            <p className="price-billed">A base price; the rest depends on the creator you choose, their skill and the work.</p>
             <ul className="pricing-list">
-              <li>The price is on your brief before you pay anything</li>
+              <li>Pick a creator, or let us match one for your industry</li>
+              <li>The full price is on your brief before you pay anything</li>
               <li>Pay an upfront share to start production</li>
               <li>Storyboard review before the final render</li>
               <li>Captions, voice and sound included</li>
@@ -711,6 +713,7 @@ function useLocalCurrency() {
   return {
     currency: india ? "INR" : "USD",
     amount: (inrPrice) => (india ? inrPrice : Math.round(inrPrice / USD_TO_INR)),
+    fromUsd: (usdPrice) => (india ? usdPrice * USD_TO_INR : usdPrice),
     format: (value) => new Intl.NumberFormat(india ? "en-IN" : "en-US", {
       style: "currency", currency: india ? "INR" : "USD", maximumFractionDigits: 0,
     }).format(Math.round(value)),
