@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { posts } from "../posts/index.js";
 import { reelStudies } from "../reelStudies.js";
 
@@ -9,8 +9,13 @@ const REQUEST_VIDEO_URL = `${BRANDS_SITE}/creators?then=request`;
 const BROWSE_CREATORS_URL = `${BRANDS_SITE}/creators`;
 const BRAND_SIGN_UP_URL = `${BRANDS_SITE}/brands/sign-in`;
 const CREATOR_STUDIO_URL = "https://creator.dalaillama.in/";
-// Films made on Dalai Llama for paying clients (the brands site's feed). Only our own work shows here.
-const FEED_API = "https://api.dalaillama.in/api/v1/public/showcase?tab=TOP&page=0";
+// Films made on Dalai Llama for paying clients (the brands site's feed), inspiration videos (ideas
+// of what a creator here can make, tagged as such) and the creator catalogue.
+const API = "https://api.dalaillama.in/api/v1/public";
+const FEED_API = `${API}/showcase?tab=TOP&page=0`;
+const INSPIRATION_API = `${API}/showcase/inspiration`;
+const CREATORS_API = `${API}/creators?limit=8`;
+const INSPIRATION_PAGE = `${BRANDS_SITE}/inspiration`;
 
 const brandProblems = [
   ["Too many creators, too few that fit", "Open calls bring a flood of portfolios, and most don't match your product, audience or category."],
@@ -275,6 +280,8 @@ export default function Home() {
   const featuredGuideCards = featuredGuides.slice(0, FEATURED_GUIDE_CARD_LIMIT);
   const latestPostLinks = posts.slice(0, LATEST_POST_LINK_LIMIT);
   const films = useFilms();
+  const ideas = useJson(INSPIRATION_API, []);
+  const creators = useJson(CREATORS_API, []);
 
   return (
     <article className="landing-page">
@@ -285,8 +292,8 @@ export default function Home() {
           <div className="hero-body">
             <p>Tell us what the video should do. We match you with a creator who makes ads for brands like yours, and you get a priced brief straight away.</p>
             <p>
-              Every film you see here was made on Dalai Llama and delivered to a paying client. No open calls, no chasing portfolios,
-              no price after three calls.
+              Films tagged "Made on Dalai Llama" were delivered to paying clients; "Inspiration" shows the kind of ad our creators
+              can make for you. No open calls, no chasing portfolios, no price after three calls.
             </p>
           </div>
           <div className="hero-actions">
@@ -344,7 +351,7 @@ export default function Home() {
         </div>
       </section>
 
-      <FilmStrip films={films} />
+      <WorkGrid films={films} ideas={ideas} />
 
       <section className="landing-section split-section" id="order">
         <div>
@@ -382,6 +389,7 @@ export default function Home() {
             </div>
           ))}
         </div>
+        <CreatorCatalogue creators={creators} />
         <div className="stage-list reach-list">
           {creatorReach.map(([title, body], index) => (
             <div className="stage-row" key={title}>
@@ -506,34 +514,118 @@ function HeroFilm({ film }) {
   );
 }
 
-function FilmStrip({ films }) {
-  if (films.length === 0) return null;
+/** A public list from our API; {@code fallback} until (and unless) it answers. */
+function useJson(url, fallback) {
+  const [data, setData] = useState(fallback);
+  useEffect(() => {
+    let cancelled = false;
+    fetch(url, { headers: { accept: "application/json" } })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((body) => { if (!cancelled && Array.isArray(body)) setData(body); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, [url]);
+  return data;
+}
+
+/** "What we can create": our films first, then inspiration, in one masonry grid, each tagged. */
+function WorkGrid({ films, ideas }) {
+  const shownIdeas = ideas.filter((idea) => idea.posterUrl).slice(0, Math.max(0, 12 - films.length));
+  if (films.length === 0 && shownIdeas.length === 0) return null;
   return (
-    <section className="landing-section" id="films" aria-label="Films made on Dalai Llama">
-      <p className="kicker">Made on Dalai Llama</p>
-      <h2>Ads our creators made for paying clients.</h2>
-      <div className="film-grid">
+    <section className="landing-section" id="films" aria-label="What we can create">
+      <p className="kicker">What we can create</p>
+      <h2>Ads for every kind of brand.</h2>
+      <p className="section-lede">
+        "Made on Dalai Llama" films were delivered to paying clients. "Inspiration" shows the kind of ad our creators can make
+        for you: see one you like, ask for one like it.
+      </p>
+      <div className="work-grid">
         {films.map((film) => (
-          <a className="film-card creator-panel-muted" href={filmUrl(film)} key={film.publicId}
+          <a className="work-card creator-panel-muted" href={filmUrl(film)} key={film.publicId}
              data-ga-event="film_click" data-ga-label={film.title}>
-            <div className={`film-card-frame${film.vertical ? " film-card-vertical" : ""}`}>
+            <div className="work-card-frame" style={{ aspectRatio: film.vertical ? "9 / 16" : "16 / 10" }}>
               <img src={film.thumbnailUrl} alt="" loading="lazy" />
               <span className="play-badge" aria-hidden="true">▶</span>
+              <span className="work-tag work-tag-ours">Made on Dalai Llama</span>
             </div>
             <span className="film-card-meta">{filmMeta(film)}</span>
             <strong>{film.title}</strong>
             {film.creator && <small>by {film.creator.displayName}</small>}
           </a>
         ))}
+        {shownIdeas.map((idea) => <IdeaCard idea={idea} key={idea.id} />)}
       </div>
       <p className="hero-note">
-        <a className="hero-link" href={BROWSE_CREATORS_URL} data-ga-event="cta_click" data-ga-cta-location="films_section" data-ga-cta-text="See all films">
-          See every creator and film
+        <a className="hero-link" href={INSPIRATION_PAGE} data-ga-event="cta_click" data-ga-cta-location="work_section" data-ga-cta-text="More inspiration">
+          More inspiration
+        </a>{" · "}
+        <a className="hero-link" href={BROWSE_CREATORS_URL} data-ga-event="cta_click" data-ga-cta-location="work_section" data-ga-cta-text="See every creator">
+          See every creator
         </a>
       </p>
     </section>
   );
 }
+
+/** An inspiration video in our own player: muted, plays on hover or tap. */
+function IdeaCard({ idea }) {
+  const [playing, setPlaying] = useState(false);
+  const video = useRef(null);
+  const play = () => video.current?.play().then(() => setPlaying(true)).catch(() => {});
+  const stop = () => { video.current?.pause(); setPlaying(false); };
+  const ratio = idea.posterWidth && idea.posterHeight ? `${idea.posterWidth} / ${idea.posterHeight}` : "9 / 16";
+  const request = `${REQUEST_VIDEO_URL}&inspiration=${encodeURIComponent(idea.pinId)}${idea.industry ? `&industry=${idea.industry}` : ""}`;
+  return (
+    <div className="work-card creator-panel-muted">
+      <div className="work-card-frame" style={{ aspectRatio: ratio }} onMouseEnter={play} onMouseLeave={stop}
+           onClick={() => (playing ? stop() : play())}>
+        {idea.videoUrl
+          ? <video ref={video} src={idea.videoUrl} poster={idea.posterUrl} muted loop playsInline preload="none" aria-label={idea.title} />
+          : <img src={idea.posterUrl} alt="" loading="lazy" />}
+        {idea.videoUrl && !playing && <span className="play-badge" aria-hidden="true">▶</span>}
+        <span className="work-tag">Inspiration</span>
+      </div>
+      <span className="film-card-meta">{INDUSTRY_LABEL[idea.industry] || "Inspiration"}</span>
+      <strong>{idea.title}</strong>
+      {idea.makerName && <small>by {idea.makerName}</small>}
+      <a className="work-card-request" href={request} data-ga-event="cta_click" data-ga-cta-location="work_section" data-ga-cta-text="Make one like this">
+        Make one like this
+      </a>
+    </div>
+  );
+}
+
+/** Creators with films to show: a card each, to their page. */
+function CreatorCatalogue({ creators }) {
+  if (creators.length === 0) return null;
+  return (
+    <div className="creator-catalogue" aria-label="Creators on Dalai Llama">
+      {creators.map((creator) => (
+        <a className="creator-card creator-panel-muted" href={creator.profileUrl} key={creator.handle}
+           data-ga-event="creator_click" data-ga-label={creator.handle}>
+          <div className="creator-card-cover">{creator.coverUrl && <img src={creator.coverUrl} alt="" loading="lazy" />}</div>
+          <div className="creator-card-body">
+            {creator.avatarUrl ? <img className="creator-avatar" src={creator.avatarUrl} alt="" loading="lazy" />
+              : <span className="creator-avatar creator-avatar-initial">{creator.displayName.slice(0, 1)}</span>}
+            <div>
+              <strong>{creator.displayName}</strong>
+              <small>
+                {[creator.headline, `${creator.filmCount} film${creator.filmCount === 1 ? "" : "s"}`].filter(Boolean).join(" · ")}
+              </small>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  );
+}
+
+const INDUSTRY_LABEL = {
+  FASHION: "Fashion", BEAUTY: "Beauty", FOOD_BEVERAGE: "Food & beverage", TECH: "Tech", FINANCE: "Finance",
+  REAL_ESTATE: "Real estate", EDUCATION: "Education", HEALTH: "Health", TRAVEL: "Travel", AUTOMOTIVE: "Automotive",
+  ECOMMERCE: "E-commerce", ENTERTAINMENT: "Entertainment", OTHER: "Other",
+};
 
 function PricingSection() {
   const [audience, setAudience] = useState("CREATORS");

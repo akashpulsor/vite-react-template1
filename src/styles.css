@@ -2023,3 +2023,145 @@ a:hover {
 .crew-grid-two {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
+
+/* ---- "What we can create" masonry and the creator catalogue ---- */
+
+.work-grid {
+  columns: 4 220px;
+  column-gap: 16px;
+  margin-top: 24px;
+}
+
+.work-card {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding: 10px;
+  border-radius: 18px;
+  break-inside: avoid;
+}
+
+.work-card strong {
+  color: #ffffff;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.work-card small {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.work-card-frame {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #000104;
+  cursor: pointer;
+}
+
+.work-card-frame img,
+.work-card-frame video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.work-card-frame .play-badge {
+  width: 44px;
+  height: 44px;
+  font-size: 15px;
+}
+
+.work-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #f59e0b;
+  color: #0f0a00;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.work-tag-ours {
+  background: var(--creator-purple);
+  color: #ffffff;
+}
+
+.work-card-request {
+  justify-self: start;
+  margin-top: 4px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: var(--creator-purple);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.creator-catalogue {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.creator-card {
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.creator-card-cover {
+  height: 120px;
+  background: radial-gradient(120% 90% at 50% 0%, rgba(124, 58, 237, 0.28), rgba(0, 1, 4, 0.96) 70%);
+}
+
+.creator-card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.creator-card-body {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px 14px;
+}
+
+.creator-card-body > div {
+  display: grid;
+  min-width: 0;
+}
+
+.creator-card-body strong {
+  color: #ffffff;
+  font-size: 15px;
+}
+
+.creator-card-body small {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.creator-avatar {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.creator-avatar-initial {
+  display: grid;
+  place-items: center;
+  background: var(--creator-purple);
+  color: #ffffff;
+  font-weight: 800;
+}
