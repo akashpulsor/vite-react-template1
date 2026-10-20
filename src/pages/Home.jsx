@@ -12,7 +12,6 @@ const CREATOR_STUDIO_URL = "https://creator.dalaillama.in/";
 // Films made on Dalai Llama for paying clients (the brands site's feed), inspiration videos (ideas
 // of what a creator here can make, tagged as such) and the creator catalogue.
 const API = "https://api.dalaillama.in/api/v1/public";
-const FEED_API = `${API}/showcase?tab=TOP&page=0`;
 const INSPIRATION_API = `${API}/showcase/inspiration`;
 const CREATORS_API = `${API}/creators?limit=8`;
 const INSPIRATION_PAGE = `${BRANDS_SITE}/inspiration`;
@@ -47,10 +46,10 @@ const creatorFeatures = [
 ];
 
 const creatorReach = [
-  ["Your public profile", "A page brands can find, with the films you made on Dalai Llama for paying clients."],
+  ["Shown to brands, regularly", "Every new film goes to brands in the industries you make for, in automatic outreach and the brands' feed, so your work keeps being seen."],
+  ["Your public profile", "A page brands find and follow, with the films you made for paying clients. Followers hear about every new one."],
   ["Outreach from your own address", "Send your work to brands from your Dalai Llama email. One mail a day per brand, never spam."],
-  ["Automatic outreach", "We show your new films to brands in the industries you work in, who are likely to want one like them."],
-  ["Requests routed to you", "Brands that ask Dalai Llama for a video in your industry are routed to you. A request comes with a brief you can price."],
+  ["Easy to buy from", "A brand who likes your work requests a video in one click, and gets your brief with the price. Requests in your industry are routed to you."],
 ];
 
 // Prices are monthly; longer billing is the months times the monthly price, less a discount. The
@@ -279,7 +278,6 @@ export default function Home() {
     .filter(Boolean);
   const featuredGuideCards = featuredGuides.slice(0, FEATURED_GUIDE_CARD_LIMIT);
   const latestPostLinks = posts.slice(0, LATEST_POST_LINK_LIMIT);
-  const films = useFilms();
   const ideas = useJson(INSPIRATION_API, []);
   const creators = useJson(CREATORS_API, []);
 
@@ -292,8 +290,7 @@ export default function Home() {
           <div className="hero-body">
             <p>Tell us what the video should do. We match you with a creator who makes ads for brands like yours, and you get a priced brief straight away.</p>
             <p>
-              Films tagged "Made on Dalai Llama" were delivered to paying clients; "Inspiration" shows the kind of ad our creators
-              can make for you. No open calls, no chasing portfolios, no price after three calls.
+              The videos here show the kind of ad our creators make. No open calls, no chasing portfolios, no price after three calls.
             </p>
           </div>
           <div className="hero-actions">
@@ -307,13 +304,13 @@ export default function Home() {
             </a>
           </div>
           <p className="hero-note">
-            You make videos?{" "}
+            You make videos? We put your work in front of brands, again and again.{" "}
             <a className="hero-link" href="#creators" data-ga-event="cta_click" data-ga-cta-location="hero_section" data-ga-cta-text="For creators">
-              Get found by brands, free
+              Get seen, sell more, free
             </a>
           </p>
         </div>
-        <HeroFilm film={films[0]} />
+        <HeroIdea idea={ideas.find((idea) => idea.posterUrl)} />
       </section>
 
       <section className="landing-section essay-section" id="problem">
@@ -351,7 +348,7 @@ export default function Home() {
         </div>
       </section>
 
-      <WorkGrid films={films} ideas={ideas} />
+      <WorkGrid ideas={ideas} />
 
       <section className="landing-section split-section" id="order">
         <div>
@@ -376,25 +373,27 @@ export default function Home() {
 
       <section className="landing-section" id="creators">
         <p className="kicker">For creators</p>
-        <h2>A studio that makes the ad, and brings you the brands.</h2>
+        <h2>We keep your work in front of brands.</h2>
         <p className="section-lede">
-          Make client-ready video ads with the best models for each shot, then let brands find you: a public profile, outreach
-          from your own address, and requests routed to you.
+          Brands buy from creators they keep seeing. Dalai Llama shows your films to brands in the industries you make for, again
+          and again: on your profile, in the brands' feed, in automatic outreach and in mail from your own address. More brands see
+          your work, and buying a video from you takes one click.
         </p>
-        <div className="crew-grid">
-          {creatorFeatures.map(([title, body]) => (
-            <div className={`crew-card creator-panel-muted${title === "Stretch" ? " crew-card-accent" : ""}`} key={title}>
-              <h3>{title}</h3>
-              <p>{body}</p>
-            </div>
-          ))}
-        </div>
-        <CreatorCatalogue creators={creators} />
         <div className="stage-list reach-list">
           {creatorReach.map(([title, body], index) => (
             <div className="stage-row" key={title}>
               <span>{String(index + 1).padStart(2, "0")}</span>
               <p><strong className="row-title">{title}.</strong> {body}</p>
+            </div>
+          ))}
+        </div>
+        <CreatorCatalogue creators={creators} />
+        <h3 className="subhead">And a studio that makes the ad</h3>
+        <div className="crew-grid">
+          {creatorFeatures.map(([title, body]) => (
+            <div className={`crew-card creator-panel-muted${title === "Stretch" ? " crew-card-accent" : ""}`} key={title}>
+              <h3>{title}</h3>
+              <p>{body}</p>
             </div>
           ))}
         </div>
@@ -466,49 +465,23 @@ export default function Home() {
   );
 }
 
-/** Films made on Dalai Llama, newest top first; empty until the feed answers. */
-function useFilms() {
-  const [films, setFilms] = useState([]);
-  useEffect(() => {
-    let cancelled = false;
-    fetch(FEED_API, { headers: { accept: "application/json" } })
-      .then((response) => (response.ok ? response.json() : null))
-      .then((page) => {
-        const items = (page?.items || []).filter((item) => item.origin === "PLATFORM" && item.thumbnailUrl);
-        if (!cancelled) setFilms(items.slice(0, 8));
-      })
-      .catch(() => {});
-    return () => { cancelled = true; };
-  }, []);
-  return films;
-}
-
-function filmUrl(film) {
-  return `${film.creator?.profileUrl || BROWSE_CREATORS_URL}?film=${encodeURIComponent(film.publicId)}`;
-}
-
-function filmMeta(film) {
-  const length = film.durationSeconds ? `${Math.floor(film.durationSeconds / 60)}:${String(Math.round(film.durationSeconds % 60)).padStart(2, "0")}` : null;
-  return [FORMAT_LABEL[film.format], length, film.vertical ? "Vertical" : "Widescreen"].filter(Boolean).join(" · ");
-}
-
-const FORMAT_LABEL = {
-  PRODUCT_AD: "Product ad", UGC: "UGC", EXPLAINER: "Explainer", BRAND_FILM: "Brand film", SOCIAL_SHORT: "Social short",
-};
-
-/** The hero's right side: the top film, played from its poster to the creator's page. */
-function HeroFilm({ film }) {
+/** The hero's right side: an inspiration video playing muted, with a request for one like it. */
+function HeroIdea({ idea }) {
+  if (!idea) return <div className="hero-film creator-panel"><div className="hero-film-frame"><div className="hero-film-empty" /></div></div>;
+  const request = `${REQUEST_VIDEO_URL}&inspiration=${encodeURIComponent(idea.pinId)}${idea.industry ? `&industry=${idea.industry}` : ""}`;
   return (
-    <a className="hero-film creator-panel" href={film ? filmUrl(film) : BROWSE_CREATORS_URL}
-       data-ga-event="film_click" data-ga-label={film?.title || "Browse films"} aria-label={film ? `Watch ${film.title}` : "See films made on Dalai Llama"}>
+    <a className="hero-film creator-panel" href={request} data-ga-event="cta_click" data-ga-cta-location="hero_video"
+       data-ga-cta-text="Make one like this" aria-label={`Make an ad like ${idea.title}`}>
       <div className="hero-film-frame">
-        {film ? <img src={film.thumbnailUrl} alt="" loading="eager" /> : <div className="hero-film-empty" />}
-        <span className="play-badge" aria-hidden="true">▶</span>
+        {idea.videoUrl
+          ? <video src={idea.videoUrl} poster={idea.posterUrl} autoPlay muted loop playsInline aria-label={idea.title} />
+          : <img src={idea.posterUrl} alt="" loading="eager" />}
+        <span className="work-tag">Inspiration</span>
       </div>
       <div className="hero-film-caption">
-        <span>{film ? filmMeta(film) : "Made on Dalai Llama"}</span>
-        <strong>{film ? film.title : "Films made for paying clients"}</strong>
-        {film?.creator && <small>by {film.creator.displayName} · made on Dalai Llama for a paying client</small>}
+        <span>{INDUSTRY_LABEL[idea.industry] || "Inspiration"}</span>
+        <strong>{idea.title}</strong>
+        <small>{idea.makerName ? `by ${idea.makerName} · ` : ""}make one like this for your brand</small>
       </div>
     </a>
   );
@@ -528,33 +501,20 @@ function useJson(url, fallback) {
   return data;
 }
 
-/** "What we can create": our films first, then inspiration, in one masonry grid, each tagged. */
-function WorkGrid({ films, ideas }) {
-  const shownIdeas = ideas.filter((idea) => idea.posterUrl).slice(0, Math.max(0, 12 - films.length));
-  if (films.length === 0 && shownIdeas.length === 0) return null;
+/** "What we can create": inspiration videos, each tagged, in one masonry grid. (Creators' own films
+ * join it once there are enough of them.) */
+function WorkGrid({ ideas }) {
+  const shown = ideas.filter((idea) => idea.posterUrl).slice(0, 12);
+  if (shown.length === 0) return null;
   return (
     <section className="landing-section" id="films" aria-label="What we can create">
       <p className="kicker">What we can create</p>
       <h2>Ads for every kind of brand.</h2>
       <p className="section-lede">
-        "Made on Dalai Llama" films were delivered to paying clients. "Inspiration" shows the kind of ad our creators can make
-        for you: see one you like, ask for one like it.
+        The kind of ad our creators can make for you. See one you like? Ask for one like it.
       </p>
       <div className="work-grid">
-        {films.map((film) => (
-          <a className="work-card creator-panel-muted" href={filmUrl(film)} key={film.publicId}
-             data-ga-event="film_click" data-ga-label={film.title}>
-            <div className="work-card-frame" style={{ aspectRatio: film.vertical ? "9 / 16" : "16 / 10" }}>
-              <img src={film.thumbnailUrl} alt="" loading="lazy" />
-              <span className="play-badge" aria-hidden="true">▶</span>
-              <span className="work-tag work-tag-ours">Made on Dalai Llama</span>
-            </div>
-            <span className="film-card-meta">{filmMeta(film)}</span>
-            <strong>{film.title}</strong>
-            {film.creator && <small>by {film.creator.displayName}</small>}
-          </a>
-        ))}
-        {shownIdeas.map((idea) => <IdeaCard idea={idea} key={idea.id} />)}
+        {shown.map((idea) => <IdeaCard idea={idea} key={idea.id} />)}
       </div>
       <p className="hero-note">
         <a className="hero-link" href={INSPIRATION_PAGE} data-ga-event="cta_click" data-ga-cta-location="work_section" data-ga-cta-text="More inspiration">
@@ -598,7 +558,7 @@ function IdeaCard({ idea }) {
 
 /** Creators with films to show: a card each, to their page. */
 function CreatorCatalogue({ creators }) {
-  if (creators.length === 0) return null;
+  if (creators.length < 3) return null;
   return (
     <div className="creator-catalogue" aria-label="Creators on Dalai Llama">
       {creators.map((creator) => (
