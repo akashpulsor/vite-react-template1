@@ -2184,3 +2184,9 @@ a:hover {
   top: 14px;
   left: 14px;
 }
+
+.nav-links a.nav-cta {
+  border: 1px solid var(--creator-border-strong);
+  color: #ffffff;
+  background: rgba(124, 58, 237, 0.18);
+}

@@ -62,7 +62,8 @@ export default function App() {
             <a href="/#films" data-ga-event="nav_click" data-ga-label="Films">Films</a>
             <a href="/#pricing" data-ga-event="nav_click" data-ga-label="Pricing">Pricing</a>
             <a href="/blog" data-ga-event="nav_click" data-ga-label="Guides">Guides</a>
-            <a href="https://brands.dalaillama.in/brands/sign-in" data-ga-event="nav_click" data-ga-label="Brand sign in">Sign in</a>
+            <a href="https://brands.dalaillama.in/brands/sign-in" data-ga-event="nav_click" data-ga-label="Brand sign in">Brand sign in</a>
+            <a className="nav-cta" href="https://creator.dalaillama.in/" data-ga-event="nav_click" data-ga-label="Creator sign in">Creator sign in</a>
           </nav>
         </header>
         <main>
