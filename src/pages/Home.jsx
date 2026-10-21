@@ -114,9 +114,9 @@ const creatorPlans = [
   },
 ];
 
-// A 60-second video starts at this base price (in the visitor's currency); the rest is the creator's
-// own rate, set by their skill and the work.
-const BRAND_VIDEO_BASE_USD = 20;
+// A 60-second video starts at this base price -- in India the price a request we match is charged
+// (tenant-service brands.request-pricing) -- and the rest is the creator's own rate, by their skill.
+const BRAND_VIDEO_BASE = { INR: 1999, USD: 20 };
 
 const featuredGuideSlugs = [
   "ai-video-process-d2c-brands",
@@ -700,7 +700,7 @@ function PricingSection({ onRequest }) {
           <article className="pricing-card creator-panel-muted pricing-card-featured">
             <div className="pricing-card-top"><span className="pricing-badge">A finished video ad</span></div>
             <h3>Per video</h3>
-            <div className="price-row"><strong>From {money.format(money.fromUsd(BRAND_VIDEO_BASE_USD))}</strong><span>for a 60-second video</span></div>
+            <div className="price-row"><strong>From {money.format(BRAND_VIDEO_BASE[money.currency])}</strong><span>for a 60-second video</span></div>
             <p className="price-billed">A base price; the rest depends on the creator you choose, their skill and the work.</p>
             <ul className="pricing-list">
               <li>Pick a creator, or let us match one for your industry</li>
@@ -746,7 +746,6 @@ function useLocalCurrency() {
   return {
     currency: india ? "INR" : "USD",
     amount: (inrPrice) => (india ? inrPrice : Math.round(inrPrice / USD_TO_INR)),
-    fromUsd: (usdPrice) => (india ? usdPrice * USD_TO_INR : usdPrice),
     format: (value) => new Intl.NumberFormat(india ? "en-IN" : "en-US", {
       style: "currency", currency: india ? "INR" : "USD", maximumFractionDigits: 0,
     }).format(Math.round(value)),
