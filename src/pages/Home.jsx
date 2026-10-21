@@ -700,12 +700,15 @@ function PricingSection({ onRequest }) {
           <article className="pricing-card creator-panel-muted pricing-card-featured">
             <div className="pricing-card-top"><span className="pricing-badge">A finished video ad</span></div>
             <h3>Per video</h3>
-            <div className="price-row"><strong>From {money.format(BRAND_VIDEO_BASE[money.currency])}</strong><span>for a 60-second video</span></div>
-            <p className="price-billed">A base price; the rest depends on the creator you choose, their skill and the work.</p>
+            <div className="price-row"><strong>{money.format(BRAND_VIDEO_BASE[money.currency])} and up</strong><span>for a 60-second video</span></div>
+            <p className="price-billed">
+              {money.format(BRAND_VIDEO_BASE[money.currency])} is the base. Each creator sets their own range above it, by their skill
+              and the work.
+            </p>
             <ul className="pricing-list">
               <li>Pick a creator, or let us match one for your industry</li>
               <li>The full price is on your brief before you pay anything</li>
-              <li>Pay an upfront share to start production</li>
+              <li>No full payment upfront: pay a share to start, the rest when you approve the final video</li>
               <li>Storyboard review before the final render</li>
               <li>Captions, voice and sound included</li>
             </ul>
