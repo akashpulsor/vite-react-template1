@@ -19,6 +19,9 @@ import videoEditingWorkflow from "./video-editing-workflow.md?raw";
 import videoProductionChecklist from "./video-production-checklist.md?raw";
 import ultimateGuideToVideoRepurposing from "./ultimate-guide-to-video-repurposing.md?raw";
 import aiVideoProcessD2cBrands from "./ai-video-process-d2c-brands.md?raw";
+import aiVideoGenerationProcess from "./ai-video-generation-process.md?raw";
+import scalingAiVideoProduction from "./scaling-ai-video-production.md?raw";
+import reduceAiVideoProductionCost from "./reduce-ai-video-production-cost.md?raw";
 import partitionHistoryShortVideo from "./partition-history-short-video.md?raw";
 import historyOfZeroShunya from "./history-of-zero-shunya.md?raw";
 import cockroachSpyShortVideo from "./cockroach-spy-short-video.md?raw";
@@ -33,6 +36,9 @@ import { serviceComparisonPosts } from "./serviceComparisonPosts.js";
 import { videoOperationsPosts } from "./videoOperationsPosts.js";
 
 const rawPosts = [
+  aiVideoGenerationProcess,
+  reduceAiVideoProductionCost,
+  scalingAiVideoProduction,
   aiVideoProcessD2cBrands,
   aiVideoWorkflowDigitalPublishers,
   aiVideoEditingNewsrooms,
@@ -66,14 +72,14 @@ const rawPosts = [
 const markdownPosts = rawPosts.map(parsePost);
 
 export const posts = [
-  ...markdownPosts.slice(0, 6),
+  ...markdownPosts.slice(0, 9),
   ...newsroomWorkflowPosts,
   ...agencyWorkflowPosts,
   ...videoOperationsPosts,
   ...serviceComparisonPosts,
-  markdownPosts[6],
+  markdownPosts[9],
   ...programmaticShortsPosts,
-  ...markdownPosts.slice(7),
+  ...markdownPosts.slice(10),
 ];
 
 export function getPostBySlug(slug) {
