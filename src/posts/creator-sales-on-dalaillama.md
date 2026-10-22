@@ -38,7 +38,7 @@ Dalaillama keeps adding brands, and the right person to contact at each, to its 
 
 From that audience, brands in your industry are sent a film they haven't seen yet, chosen from creators who make videos for that industry. Yours included.
 
-You don't write anything, choose anyone, or press send. It runs on its own, and it doesn't use up your own email allowance. On the Free plan, your work is shown this way to up to 10 brands a month. Studio raises that to 100, and Pro to every brand in the directory.
+You don't write anything, choose anyone, or press send. It runs on its own, and it doesn't use up your own email allowance. On the Free plan, your work is shown this way to a few brands, up to 10 a month. Studio raises that to 100 a month, and Pro to every brand in the audience.
 
 And when a brand follows you, they hear about every new film you publish. Your audience grows instead of resetting with every pitch.
 
@@ -84,16 +84,21 @@ You get that as a brief. You set the price on it, the brand reviews it, and pays
 
 No sales call, no "can you send your rates", no chasing an invoice before you start.
 
-## What it costs: nothing to start
+## What it costs: free to start, paid to reach more
 
-Everything above works on the Free plan:
+Every step above works on the Free plan, so you can start selling today without paying anything. The Free plan gets your work in front of a **few** brands. The paid plans are how you reach **many** more.
 
-- a public profile with your YouTube videos;
-- automatic showcasing to brands in your industry (up to 10 brands a month);
-- your own outreach with ready templates (up to 100 emails a month);
-- followers, and video requests from brands, as priced briefs.
+| | Free | Studio | Pro |
+| --- | --- | --- | --- |
+| Price | ₹0 | ₹2,999 a month | ₹6,999 a month |
+| Public profile with your YouTube videos | Yes | Yes | Yes |
+| Brands shown your work automatically | Up to 10 a month | Up to 100 a month | Every brand in the audience |
+| Your own emails to brands | 100 a month | 1,000 a month | 3,000 a month |
+| Video requests as priced briefs | Yes | Yes | Yes |
 
-You only pay when you want more reach or more studio features. Studio (₹2,999 a month) shows your work to up to 100 brands a month with 1,000 emails, and Pro (₹6,999 a month) to every brand with 3,000.
+On Free, your profile reaches up to 10 brands a month, enough to see requests come in. Studio puts your work in front of ten times as many brands, with ten times the emails. Pro shows it to every brand in the audience, and the audience keeps growing.
+
+Quarterly, half-yearly and yearly billing are discounted by 10%, 15% and 20%.
 
 ## The old way vs. the Dalaillama way
 
@@ -105,7 +110,7 @@ You only pay when you want more reach or more studio features. Studio (₹2,999 
 | Frequency | Easy to over-send and get ignored | One email a day per brand, for everyone |
 | Enquiries | "What are your rates?" threads | A request that arrives as a brief you price |
 | Getting paid | Chasing invoices | A share upfront, the rest on approval |
-| Cost to start | Your time | Free |
+| Cost to start | Your time | Free, with more reach on paid plans |
 
 ## Start now
 
