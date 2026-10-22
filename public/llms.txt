@@ -1,0 +1,62 @@
+# Dalai Llama
+
+> Dalai Llama (dalaillama.in) is an on-demand creator service for video ads -- "Uber for your creative department". Brands and agencies request a video, get matched to an active creator who makes ads for their industry, see the price on a brief (usually the same day), approve the storyboard, and pay a share upfront and the rest on approval. Creators produce in an AI-assisted studio that plans every shot before it is rendered, so videos are faster and cheaper to make and to revise.
+
+## What we do
+
+- **For brands (especially D2C):** request a video ad with no sign-in at https://brands.dalaillama.in. Describe what the video should do, the product, who it's for, the length and the languages, and add product photos or references. A creator who makes videos for brands in your industry takes it -- or you pick one from their profile -- and sends back a brief with the price. You approve the storyboard before the film is made, then the finished ad with captions, voice and sound included.
+- **For creators:** a studio at https://creator.dalaillama.in to make ads from idea to finished film (script, storyboard, scene plan, voice, captions, sound), a public profile of films delivered to paying clients, regular exposure to brands in the industries they make for, and requests in their industry routed to them.
+- **For agencies:** creative capacity on demand -- more clients and more categories without hiring, at a lower cost per video.
+
+## How we help
+
+- **No freelancer hassle:** no sorting through open portfolios, no price that only arrives after calls, no brief scattered across chats and email. Matching, a priced brief, the storyboard review and the final video all sit in one link.
+- **Proof of delivery:** every film on a creator's profile was made on Dalai Llama and delivered to a client who paid for it.
+- **Price before work:** a 60-second video starts from Rs 1,999 in India ($20 elsewhere); the rest is the creator's own rate for the work. Every job is quoted before it starts.
+- **Safe payment:** a share upfront to start, the rest on approval of the final video.
+
+## How we increase productivity
+
+- Shots are planned and storyboarded before they are rendered, so a weak scene is fixed on paper, not after paying to render it.
+- A change to one shot re-renders only that shot, not the whole film.
+- The right model for each shot (for example Seedance, Veo, Kling), from a fast draft model to a cinematic one.
+- Stretch (frame interpolation): render a shorter clip and fill in the missing frames, so a slow-motion shot costs a fraction of rendering every second.
+- Music, voice, captions and sound in the same pipeline, so creators deliver ads instead of assembling files.
+- Render cost is visible before each render, and generation cost is tracked per project and per stage.
+
+## How we help agencies scale and reduce cost
+
+- **Variable cost instead of fixed headcount:** pay per video, not per editor; a quiet month costs a quiet month's worth.
+- **Elastic capacity:** a launch that needs twenty variations in a week is taken by more creators, not by hiring.
+- **A specialist per client:** each client's work goes to a creator who makes videos for that industry.
+- **Lower cost per deliverable:** AI-assisted production, storyboard-first approval and per-shot re-rendering cut the time and spend behind each video.
+- **Control kept in one place:** briefs, approvals, review rounds and delivery in one link, ready for client review.
+
+## Uber for your creative department
+
+Like ride-hailing for transport, Dalai Llama makes a creator available when you need one, at a price you see before you commit, without owning a team: request, get matched, see the price, approve, pay for what ships.
+
+## Creator plans
+
+- **Free:** public creator profile, create and download videos, automatic outreach to brands who may like your videos.
+- **Studio (Rs 2,999/month):** for creators taking on paid work -- edit any shot, upload product and reference images, share brief links with clients, wider reach to brands.
+- **Pro (Rs 6,999/month):** every studio feature, including upscaling and custom character voices, with the profile shown to every brand.
+- Quarterly, half-yearly and yearly billing are discounted (10%, 15% and 20%).
+
+## Key pages
+
+- [Home](https://dalaillama.in/): what we do, for brands and for creators, pricing.
+- [Request a video (brands)](https://brands.dalaillama.in): send a video request, no sign-in needed.
+- [Creator studio](https://creator.dalaillama.in): start free as a creator.
+- [Blog](https://dalaillama.in/blog): guides on video ads and AI video production.
+
+## Guides
+
+- [What Is an On-Demand Creator Service?](https://dalaillama.in/blog/on-demand-creator-service): how on-demand creative works for brands, agencies and creators.
+- [How D2C Brands Can Get Ads Made Without the Freelancer Hassle](https://dalaillama.in/blog/d2c-video-ads-without-freelancer-hassle)
+- [Ad Making Fundamentals for D2C Brands](https://dalaillama.in/blog/ad-making-fundamentals-d2c)
+- [Propaganda, Persuasion and Your Brand: What Customers Actually See](https://dalaillama.in/blog/brand-perception-propaganda-theory)
+- [How D2C Brands Can Create Better AI Videos](https://dalaillama.in/blog/ai-video-process-d2c-brands)
+- [The AI Video Generation Process, Step by Step](https://dalaillama.in/blog/ai-video-generation-process)
+- [How to Reduce the Cost of AI Video Production](https://dalaillama.in/blog/reduce-ai-video-production-cost)
+- [How to Scale AI Video Production](https://dalaillama.in/blog/scaling-ai-video-production)

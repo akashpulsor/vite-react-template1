@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import {
@@ -306,6 +306,8 @@ for (const post of posts) {
 const sitemap = buildSitemap(posts);
 await writeFile(path.join(distDir, "sitemap.xml"), sitemap);
 await writeFile(path.join(rootDir, "public", "sitemap.xml"), sitemap);
+// llms.txt is the standard name; /llm.txt serves the same file for anyone who asks for that one.
+await copyFile(path.join(distDir, "llms.txt"), path.join(distDir, "llm.txt"));
 
 console.log(`Prerendered ${posts.length} blog posts and ${videoRepurposingChildPages.length + 1} video repurposing pages and wrote sitemap.`);
 
@@ -350,14 +352,14 @@ async function loadPosts() {
   const serviceComparisonPosts = serviceModule.serviceComparisonPosts || [];
 
   return [
-    ...parsed.slice(0, 5),
+    ...parsed.slice(0, 9),
     ...newsroomWorkflowPosts,
     ...agencyWorkflowPosts,
     ...videoOperationsPosts,
     ...serviceComparisonPosts,
-    parsed[5],
+    parsed[9],
     ...programmaticPosts,
-    ...parsed.slice(6),
+    ...parsed.slice(10),
   ].filter(Boolean);
 }
 

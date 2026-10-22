@@ -22,6 +22,10 @@ import aiVideoProcessD2cBrands from "./ai-video-process-d2c-brands.md?raw";
 import aiVideoGenerationProcess from "./ai-video-generation-process.md?raw";
 import scalingAiVideoProduction from "./scaling-ai-video-production.md?raw";
 import reduceAiVideoProductionCost from "./reduce-ai-video-production-cost.md?raw";
+import onDemandCreatorService from "./on-demand-creator-service.md?raw";
+import d2cVideoAdsWithoutFreelancerHassle from "./d2c-video-ads-without-freelancer-hassle.md?raw";
+import adMakingFundamentalsD2c from "./ad-making-fundamentals-d2c.md?raw";
+import brandPerceptionPropagandaTheory from "./brand-perception-propaganda-theory.md?raw";
 import partitionHistoryShortVideo from "./partition-history-short-video.md?raw";
 import historyOfZeroShunya from "./history-of-zero-shunya.md?raw";
 import cockroachSpyShortVideo from "./cockroach-spy-short-video.md?raw";
@@ -36,6 +40,10 @@ import { serviceComparisonPosts } from "./serviceComparisonPosts.js";
 import { videoOperationsPosts } from "./videoOperationsPosts.js";
 
 const rawPosts = [
+  onDemandCreatorService,
+  d2cVideoAdsWithoutFreelancerHassle,
+  adMakingFundamentalsD2c,
+  brandPerceptionPropagandaTheory,
   aiVideoGenerationProcess,
   reduceAiVideoProductionCost,
   scalingAiVideoProduction,
@@ -72,14 +80,14 @@ const rawPosts = [
 const markdownPosts = rawPosts.map(parsePost);
 
 export const posts = [
-  ...markdownPosts.slice(0, 9),
+  ...markdownPosts.slice(0, 13),
   ...newsroomWorkflowPosts,
   ...agencyWorkflowPosts,
   ...videoOperationsPosts,
   ...serviceComparisonPosts,
-  markdownPosts[9],
+  markdownPosts[13],
   ...programmaticShortsPosts,
-  ...markdownPosts.slice(10),
+  ...markdownPosts.slice(14),
 ];
 
 export function getPostBySlug(slug) {
