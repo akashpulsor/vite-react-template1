@@ -352,14 +352,14 @@ async function loadPosts() {
   const serviceComparisonPosts = serviceModule.serviceComparisonPosts || [];
 
   return [
-    ...parsed.slice(0, 9),
+    ...parsed.slice(0, 10),
     ...newsroomWorkflowPosts,
     ...agencyWorkflowPosts,
     ...videoOperationsPosts,
     ...serviceComparisonPosts,
-    parsed[9],
+    parsed[10],
     ...programmaticPosts,
-    ...parsed.slice(10),
+    ...parsed.slice(11),
   ].filter(Boolean);
 }
 
