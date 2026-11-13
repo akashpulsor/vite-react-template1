@@ -791,8 +791,7 @@ function ResourceDirectory({ featuredGuides }) {
         <div className="resource-directory-body">
           <div className="resource-quick-links" aria-label="Primary resource links">
             <a href="/blog" data-ga-event="resource_link_click" data-ga-label="Blog archive">Blog archive</a>
-            <a href="/short-video-editor" data-ga-event="resource_link_click" data-ga-label="Short video editor">Short video editor</a>
-            <a href="/video-repurposing" data-ga-event="resource_link_click" data-ga-label="Video repurposing">Video repurposing</a>
+            <a href="/blog/ai-video-process-d2c-brands" data-ga-event="resource_link_click" data-ga-label="AI video ads for D2C brands">AI video ads for D2C brands</a>
             <a href="/#pricing" data-ga-event="resource_link_click" data-ga-label="Pricing">Pricing</a>
           </div>
           <ResourceGroup title="Production guides" links={productionLinks} />

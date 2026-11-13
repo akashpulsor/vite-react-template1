@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { trackEvent } from "../analytics.js";
+import { trackEvent, trackMetaEvent } from "../analytics.js";
 
 const countries = [
   "India",
@@ -52,6 +52,7 @@ export default function LeadForm({ selectedPackage = null, requirePackage = fals
         selected_package: selectedPackage?.code || "not_selected",
       });
       trackEvent("lead_submit_success", { event_category: "lead_form" });
+      trackMetaEvent("Lead", { content_name: "Campaign interest form", selected_package: selectedPackage?.code || "not_selected" });
       setState({ status: "sent", message: "Thanks. We saved your campaign request." });
       setForm({ name: "", email: "", phoneNumber: "", country: "India", youtubeHandle: "", message: "", website: "" });
     } catch (error) {

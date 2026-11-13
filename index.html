@@ -11,13 +11,27 @@
       window.__DALAILLAMA_GA4_INITIALIZED__ = true;
       window.__DALAILLAMA_GA4_AUTO_PAGE_VIEW__ = true;
     </script>
+    <!-- Meta Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1602578124469554');
+      fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#000104" />
     <meta
       name="description"
-      content="Find the right creator for your next video ad. Brands get a priced brief from a creator who makes ads for their industry; creators get a studio that makes the ad and brings them brands. Both start free."
+      content="AI video ads for your brand, made by creators who make ads for your industry. Brands get a priced brief straight away; creators get an AI video studio that makes the ad and brings them brands. Both start free."
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="mask-icon" href="/favicon.svg" color="#7c3aed" />
@@ -25,23 +39,23 @@
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="dalaillama.in" />
-    <meta property="og:title" content="Dalaillama | Video Ads Made by Creators Who Fit Your Brand" />
+    <meta property="og:title" content="Dalaillama | AI Video Ads Made by Creators Who Fit Your Brand" />
     <meta
       property="og:description"
-      content="Find the right creator for your next video ad. Brands get a priced brief from a creator who makes ads for their industry; creators get a studio that makes the ad and brings them brands. Both start free."
+      content="AI video ads for your brand, made by creators who make ads for your industry. Brands get a priced brief straight away; creators get an AI video studio that makes the ad and brings them brands. Both start free."
     />
     <meta property="og:url" content="https://dalaillama.in/" />
     <meta property="og:image" content="https://dalaillama.in/social-card.svg" />
-    <meta property="og:image:alt" content="Dalaillama: video ads made by creators" />
+    <meta property="og:image:alt" content="Dalaillama: AI video ads made by creators" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Dalaillama | Video Ads Made by Creators Who Fit Your Brand" />
+    <meta name="twitter:title" content="Dalaillama | AI Video Ads Made by Creators Who Fit Your Brand" />
     <meta
       name="twitter:description"
-      content="Find the right creator for your next video ad. Brands get a priced brief from a creator who makes ads for their industry; creators get a studio that makes the ad and brings them brands. Both start free."
+      content="AI video ads for your brand, made by creators who make ads for your industry. Brands get a priced brief straight away; creators get an AI video studio that makes the ad and brings them brands. Both start free."
     />
     <meta name="twitter:image" content="https://dalaillama.in/social-card.svg" />
-    <meta name="twitter:image:alt" content="Dalaillama: video ads made by creators" />
-    <title>Dalaillama | Video Ads Made by Creators Who Fit Your Brand</title>
+    <meta name="twitter:image:alt" content="Dalaillama: AI video ads made by creators" />
+    <title>Dalaillama | AI Video Ads Made by Creators Who Fit Your Brand</title>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -60,13 +74,17 @@
             "publisher": {
               "@id": "https://dalaillama.in/#organization"
             },
-            "description": "Done-for-you short video editing for creators and teams. Send a long video, podcast, webinar, interview, demo, or raw clip and get a captioned vertical Short back in 30 minutes."
+            "description": "AI video ads for brands, made by creators who make ads for their industry. Brands get a priced brief straight away; creators get an AI video studio that makes the ad and brings them brands."
           }
         ]
       }
     </script>
   </head>
   <body>
+    <!-- Meta Pixel fallback for visitors without JavaScript (an <img> is not valid inside <head>). -->
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1602578124469554&ev=PageView&noscript=1"
+    /></noscript>
     <div id="root"></div>
     <!-- React app bundle. GA4 event listeners are initialized from src/main.jsx via src/analytics.js. -->
     <script type="module" src="/src/main.jsx"></script>

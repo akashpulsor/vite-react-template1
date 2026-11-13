@@ -11,12 +11,12 @@ import {
 
 const SITE_URL = "https://dalaillama.in";
 const CURRENT_LASTMOD = "2026-07-01";
-const HOME_TITLE = "Dalaillama | Video Ads Made by Creators Who Fit Your Brand";
+const HOME_TITLE = "Dalaillama | AI Video Ads Made by Creators Who Fit Your Brand";
 const SHORT_VIDEO_EDITOR_TITLE = "Short Video Editor for Reels & YouTube Shorts | Dalaillama";
 const VIDEO_REPURPOSING_TITLE = "Video Repurposing Service for Shorts | Dalaillama";
 const BLOG_TITLE = "AI Newsroom Video Workflow Knowledge Base | Dalaillama";
 const DEFAULT_DESCRIPTION =
-  "Find the right creator for your next video ad. Brands get a priced brief from a creator who makes ads for their industry; creators get a studio that makes the ad and brings them brands. Both start free.";
+  "AI video ads for your brand, made by creators who make ads for your industry. Brands get a priced brief straight away; creators get an AI video studio that makes the ad and brings them brands. Both start free.";
 const SHORT_VIDEO_EDITOR_DESCRIPTION =
   "A short video editor service for creators and teams. Send existing footage and get one ready-to-post vertical Short for Reels, Shorts, TikTok, or LinkedIn in 30 minutes.";
 const VIDEO_REPURPOSING_DESCRIPTION = videoRepurposingHub.description;
@@ -440,7 +440,7 @@ function homeSeo() {
     path: "/",
     type: "website",
     image: DEFAULT_SOCIAL_IMAGE,
-    imageAlt: "Dalaillama short video editor service",
+    imageAlt: "Dalaillama: AI video ads made by creators",
   };
 }
 
@@ -669,26 +669,25 @@ function renderShell(content) {
           <a class="wordmark" href="/" aria-label="Dalaillama home">Dalaillama</a>
           <nav class="nav-links" aria-label="Primary navigation">
             <a href="/">Home</a>
-            <a href="/short-video-editor">Short Video Editor</a>
-            <a href="/video-repurposing">Video Repurposing</a>
-            <a href="/#order">Order</a>
-            <a href="/#production-guides">Production Guides</a>
-            <a href="/blog">Editing Guides</a>
+            <a href="/#how">For brands</a>
+            <a href="/#creators">For creators</a>
+            <a href="/#films">Films</a>
+            <a href="/#pricing">Pricing</a>
+            <a href="/blog">Guides</a>
+            <a href="https://brands.dalaillama.in/brands/sign-in">Brand sign in</a>
+            <a class="nav-cta" href="https://creator.dalaillama.in/">Creator sign in</a>
           </nav>
         </header>
         <main>${content}</main>
-        <footer class="site-footer" aria-label="Short video editing resources">
-          <a href="/short-video-editor">Short Video Editor Service</a>
-          <a href="/video-repurposing">Video Repurposing Service</a>
-          <a href="/blog/newsroom-video-workflow">Newsroom Video Workflow</a>
-          <a href="/blog/agency-video-editing-workflow">Agency Video Editing Workflow</a>
-          <a href="/blog/video-operations-guide">Video Operations Guide</a>
-          <a href="/video-repurposing/turn-podcast-into-shorts">Turn Podcast into Shorts</a>
-          <a href="/blog/best-shorts-editing-service">Best Shorts Editing Service</a>
-          <a href="/blog/short-form-video-editor-attention-span">Short-Form Video Editing Guide</a>
-          <a href="/blog/reel-patterns-worth-editing">Reel Editing Patterns</a>
-          <a href="/blog/youtube-shorts-hooks">YouTube Shorts Hooks</a>
-          <a href="/#access">Send a Video</a>
+        <footer class="site-footer" aria-label="Dalaillama footer">
+          <span>Dalaillama</span>
+          <a href="/#pricing">Pricing</a>
+          <a href="https://brands.dalaillama.in/creators?then=request">Request an AI video ad</a>
+          <a href="/blog/ai-video-process-d2c-brands">AI video ads for D2C brands</a>
+          <a href="/blog">Blog</a>
+          <a href="https://brands.dalaillama.in/creators">Creators</a>
+          <a href="https://brands.dalaillama.in/privacy">Privacy</a>
+          <a href="https://brands.dalaillama.in/terms">Terms</a>
         </footer>
       </div>
     </div>`;
@@ -696,25 +695,17 @@ function renderShell(content) {
 
 function renderHomeFallback(allPosts) {
   const featuredPosts = featuredPostsFrom(allPosts);
-  const shortVideoEditorLinks = [
-    {
-      title: "Short Video Editor Service",
-      href: "/short-video-editor",
-    body: "Send existing video and get a ready-to-post vertical Short back within 30 minutes.",
-    },
-    ...SHORT_VIDEO_EDITOR_RESOURCES.slice(0, 3),
-  ];
 
   return `
     <article class="landing-page">
       <section class="landing-hero studio-hero">
         <div class="hero-copy">
-          <p class="kicker">Done-for-you short video editing</p>
-          <h1>Short video editing done for you in 30 minutes.</h1>
+          <p class="kicker">AI video ads, made by creators on Dalai Llama</p>
+          <h1>The right creator for your next AI video ad.</h1>
           <div class="hero-body">
-            <p>Send us the video. We create the Short for you.</p>
-            <p>Share a long video, raw clip, podcast, webinar, interview, demo, or founder video. We manually edit it, add captions and polish, then return a ready-to-post short-form video.</p>
-            <p>The promise is simple: your video becomes a finished Short in 30 minutes.</p>
+            <p>Tell us what the video should do. We match you with a creator who makes AI video ads for brands like yours, and you get a priced brief straight away.</p>
+            <p>No open calls, no chasing portfolios, no price after three calls.</p>
+            <p>You make videos? Our AI video studio makes the ad with you and puts your work in front of brands. Start free.</p>
           </div>
         </div>
       </section>
@@ -722,11 +713,6 @@ function renderHomeFallback(allPosts) {
         <p class="kicker">Production guides</p>
         <h2>See Shorts planned from concept to production.</h2>
         ${renderGuideCards(featuredPosts)}
-      </section>
-      <section class="landing-section writing-section" id="short-video-editor-links">
-        <p class="kicker">Short video editor links</p>
-        <h2>For creators searching for a short video editor.</h2>
-        ${renderLinkCards(shortVideoEditorLinks)}
       </section>
       <section class="landing-section writing-section">
         <p class="kicker">Blogs & case studies</p>

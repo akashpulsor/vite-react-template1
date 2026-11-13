@@ -15,6 +15,10 @@ const SOCIAL_LINK_HOSTS = [
   "tiktok.com",
 ];
 
+// Meta's standard events (Lead, ViewContent) can be optimised for in Ads Manager directly;
+// anything else is sent as a custom event.
+const META_STANDARD_EVENTS = new Set(["Lead", "ViewContent", "Contact", "CompleteRegistration", "SubmitApplication"]);
+
 let initialized = typeof window !== "undefined" && window.__DALAILLAMA_GA4_INITIALIZED__ === true;
 let lastTrackedPath = "";
 
@@ -72,6 +76,12 @@ export function trackEvent(eventName, params = {}) {
   });
 }
 
+/** Sends a conversion to the Meta Pixel loaded in index.html; a no-op when the pixel is blocked. */
+export function trackMetaEvent(eventName, params = {}) {
+  if (typeof window === "undefined" || typeof window.fbq !== "function") return;
+  window.fbq(META_STANDARD_EVENTS.has(eventName) ? "track" : "trackCustom", eventName, params);
+}
+
 export function initLandingClickTracking() {
   if (typeof document === "undefined" || document.__dalaillamaClickTracking) return;
   document.__dalaillamaClickTracking = true;
@@ -82,6 +92,9 @@ export function initLandingClickTracking() {
 
     const trackedElement = clickedElement.closest("[data-ga-event]");
     if (trackedElement) trackDatasetClick(trackedElement);
+
+    const metaElement = clickedElement.closest("[data-meta-event]");
+    if (metaElement) trackMetaEvent(metaElement.dataset.metaEvent, { content_name: normalizedText(metaElement) });
 
     const outboundLink = clickedElement.closest("a[href]");
     if (outboundLink) trackOutboundDrive(outboundLink);

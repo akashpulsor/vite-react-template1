@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { trackEvent } from "../analytics.js";
+import { trackEvent, trackMetaEvent } from "../analytics.js";
 
 const API = "https://api.dalaillama.in/api/v1/public";
 const BRANDS_SITE = "https://brands.dalaillama.in";
@@ -30,7 +30,10 @@ function useModal(onClose) {
 /** Our own player for a video on the page: sound on, controls, and a request for one like it. */
 export function PlayerModal({ video, onClose, onRequest }) {
   useModal(onClose);
-  useEffect(() => trackEvent("video_play", { video_title: video.title, video_tag: video.tag }), [video]);
+  useEffect(() => {
+    trackEvent("video_play", { video_title: video.title, video_tag: video.tag });
+    trackMetaEvent("ViewContent", { content_type: "video", content_name: video.title, content_category: video.tag });
+  }, [video]);
   return (
     <div className="modal-backdrop" role="dialog" aria-modal="true" aria-label={video.title} onClick={onClose}>
       <div className="player-modal" onClick={(event) => event.stopPropagation()}>
@@ -65,6 +68,10 @@ export function InquiryModal({ prefill, onClose }) {
   });
   const [state, setState] = useState({ status: "idle", message: "", briefUrl: null });
   const set = (key) => (event) => setForm({ ...form, [key]: event.target.value });
+  const source = prefill?.source || "landing";
+
+  // Every "Request a video" / "Make one like this" button opens this form, so opening it is the click.
+  useEffect(() => trackMetaEvent("RequestVideoClick", { source }), [source]);
 
   const submit = async (event) => {
     event.preventDefault();
@@ -86,7 +93,8 @@ export function InquiryModal({ prefill, onClose }) {
       const response = await fetch(`${API}/brands/requests`, { method: "POST", body });
       const result = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(result.message || "Couldn't send your request. Please try again.");
-      trackEvent("inquiry_submit_success", { event_category: "inquiry", from: prefill?.source || "landing" });
+      trackEvent("inquiry_submit_success", { event_category: "inquiry", from: source });
+      trackMetaEvent("Lead", { content_name: "Video request", content_category: form.industry || "unspecified", source });
       setState({ status: "sent", message: "", briefUrl: result.briefUrl || null });
     } catch (error) {
       trackEvent("inquiry_submit_error", { event_category: "inquiry" });
