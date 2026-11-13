@@ -14,6 +14,10 @@ const CREATOR_STUDIO_URL = "https://creator.dalaillama.in/";
 // of what a creator here can make, tagged as such) and the creator catalogue.
 const API = "https://api.dalaillama.in/api/v1/public";
 const INSPIRATION_API = `${API}/showcase/inspiration`;
+// Creators' films for the landing page, best first (likes weigh in), and the ones ops put in the hero.
+const LANDING_FILMS_API = `${API}/showcase/landing`;
+const HERO_FILMS_API = `${API}/showcase/landing/hero`;
+const WORK_GRID_LIMIT = 16;
 const CREATORS_API = `${API}/creators?limit=8`;
 const INSPIRATION_PAGE = `${BRANDS_SITE}/inspiration`;
 
@@ -280,13 +284,24 @@ export default function Home() {
     .filter(Boolean);
   const featuredGuideCards = featuredGuides.slice(0, FEATURED_GUIDE_CARD_LIMIT);
   const latestPostLinks = posts.slice(0, LATEST_POST_LINK_LIMIT);
-  const ideas = useJson(INSPIRATION_API, []);
+  const ideas = useJson(INSPIRATION_API, []).map(ideaItem);
+  const films = useJson(LANDING_FILMS_API, []).map(filmItem);
+  const heroFilm = useJson(HERO_FILMS_API, []).map(filmItem)[0];
   const creators = useJson(CREATORS_API, []);
+  // The hero shows the newest film ops chose, else an inspiration video. The grid puts creators'
+  // films before inspiration; the landing list starts with the hero films, so drop the one shown.
+  const heroItem = heroFilm || ideas.find((idea) => idea.posterUrl);
+  const workItems = [...films.filter((film) => film.id !== heroFilm?.id), ...ideas];
   // A video playing in our player, and the request form, both open right here on the page.
   const [playing, setPlaying] = useState(null);
   const [inquiry, setInquiry] = useState(null);
   const requestVideo = (prefill = {}) => { setPlaying(null); setInquiry(prefill); };
-  const playIdea = (idea) => idea.videoUrl ? setPlaying(idea) : requestVideo(ideaPrefill(idea));
+  const play = async (item) => {
+    if (item.videoUrl || item.youtubeId) return setPlaying(item);
+    const videoUrl = item.selfHosted ? await selfSourceUrl(item.id) : null;
+    if (videoUrl) return setPlaying({ ...item, videoUrl });
+    requestVideo(item.prefill);
+  };
 
   return (
     <article className="landing-page">
@@ -317,7 +332,7 @@ export default function Home() {
             </a>
           </p>
         </div>
-        <HeroIdea idea={ideas.find((idea) => idea.posterUrl)} onPlay={playIdea} />
+        <HeroIdea idea={heroItem} onPlay={play} />
       </section>
 
       <section className="landing-section essay-section" id="problem">
@@ -355,7 +370,7 @@ export default function Home() {
         </div>
       </section>
 
-      <WorkGrid ideas={ideas} onPlay={playIdea} onRequest={(idea) => requestVideo(ideaPrefill(idea))} />
+      <WorkGrid ideas={workItems} onPlay={play} onRequest={(item) => requestVideo(item.prefill)} />
 
       <section className="landing-section split-section" id="order">
         <div>
@@ -481,24 +496,53 @@ export default function Home() {
         </div>
       </section>
       {playing && (
-        <PlayerModal video={{ videoUrl: playing.videoUrl, posterUrl: playing.posterUrl, title: playing.title, tag: "Inspiration",
-                              byline: playing.makerName ? `by ${playing.makerName}` : null }}
-                     onClose={() => setPlaying(null)} onRequest={() => requestVideo(ideaPrefill(playing))} />
+        <PlayerModal video={{ videoUrl: playing.videoUrl, youtubeId: playing.youtubeId, posterUrl: playing.posterUrl, title: playing.title,
+                              tag: playing.tag, byline: playing.makerName ? `by ${playing.makerName}` : null }}
+                     onClose={() => setPlaying(null)} onRequest={() => requestVideo(playing.prefill)} />
       )}
       {inquiry && <InquiryModal prefill={inquiry} onClose={() => setInquiry(null)} />}
     </article>
   );
 }
 
-/** A request for "one like this": the video as the reference, on our own inspiration page. */
-function ideaPrefill(idea) {
+/** An inspiration video as a card. Its request for "one like this" points at our inspiration page. */
+function ideaItem(idea) {
   return {
-    title: idea.title, industry: idea.industry, source: "inspiration",
-    reference: `Like this inspiration video: ${idea.title} (${INSPIRATION_PAGE}?pin=${encodeURIComponent(idea.pinId)})`,
+    ...idea, tag: "Inspiration",
+    prefill: {
+      title: idea.title, industry: idea.industry, source: "inspiration",
+      reference: `Like this inspiration video: ${idea.title} (${INSPIRATION_PAGE}?pin=${encodeURIComponent(idea.pinId)})`,
+    },
   };
 }
 
-/** The hero's right side: an inspiration video playing muted, with a request for one like it. */
+/** A creator's film (a showcase card) as a card. YouTube films play embedded; our own copies need a
+ * short-lived link first (selfSourceUrl). Its request for "one like this" points at the creator. */
+function filmItem(film) {
+  return {
+    id: film.publicId, title: film.title, industry: film.industry, tag: "Creator film",
+    posterUrl: film.thumbnailUrl, posterWidth: film.aspectW, posterHeight: film.aspectH,
+    youtubeId: film.host === "YOUTUBE" ? film.youtubeVideoId : null, selfHosted: film.host === "SELF",
+    makerName: film.creator?.displayName,
+    prefill: {
+      title: film.title, industry: film.industry, source: "creator_film",
+      reference: `Like this film by ${film.creator?.displayName}: ${film.title} (${film.creator?.profileUrl})`,
+    },
+  };
+}
+
+/** The short-lived link to our own copy of a film; null when it can't be had. */
+async function selfSourceUrl(publicId) {
+  try {
+    const response = await fetch(`${API}/showcase/${encodeURIComponent(publicId)}/source`, { headers: { accept: "application/json" } });
+    return response.ok ? (await response.json()).url || null : null;
+  } catch {
+    return null;
+  }
+}
+
+/** The hero's right side: a film ops chose or an inspiration video, playing muted when we have the
+ * file (a YouTube film shows its thumbnail), with a request for one like it. */
 function HeroIdea({ idea, onPlay }) {
   if (!idea) return <div className="hero-film creator-panel"><div className="hero-film-frame"><div className="hero-film-empty" /></div></div>;
   return (
@@ -508,10 +552,10 @@ function HeroIdea({ idea, onPlay }) {
         {idea.videoUrl
           ? <video src={idea.videoUrl} poster={idea.posterUrl} autoPlay muted loop playsInline aria-label={idea.title} />
           : <img src={idea.posterUrl} alt="" loading="eager" />}
-        <span className="work-tag">Inspiration</span>
+        <span className="work-tag">{idea.tag}</span>
       </div>
       <div className="hero-film-caption">
-        <span>{INDUSTRY_LABEL[idea.industry] || "Inspiration"}</span>
+        <span>{INDUSTRY_LABEL[idea.industry] || idea.tag}</span>
         <strong>{idea.title}</strong>
         <small>{idea.makerName ? `by ${idea.makerName} · ` : ""}make one like this for your brand</small>
       </div>
@@ -533,10 +577,10 @@ function useJson(url, fallback) {
   return data;
 }
 
-/** "What we can create": inspiration videos, each tagged, in one masonry grid. (Creators' own films
- * join it once there are enough of them.) */
+/** "What we can create": creators' films first, then inspiration videos, each tagged, in one
+ * masonry grid. */
 function WorkGrid({ ideas, onPlay, onRequest }) {
-  const shown = ideas.filter((idea) => idea.posterUrl).slice(0, 12);
+  const shown = ideas.filter((idea) => idea.posterUrl).slice(0, WORK_GRID_LIMIT);
   if (shown.length === 0) return null;
   return (
     <section className="landing-section" id="films" aria-label="What we can create">
@@ -560,8 +604,8 @@ function WorkGrid({ ideas, onPlay, onRequest }) {
   );
 }
 
-/** An inspiration video: a muted preview on hover, our player on click, "Make one like this" opens
- * the request form on the page. */
+/** A creator's film or an inspiration video: a muted preview on hover when we have the file, our
+ * player on click, "Make one like this" opens the request form on the page. */
 function IdeaCard({ idea, onPlay, onRequest }) {
   const [playing, setPlaying] = useState(false);
   const video = useRef(null);
@@ -577,9 +621,9 @@ function IdeaCard({ idea, onPlay, onRequest }) {
           ? <video ref={video} src={idea.videoUrl} poster={idea.posterUrl} muted loop playsInline preload="none" aria-label={idea.title} />
           : <img src={idea.posterUrl} alt="" loading="lazy" />}
         {idea.videoUrl && !playing && <span className="play-badge" aria-hidden="true">▶</span>}
-        <span className="work-tag">Inspiration</span>
+        <span className="work-tag">{idea.tag}</span>
       </div>
-      <span className="film-card-meta">{INDUSTRY_LABEL[idea.industry] || "Inspiration"}</span>
+      <span className="film-card-meta">{INDUSTRY_LABEL[idea.industry] || idea.tag}</span>
       <strong>{idea.title}</strong>
       {idea.makerName && <small>by {idea.makerName}</small>}
       <button type="button" className="work-card-request" onClick={() => onRequest(idea)}

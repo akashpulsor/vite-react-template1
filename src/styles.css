@@ -2230,6 +2230,15 @@ a:hover {
   max-height: calc(100vh - 32px);
 }
 
+.player-frame .player-embed {
+  display: block;
+  width: min(92vw, calc((100vh - 32px) * 9 / 16), 420px);
+  aspect-ratio: 9 / 16;
+  border: 0;
+  border-radius: 16px;
+  background: #000104;
+}
+
 .player-frame video {
   display: block;
   max-width: 100%;

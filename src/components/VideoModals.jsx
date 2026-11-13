@@ -27,7 +27,8 @@ function useModal(onClose) {
   }, [onClose]);
 }
 
-/** Our own player for a video on the page: sound on, controls, and a request for one like it. */
+/** Our own player for a video on the page: sound on, controls, and a request for one like it. A
+ * creator's film on YouTube plays in YouTube's embedded player. */
 export function PlayerModal({ video, onClose, onRequest }) {
   useModal(onClose);
   useEffect(() => {
@@ -39,7 +40,10 @@ export function PlayerModal({ video, onClose, onRequest }) {
       <div className="player-modal" onClick={(event) => event.stopPropagation()}>
         <button type="button" className="modal-close" aria-label="Close" onClick={onClose}>×</button>
         <div className="player-frame">
-          <video src={video.videoUrl} poster={video.posterUrl} controls autoPlay playsInline />
+          {video.youtubeId
+            ? <iframe className="player-embed" src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(video.youtubeId)}?autoplay=1&rel=0&playsinline=1`}
+                      title={video.title} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen />
+            : <video src={video.videoUrl} poster={video.posterUrl} controls autoPlay playsInline />}
         </div>
         <div className="player-caption">
           <span className="work-tag-inline">{video.tag}</span>
