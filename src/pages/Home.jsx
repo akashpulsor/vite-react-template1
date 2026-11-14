@@ -285,20 +285,25 @@ export default function Home() {
   const featuredGuideCards = featuredGuides.slice(0, FEATURED_GUIDE_CARD_LIMIT);
   const latestPostLinks = posts.slice(0, LATEST_POST_LINK_LIMIT);
   const ideas = useJson(INSPIRATION_API, []).map(ideaItem);
-  const films = useJson(LANDING_FILMS_API, []).map(filmItem);
-  const heroFilm = useJson(HERO_FILMS_API, []).map(filmItem)[0];
+  const filmCards = useJson(LANDING_FILMS_API, []);
+  const heroCards = useJson(HERO_FILMS_API, []);
+  // Our own copies of creators' films, fetched up front so they preview like inspiration videos.
+  const sources = useSelfSources([...heroCards, ...filmCards]);
+  const films = filmCards.map((film) => filmItem(film, sources));
+  const heroFilm = heroCards.map((film) => filmItem(film, sources))[0];
   const creators = useJson(CREATORS_API, []);
-  // The hero shows the newest film ops chose, else an inspiration video. The grid puts creators'
-  // films before inspiration; the landing list starts with the hero films, so drop the one shown.
-  const heroItem = heroFilm || ideas.find((idea) => idea.posterUrl);
-  const workItems = [...films.filter((film) => film.id !== heroFilm?.id), ...ideas];
+  // The hero shows the newest film ops chose, else the top creator film, else an inspiration video.
+  // The grid puts creators' films before inspiration, without the one already in the hero.
+  const heroItem = heroFilm || films[0] || ideas.find((idea) => idea.posterUrl);
+  const workItems = [...films.filter((film) => film.id !== heroItem?.id), ...ideas];
   // A video playing in our player, and the request form, both open right here on the page.
   const [playing, setPlaying] = useState(null);
   const [inquiry, setInquiry] = useState(null);
   const requestVideo = (prefill = {}) => { setPlaying(null); setInquiry(prefill); };
   const play = async (item) => {
-    if (item.videoUrl || item.youtubeId) return setPlaying(item);
-    const videoUrl = item.selfHosted ? await selfSourceUrl(item.id) : null;
+    if (item.youtubeId) return setPlaying(item);
+    // Our own copy: a fresh link, since the one fetched for the preview lasts an hour.
+    const videoUrl = item.selfHosted ? await selfSourceUrl(item.id) : item.videoUrl;
     if (videoUrl) return setPlaying({ ...item, videoUrl });
     requestVideo(item.prefill);
   };
@@ -516,19 +521,37 @@ function ideaItem(idea) {
   };
 }
 
-/** A creator's film (a showcase card) as a card. YouTube films play embedded; our own copies need a
- * short-lived link first (selfSourceUrl). Its request for "one like this" points at the creator. */
-function filmItem(film) {
+/** A creator's film (a showcase card) as a card. YouTube films play embedded; our own copies preview
+ * from the link in {@code sources} (useSelfSources). Its request for "one like this" points at the
+ * creator. A film without a title is named after its creator. */
+function filmItem(film, sources) {
+  const title = film.title || `A film by ${film.creator?.displayName}`;
   return {
-    id: film.publicId, title: film.title, industry: film.industry, tag: "Creator film",
+    id: film.publicId, title, industry: film.industry, tag: "Creator film",
     posterUrl: film.thumbnailUrl, posterWidth: film.aspectW, posterHeight: film.aspectH,
     youtubeId: film.host === "YOUTUBE" ? film.youtubeVideoId : null, selfHosted: film.host === "SELF",
+    videoUrl: sources[film.publicId] || null,
     makerName: film.creator?.displayName,
     prefill: {
-      title: film.title, industry: film.industry, source: "creator_film",
-      reference: `Like this film by ${film.creator?.displayName}: ${film.title} (${film.creator?.profileUrl})`,
+      title, industry: film.industry, source: "creator_film",
+      reference: `Like this film by ${film.creator?.displayName}: ${title} (${film.creator?.profileUrl})`,
     },
   };
+}
+
+/** Links to our own copies of the given films, by public id, fetched once per film. The posters
+ * show until each answers; the files themselves load only as the hero or a hovered card plays. */
+function useSelfSources(cards) {
+  const [sources, setSources] = useState({});
+  const ids = [...new Set(cards.filter((card) => card.host === "SELF").map((card) => card.publicId))].join(",");
+  useEffect(() => {
+    if (!ids) return undefined;
+    let cancelled = false;
+    Promise.all(ids.split(",").map(async (id) => [id, await selfSourceUrl(id)]))
+      .then((pairs) => { if (!cancelled) setSources(Object.fromEntries(pairs.filter(([, url]) => url))); });
+    return () => { cancelled = true; };
+  }, [ids]);
+  return sources;
 }
 
 /** The short-lived link to our own copy of a film; null when it can't be had. */
