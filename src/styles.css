@@ -1845,6 +1845,17 @@ a:hover {
   max-height: 560px;
 }
 
+/* A creator film on Dalaillama's YouTube channel, playing muted. Clicks go to the hero button, which
+   opens our player with sound. */
+.hero-film-frame .hero-film-embed {
+  height: 100%;
+  aspect-ratio: 9 / 16;
+  max-width: 100%;
+  border: 0;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
 .hero-film-frame img {
   height: 100%;
   max-width: 100%;

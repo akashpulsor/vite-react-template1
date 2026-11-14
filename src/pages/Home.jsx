@@ -572,9 +572,12 @@ function HeroIdea({ idea, onPlay }) {
     <button type="button" className="hero-film creator-panel" onClick={() => onPlay(idea)} data-ga-event="video_open"
             data-ga-label={idea.title} aria-label={`Play ${idea.title}`}>
       <div className="hero-film-frame">
-        {idea.videoUrl
-          ? <video src={idea.videoUrl} poster={idea.posterUrl} autoPlay muted loop playsInline aria-label={idea.title} />
-          : <img src={idea.posterUrl} alt="" loading="eager" />}
+        {idea.youtubeId
+          ? <iframe className="hero-film-embed" title={idea.title} allow="autoplay; encrypted-media" tabIndex={-1}
+                    src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(idea.youtubeId)}?autoplay=1&mute=1&loop=1&playlist=${encodeURIComponent(idea.youtubeId)}&controls=0&playsinline=1&rel=0&modestbranding=1`} />
+          : idea.videoUrl
+            ? <video src={idea.videoUrl} poster={idea.posterUrl} autoPlay muted loop playsInline aria-label={idea.title} />
+            : <img src={idea.posterUrl} alt="" loading="eager" />}
         <span className="work-tag">{idea.tag}</span>
       </div>
       <div className="hero-film-caption">
