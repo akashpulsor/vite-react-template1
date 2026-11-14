@@ -17,7 +17,8 @@ const INSPIRATION_API = `${API}/showcase/inspiration`;
 // Creators' films for the landing page, best first (likes weigh in), and the ones ops put in the hero.
 const LANDING_FILMS_API = `${API}/showcase/landing`;
 const HERO_FILMS_API = `${API}/showcase/landing/hero`;
-const WORK_GRID_LIMIT = 16;
+// Every creator film shows; inspiration only tops the grid up to this while creators are few.
+const INSPIRATION_TOP_UP_TO = 12;
 const CREATORS_API = `${API}/creators?limit=8`;
 const INSPIRATION_PAGE = `${BRANDS_SITE}/inspiration`;
 
@@ -293,10 +294,11 @@ export default function Home() {
   const heroFilms = heroCards.map((film) => filmItem(film, sources));
   const creators = useJson(CREATORS_API, []);
   // The hero cycles through the films ops chose (newest first), else shows the top creator film,
-  // else an inspiration video. The grid shows every creator film, then inspiration.
+  // else an inspiration video. The grid shows every creator film; inspiration only fills it up to
+  // INSPIRATION_TOP_UP_TO while there are few creator films.
   const firstIdea = ideas.find((idea) => idea.posterUrl);
   const heroItems = heroFilms.length ? heroFilms : [films[0] || firstIdea].filter(Boolean);
-  const workItems = [...films, ...ideas];
+  const workItems = [...films, ...ideas.filter((idea) => idea.posterUrl).slice(0, Math.max(0, INSPIRATION_TOP_UP_TO - films.length))];
   // A video playing in our player, and the request form, both open right here on the page.
   const [playing, setPlaying] = useState(null);
   const [inquiry, setInquiry] = useState(null);
@@ -626,7 +628,7 @@ function useJson(url, fallback) {
 /** "What we can create": creators' films first, then inspiration videos, each tagged, in one
  * masonry grid. */
 function WorkGrid({ ideas, onPlay, onRequest }) {
-  const shown = ideas.filter((idea) => idea.posterUrl).slice(0, WORK_GRID_LIMIT);
+  const shown = ideas.filter((idea) => idea.posterUrl);
   if (shown.length === 0) return null;
   return (
     <section className="landing-section" id="films" aria-label="What we can create">
