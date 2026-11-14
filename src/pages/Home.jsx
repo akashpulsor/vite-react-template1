@@ -586,13 +586,21 @@ function HeroReel({ items, onPlay }) {
   return <HeroIdea idea={current} onPlay={onPlay} onEnded={count > 1 ? next : null} />;
 }
 
+/** The film's own width and height for the hero frame's shape (styles.css .hero-film-frame); none
+ * when unknown, which keeps the 4:5 default. */
+function filmShape(idea) {
+  const width = Number(idea.posterWidth);
+  const height = Number(idea.posterHeight);
+  return width > 0 && height > 0 ? { "--film-w": width, "--film-h": height } : undefined;
+}
+
 /** One film in the hero: playing muted (a YouTube film as an embed), with a request for one like it. */
 function HeroIdea({ idea, onPlay, onEnded }) {
   if (!idea) return <div className="hero-film creator-panel"><div className="hero-film-frame"><div className="hero-film-empty" /></div></div>;
   return (
     <button type="button" className="hero-film creator-panel" onClick={() => onPlay(idea)} data-ga-event="video_open"
             data-ga-label={idea.title} aria-label={`Play ${idea.title}`}>
-      <div className="hero-film-frame">
+      <div className="hero-film-frame" style={filmShape(idea)}>
         {idea.youtubeId
           ? <iframe className="hero-film-embed" title={idea.title} allow="autoplay; encrypted-media" tabIndex={-1}
                     src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(idea.youtubeId)}?autoplay=1&mute=1&loop=1&playlist=${encodeURIComponent(idea.youtubeId)}&controls=0&playsinline=1&rel=0&modestbranding=1`} />
