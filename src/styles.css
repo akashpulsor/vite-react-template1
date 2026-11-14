@@ -1820,6 +1820,12 @@ a:hover {
   display: grid;
   gap: 14px;
   align-self: center;
+  /* Hugs the film (--film-w / --film-h, set per film; 4:5 when unknown): as wide as the film is at
+     --hero-max-h tall, plus this panel's padding, never wider than the column. A vertical film gets a
+     narrow panel, a wide one the whole column. */
+  --hero-max-h: 560px;
+  justify-self: center;
+  width: min(100%, calc(var(--hero-max-h) * var(--film-w, 4) / var(--film-h, 5) + 28px));
   padding: 14px;
   border-radius: 22px;
   transition: transform 160ms ease, border-color 160ms ease;
@@ -1840,19 +1846,17 @@ a:hover {
   background: radial-gradient(120% 90% at 50% 0%, rgba(124, 58, 237, 0.28), rgba(0, 1, 4, 0.96) 70%);
 }
 
-/* The frame takes the film's own shape (--film-w / --film-h, set per film; 4:5 when unknown), as tall
-   as --hero-max-h allows: width follows from the shape, so a vertical film is narrow and a wide one
-   wide, and the video fills it without bars. */
+/* The film's own shape, filling the panel (.hero-film sizes it), so the video fills it without bars. */
 .hero-film-frame {
-  --hero-max-h: 560px;
   aspect-ratio: var(--film-w, 4) / var(--film-h, 5);
-  width: min(100%, calc(var(--hero-max-h) * var(--film-w, 4) / var(--film-h, 5)));
-  justify-self: center;
+  width: 100%;
 }
 
 .hero-film-frame > video,
 .hero-film-frame > img,
 .hero-film-frame > .hero-film-embed {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1895,6 +1899,10 @@ a:hover {
   display: grid;
   gap: 4px;
   padding: 0 6px 6px;
+  /* Wraps to the film's width instead of widening the panel around a vertical film. */
+  width: 0;
+  min-width: 100%;
+  box-sizing: border-box;
 }
 
 .hero-film-caption span,
@@ -2028,7 +2036,7 @@ a:hover {
 }
 
 @media (max-width: 860px) {
-  .hero-film-frame {
+  .hero-film {
     --hero-max-h: 460px;
   }
 
