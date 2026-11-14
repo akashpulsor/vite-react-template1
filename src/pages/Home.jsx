@@ -574,16 +574,43 @@ const HERO_STILL_MS = 12000;
  * then the next; a YouTube film or a poster moves on after HERO_STILL_MS. One item stays put. */
 function HeroReel({ items, onPlay }) {
   const [index, setIndex] = useState(0);
+  const lite = useLiteVideo();
   const count = items.length;
   const current = count ? items[index % count] : null;
   const next = () => setIndex((i) => (i + 1) % Math.max(count, 1));
-  const timed = count > 1 && current && !(current.videoUrl && !current.youtubeId);
+  const playsFile = current && current.videoUrl && !current.youtubeId && !lite;
+  const timed = count > 1 && current && !playsFile;
   useEffect(() => {
     if (!timed) return undefined;
     const timer = setTimeout(next, HERO_STILL_MS);
     return () => clearTimeout(timer);
   }, [timed, index, count]);
-  return <HeroIdea idea={current} onPlay={onPlay} onEnded={count > 1 ? next : null} />;
+  return <HeroIdea idea={current} onPlay={onPlay} onEnded={count > 1 ? next : null} lite={lite} />;
+}
+
+/** True on a phone-sized screen, with Data Saver on, or on a slow connection: there the hero shows
+ * our own files as their poster (a tap plays them in the player) instead of streaming a full-size
+ * file on its own. YouTube adapts its quality, so its films still play. */
+function useLiteVideo() {
+  const query = "(max-width: 860px)";
+  const check = () => {
+    if (typeof window === "undefined") return false;
+    const connection = navigator.connection || {};
+    return window.matchMedia(query).matches || connection.saveData === true
+      || ["slow-2g", "2g", "3g"].includes(connection.effectiveType);
+  };
+  const [lite, setLite] = useState(check);
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    const update = () => setLite(check());
+    media.addEventListener("change", update);
+    navigator.connection?.addEventListener?.("change", update);
+    return () => {
+      media.removeEventListener("change", update);
+      navigator.connection?.removeEventListener?.("change", update);
+    };
+  }, []);
+  return lite;
 }
 
 /** The film's own width and height, shaping the hero panel and frame (styles.css .hero-film); none
@@ -594,8 +621,9 @@ function filmShape(idea) {
   return width > 0 && height > 0 ? { "--film-w": width, "--film-h": height } : undefined;
 }
 
-/** One film in the hero: playing muted (a YouTube film as an embed), with a request for one like it. */
-function HeroIdea({ idea, onPlay, onEnded }) {
+/** One film in the hero: playing muted (a YouTube film as an embed; with {@code lite}, our own file
+ * shows its poster and a play badge), with a request for one like it. */
+function HeroIdea({ idea, onPlay, onEnded, lite }) {
   if (!idea) return <div className="hero-film creator-panel"><div className="hero-film-frame"><div className="hero-film-empty" /></div></div>;
   return (
     <button type="button" className="hero-film creator-panel" onClick={() => onPlay(idea)} data-ga-event="video_open"
@@ -604,10 +632,11 @@ function HeroIdea({ idea, onPlay, onEnded }) {
         {idea.youtubeId
           ? <iframe className="hero-film-embed" title={idea.title} allow="autoplay; encrypted-media" tabIndex={-1}
                     src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(idea.youtubeId)}?autoplay=1&mute=1&loop=1&playlist=${encodeURIComponent(idea.youtubeId)}&controls=0&playsinline=1&rel=0&modestbranding=1`} />
-          : idea.videoUrl
+          : idea.videoUrl && !lite
             ? <video key={idea.id || idea.videoUrl} src={idea.videoUrl} poster={idea.posterUrl} autoPlay muted playsInline
                      loop={!onEnded} onEnded={onEnded || undefined} onError={onEnded || undefined} aria-label={idea.title} />
             : <img src={idea.posterUrl} alt="" loading="eager" />}
+        {lite && idea.videoUrl && !idea.youtubeId && <span className="play-badge" aria-hidden="true">▶</span>}
         <span className="work-tag">{idea.tag}</span>
       </div>
       <div className="hero-film-caption">
