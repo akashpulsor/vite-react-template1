@@ -290,12 +290,13 @@ export default function Home() {
   // Our own copies of creators' films, fetched up front so they preview like inspiration videos.
   const sources = useSelfSources([...heroCards, ...filmCards]);
   const films = filmCards.map((film) => filmItem(film, sources));
-  const heroFilm = heroCards.map((film) => filmItem(film, sources))[0];
+  const heroFilms = heroCards.map((film) => filmItem(film, sources));
   const creators = useJson(CREATORS_API, []);
-  // The hero shows the newest film ops chose, else the top creator film, else an inspiration video.
-  // The grid puts creators' films before inspiration, without the one already in the hero.
-  const heroItem = heroFilm || films[0] || ideas.find((idea) => idea.posterUrl);
-  const workItems = [...films.filter((film) => film.id !== heroItem?.id), ...ideas];
+  // The hero cycles through the films ops chose (newest first), else shows the top creator film,
+  // else an inspiration video. The grid shows every creator film, then inspiration.
+  const firstIdea = ideas.find((idea) => idea.posterUrl);
+  const heroItems = heroFilms.length ? heroFilms : [films[0] || firstIdea].filter(Boolean);
+  const workItems = [...films, ...ideas];
   // A video playing in our player, and the request form, both open right here on the page.
   const [playing, setPlaying] = useState(null);
   const [inquiry, setInquiry] = useState(null);
@@ -337,7 +338,7 @@ export default function Home() {
             </a>
           </p>
         </div>
-        <HeroIdea idea={heroItem} onPlay={play} />
+        <HeroReel items={heroItems} onPlay={play} />
       </section>
 
       <section className="landing-section essay-section" id="problem">
@@ -564,9 +565,27 @@ async function selfSourceUrl(publicId) {
   }
 }
 
-/** The hero's right side: a film ops chose or an inspiration video, playing muted when we have the
- * file (a YouTube film shows its thumbnail), with a request for one like it. */
-function HeroIdea({ idea, onPlay }) {
+/** How long a YouTube film or a poster stays in the hero before the next; our own files play to the end. */
+const HERO_STILL_MS = 12000;
+
+/** The hero's right side, cycling through {@code items}: each of our own files plays to its end,
+ * then the next; a YouTube film or a poster moves on after HERO_STILL_MS. One item stays put. */
+function HeroReel({ items, onPlay }) {
+  const [index, setIndex] = useState(0);
+  const count = items.length;
+  const current = count ? items[index % count] : null;
+  const next = () => setIndex((i) => (i + 1) % Math.max(count, 1));
+  const timed = count > 1 && current && !(current.videoUrl && !current.youtubeId);
+  useEffect(() => {
+    if (!timed) return undefined;
+    const timer = setTimeout(next, HERO_STILL_MS);
+    return () => clearTimeout(timer);
+  }, [timed, index, count]);
+  return <HeroIdea idea={current} onPlay={onPlay} onEnded={count > 1 ? next : null} />;
+}
+
+/** One film in the hero: playing muted (a YouTube film as an embed), with a request for one like it. */
+function HeroIdea({ idea, onPlay, onEnded }) {
   if (!idea) return <div className="hero-film creator-panel"><div className="hero-film-frame"><div className="hero-film-empty" /></div></div>;
   return (
     <button type="button" className="hero-film creator-panel" onClick={() => onPlay(idea)} data-ga-event="video_open"
@@ -576,7 +595,8 @@ function HeroIdea({ idea, onPlay }) {
           ? <iframe className="hero-film-embed" title={idea.title} allow="autoplay; encrypted-media" tabIndex={-1}
                     src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(idea.youtubeId)}?autoplay=1&mute=1&loop=1&playlist=${encodeURIComponent(idea.youtubeId)}&controls=0&playsinline=1&rel=0&modestbranding=1`} />
           : idea.videoUrl
-            ? <video src={idea.videoUrl} poster={idea.posterUrl} autoPlay muted loop playsInline aria-label={idea.title} />
+            ? <video key={idea.id || idea.videoUrl} src={idea.videoUrl} poster={idea.posterUrl} autoPlay muted playsInline
+                     loop={!onEnded} onEnded={onEnded || undefined} onError={onEnded || undefined} aria-label={idea.title} />
             : <img src={idea.posterUrl} alt="" loading="eager" />}
         <span className="work-tag">{idea.tag}</span>
       </div>
