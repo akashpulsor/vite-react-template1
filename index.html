@@ -21,6 +21,10 @@
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
+      // No automatic events: Meta's own button-click detection and setup-tool rules sent noise
+      // (a "Request Video" on every page load). Only our explicit events count: PageView,
+      // RequestVideoClick, ViewContent, Lead (src/analytics.js trackMetaEvent).
+      fbq('set', 'autoConfig', false, '1602578124469554');
       fbq('init', '1602578124469554');
       fbq('track', 'PageView');
     </script>
