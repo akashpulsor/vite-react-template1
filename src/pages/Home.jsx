@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { posts } from "../posts/index.js";
 import { reelStudies } from "../reelStudies.js";
 import LeadForm from "../components/LeadForm.jsx";
-import { InquiryModal, PlayerModal } from "../components/VideoModals.jsx";
+import { InquiryModal, PlayerModal, adAttribution } from "../components/VideoModals.jsx";
 
 // Two sides of one marketplace: brands who need a video ad, and the creators who make them on
 // Dalai Llama. Brands request (no sign-in) on the brands site; creators start free in the studio.
@@ -302,6 +302,14 @@ export default function Home() {
   // A video playing in our player, and the request form, both open right here on the page.
   const [playing, setPlaying] = useState(null);
   const [inquiry, setInquiry] = useState(null);
+  // An ad links to /?request=1&utm_source=…: the short request form opens straight away, and the
+  // ad's utm tags are kept for the visit so any request sent carries them.
+  useEffect(() => {
+    const { utmSource } = adAttribution();
+    if (new URLSearchParams(window.location.search).get("request") === "1") {
+      setInquiry({ source: utmSource || "ad", short: true });
+    }
+  }, []);
   const requestVideo = (prefill = {}) => { setPlaying(null); setInquiry(prefill); };
   const play = async (item) => {
     if (item.youtubeId) return setPlaying(item);

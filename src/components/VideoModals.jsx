@@ -59,6 +59,21 @@ export function PlayerModal({ video, onClose, onRequest }) {
   );
 }
 
+/** The ad that brought this visitor (utm_source / utm_campaign on the landing URL), kept for the
+ * visit so a request sent later still carries it. Browser storage may be unavailable; then only the
+ * current URL counts. */
+export function adAttribution() {
+  const params = typeof window === "undefined" ? new URLSearchParams() : new URLSearchParams(window.location.search);
+  const clean = (value) => (value || "").replace(/[^A-Za-z0-9._-]/g, "").slice(0, 64) || null;
+  const fromUrl = { utmSource: clean(params.get("utm_source")), utmCampaign: clean(params.get("utm_campaign")) };
+  try {
+    if (fromUrl.utmSource) sessionStorage.setItem("dl_utm", JSON.stringify(fromUrl));
+    return fromUrl.utmSource ? fromUrl : JSON.parse(sessionStorage.getItem("dl_utm") || "null") || fromUrl;
+  } catch {
+    return fromUrl;
+  }
+}
+
 /**
  * "Request a video" right on the landing page: the same request the brands site sends, without
  * signing in. Dalai Llama matches a creator for the industry, who turns it into a priced brief;
@@ -66,8 +81,10 @@ export function PlayerModal({ video, onClose, onRequest }) {
  */
 export function InquiryModal({ prefill, onClose }) {
   useModal(onClose);
+  // From an ad: only what we need to reply (name, email, WhatsApp) and what the video should do.
+  const short = Boolean(prefill?.short);
   const [form, setForm] = useState({
-    contactName: "", email: "", companyName: "", websiteUrl: "", industry: prefill?.industry || "",
+    contactName: "", email: "", phone: "", companyName: "", websiteUrl: "", industry: prefill?.industry || "",
     message: "", durationSeconds: 30, budgetBand: "NOT_SURE", timeline: "THIS_MONTH",
   });
   const [state, setState] = useState({ status: "idle", message: "", briefUrl: null });
@@ -87,11 +104,13 @@ export function InquiryModal({ prefill, onClose }) {
     body.append("contact", json({
       contactName: form.contactName.trim(), email: form.email.trim(), companyName: form.companyName.trim(),
       websiteUrl: site && !/^https?:\/\//i.test(site) ? `https://${site}` : site,
+      phone: form.phone.trim() || null,
     }));
     body.append("data", json({
       message: form.message.trim(), industry: form.industry || null, durationSeconds: Number(form.durationSeconds),
       budgetBand: form.budgetBand, timeline: form.timeline, languages: ["English"],
       campaignDirection: prefill?.reference || null,
+      ...adAttribution(),
     }));
     try {
       const response = await fetch(`${API}/brands/requests`, { method: "POST", body });
@@ -112,7 +131,9 @@ export function InquiryModal({ prefill, onClose }) {
         <button type="button" className="modal-close" aria-label="Close" onClick={onClose}>×</button>
         <h2 id="inquiry-title">{prefill?.title ? "Make one like this" : "Request a video"}</h2>
         <p className="modal-lede">
-          {prefill?.title
+          {short
+            ? "Tell us what the video should do. A creator who makes ads for your industry sends a brief with the price, usually within a day. Videos from ₹1,999."
+            : prefill?.title
             ? `Tell us about your brand and we'll match you with a creator who can make an ad like "${prefill.title}".`
             : "Tell us what you need. We match you with a creator for your industry, and you get a brief with the price straight away."}
         </p>
@@ -136,24 +157,34 @@ export function InquiryModal({ prefill, onClose }) {
               <label><span>Work email</span>
                 <input required type="email" maxLength={254} autoComplete="email" value={form.email} onChange={set("email")} placeholder="you@yourbrand.com" />
               </label>
-              <label><span>Brand</span>
-                <input maxLength={120} autoComplete="organization" value={form.companyName} onChange={set("companyName")} />
+              <label><span>{short ? "WhatsApp number" : "WhatsApp (optional)"}</span>
+                <input required={short} type="tel" maxLength={20} autoComplete="tel" inputMode="tel" pattern="\+?[0-9 ()\-]{7,20}"
+                       value={form.phone} onChange={set("phone")} placeholder="+91 98765 43210" />
               </label>
-              <label><span>Website (optional)</span>
-                <input maxLength={255} autoComplete="url" value={form.websiteUrl} onChange={set("websiteUrl")} placeholder="yourbrand.com" />
-              </label>
+              {!short && (
+                <label><span>Brand</span>
+                  <input maxLength={120} autoComplete="organization" value={form.companyName} onChange={set("companyName")} />
+                </label>
+              )}
             </div>
-            <label><span>Your industry</span>
-              <select value={form.industry} onChange={set("industry")}>
-                <option value="">Choose one</option>
-                {INDUSTRIES.map(([code, label]) => <option key={code} value={code}>{label}</option>)}
-              </select>
-            </label>
+            {!short && (
+              <>
+                <label><span>Website (optional)</span>
+                  <input maxLength={255} autoComplete="url" value={form.websiteUrl} onChange={set("websiteUrl")} placeholder="yourbrand.com" />
+                </label>
+                <label><span>Your industry</span>
+                  <select value={form.industry} onChange={set("industry")}>
+                    <option value="">Choose one</option>
+                    {INDUSTRIES.map(([code, label]) => <option key={code} value={code}>{label}</option>)}
+                  </select>
+                </label>
+              </>
+            )}
             <label><span>What should the video do?</span>
               <textarea required maxLength={1000} rows={3} value={form.message} onChange={set("message")}
                         placeholder="e.g. Launch our new face mist for summer, run as Instagram reels, drive online orders." />
             </label>
-            <div className="form-grid form-grid-three">
+            {!short && <div className="form-grid form-grid-three">
               <label><span>Length</span>
                 <select value={form.durationSeconds} onChange={set("durationSeconds")}>
                   {LENGTHS.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
@@ -169,7 +200,7 @@ export function InquiryModal({ prefill, onClose }) {
                   {TIMELINES.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
                 </select>
               </label>
-            </div>
+            </div>}
             {state.message && <p className="form-note form-error">{state.message}</p>}
             <div className="form-actions">
               <button type="submit" disabled={state.status === "sending" || !form.message.trim()}>
